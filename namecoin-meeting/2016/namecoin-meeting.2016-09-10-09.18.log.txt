@@ -1,0 +1,32 @@
+09:18:27 <midmagic> #startmeeting
+09:18:27 <qpm> Meeting started Sat Sep 10 09:18:27 2016 UTC.  The chair is midmagic. Information about MeetBot at http://wiki.debian.org/MeetBot.
+09:18:27 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+09:18:41 <midmagic> #meetingtopic This is the meeting topic prefix
+09:19:03 <midmagic> It will remember the old topic and restore it (on the meeting side) when the meeting is over. It's useful for marking up the resulting meeting minutes.
+09:19:22 <midmagic> #idea Maybe midnight should correct the topicsync propagation between networks.
+09:19:43 <midnightmagic> This is a comment on the topic which is salient.
+09:19:56 <midmagic> This is another comment correcting your lack of conclusion.
+09:20:16 <midnightmagic> #agreed I agree that your conclusion is superior to mine.
+09:20:44 <midmagic> #accepted This will be the thing that the "chair" of the meeting accepts.
+09:20:59 <midmagic> #link http://www.google.com/ Google confirms it.
+09:21:21 <midnightmagic> #link http://netcraft.example/ Netcraft counter-indication link.
+09:21:33 <midmagic> #topic Some subtopic of the moment
+09:21:44 <midmagic> Commentary from the TX side.
+09:21:55 <midnightmagic> Commentary from the freenode side.
+09:22:07 <midnightmagic> #idea We should sell some bitcoins and buy out Google
+09:22:17 <midmagic> #idea Look under the couch for spare bitcoins
+09:22:24 <midnightmagic> Some commentary.
+09:22:32 <midnightmagic> #agreed Look under the couch.
+09:22:39 <midmagic> #agreed Look under the couch
+09:22:43 <midmagic> #accepted Look under the couch
+09:22:50 <midmagic> #action midmagic Will look under the couch for spare bitcoins.
+09:22:56 <midmagic> #topic Wrapping up topic
+09:23:04 <midnightmagic> Some commentary.
+09:23:08 <midmagic> Vague notions of agreement.
+09:23:17 <midnightmagic> We're all very agreeable here.
+09:23:19 <midmagic> Indeed!
+09:23:58 <midnightmagic> #info I have no couches to look under.
+09:24:17 <midnightmagic> Some commentary and discussion about couch safety since the Alberta beef recall.. something about prions.
+09:24:43 <midnightmagic> #link http://goo.gl/ Alberta beef recall notice
+09:25:03 <midmagic> #action midnightmagic midmagic will both look into prions
+09:25:11 <midmagic> #endmeeting
