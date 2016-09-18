@@ -1,0 +1,9 @@
+12:36:59 <Jeremy_Rand> #startmeeting
+12:36:59 <qpm> Meeting started Sun Sep 18 12:36:59 2016 UTC.  The chair is Jeremy_Rand. Information about MeetBot at http://wiki.debian.org/MeetBot.
+12:37:00 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+12:38:13 <Jeremy_Rand> #topic Jeremy's test meeting
+12:39:12 <Jeremy_Rand> #info This info item appears in the minutes
+12:40:04 <Jeremy_Rand> #idea Someone should make the MeetBot info link use https rather than http
+12:40:32 <Jeremy_Rand> #agreed non-TLS links are evil
+12:40:59 <Jeremy_Rand> #action Jeremy_Rand will bring that up at the actual meeting
+12:41:38 <Jeremy_Rand> #endmeeting
