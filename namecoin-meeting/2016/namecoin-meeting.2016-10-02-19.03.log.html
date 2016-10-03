@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-meeting log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:03:17</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:03:18</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Oct  2 19:03:17 2016 UTC.  The chair is Jeremy_Rand. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:03:18</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:03:56</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#meetingtopic </span><span class="cmdline">Namecoin Development Meeting</span>
+<a name="l-5"></a><span class="tm">19:05:01</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Hello everyone, welcome to the meeting
+<a name="l-6"></a><span class="tm">19:05:21</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Can we get a roll call of who's here today?
+<a name="l-7"></a><span class="tm">19:06:04</span><span class="nk"> &lt;jbisch&gt;</span> hi
+<a name="l-8"></a><span class="tm">19:06:13</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Hi jbisch
+<a name="l-9"></a><span class="tm">19:07:58</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Namecoin Core</span>
+<a name="l-10"></a><span class="tm">19:09:17</span><span class="nk"> &lt;jonasbits&gt;</span> hi
+<a name="l-11"></a><span class="tm">19:09:30</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> hello jonasbits
+<a name="l-12"></a><span class="tm">19:10:16</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> So on the Namecoin Core front, I think not a lot has happened since last meeting, unless I'm unaware of something
+<a name="l-13"></a><span class="tm">19:10:42</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">samurai321 on Reddit brought up possible compatibility issues between the name tab PR and 0.3.x wallet.dat files.</span>
+<a name="l-14"></a><span class="tm">19:11:09</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/67#issuecomment-247847543</span>
+<a name="l-15"></a><span class="tm">19:11:58</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#help </span><span class="cmdline">We still need someone to test for the issue that samurai321 brought up</span>
+<a name="l-16"></a><span class="tm">19:12:55</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Anyone interested in checking an 0.3.80-created wallet with brand0's name tab PR?
+<a name="l-17"></a><span class="tm">19:14:07</span><span class="nk"> &lt;brand0&gt;</span> Whoops, I'm here now.
+<a name="l-18"></a><span class="tm">19:14:17</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> hey brand0
+<a name="l-19"></a><span class="tm">19:15:23</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I'm not likely to be able to do that 0.3.80 wallet test in the next couple weeks, unless my schedule ends up lighter than expected
+<a name="l-20"></a><span class="tm">19:16:05</span><span class="nk"> &lt;brand0&gt;</span> 0.3.80 won't run or compile on any of my systems -- the dependencies are too old
+<a name="l-21"></a><span class="tm">19:17:09</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">brand0:</span> I'd expect it to run okay on Debian Jessie, if that's available to you
+<a name="l-22"></a><span class="tm">19:17:10</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> (I'm pretty sure I've built+run it on Jessie before)
+<a name="l-23"></a><span class="tm">19:17:32</span><span class="nk"> &lt;brand0&gt;</span> I'm all arch
+<a name="l-24"></a><span class="tm">19:17:36</span><span class="nk"> &lt;brand0&gt;</span> I'll set up a VM
+<a name="l-25"></a><span class="tm">19:17:47</span><span class="nk"> &lt;brand0&gt;</span> but I feel like independent verification has more weight here
+<a name="l-26"></a><span class="tm">19:17:47</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I think I had to install BDB from either Wheezy or Squeeze though
+<a name="l-27"></a><span class="tm">19:17:55</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> yeah, agreed
+<a name="l-28"></a><span class="tm">19:18:01</span><span class="nk"> &lt;brand0&gt;</span> this is the last thing to test right?
+<a name="l-29"></a><span class="tm">19:18:08</span><span class="nk"> &lt;brand0&gt;</span> (that we know of)
+<a name="l-30"></a><span class="tm">19:18:31</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> at the moment my priority with the name tab is verifying that the wallet unlocking code works properly with my wallet that has a bunch of dead queued transactions in it
+<a name="l-31"></a><span class="tm">19:18:51</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I expect to be able to test that this week
+<a name="l-32"></a><span class="tm">19:18:56</span><span class="nk"> &lt;brand0&gt;</span> alright. i've confirmed that. but verification would be nice.
+<a name="l-33"></a><span class="tm">19:19:33</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I can't think of any other blocker bugs off the top of my head, but there might be some on GitHub that I'm forgetting
+<a name="l-34"></a><span class="tm">19:20:38</span><span class="nk"> &lt;brand0&gt;</span> samurai321 mentioned something about the windows installer crashing
+<a name="l-35"></a><span class="tm">19:20:55</span><span class="nk"> &lt;brand0&gt;</span> when he clicked "run after installing" or something, dunno if that could be related
+<a name="l-36"></a><span class="tm">19:21:10</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> was it the installer?  I thought his client crashed the first time he shut it down?
+<a name="l-37"></a><span class="tm">19:21:30</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> The installer shouldn't be crashing, that's not Bitcoin code, it's entirely generated by NSIS
+<a name="l-38"></a><span class="tm">19:22:24</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> on that note, my Windows VM's are currently undergoing a reinstall from scratch, so I can't easily test things on Windows for at least a couple days
+<a name="l-39"></a><span class="tm">19:23:12</span><span class="nk"> &lt;brand0&gt;</span> oh yeah maybe it was namecoin-core shutdown
+<a name="l-40"></a><span class="tm">19:23:17</span><span class="nk"> &lt;brand0&gt;</span> i read that wrong
+<a name="l-41"></a><span class="tm">19:23:26</span><span class="nk"> &lt;brand0&gt;</span> just said "it crashed" though
+<a name="l-42"></a><span class="tm">19:23:45</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> maybe ask him for clarification?
+<a name="l-43"></a><span class="tm">19:24:24</span><span class="nk"> &lt;jonasbits&gt;</span> https://github.com/markhuber/modern-ie-vagrant if you need a quick vm to test in
+<a name="l-44"></a><span class="tm">19:25:08</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jonasbits:</span> I can probably get the VM's installed pretty quick, there are just a lot of quirks with Windows VM's
+<a name="l-45"></a><span class="tm">19:25:41</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> e.g. Windows Update sits there spinning for *days* eating a core, saying it's checking for updates
+<a name="l-46"></a><span class="tm">19:25:51</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> unless you install a specific fix from the Microsoft website
+<a name="l-47"></a><span class="tm">19:26:23</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> it's 2016 and Microsoft still can't implement the equivalent of apt-get
+<a name="l-48"></a><span class="tm">19:27:13</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> anyway,
+<a name="l-49"></a><span class="tm">19:27:18</span><span class="nk"> &lt;brand0&gt;</span> lol
+<a name="l-50"></a><span class="tm">19:27:28</span><span class="nk"> &lt;brand0&gt;</span> okay I asked for clarification and possibly more information
+<a name="l-51"></a><span class="tm">19:27:35</span><span class="nk"> &lt;jonasbits&gt;</span> i used the above vm yesterday, but this repo is one step better i think
+<a name="l-52"></a><span class="tm">19:28:03</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#action </span><span class="cmdline">Jeremy_Rand will try to test the wallet unlocking fixes in the name tab PR</span>
+<a name="l-53"></a><span class="tm">19:28:14</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> relatedly
+<a name="l-54"></a><span class="tm">19:29:05</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#idea </span><span class="cmdline">Could we do Gitian builds of PR's in the future by using tags in the namecoin/namecoin-core repo?  E.g. nc0.13.99-name-tab-beta1</span>
+<a name="l-55"></a><span class="tm">19:29:22</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> That way the Gitian workflow (e.g. gsign/gverify) is a lot simpler
+<a name="l-56"></a><span class="tm">19:30:05</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I think Daniel approved this a while back but we never actually got it set up
+<a name="l-57"></a><span class="tm">19:30:21</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> (something to do with me not ever actually making the tags)
+<a name="l-58"></a><span class="tm">19:31:43</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I think Bitcoin just uses Luke-Jr's Bitcoin Knots for that purpose, which is a lot of extra bother that I'd rather not do
+<a name="l-59"></a><span class="tm">19:34:59</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> any thoughts on that?
+<a name="l-60"></a><span class="tm">19:35:27</span><span class="nk"> &lt;brand0&gt;</span> it sounds cool. i don't know how any of this stuff is working though.
+<a name="l-61"></a><span class="tm">19:35:53</span><span class="nk"> &lt;jbisch&gt;</span> I don't think we should also maintain a Bitcoin Knots fork.
+<a name="l-62"></a><span class="tm">19:36:38</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">brand0:</span> the gsign/gverify scripts in Gitian will automatically sync the Gitian sigs with our sigs repo on GitHub
+<a name="l-63"></a><span class="tm">19:37:00</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> so no need to post the sigs on Reddit or in an issue tracker
+<a name="l-64"></a><span class="tm">19:37:45</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch:</span> yeah, I think just adding some extra tags to our main repo with PR's merged is way easier than what Luke does with Knots
+<a name="l-65"></a><span class="tm">19:38:54</span><span class="nk"> &lt;jbisch&gt;</span> Why merge it in first instead of going off of the PR author's fork? For posterity?
+<a name="l-66"></a><span class="tm">19:39:52</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch:</span> reproducible builds should be immutable, and it also reduces the tinkering needed for use with the release process docs
+<a name="l-67"></a><span class="tm">19:40:58</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I'd rather not rely on every PR author that we get keeping their branches/tags online forever
+<a name="l-68"></a><span class="tm">19:41:15</span><span class="nk"> &lt;jbisch&gt;</span> okay
+<a name="l-69"></a><span class="tm">19:41:41</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> also there are those of us who just copy+paste from the release-process.md doc without thinking about what we're pasting :)
+<a name="l-70"></a><span class="tm">19:43:13</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok, so sounds like we're all okay with using tags on the namecoin/namecoin-core repo for future Gitian PR builds?
+<a name="l-71"></a><span class="tm">19:43:30</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> (at least as a trial)
+<a name="l-72"></a><span class="tm">19:43:57</span><span class="nk"> &lt;jbisch&gt;</span> yeah
+<a name="l-73"></a><span class="tm">19:44:01</span><span class="nk"> &lt;jonasbits&gt;</span> agreed
+<a name="l-74"></a><span class="tm">19:44:05</span><span class="nk"> &lt;brand0&gt;</span> yup
+<a name="l-75"></a><span class="tm">19:44:56</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#agreed </span><span class="cmdline">Future Gitian PR builds will be done via tags on namecoin/namecoin-core repo; we will re-evaluate as needed</span>
+<a name="l-76"></a><span class="tm">19:45:17</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> any other Namecoin Core related things anyone would like to bring up?
+<a name="l-77"></a><span class="tm">19:45:47</span><span class="nk"> &lt;jbisch&gt;</span> Does static analysis belong here?
+<a name="l-78"></a><span class="tm">19:46:24</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch:</span> how about we do static analysis right after any other Namecoin Core related things?
+<a name="l-79"></a><span class="tm">19:46:27</span><span class="nk"> &lt;jonasbits&gt;</span> i can confirm that arm7 builds does work on my rpi3 noobs install
+<a name="l-80"></a><span class="tm">19:46:58</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jonasbits:</span> fyi that's exactly the kind of message that can be prefixed with #info
+<a name="l-81"></a><span class="tm">19:47:04</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> meetbot is cool
+<a name="l-82"></a><span class="tm">19:47:33</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> and that's excellent, good to hear that the ARM builds are working
+<a name="l-83"></a><span class="tm">19:48:12</span><span class="nk"> &lt;jonasbits&gt;</span> i plan to run a testnet node 24/7 on that
+<a name="l-84"></a><span class="tm">19:48:18</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> cool
+<a name="l-85"></a><span class="tm">19:49:01</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">jonasbits confirms that arm7 builds work on rpi3</span>
+<a name="l-86"></a><span class="tm">19:49:45</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> anything else on Namecoin Core, or should we switch topics to static analysis?
+<a name="l-87"></a><span class="tm">19:49:48</span><span class="nk"> &lt;jonasbits&gt;</span> they are automatically built on gitian now
+<a name="l-88"></a><span class="tm">19:50:26</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jonasbits:</span> yeah, I saw that Bitcoin Core added that.  I was a bit sad that my Gitian builds take twice as long though
+<a name="l-89"></a><span class="tm">19:52:31</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Static analysis</span>
+<a name="l-90"></a><span class="tm">19:53:20</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch:</span> you wanted to bring some stuff up here?
+<a name="l-91"></a><span class="tm">19:54:24</span><span class="nk"> &lt;jbisch&gt;</span> I just ran scan-build on Namecoin Core and got a couple of scan results and a lot of analyzer failures, but I think I did it wrong.
+<a name="l-92"></a><span class="tm">19:55:17</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch:</span> you might find the csbuild and csdiff tools that are packaged in Fedora interesting
+<a name="l-93"></a><span class="tm">19:55:38</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> sadly they're not in Debian right now
+<a name="l-94"></a><span class="tm">19:55:43</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> not even unstable
+<a name="l-95"></a><span class="tm">19:55:55</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> they're probably easy to build for Debian though
+<a name="l-96"></a><span class="tm">19:56:46</span><span class="nk"> &lt;jbisch&gt;</span> I'll look at that. My problem seems to be that I didn't run scan-build on the configure script when you are supposed to do so in addition to the make command.
+<a name="l-97"></a><span class="tm">19:56:48</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> basically they run GCC, Clang Analyzer, and cppcheck on a codebase as it's built, and they can do diff operations on the results for different runs
+<a name="l-98"></a><span class="tm">19:57:12</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> in our case, we'd want to do 2 diff operations
+<a name="l-99"></a><span class="tm">19:57:27</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> a diff against Bitcoin Core upstream, and a diff against consecutive commits in Namecoin Core
+<a name="l-100"></a><span class="tm">19:58:29</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> FYI in theory kld is planning to tinker with this, but I know he has limited time availability so he'd probably love to get some assistance
+<a name="l-101"></a><span class="tm">19:59:47</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Also my understanding is that kld is planning to use static analysis as a method of getting some experience with the Namecoin codebase, but plans to switch to doing Android related stuff once he's gotten the hang of things
+<a name="l-102"></a><span class="tm">20:00:47</span><span class="nk"> &lt;jbisch&gt;</span> Yeah, I just wanted to look into static analyzers and had Namecoin Core nearby. :)
+<a name="l-103"></a><span class="tm">20:01:25</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> relatedly
+<a name="l-104"></a><span class="tm">20:01:49</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> we decided a few days ago to stay away from Coverity due to license restrictions
+<a name="l-105"></a><span class="tm">20:02:19</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> That said, it's come to my attention that Tor and Monero are using Coverity (unless I'm misreading things)
+<a name="l-106"></a><span class="tm">20:02:51</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> so perhaps it would be useful if I ask either the Tor people or the Monero people about their experience with it
+<a name="l-107"></a><span class="tm">20:03:18</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I still favor using free software tools though
+<a name="l-108"></a><span class="tm">20:03:28</span><span class="nk"> &lt;jbisch&gt;</span> They may just not have read the license.
+<a name="l-109"></a><span class="tm">20:03:53</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I assume the Tor people have enough lawyers around that they've read it?
+<a name="l-110"></a><span class="tm">20:04:00</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Less sure about Monero
+<a name="l-111"></a><span class="tm">20:04:39</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> anyway, I figure it can't hurt to ask
+<a name="l-112"></a><span class="tm">20:05:28</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> (other than sinking my available time for more useful things)
+<a name="l-113"></a><span class="tm">20:06:05</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> so I'll probably put it on the "next time I happen to be chatting with fluffypony I'll bring it up; same goes for the Tor people" list
+<a name="l-114"></a><span class="tm">20:08:20</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> in case anyone's wondering why kld isn't here today, it's presumably because his 2-3 hours per week of dev time would be 50% depleted by our meetings :)
+<a name="l-115"></a><span class="tm">20:08:51</span><span class="nk"> &lt;jbisch&gt;</span> Only 50%? :)
+<a name="l-116"></a><span class="tm">20:09:24</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> But when he's got some cool stuff to report, I'll see if he can join our meetings for a few minutes
+<a name="l-117"></a><span class="tm">20:09:47</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch:</span> our meetings are roughly 2-3 hours every 2 weeks, so that would be 50%, unless my math is broken
+<a name="l-118"></a><span class="tm">20:11:11</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> anyway, jbisch do you want to summarize your scan-build adventures with an #info command for the minutes?
+<a name="l-119"></a><span class="tm">20:13:10</span><span class="nk"> &lt;jbisch&gt;</span> <span class="cmd">#info </span><span class="cmdline">I tried running scan-build for static analysis and realized you need to run it for both ./configure and make if the project uses autotools.</span>
+<a name="l-120"></a><span class="tm">20:14:34</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> cool
+<a name="l-121"></a><span class="tm">20:14:49</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> any other static analysis things to bring up?
+<a name="l-122"></a><span class="tm">20:16:04</span><span class="nk"> &lt;jbisch&gt;</span> No
+<a name="l-123"></a><span class="tm">20:16:12</span><span class="nk"> &lt;brand0&gt;</span> no
+<a name="l-124"></a><span class="tm">20:17:09</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">SPV</span>
+<a name="l-125"></a><span class="tm">20:17:57</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I did some security review of libdohj-namecoin, and fixed a bug</span>
+<a name="l-126"></a><span class="tm">20:18:07</span><span class="nk"> &lt;brand0&gt;</span> nice
+<a name="l-127"></a><span class="tm">20:18:47</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">the bug impacted a non-default verification mode (the one that retrieves a single full block over P2P after getting the height over REST)</span>
+<a name="l-128"></a><span class="tm">20:19:00</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">fix has been submitted to upstream libdohj</span>
+<a name="l-129"></a><span class="tm">20:19:17</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">and that is why the code isn't being distributed to end users yet.  :)</span>
+<a name="l-130"></a><span class="tm">20:20:48</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> If anyone was unwise enough to be doing daily use of something that was advertised as a "conference-demo-quality beta",
+<a name="l-131"></a><span class="tm">20:21:25</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> then I hope they're okay with getting false name results from malicious P2P nodes
+<a name="l-132"></a><span class="tm">20:21:55</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> then again, people who do such things probably have already gotten pwned in multiple ways
+<a name="l-133"></a><span class="tm">20:22:36</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> other than that, I'd be surprised if anyone was using that particular verification mode
+<a name="l-134"></a><span class="tm">20:23:03</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> the restmerkleapi mode and the leveldbtxcache mode are much cooler
+<a name="l-135"></a><span class="tm">20:23:41</span><span class="nk"> &lt;jonasbits&gt;</span> indeed
+<a name="l-136"></a><span class="tm">20:24:18</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> anyway, rnicoll hasn't yet merged the fix to upstream, so any deployment to end users is blocked by that being merged
+<a name="l-137"></a><span class="tm">20:24:34</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> not like there aren't already lots of other things blocking deployment to end users
+<a name="l-138"></a><span class="tm">20:24:46</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> like, say, getting all of the bitcoinj-addons code upstreamed
+<a name="l-139"></a><span class="tm">20:26:37</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> any other SPV topics anyone would like to bring up?
+<a name="l-140"></a><span class="tm">20:29:32</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> oh actually
+<a name="l-141"></a><span class="tm">20:30:07</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#help </span><span class="cmdline">Can some people please test out the SPV codebase?  It's not that hard to build from source.</span>
+<a name="l-142"></a><span class="tm">20:30:48</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> The bounty has been in limbo for... probably more than a month, because no one else has tested it
+<a name="l-143"></a><span class="tm">20:32:15</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Also,
+<a name="l-144"></a><span class="tm">20:32:39</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#help </span><span class="cmdline">Can anyone look into what privacy improvements the Bitsquare people made to their fork of BitcoinJ?</span>
+<a name="l-145"></a><span class="tm">20:33:05</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I believe pigeons said they've done some useful work on it, but I haven't really had a chance to examine it</span>
+<a name="l-146"></a><span class="tm">20:34:40</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Bitsquare seems to be aiming for anonymity modulo blockchain leakage, and they seem to have a good reputation, so I'd hope that maybe they've fixed some of the more egregious issues in BitcoinJ
+<a name="l-147"></a><span class="tm">20:35:36</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I'd be hesitant to adopt a fork of BitcoinJ though -- but I'd be curious if there's any work on getting that stuff upstreamed
+<a name="l-148"></a><span class="tm">20:39:06</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> any other SPV things?
+<a name="l-149"></a><span class="tm">20:41:57</span><span class="nk"> &lt;brand0&gt;</span> nope
+<a name="l-150"></a><span class="tm">20:42:08</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok, so moving on
+<a name="l-151"></a><span class="tm">20:42:23</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Tor</span>
+<a name="l-152"></a><span class="tm">20:43:02</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've been engaging with Jesse Victors of OnioNS to see how we can collaborate</span>
+<a name="l-153"></a><span class="tm">20:43:33</span><span class="nk"> &lt;brand0&gt;</span> oh cool
+<a name="l-154"></a><span class="tm">20:43:50</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> In particular, initially we've been focusing on fleshing out the differences in threat model between Namecoin and OnioNS
+<a name="l-155"></a><span class="tm">20:45:22</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> and also we've been discussing the integration with Tor (both in terms of data stored in naming system, and in terms of getting Tor to use an external naming system)
+<a name="l-156"></a><span class="tm">20:46:30</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Jesse has been very helpful
+<a name="l-157"></a><span class="tm">20:47:19</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Also I need to read his latest paper on OnioNS, since I haven't really studied up on his work in detail since I read his thesis
+<a name="l-158"></a><span class="tm">20:47:45</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> which would have been... 2 years ago?  I've lost track
+<a name="l-159"></a><span class="tm">20:50:01</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> any other Tor-related things anyone would like to bring up?
+<a name="l-160"></a><span class="tm">20:54:12</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok, so next up
+<a name="l-161"></a><span class="tm">20:54:16</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">TLS</span>
+<a name="l-162"></a><span class="tm">20:54:37</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">hl, ryan-c, and I agreed on some changes to the TLS cert spec</span>
+<a name="l-163"></a><span class="tm">20:54:51</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/ifa-wg/proposals/pull/24#issuecomment-249307249</span>
+<a name="l-164"></a><span class="tm">20:55:15</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I'm about halfway through implementing those changes in ncdns</span>
+<a name="l-165"></a><span class="tm">20:58:20</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> anything else TLS-related to bring up?
+<a name="l-166"></a><span class="tm">21:01:15</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> anyone have additional development related topics, or should we move onto public relations?
+<a name="l-167"></a><span class="tm">21:03:16</span><span class="nk"> &lt;jonasbits&gt;</span> i think move on
+<a name="l-168"></a><span class="tm">21:03:31</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Public relations</span>
+<a name="l-169"></a><span class="tm">21:03:54</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> So at the moment it looks like we have 4 OU students who are interested in working with us
+<a name="l-170"></a><span class="tm">21:04:00</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> which is a nice increase from last year
+<a name="l-171"></a><span class="tm">21:04:32</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I think only 2 of them have introduced themselves on IRC yet
+<a name="l-172"></a><span class="tm">21:05:11</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">it looks like we have 4 OU students who are interested in working with us</span>
+<a name="l-173"></a><span class="tm">21:05:29</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> meanwhile
+<a name="l-174"></a><span class="tm">21:06:03</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I *might* apply to give a talk at OU's Social Justice Symposium</span>
+<a name="l-175"></a><span class="tm">21:06:13</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://www.ou.edu/content/gec/equality-and-social-justice.html</span>
+<a name="l-176"></a><span class="tm">21:06:29</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I'm still trying to figure out what the focus of the talk would be
+<a name="l-177"></a><span class="tm">21:06:39</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> and they want submissions by Friday
+<a name="l-178"></a><span class="tm">21:07:29</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> the talks can be either 25 mins + 5 minutes Q&amp;A, or 50 mins + 10 mins Q&amp;A (if I recall correctly from the website)
+<a name="l-179"></a><span class="tm">21:08:39</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I'd lean toward focusing on why privacy/security/free speech on the Internet affect other human rights issues, then talking about how Namecoin can help (in nontechnical terms)
+<a name="l-180"></a><span class="tm">21:09:08</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> e.g. mention the CA system's trust issues, and the usability issues in .onion
+<a name="l-181"></a><span class="tm">21:09:37</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> also possibly mention the political issues we've encountered, e.g. browser vendors refusing to implement API's that would make our lives easier
+<a name="l-182"></a><span class="tm">21:09:53</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> (again, in nontechnical terms)
+<a name="l-183"></a><span class="tm">21:10:20</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I've presented on Namecoin to a roomful of social science majors before, so I can probably adapt some of the nontechnical descriptions in that talk
+<a name="l-184"></a><span class="tm">21:10:52</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> any suggestions on this?
+<a name="l-185"></a><span class="tm">21:18:20</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> guess not :(
+<a name="l-186"></a><span class="tm">21:18:40</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">the website FAQ has been updated/expanded a bit</span>
+<a name="l-187"></a><span class="tm">21:19:38</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> any other public relations things?
+<a name="l-188"></a><span class="tm">21:20:56</span><span class="nk"> &lt;jonasbits&gt;</span> maybe easy tasks could bring more people to the project, like running nodes with arm devices
+<a name="l-189"></a><span class="tm">21:22:02</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Yeah, that might be interesting
+<a name="l-190"></a><span class="tm">21:22:23</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jonasbits:</span> btw, that's an excellent use for the #idea command for meetbot :)
+<a name="l-191"></a><span class="tm">21:22:59</span><span class="nk"> &lt;jonasbits&gt;</span> must the #idea tag be in front?
+<a name="l-192"></a><span class="tm">21:23:06</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I believe so
+<a name="l-193"></a><span class="tm">21:23:25</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> or at least, all the examples do so
+<a name="l-194"></a><span class="tm">21:24:08</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#idea </span><span class="cmdline">Easy tasks for beginners, to bring more people to the project, on task could be: - Run namecoind on Arm7 device</span>
+<a name="l-195"></a><span class="tm">21:24:18</span><span class="nk"> &lt;jonasbits&gt;</span> *one
+<a name="l-196"></a><span class="tm">21:25:23</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#idea </span><span class="cmdline">I know that ATI used to give out tiny bug bounties (like $3 USD per bug) in order to encourage the community to test out betas</span>
+<a name="l-197"></a><span class="tm">21:25:44</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> If at some point we end up with some money to spare on such a scheme, might be interesting
+<a name="l-198"></a><span class="tm">21:26:06</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch:</span> how did that system work out in practice for ATI?
+<a name="l-199"></a><span class="tm">21:26:16</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> did it actually result in better quality releases?
+<a name="l-200"></a><span class="tm">21:26:43</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> As an outsider lurking in their forum, it looked effective to me
+<a name="l-201"></a><span class="tm">21:29:46</span><span class="nk"> &lt;jbisch&gt;</span> I'm not sure if they were effective or not.
+<a name="l-202"></a><span class="tm">21:30:01</span><span class="nk"> &lt;jbisch&gt;</span> I imagine they were.
+<a name="l-203"></a><span class="tm">21:30:33</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch:</span> do I recall correctly that Alan actually did them before ATI was a thing?
+<a name="l-204"></a><span class="tm">21:30:43</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> (i.e. with limited funding available)
+<a name="l-205"></a><span class="tm">21:31:35</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch:</span> is there anyone from Armory whom you could ask whether it was effective in practice?  Maybe Goatpig or Doug?
+<a name="l-206"></a><span class="tm">21:32:39</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Like, if we could speed up our beta to final release cycle significantly, that might be a useful way to spend, say, $50 USD of our NMDF or Bountysource funds
+<a name="l-207"></a><span class="tm">21:33:14</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I don't think it's a great use of our developers' time to be beta testing each other's stuff all the time
+<a name="l-208"></a><span class="tm">21:33:45</span><span class="nk"> &lt;jbisch&gt;</span> Maybe Goatpig would know. I'm not sure if he was involved in administrating the bounty program or to what degree.
+<a name="l-209"></a><span class="tm">21:34:01</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> If it's, say, 10 bugs for 5 USD each, per release, that's trivial compared to the what developers' time is worth
+<a name="l-210"></a><span class="tm">21:34:10</span><span class="nk"> &lt;jbisch&gt;</span> I think Alan did it before ATI was formed.
+<a name="l-211"></a><span class="tm">21:34:14</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> and if it saves the devs that time, I'd say it's likely to be useful
+<a name="l-212"></a><span class="tm">21:34:21</span><span class="nk"> &lt;jbisch&gt;</span> Yeah.
+<a name="l-213"></a><span class="tm">21:35:37</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch:</span> yeah, if you can ask Goatpig, that'd be awesome
+<a name="l-214"></a><span class="tm">21:35:54</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> hopefully it wouldn't be necessary to bother Alan about that question
+<a name="l-215"></a><span class="tm">21:36:29</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> (unless you think Alan wouldn't mind answering it for you)
+<a name="l-216"></a><span class="tm">21:40:35</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch:</span> should we put that down as an action item in the minutes for you?
+<a name="l-217"></a><span class="tm">21:41:05</span><span class="nk"> &lt;jbisch&gt;</span> Okay
+<a name="l-218"></a><span class="tm">21:42:04</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#action </span><span class="cmdline">jbisch will check with Armory people (probably Goatpig) about whether the beta bug bounty program was effective</span>
+<a name="l-219"></a><span class="tm">21:42:35</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok, so that leads us very nicely to our next topic,
+<a name="l-220"></a><span class="tm">21:42:45</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Funding</span>
+<a name="l-221"></a><span class="tm">21:43:12</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">Bountysource was having technical issues this morning, so I couldn't check our balance</span>
+<a name="l-222"></a><span class="tm">21:43:54</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">But it looks like our anonymous recurring supporter on Bountysource increased their donation amount again, it's now $15 USD per month</span>
+<a name="l-223"></a><span class="tm">21:44:25</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> So that's good to see
+<a name="l-224"></a><span class="tm">21:44:50</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">NMDF hasn't received donations since our previous meeting</span>
+<a name="l-225"></a><span class="tm">21:45:23</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I contacted Phelix about moving NMDF funds to an HD wallet; still waiting on an answer from him</span>
+<a name="l-226"></a><span class="tm">21:46:15</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> As usual, ongoing attempts to get funding shouldn't be discussed in this meeting because reasons
+<a name="l-227"></a><span class="tm">21:47:19</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> But any other funding related topics are welcome
+<a name="l-228"></a><span class="tm">21:47:44</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> any funding related things from you guys?
+<a name="l-229"></a><span class="tm">21:53:22</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> guess not.  Any other topics that anyone would like to bring up before we wrap up the meeting?
+<a name="l-230"></a><span class="tm">21:58:20</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok then.  Thanks for being here everyone.
+<a name="l-231"></a><span class="tm">21:58:25</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

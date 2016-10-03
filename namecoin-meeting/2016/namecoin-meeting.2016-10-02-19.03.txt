@@ -1,0 +1,144 @@
+===============================================
+#namecoin-meeting: Namecoin Development Meeting
+===============================================
+
+
+Meeting started by Jeremy_Rand at 19:03:17 UTC. The full logs are
+available at
+https://github.com/midnightmagic/namecoin-meeting/master/namecoin-meeting/2016/namecoin-meeting.2016-10-02-19.03.log.html
+.
+
+
+
+Meeting summary
+---------------
+* Namecoin Core  (Jeremy_Rand, 19:07:58)
+  * samurai321 on Reddit brought up possible compatibility issues
+    between the name tab PR and 0.3.x wallet.dat files.  (Jeremy_Rand,
+    19:10:42)
+  * LINK:
+    https://github.com/namecoin/namecoin-core/pull/67#issuecomment-247847543
+    (Jeremy_Rand, 19:11:09)
+  * HELP: We still need someone to test for the issue that samurai321
+    brought up  (Jeremy_Rand, 19:11:58)
+  * LINK: https://github.com/markhuber/modern-ie-vagrant if you need a
+    quick vm to test in  (jonasbits, 19:24:24)
+  * ACTION: Jeremy_Rand will try to test the wallet unlocking fixes in
+    the name tab PR  (Jeremy_Rand, 19:28:03)
+  * IDEA: Could we do Gitian builds of PR's in the future by using tags
+    in the namecoin/namecoin-core repo?  E.g. nc0.13.99-name-tab-beta1
+    (Jeremy_Rand, 19:29:05)
+  * AGREED: Future Gitian PR builds will be done via tags on
+    namecoin/namecoin-core repo; we will re-evaluate as needed
+    (Jeremy_Rand, 19:44:56)
+  * jonasbits confirms that arm7 builds work on rpi3  (Jeremy_Rand,
+    19:49:01)
+
+* Static analysis  (Jeremy_Rand, 19:52:31)
+  * I tried running scan-build for static analysis and realized you need
+    to run it for both ./configure and make if the project uses
+    autotools.  (jbisch, 20:13:10)
+
+* SPV  (Jeremy_Rand, 20:17:09)
+  * I did some security review of libdohj-namecoin, and fixed a bug
+    (Jeremy_Rand, 20:17:57)
+  * the bug impacted a non-default verification mode (the one that
+    retrieves a single full block over P2P after getting the height over
+    REST)  (Jeremy_Rand, 20:18:47)
+  * fix has been submitted to upstream libdohj  (Jeremy_Rand, 20:19:00)
+  * and that is why the code isn't being distributed to end users yet.
+    :)  (Jeremy_Rand, 20:19:17)
+  * HELP: Can some people please test out the SPV codebase?  It's not
+    that hard to build from source.  (Jeremy_Rand, 20:30:07)
+  * HELP: Can anyone look into what privacy improvements the Bitsquare
+    people made to their fork of BitcoinJ?  (Jeremy_Rand, 20:32:39)
+  * I believe pigeons said they've done some useful work on it, but I
+    haven't really had a chance to examine it  (Jeremy_Rand, 20:33:05)
+
+* Tor  (Jeremy_Rand, 20:42:23)
+  * I've been engaging with Jesse Victors of OnioNS to see how we can
+    collaborate  (Jeremy_Rand, 20:43:02)
+
+* TLS  (Jeremy_Rand, 20:54:16)
+  * hl, ryan-c, and I agreed on some changes to the TLS cert spec
+    (Jeremy_Rand, 20:54:37)
+  * LINK:
+    https://github.com/ifa-wg/proposals/pull/24#issuecomment-249307249
+    (Jeremy_Rand, 20:54:51)
+  * I'm about halfway through implementing those changes in ncdns
+    (Jeremy_Rand, 20:55:15)
+
+* Public relations  (Jeremy_Rand, 21:03:31)
+  * it looks like we have 4 OU students who are interested in working
+    with us  (Jeremy_Rand, 21:05:11)
+  * I *might* apply to give a talk at OU's Social Justice Symposium
+    (Jeremy_Rand, 21:06:03)
+  * LINK:
+    https://www.ou.edu/content/gec/equality-and-social-justice.html
+    (Jeremy_Rand, 21:06:13)
+  * the website FAQ has been updated/expanded a bit  (Jeremy_Rand,
+    21:18:40)
+  * IDEA: Easy tasks for beginners, to bring more people to the project,
+    on task could be: - Run namecoind on Arm7 device  (jonasbits,
+    21:24:08)
+  * IDEA: I know that ATI used to give out tiny bug bounties (like $3
+    USD per bug) in order to encourage the community to test out betas
+    (Jeremy_Rand, 21:25:23)
+  * ACTION: jbisch will check with Armory people (probably Goatpig)
+    about whether the beta bug bounty program was effective
+    (Jeremy_Rand, 21:42:04)
+
+* Funding  (Jeremy_Rand, 21:42:45)
+  * Bountysource was having technical issues this morning, so I couldn't
+    check our balance  (Jeremy_Rand, 21:43:12)
+  * But it looks like our anonymous recurring supporter on Bountysource
+    increased their donation amount again, it's now $15 USD per month
+    (Jeremy_Rand, 21:43:54)
+  * NMDF hasn't received donations since our previous meeting
+    (Jeremy_Rand, 21:44:50)
+  * I contacted Phelix about moving NMDF funds to an HD wallet; still
+    waiting on an answer from him  (Jeremy_Rand, 21:45:23)
+
+Meeting ended at 21:58:25 UTC.
+
+
+
+
+Action Items
+------------
+* Jeremy_Rand will try to test the wallet unlocking fixes in the name
+  tab PR
+* jbisch will check with Armory people (probably Goatpig) about whether
+  the beta bug bounty program was effective
+
+
+
+
+Action Items, by person
+-----------------------
+* jbisch
+  * jbisch will check with Armory people (probably Goatpig) about
+    whether the beta bug bounty program was effective
+* Jeremy_Rand
+  * Jeremy_Rand will try to test the wallet unlocking fixes in the name
+    tab PR
+* **UNASSIGNED**
+  * (none)
+
+
+
+
+People Present (lines said)
+---------------------------
+* Jeremy_Rand (176)
+* brand0 (21)
+* jbisch (19)
+* jonasbits (13)
+* qpm (2)
+
+
+
+
+Generated by `MeetBot`_ 0.1.4
+
+.. _`MeetBot`: https://wiki.debian.org/MeetBot
