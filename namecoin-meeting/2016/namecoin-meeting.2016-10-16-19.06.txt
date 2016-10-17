@@ -1,0 +1,213 @@
+===============================================
+#namecoin-meeting: Namecoin Development Meeting
+===============================================
+
+
+Meeting started by Jeremy_Rand at 19:06:58 UTC. The full logs are
+available at
+https://github.com/midnightmagic/namecoin-meeting/master/namecoin-meeting/2016/namecoin-meeting.2016-10-16-19.06.log.html
+.
+
+
+
+Meeting summary
+---------------
+* Namecoin Core  (Jeremy_Rand, 19:13:47)
+  * I tested brand0's wallet unlocking fixes in the name tab PR.  I can
+    confirm that they work properly in my tests.  (Jeremy_Rand,
+    19:14:37)
+  * As per the previous meeting's discussion, I've tagged Namecoin Core
+    nc0.13.99-name-tab-beta1.  (Jeremy_Rand, 19:16:01)
+  * I've also uploaded GNU/Linux and Windows binaries, and Gitian sigs
+    for nc0.13.99-name-tab-beta1.  (Jeremy_Rand, 19:16:42)
+  * HELP: We need someone to ACK/NACK the PR that adds the release to to
+    the namecoin.org betas page  (Jeremy_Rand, 19:18:09)
+  * LINK: https://github.com/namecoin/namecoin.org/pull/79
+    (Jeremy_Rand, 19:18:22)
+  * brand0 has ACKed https://github.com/namecoin/namecoin.org/pull/79
+    (Jeremy_Rand, 19:23:01)
+  * I noticed some errors in the Release Process docs; I submitted a PR
+    to fix them  (Jeremy_Rand, 19:25:25)
+  * LINK: https://github.com/namecoin/namecoin-core/pull/104
+    (Jeremy_Rand, 19:25:35)
+  * Domob has merged those fixes to the dev branch  (Jeremy_Rand,
+    19:27:25)
+  * Those fixes still need to be backported to master and 0.13 branches
+    (Jeremy_Rand, 19:27:56)
+  * ACTION: Jeremy_Rand will backport
+    https://github.com/namecoin/namecoin-core/pull/104 to master and
+    0.13 branches  (Jeremy_Rand, 19:28:31)
+  * kld confirmed that Whit Jackson's instructions for building on OS X
+    do work, with my proposed changes.  (Jeremy_Rand, 19:29:55)
+  * LINK: https://github.com/namecoin/namecoin-core/pull/97
+    (Jeremy_Rand, 19:30:09)
+  * HELP: we need to modify Whit's PR to add my changes, and target it
+    for dev branch  (Jeremy_Rand, 19:30:48)
+  * ACTION: cassiniNMC will submit
+    https://github.com/namecoin/namecoin-core/pull/97 to dev branch with
+    Jeremy_Rand's changes  (Jeremy_Rand, 19:37:09)
+  * HELP: We still need someone to help test 0.3.80 wallets with
+    brand0's name tab PR  (Jeremy_Rand, 19:37:50)
+  * I think I have access to an old 0.3.80 wallet that I can put into
+    Namecoin Core to see how it goes  (Jeremy_Rand, 19:38:26)
+  * ACTION: Jeremy_Rand will try to test the name tab PR with an old
+    0.3.80 wallet  (Jeremy_Rand, 19:39:21)
+  * AGREED: After the 0.3.80 wallet testing, publicize the Namecoin Core
+    nc0.13.99-name-tab-beta1 release; if no major issues found after 2
+    weeks, merge it to Namecoin Core  (Jeremy_Rand, 19:52:17)
+  * IDEA: Actually, we need a summary page (e.g. on github) on the
+    current status (with links) of (a) Namecoin Core, (b)  (cassiniNMC,
+    20:00:52)
+  * AGREED: Beta releases should be announced on the namecoin.org news
+    section going forward  (Jeremy_Rand, 20:05:06)
+  * IDEA: We need a summary page (e.g. on github) on the current status
+    (with ETA, and with links to the repo) of (a) Namecoin Core, (b) GUI
+    i.e. brand0's name tab PR, and (c) the SPV project.  (cassiniNMC,
+    20:08:01)
+
+* SPV  (Jeremy_Rand, 20:16:41)
+  * I uploaded binaries of the SPV name lookup client  (Jeremy_Rand,
+    20:17:05)
+  * HELP: we need someone to ACK/NACK the PR that adds that info to
+    namecoin.org  (Jeremy_Rand, 20:17:35)
+  * LINK: https://github.com/namecoin/namecoin.org/pull/77
+    (Jeremy_Rand, 20:17:57)
+  * brand0 has ACKed https://github.com/namecoin/namecoin.org/pull/77
+    (Jeremy_Rand, 20:24:12)
+  * HELP: Can anyone look into what privacy improvements the Bitsquare
+    people made to their fork of BitcoinJ?  I believe pigeons said
+    they've done some useful work on it, but I haven't really had a
+    chance to examine it.  (Jeremy_Rand, 20:25:17)
+  * LINK: https://github.com/bitsquare/bitcoinj   (pigeons, 20:26:29)
+  * mkarrer is likely to be responsive in #bitsquare according to
+    pigeons  (Jeremy_Rand, 20:28:20)
+
+* Protocol  (Jeremy_Rand, 20:31:15)
+  * I've been doing some preliminary research on detecting attacks on
+    blockchain immutability for AuxPoW chains like Namecoin
+    (Jeremy_Rand, 20:31:52)
+  * The motivation is to force certain types of Namecoin attackers to
+    also have to attack Bitcoin if they want their attack on Namecoin to
+    be successful  (Jeremy_Rand, 20:32:42)
+  * I will publish my data (and deployment ideas) when I've had time to
+    analyze more thoroughly  (Jeremy_Rand, 20:44:20)
+
+* Tor  (Jeremy_Rand, 20:53:07)
+  * The OnioNS Python/Stem codebase that we were planning to use, is
+    likely to be obsoleted by the pluggable naming API in the future.
+    However, that API is not yet stable or usable enough to be used for
+    Namecoin right now.  (Jeremy_Rand, 21:09:41)
+  * AGREED: wyatt will remain assigned to adapting the Python/Stem code
+    from Jesse to work with Namecoin.  We'll try to keep most of the
+    logic in ncdns's codebase (which should be future proof for the
+    pluggable naming API).  We'll re-evaluate once the pluggable naming
+    API has stabilized.  (Jeremy_Rand, 21:10:30)
+  * ACTION: Jeremy_Rand will continue to engage with the Tor people to
+    make sure that the pluggable naming API meets our needs.
+    (Jeremy_Rand, 21:11:41)
+
+* TLS  (Jeremy_Rand, 21:15:35)
+  * I've almost finished updating ncdns to use the revised dehydrated
+    cert spec, but I can't test that code until I get my Windows VM
+    working again.  (Jeremy_Rand, 21:16:18)
+  * the Critical flag on the Extended Key Usage field is probably being
+    put on hold, because it's more annoying to handle with Go's libs
+    than I figured it would be, and it doesn't seem to be of much
+    practical significance  (Jeremy_Rand, 21:17:05)
+
+* Public Relations  (Jeremy_Rand, 21:20:47)
+  * I applied to give a talk at OU's Mosaic Social Justice Symposium.
+    (Jeremy_Rand, 21:21:07)
+  * LINK:
+    https://www.ou.edu/content/gec/equality-and-social-justice.html
+    (Jeremy_Rand, 21:21:19)
+  * Acceptance will be decided by October 21.  (Jeremy_Rand, 21:21:31)
+  * If it's accepted, the talk will be November 5.  (Jeremy_Rand,
+    21:21:41)
+  * jbisch talked to Goatpig about bug bounties.  Goatpig thinks paying
+    for expert review is more productive than bug bounties.
+    (Jeremy_Rand, 21:34:23)
+  * AGREED: We will not pursue bug bounties at this time  (Jeremy_Rand,
+    21:34:36)
+  * GSoC 2017 is announced.  (Jeremy_Rand, 21:35:45)
+  * IDEA: We may want to start working on a GSoC ideas page early rather
+    than leaving it to the last couple weeks as we did previously
+    (Jeremy_Rand, 21:36:13)
+  * IDEA: Also, as jonasbits said at the previous meeting, we may want
+    to start an "Easy Tasks for Beginners" list  (Jeremy_Rand, 21:37:36)
+  * IDEA: tag bugs on GitHub with a "newcomer" or "helpwanted" tag
+    (jbisch, 21:38:21)
+
+* Funding  (Jeremy_Rand, 21:43:16)
+  * We're getting $15 USD/month from 1 recurring supporter on
+    Bountysource.   That brings our balance in Bountysource to $329 USD.
+    (Jeremy_Rand, 21:44:16)
+  * NMDF has not received BTC or NMC since the previous meeting
+    (Jeremy_Rand, 21:44:49)
+  * I talked to Phelix; he will work on moving NMDF funds to an HD
+    wallet.  It might take him some time to get that done.
+    (Jeremy_Rand, 21:45:39)
+  * IDEA: It might be useful to put a Donate link in the header of
+    namecoin.org.  At the moment the link is only available near the
+    bottom of the home page, which isn't necessarily obvious to people
+    who are following deep links to the site.  (Jeremy_Rand, 21:46:31)
+
+Meeting ended at 22:24:34 UTC.
+
+
+
+
+Action Items
+------------
+* Jeremy_Rand will backport
+  https://github.com/namecoin/namecoin-core/pull/104 to master and 0.13
+  branches
+* cassiniNMC will submit
+  https://github.com/namecoin/namecoin-core/pull/97 to dev branch with
+  Jeremy_Rand's changes
+* Jeremy_Rand will try to test the name tab PR with an old 0.3.80 wallet
+* Jeremy_Rand will continue to engage with the Tor people to make sure
+  that the pluggable naming API meets our needs.
+
+
+
+
+Action Items, by person
+-----------------------
+* cassiniNMC
+  * cassiniNMC will submit
+    https://github.com/namecoin/namecoin-core/pull/97 to dev branch with
+    Jeremy_Rand's changes
+* Jeremy_Rand
+  * Jeremy_Rand will backport
+    https://github.com/namecoin/namecoin-core/pull/104 to master and
+    0.13 branches
+  * cassiniNMC will submit
+    https://github.com/namecoin/namecoin-core/pull/97 to dev branch with
+    Jeremy_Rand's changes
+  * Jeremy_Rand will try to test the name tab PR with an old 0.3.80
+    wallet
+  * Jeremy_Rand will continue to engage with the Tor people to make sure
+    that the pluggable naming API meets our needs.
+* **UNASSIGNED**
+  * (none)
+
+
+
+
+People Present (lines said)
+---------------------------
+* Jeremy_Rand (194)
+* cassiniNMC (40)
+* brand0 (23)
+* jbisch (6)
+* pigeons (3)
+* qpm (2)
+* wyatt (1)
+
+
+
+
+Generated by `MeetBot`_ 0.1.4
+
+.. _`MeetBot`: https://wiki.debian.org/MeetBot

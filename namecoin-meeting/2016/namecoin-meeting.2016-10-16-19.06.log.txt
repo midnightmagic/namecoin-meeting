@@ -1,0 +1,269 @@
+19:06:58 <Jeremy_Rand> #startmeeting
+19:06:58 <qpm> Meeting started Sun Oct 16 19:06:58 2016 UTC.  The chair is Jeremy_Rand. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:06:59 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:07:42 <Jeremy_Rand> #meetingtopic Namecoin Development Meeting
+19:08:07 <Jeremy_Rand> hey everyone, welcome to the meeting.  Sorry we're starting a few minutes late today
+19:08:18 <Jeremy_Rand> Can we get a roll call of who's here today?
+19:10:05 <cassiniNMC> Hi.
+19:10:30 <Jeremy_Rand> hey cassiniNMC
+19:11:34 <Jeremy_Rand> brand0 / jbisch / jonasbits / hl / midmightmagic / midmagic / pigeons / fluffypony: are you guys here?
+19:13:42 <Jeremy_Rand> ok, so I guess it's just us for now.  Let's get on with the first topic, then.
+19:13:47 <Jeremy_Rand> #topic Namecoin Core
+19:14:37 <Jeremy_Rand> #info I tested brand0's wallet unlocking fixes in the name tab PR.  I can confirm that they work properly in my tests.
+19:16:01 <Jeremy_Rand> #info As per the previous meeting's discussion, I've tagged Namecoin Core nc0.13.99-name-tab-beta1.
+19:16:42 <Jeremy_Rand> #info I've also uploaded GNU/Linux and Windows binaries, and Gitian sigs for nc0.13.99-name-tab-beta1.
+19:17:12 <cassiniNMC> Ah, "uploaded" where?
+19:17:45 <Jeremy_Rand> cassiniNMC: I figured out how to upload files to namecoin.org, so we don't need to use Google Drive anymore
+19:18:09 <Jeremy_Rand> #help We need someone to ACK/NACK the PR that adds the release to to the namecoin.org betas page
+19:18:22 <Jeremy_Rand> #link https://github.com/namecoin/namecoin.org/pull/79
+19:19:41 <Jeremy_Rand> cassiniNMC: would you be up for reviewing that PR?
+19:20:09 <brand0> (here, sorry -- late)
+19:20:33 <Jeremy_Rand> hey brand0
+19:21:28 <cassiniNMC> ok, I can look at this PR in detail on Tuesday.
+19:22:09 <wyatt> I am also here, I should mention.
+19:22:11 <cassiniNMC> Ah, there are not so many "details to look at", so
+19:22:24 <brand0> i've ACKED PR 79
+19:22:49 <Jeremy_Rand> ah, ok.  Thanks brand0
+19:23:01 <Jeremy_Rand> #info brand0 has ACKed https://github.com/namecoin/namecoin.org/pull/79
+19:23:11 <Jeremy_Rand> hey wyatt, welcome to the meeting
+19:23:29 <Jeremy_Rand> for anyone wondering, wyatt is one of the students from OU who will be working with us this year
+19:25:25 <Jeremy_Rand> #info I noticed some errors in the Release Process docs; I submitted a PR to fix them
+19:25:35 <Jeremy_Rand> #link https://github.com/namecoin/namecoin-core/pull/104
+19:27:25 <Jeremy_Rand> #info Domob has merged those fixes to the dev branch
+19:27:56 <Jeremy_Rand> #info Those fixes still need to be backported to master and 0.13 branches
+19:28:31 <Jeremy_Rand> #action Jeremy_Rand will backport https://github.com/namecoin/namecoin-core/pull/104 to master and 0.13 branches
+19:29:12 <Jeremy_Rand> Also related to build documentation,
+19:29:55 <Jeremy_Rand> #info kld confirmed that Whit Jackson's instructions for building on OS X do work, with my proposed changes.
+19:30:09 <Jeremy_Rand> #link https://github.com/namecoin/namecoin-core/pull/97
+19:30:48 <Jeremy_Rand> #help we need to modify Whit's PR to add my changes, and target it for dev branch
+19:31:15 <Jeremy_Rand> I might be able to do that, unless anyone else is volunteering?
+19:33:19 <Jeremy_Rand> ok, so I guess I'll do that
+19:33:56 <cassiniNMC> (It is only the build-osx.md file, isn't it?)
+19:34:13 <cassiniNMC> I was wondering if there is any code file involved?!
+19:34:37 <Jeremy_Rand> cassiniNMC: yes, it's just the build-osx.md file
+19:35:26 <cassiniNMC> ok, should be no problem,
+19:35:50 <Jeremy_Rand> cassiniNMC: ok, so are you volunteering for that task?
+19:36:16 <cassiniNMC> provided I can remember the git commands (haven't done any git/github stuff for several months). Yes, I'll do it.
+19:37:09 <Jeremy_Rand> #action cassiniNMC will submit https://github.com/namecoin/namecoin-core/pull/97 to dev branch with Jeremy_Rand's changes
+19:37:12 <Jeremy_Rand> thanks
+19:37:50 <Jeremy_Rand> #help We still need someone to help test 0.3.80 wallets with brand0's name tab PR
+19:38:26 <Jeremy_Rand> #info I think I have access to an old 0.3.80 wallet that I can put into Namecoin Core to see how it goes
+19:38:50 <Jeremy_Rand> But if anyone else would like to try as well, feel free :)
+19:39:21 <Jeremy_Rand> #action Jeremy_Rand will try to test the name tab PR with an old 0.3.80 wallet
+19:39:41 <cassiniNMC> Is there release we want to aim at? In November I'll have plenty of
+19:39:47 <cassiniNMC> time to spare for tests like this.
+19:39:59 <cassiniNMC> /release/release date/
+19:40:41 <cassiniNMC> grrr typos. Correct: Is there a release date we want to strive for?
+19:41:05 <Jeremy_Rand> cassiniNMC: I'm not sure.  Probably the sooner the better, given that we're basically at the mercy of Bitcoin not trying to schedule a bunch of additional softforks before we activate AAA.
+19:41:09 <Jeremy_Rand> And AAA is dependent on the name tab PR
+19:42:04 <Jeremy_Rand> also FWIW, the report we got about crashing with 0.3.80 wallets is probably harmless -- it crashed on exit, and worked fine from then on
+19:42:30 <Jeremy_Rand> So if we can't easily reproduce it very soon, I am inclined to write it off as a nonblocker and worry about it after we merge the name tab
+19:43:28 <cassiniNMC> Sounds ok. I had a similar effect last year with one of the manual Qt builds on Mac OS. Crashed on exit,
+19:43:52 <cassiniNMC> but never caused any harm to the wallet or the db files.
+19:44:34 <Jeremy_Rand> cassiniNMC: ok.  Yeah, crashes on exit seem to be fairly common in Bitcoin/Namecoin Git builds, and I've never had any damage as a result whenever it occurred to me.  Wasn't recent.
+19:45:31 <Jeremy_Rand> I'm unaware of any other candidate blocker bugs for the name tab.  So after I test out the 0.3.80 wallet I have (probably later today), I'd lean toward publicizing the name tab beta and getting as many people to test it as possible
+19:46:02 <Jeremy_Rand> once it's been widely advertised for, say, 2 weeks, if no blocker bugs are found, I'd say merge it.
+19:46:23 <cassiniNMC> #agreed
+19:47:26 <Jeremy_Rand> It might make sense to get Gitian sigs posted from 3 devs before we widely publicize it.  I've posted sigs for GNU/Linux and Windows, I think jbisch posted GNU/Linux sigs this morning
+19:47:44 <Jeremy_Rand> However, I don't want that to be a bottleneck, since it's still technically a beta release
+19:48:14 <brand0> When we release we should instruct people to backup their wallets and all that
+19:48:30 <Jeremy_Rand> brand0: yep, definitely
+19:48:45 <brand0> But other than that, it should be fairly safe
+19:49:18 <Jeremy_Rand> yeah, I've been using it for general use with my primary Namecoin wallet with no issues
+19:49:25 <brand0> Same
+19:49:28 <Jeremy_Rand> (other than the wallet unlocking issues that are fixed now)
+19:50:02 <jbisch> Hi, I've also just finished with a Windows Gitian build too.
+19:50:14 <Jeremy_Rand> jbisch: cool
+19:52:17 <Jeremy_Rand> #agreed After the 0.3.80 wallet testing, publicize the Namecoin Core nc0.13.99-name-tab-beta1 release; if no major issues found after 2 weeks, merge it to Namecoin Core
+19:53:27 <Jeremy_Rand> any other Namecoin Core related things to bring up, or should we move on to the next topic (which is protocol-related stuff)?
+19:54:16 <cassiniNMC> Well, people occasionally ask me what is the release status of
+19:54:48 <cassiniNMC> Namecoin Core. There are no up-to-date Linux packages, are there?
+19:55:11 <Jeremy_Rand> I'm thinking it would be useful to announce beta releases on the namecoin.org news page, rather than just silently post binaries on GitHub, the downloads page, the forum, Reddit, etc.
+19:55:50 <Jeremy_Rand> Many people who just casually come across namecoin.org will probably want to know that beta releases are happening, since it reduces incorrect perception that the project is "dead"
+19:56:15 <cassiniNMC> Precisely.
+19:56:38 <Jeremy_Rand> cassiniNMC: Namecoin Core doesn't have any official Linux packages; Gitian generates statically linked Linux executables, not packages
+19:56:53 <Jeremy_Rand> That's an issue that's inherited from Bitcoin Core
+19:56:56 <cassiniNMC> I see.
+19:57:45 <Jeremy_Rand> I think Bitcoin Core has Matt Corallo maintain Ubuntu packages, but they're not reproducible AFAIK
+19:58:26 <Jeremy_Rand> I'm not sure what setup Matt is using to create those packages, and I'm not really interested in that route until they're made reproducible
+19:59:18 <cassiniNMC> I guess if we give Peter Conrad (pmc) some instructions where to find which release then he'll update our Linux packages pages.
+19:59:48 <brand0> can't we just bundle our static gitian binaries into a .deb?
+20:00:02 <brand0> it's just ar'd together two tar files
+20:00:12 <Jeremy_Rand> cassiniNMC: yes, assuming that we want to keep using pmc's system (he's using OBS)
+20:00:25 <Jeremy_Rand> I'm inclined to just ask users to use the static binaries from Gitian
+20:00:52 <cassiniNMC> #idea Actually, we need a summary page (e.g. on github) on the current status (with links) of (a) Namecoin Core, (b)
+20:01:27 <Jeremy_Rand> brand0: I'd love to see a way to package the Gitian binaries into reproducible .deb files, but that should probably be proposed to Bitcoin Core
+20:01:43 <brand0> yeah good point Jeremy_Rand
+20:02:01 <Jeremy_Rand> Last I heard, Luke-Jr was of the personal opinion that such proposals would be likely to be accepted if the code quality is okay and it doesn't produce a bunch of maintenance hassle
+20:04:34 <Jeremy_Rand> ok so sounds like we have agreement that,
+20:05:06 <Jeremy_Rand> #agreed Beta releases should be announced on the namecoin.org news section going forward
+20:05:58 <cassiniNMC> What about reddit?
+20:06:08 <Jeremy_Rand> cassiniNMC: not sure if your message got cut off, it ended at "(a) Namecoin Core, (b)"
+20:06:32 <cassiniNMC> Ah, sorry, one moment please...
+20:08:01 <cassiniNMC> #idea We need a summary page (e.g. on github) on the current status (with ETA, and with links to the repo) of (a) Namecoin Core, (b) GUI i.e. brand0's name tab PR, and (c) the SPV project.
+20:09:15 <Jeremy_Rand> cassiniNMC: I'd lean towards using the "Beta Downloads" page of namecoin.org for that, unless there's a reason you think it wouldn't fit there?
+20:10:54 <cassiniNMC> All right, seems ok. Do you think you could include some info on your SPV code there?
+20:11:38 <brand0> you mean like a roadmap cassiniNMC?
+20:11:46 <Jeremy_Rand> cassiniNMC: funny you mention that... maybe I should make SPV our next meeting topic and come back to protocol-related things?
+20:13:14 <cassiniNMC> ah ok. Anyway, I'd like to point people interested in experimenting with Namecoin to one summary page,
+20:14:02 <cassiniNMC> particularly people interested in experimenting with "bleeding edge" projects.
+20:14:10 <Jeremy_Rand> yes, seems like the beta downloads page is well-suited to that
+20:14:47 <Jeremy_Rand> ok, any other Namecoin Core things to bring up before we move onto SPV?
+20:14:51 <cassiniNMC> ok. Furthermore, ETA info would be quite helpful.
+20:16:41 <Jeremy_Rand> #topic SPV
+20:17:05 <Jeremy_Rand> #info I uploaded binaries of the SPV name lookup client
+20:17:35 <Jeremy_Rand> #help we need someone to ACK/NACK the PR that adds that info to namecoin.org
+20:17:57 <Jeremy_Rand> #link https://github.com/namecoin/namecoin.org/pull/77
+20:19:38 <Jeremy_Rand> Note that these binaries are on Google Drive, since this was before I figured out how to upload them to the namecoin.org server
+20:19:51 <Jeremy_Rand> I will rectify that next time I'm uploading SPV client binaries
+20:20:52 <Jeremy_Rand> Note that the instructions are pretty similar to the ones that I gave cassiniNMC for GETD#4
+20:21:19 <brand0> I'm acking it right now, will note the move from google to namecoin servers in the future
+20:23:25 <Jeremy_Rand> Thanks brand0
+20:24:12 <Jeremy_Rand> #info brand0 has ACKed https://github.com/namecoin/namecoin.org/pull/77
+20:24:57 <Jeremy_Rand> Other SPV-related thing, which is a repeat of something from previous meeting
+20:25:17 <Jeremy_Rand> #help Can anyone look into what privacy improvements the Bitsquare people made to their fork of BitcoinJ?  I believe pigeons said they've done some useful work on it, but I haven't really had a chance to examine it.
+20:25:55 <pigeons> they have a branch you can look at, it was mostly some of the bloom filter issues i think
+20:26:29 <pigeons> https://github.com/bitsquare/bitcoinj
+20:26:36 <Jeremy_Rand> pigeons: ok.  I think they were planning to do some things to improve the Tor support?
+20:27:02 <pigeons> i dont know, mut mkarrer is responsive in #bitsquare
+20:27:23 <Jeremy_Rand> upstream BitcoinJ is using Orchid for its Tor support, which has been a disaster for BitcoinJ-based software that wants to use Tor from what I understand
+20:27:45 <Jeremy_Rand> pigeons: ok thanks, I'll see if I can get qpm added to #bitsquare
+20:28:20 <Jeremy_Rand> #info mkarrer is likely to be responsive in #bitsquare according to pigeons
+20:29:13 <Jeremy_Rand> ok -- any other SPV-related things that anyone would like to bring up before we move onto the next topic (protocol-related stuff)?
+20:31:15 <Jeremy_Rand> #topic Protocol
+20:31:52 <Jeremy_Rand> #info I've been doing some preliminary research on detecting attacks on blockchain immutability for AuxPoW chains like Namecoin
+20:32:42 <Jeremy_Rand> #info The motivation is to force certain types of Namecoin attackers to also have to attack Bitcoin if they want their attack on Namecoin to be successful
+20:33:33 <Jeremy_Rand> Specifically, I'm looking at the timestamps and block heights in the AuxPoW parent blocks
+20:33:39 <brand0> interesting
+20:34:42 <Jeremy_Rand> This is based on the fact that for a Bitcoin block to be valid, it has to meet certain constraints on its timestamps and on its coinbase commitment to its block height
+20:35:01 <Jeremy_Rand> And both of those fields are in the Namecoin AuxPoW block headers
+20:35:36 <Jeremy_Rand> So, let's say that a hypothetical attacker wants to rewrite a day's worth of Namecoin history
+20:36:05 <Jeremy_Rand> But they don't want to attack Bitcoin (either because they don't have enough hashrate, or it will just cause too much collateral damage)
+20:36:49 <Jeremy_Rand> What they would probably do is continue mining Bitcoin as normal, but they would commit to Namecoin blocks that build on top of the Namecoin chain from a day ago
+20:37:22 <Jeremy_Rand> This is really easy to detect, because we would see the AuxPoW headers' parent blocks jump by a day in both timestamp and block height
+20:37:40 <Jeremy_Rand> I did some simulations of this using historical Namecoin chain data
+20:38:09 <Jeremy_Rand> And my code actually found a bunch of candidate attack events.  All of them turned out to be from August/September 2014
+20:38:19 <Jeremy_Rand> That's when someone accidentally DoSed most of the Namecoin miners
+20:38:53 <Jeremy_Rand> Which basically was an attack on the network, because only 1 of the miners was able to mine properly during that period
+20:39:12 <Jeremy_Rand> so I think it's correct behavior to detect that as a candidate attack event
+20:39:49 <cassiniNMC> This was the "Great Aggregator" situation, wasn't it?
+20:39:56 <Jeremy_Rand> cassiniNMC: yes
+20:41:17 <Jeremy_Rand> I will publish my data (and deployment ideas) when I've had time to analyze more thoroughly, but the preliminary results suggest that we can pretty easily detect rewrites of 18 blocks or more without any problems
+20:44:03 <Jeremy_Rand> oh, whoops, that should have had an #info.  Lemme fix that for the minutes....
+20:44:20 <Jeremy_Rand> #info I will publish my data (and deployment ideas) when I've had time to analyze more thoroughly
+20:45:45 <cassiniNMC> Trying to figure out if your forum post https://forum.namecoin.info/viewtopic.php?p=16829#p16829 is directly related to this.
+20:47:39 <Jeremy_Rand> cassiniNMC: it is very loosely related, and my current work is derived from that 2AM brain dump.  However, my current thoughts on how this would be used are fairly different from what that post describes
+20:49:59 <cassiniNMC> ok, eagerly awaiting your data, and particularly your deployment ideas.
+20:50:27 <Jeremy_Rand> thanks :)
+20:51:15 <Jeremy_Rand> By any chance are there other protocol-related things that anyone would like to bring up, or should we move onto our next topic (Tor)?
+20:52:41 <brand0> next topic unless there's more
+20:53:07 <Jeremy_Rand> #topic Tor
+20:54:06 <Jeremy_Rand> So, our plan from a few weeks ago was that wyatt would be initially working on porting Jesse's OnioNS Stem code to use Namecoin
+20:54:25 <Jeremy_Rand> There are a couple of hitches that came up since then
+20:55:12 <Jeremy_Rand> The first is that Jesse is planning to replace that Python code with C++ code in the future, so we can't rely on upstream fixes on that codebase
+20:55:43 <Jeremy_Rand> C++ is easier to build reproducibly, but also of course adds memory safety issues that I'm not really comfortable with
+20:56:40 <Jeremy_Rand> It's probably feasible to rewrite that Python code using Bulb (which is a Tor controller library in Golang)...
+20:57:17 <brand0> What's the motivation to get away from python?
+20:57:17 <Jeremy_Rand> but Bulb is a lot more minimalist than Stem, so part of the work would involve adding a bunch of code to Bulb
+20:57:48 <Jeremy_Rand> brand0: I have no idea what Jesse's motivation is for scrapping Python.  I think he said something about "reducing dependencies"
+20:57:56 <Jeremy_Rand> But it wasn't clear to me exactly what the thinking was there
+20:58:41 <Jeremy_Rand> Anyway, the 2nd hitch that came up is that Tor is introducing a "pluggable naming systems" API, which is based on the pluggable transports API
+20:59:01 <brand0> I saw that Tor-dev email
+20:59:12 <Jeremy_Rand> which means that using the Tor control port (via Stem, Bulb, or whatever thing Jesse is doing in C++) will become obsolete for our use cases anyway
+20:59:27 <Jeremy_Rand> So, here's my take on this
+21:00:08 <Jeremy_Rand> Tor's primary goal here is to encourage experimentation with things like Namecoin, OnioNS, and GNS, because there just isn't enough real-world experience using these systems for Tor right now
+21:00:30 <Jeremy_Rand> Tor also needs that experience to be gained fast, due to the impending increase in .onion name length
+21:01:24 <Jeremy_Rand> So my opinion is that it's perfectly consistent with those high-level goals, to continue with Jesse's Python/Stem code as planned, with the knowledge that the code will need to be replaced at some point
+21:01:58 <Jeremy_Rand> The pluggable naming systems draft spec, quite frankly, needs a lot of polishing before it's even going to be possible to implement in a useful way
+21:02:18 <Jeremy_Rand> And Jesse's C++ replacement for the Python/Stem code isn't started AFAIK
+21:02:47 <brand0> are we thinking that we'll use whatever SPV implementation we end up with (that works with Tor) in conjunction with Tor's pluggable names?
+21:03:08 <Jeremy_Rand> and that Python code is small enough that I don't foresee any major problems from using it for a while until things are stabilized with the pluggable naming API
+21:03:45 <Jeremy_Rand> brand0: Probably we would use an SPV implementation in combination with some of the ncdns codebase
+21:03:58 <brand0> gotcha
+21:04:22 <Jeremy_Rand> ncdns is also useful because pluggable transports are in Golang, meaning the pluggable naming API is likely to get a high-quality implementation in Golang as well
+21:04:42 <Jeremy_Rand> so using ncdns for as much of the logic as possible helps us future proof
+21:05:48 <brand0> yeah I like that strategy
+21:07:20 <Jeremy_Rand> Okay cool.  So are we agreed that wyatt will remain assigned to adapting the Python/Stem code from Jesse to work with Namecoin, that we'll try to keep most of the logic in ncdns's codebase, and that we'll re-evaluate once the pluggable naming API has stabilized?
+21:07:46 <brand0> yeah sounds reasonable to me
+21:08:19 <Jeremy_Rand> ok cool.  Lemme try to summarize that for the minutes
+21:09:41 <Jeremy_Rand> #info The OnioNS Python/Stem codebase that we were planning to use, is likely to be obsoleted by the pluggable naming API in the future.  However, that API is not yet stable or usable enough to be used for Namecoin right now.
+21:10:30 <Jeremy_Rand> #agreed wyatt will remain assigned to adapting the Python/Stem code from Jesse to work with Namecoin.  We'll try to keep most of the logic in ncdns's codebase (which should be future proof for the pluggable naming API).  We'll re-evaluate once the pluggable naming API has stabilized.
+21:11:41 <Jeremy_Rand> #action Jeremy_Rand will continue to engage with the Tor people to make sure that the pluggable naming API meets our needs.
+21:12:43 <Jeremy_Rand> ok.  Anything else about Tor, or should we move onto the next topic (TLS)?
+21:15:35 <Jeremy_Rand> #topic TLS
+21:16:18 <Jeremy_Rand> #info I've almost finished updating ncdns to use the revised dehydrated cert spec, but I can't test that code until I get my Windows VM working again.
+21:17:05 <Jeremy_Rand> #info the Critical flag on the Extended Key Usage field is probably being put on hold, because it's more annoying to handle with Go's libs than I figured it would be, and it doesn't seem to be of much practical significance
+21:17:47 <Jeremy_Rand> Anyone else have other TLS-related things?
+21:18:31 <Jeremy_Rand> Or, does anyone have other development-related topics?  Or should we move onto public relations?
+21:20:39 <Jeremy_Rand> ok, moving on,
+21:20:47 <Jeremy_Rand> #topic Public Relations
+21:21:07 <Jeremy_Rand> #info I applied to give a talk at OU's Mosaic Social Justice Symposium.
+21:21:19 <Jeremy_Rand> #link https://www.ou.edu/content/gec/equality-and-social-justice.html
+21:21:31 <Jeremy_Rand> #info Acceptance will be decided by October 21.
+21:21:41 <Jeremy_Rand> #info If it's accepted, the talk will be November 5.
+21:22:46 <Jeremy_Rand> jbisch: you talked to Goatpig about the bug bounty thing?
+21:22:59 <jbisch> Yes, I did.
+21:24:35 <jbisch> Essentially, paying an individual a flat amount to find as many bugs pertaining to something (like the GUI) may be better than offering a broad bounty where we pay per bug, so that we don't deal with a bunch of duplicates.
+21:26:16 <Jeremy_Rand> jbisch: were duplicates a problem in practice when Armory was doing bounties?  I got the impression that people didn't really mind losing out on duplicate bounties as long as Alan was transparent about the process.  But I never really participated in that, so I could be wrong.
+21:27:43 <jbisch> I'm not sure how they actually handled it, but I imagine even if they didn't pay out for duplicates, even the time spent going through and identifying duplicates was not time well spent.
+21:28:18 <Jeremy_Rand> jbisch: ok, yes, that makes sense
+21:29:42 <Jeremy_Rand> FYI, one of the Scaling Bitcoin 2016 talks had a question about this in the Q&A.  I think it was Greg Sanders's talk
+21:30:21 <Jeremy_Rand> And he basically said the same thing as Goatpig: paying known-to-be-competent people to review things is more productive than bug bounties
+21:30:45 <Jeremy_Rand> (this was in the context of consensus-critical code, e.g. SegWit)
+21:31:30 <Jeremy_Rand> so it's unclear exactly how closely that applies to the stuff we're doing
+21:32:49 <Jeremy_Rand> ok, so are we agreed that bug bounties are NACKed for now?
+21:33:01 <brand0> yeah agreed
+21:33:03 <jbisch> yes
+21:33:15 <Jeremy_Rand> ok, summarizing for the minutes...
+21:34:23 <Jeremy_Rand> #info jbisch talked to Goatpig about bug bounties.  Goatpig thinks paying for expert review is more productive than bug bounties.
+21:34:36 <Jeremy_Rand> #agreed We will not pursue bug bounties at this time
+21:35:45 <Jeremy_Rand> #info GSoC 2017 is announced.
+21:36:13 <Jeremy_Rand> #idea We may want to start working on a GSoC ideas page early rather than leaving it to the last couple weeks as we did previously
+21:37:36 <Jeremy_Rand> #idea Also, as jonasbits said at the previous meeting, we may want to start an "Easy Tasks for Beginners" list
+21:38:21 <jbisch> #idea tag bugs on GitHub with a "newcomer" or "helpwanted" tag
+21:39:30 <Jeremy_Rand> sounds good to me
+21:41:08 <Jeremy_Rand> ok, any other things related public relations before we move onto funding?
+21:43:16 <Jeremy_Rand> #topic Funding
+21:44:16 <Jeremy_Rand> #info We're getting $15 USD/month from 1 recurring supporter on Bountysource.   That brings our balance in Bountysource to $329 USD.
+21:44:49 <Jeremy_Rand> #info NMDF has not received BTC or NMC since the previous meeting
+21:45:39 <Jeremy_Rand> #info I talked to Phelix; he will work on moving NMDF funds to an HD wallet.  It might take him some time to get that done.
+21:46:31 <Jeremy_Rand> #idea It might be useful to put a Donate link in the header of namecoin.org.  At the moment the link is only available near the bottom of the home page, which isn't necessarily obvious to people who are following deep links to the site.
+21:47:04 <Jeremy_Rand> That might require some reorganization of the header.  Which is probably needed anyway, e.g. why is Explorers easier to find than Downloads?
+21:47:54 <Jeremy_Rand> It might make sense to take a look at what some existing projects are doing wrt organizing their site header; the Qubes site seems to be doing a pretty nice job
+21:49:35 <cassiniNMC> qubes-os.org ?
+21:49:47 <Jeremy_Rand> cassiniNMC: yes
+21:50:50 <Jeremy_Rand> I believe that Qubes-OS used some OTF funding to redo their website in the past year.
+21:51:02 <Jeremy_Rand> But I'm not certain of that
+21:55:03 <Jeremy_Rand> ok, any other funding-related things to bring up?
+21:55:41 <cassiniNMC> IMO the Qubes site header isn't much better than ours.
+21:56:49 <Jeremy_Rand> cassiniNMC: the thing that I like about the Qubes header is that Downloads and Docs are easy to find (they're near the left side), while things like Roadmap aren't cluttering the header
+21:57:11 <Jeremy_Rand> Not really major differences per se
+21:58:19 <cassiniNMC> Hmm, looks perfect to me (on my fairly small Notebook display)
+22:00:28 <Jeremy_Rand> cassiniNMC: on the Namecoin site, Download is in the middle and is hard to find at a glance, and it's sufficiently cluttered that it uses 2 lines in Tor Browser's default resolution (which I think is 1000x1000 px?)
+22:00:58 <Jeremy_Rand> also News and Donate don't appear in the header on the Namecoin site, meaning you have to go to the home page in order to find those
+22:01:45 <cassiniNMC> ok, News and Donate are indeed difficult to find
+22:02:24 <Jeremy_Rand> FWIW, I've been informed by circa 2 people who visited namecoin.org that they had to look at the header for many seconds to find the Download link
+22:03:48 <brand0> yeah, it's a little buried
+22:04:17 <brand0> and typically one of the first things you find on a landing page for open source projects is a download link
+22:04:24 <brand0> even if it's already at the header
+22:04:37 <Jeremy_Rand> yeah
+22:05:06 <Jeremy_Rand> I think there's also a subconscious bias among us here -- we've visited namecoin.org often enough that we already know where to look for the Download link
+22:05:38 <Jeremy_Rand> I hadn't noticed that it was hard to find until those 2 people told me they had trouble finding it
+22:06:04 <brand0> I had trouble finding it :P
+22:06:20 <Jeremy_Rand> heh
+22:08:31 <Jeremy_Rand> ok, so sounds like there's some optimization that can be done there
+22:09:07 <Jeremy_Rand> any other funding-related topics?  And for that matter, any other Namecoin topics to bring up before we end the meeting?
+22:09:28 <cassiniNMC> There is a strange question at reddit,
+22:09:47 <cassiniNMC> "...merged-mining ... Will it become obsolete once sidechains become mainstream?"
+22:10:10 <Jeremy_Rand> cassiniNMC: ah yes, I did see that.  I haven't yet had a chance to reply
+22:10:56 <Jeremy_Rand> Basically, merged mining is a type of sidechain.  I'm pretty sure that Satoshi coined the term "sidechain" when talking about merge-mined chains.
+22:11:32 <Jeremy_Rand> The Reddit person is probably thinking of "pegged sidechains" which were introduced by Blockstream.  Pegged sidechains are orthogonal to merge-mined sidechains
+22:11:54 <cassiniNMC> Good point.
+22:12:00 <Jeremy_Rand> It's possible to have a pegged sidechain that is merge-mined, and it's possible have pegged sidechains that aren't merge-mined, and it's possible to have a merge-mined chain that isn't pegged
+22:12:26 <Jeremy_Rand> Last I heard Blockstream intends for the pegged sidechain projects they're working on to be merge-mined eventually
+22:14:45 <cassiniNMC> ok, sounds like you are the one who can answer that question best. I'll post my infamous pool statistics later.
+22:15:11 <cassiniNMC> (The initial question was "Do we know which big players are merge mining NMC?")
+22:16:11 <Jeremy_Rand> I'll see if I can answer in the next day or two.  I can't guarantee that that will occur though, so you're welcome to post your pool stats if a quick reply is needed.
+22:19:06 <Jeremy_Rand> ok, anything else anyone would like to bring up today?
+22:24:26 <Jeremy_Rand> ok, that's the end of the meeting then.  Thanks for being here everyone.
+22:24:34 <Jeremy_Rand> #endmeeting

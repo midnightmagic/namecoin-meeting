@@ -1,0 +1,399 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-meeting: Namecoin Development Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-meeting: Namecoin Development Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand at 19:06:58 UTC
+(<a href="namecoin-meeting.2016-10-16-19.06.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">Namecoin Core</b> <span class="details">(<a href='namecoin-meeting.2016-10-16-19.06.log.html#l-11'>Jeremy_Rand</a>, 19:13:47)</span>
+<ol type="a">
+  <li><span class="INFO">I tested brand0's wallet unlocking fixes in the
+    name tab PR.  I can confirm that they work properly in my
+    tests.</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-12'>Jeremy_Rand</a>,
+    19:14:37)</span></li>
+  <li><span class="INFO">As per the previous meeting's discussion, I've
+    tagged Namecoin Core nc0.13.99-name-tab-beta1.</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-13'>Jeremy_Rand</a>,
+    19:16:01)</span></li>
+  <li><span class="INFO">I've also uploaded GNU/Linux and Windows
+    binaries, and Gitian sigs for nc0.13.99-name-tab-beta1.</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-14'>Jeremy_Rand</a>,
+    19:16:42)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">We need someone
+    to ACK/NACK the PR that adds the release to to the namecoin.org
+    betas page</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-17'>Jeremy_Rand</a>,
+    19:18:09)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin.org/pull/79">https://github.com/namecoin/namecoin.org/pull/79</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-18'>Jeremy_Rand</a>,
+    19:18:22)</span></li>
+  <li><span class="INFO">brand0 has ACKed
+    https://github.com/namecoin/namecoin.org/pull/79</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-27'>Jeremy_Rand</a>,
+    19:23:01)</span></li>
+  <li><span class="INFO">I noticed some errors in the Release Process
+    docs; I submitted a PR to fix them</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-30'>Jeremy_Rand</a>,
+    19:25:25)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/104">https://github.com/namecoin/namecoin-core/pull/104</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-31'>Jeremy_Rand</a>,
+    19:25:35)</span></li>
+  <li><span class="INFO">Domob has merged those fixes to the dev
+    branch</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-32'>Jeremy_Rand</a>,
+    19:27:25)</span></li>
+  <li><span class="INFO">Those fixes still need to be backported to
+    master and 0.13 branches</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-33'>Jeremy_Rand</a>,
+    19:27:56)</span></li>
+  <li><i class="itemtype">ACTION</i>: <span class="ACTION">Jeremy_Rand
+    will backport https://github.com/namecoin/namecoin-core/pull/104 to
+    master and 0.13 branches</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-34'>Jeremy_Rand</a>,
+    19:28:31)</span></li>
+  <li><span class="INFO">kld confirmed that Whit Jackson's instructions
+    for building on OS X do work, with my proposed changes.</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-36'>Jeremy_Rand</a>,
+    19:29:55)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/97">https://github.com/namecoin/namecoin-core/pull/97</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-37'>Jeremy_Rand</a>,
+    19:30:09)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">we need to modify
+    Whit's PR to add my changes, and target it for dev branch</span>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-38'>Jeremy_Rand</a>,
+    19:30:48)</span></li>
+  <li><i class="itemtype">ACTION</i>: <span class="ACTION">cassiniNMC
+    will submit https://github.com/namecoin/namecoin-core/pull/97 to dev
+    branch with Jeremy_Rand's changes</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-47'>Jeremy_Rand</a>,
+    19:37:09)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">We still need
+    someone to help test 0.3.80 wallets with brand0's name tab PR</span>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-49'>Jeremy_Rand</a>,
+    19:37:50)</span></li>
+  <li><span class="INFO">I think I have access to an old 0.3.80 wallet
+    that I can put into Namecoin Core to see how it goes</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-50'>Jeremy_Rand</a>,
+    19:38:26)</span></li>
+  <li><i class="itemtype">ACTION</i>: <span class="ACTION">Jeremy_Rand
+    will try to test the name tab PR with an old 0.3.80 wallet</span>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-52'>Jeremy_Rand</a>,
+    19:39:21)</span></li>
+  <li><i class="itemtype">AGREED</i>: <span class="AGREED">After the
+    0.3.80 wallet testing, publicize the Namecoin Core
+    nc0.13.99-name-tab-beta1 release; if no major issues found after 2
+    weeks, merge it to Namecoin Core</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-77'>Jeremy_Rand</a>,
+    19:52:17)</span></li>
+  <li><i class="itemtype">IDEA</i>: <span class="IDEA">Actually, we need
+    a summary page (e.g. on github) on the current status (with links)
+    of (a) Namecoin Core, (b)</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-94'>cassiniNMC</a>,
+    20:00:52)</span></li>
+  <li><i class="itemtype">AGREED</i>: <span class="AGREED">Beta releases
+    should be announced on the namecoin.org news section going
+    forward</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-99'>Jeremy_Rand</a>,
+    20:05:06)</span></li>
+  <li><i class="itemtype">IDEA</i>: <span class="IDEA">We need a summary
+    page (e.g. on github) on the current status (with ETA, and with
+    links to the repo) of (a) Namecoin Core, (b) GUI i.e. brand0's name
+    tab PR, and (c) the SPV project.</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-103'>cassiniNMC</a>,
+    20:08:01)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">SPV</b> <span class="details">(<a href='namecoin-meeting.2016-10-16-19.06.log.html#l-113'>Jeremy_Rand</a>, 20:16:41)</span>
+<ol type="a">
+  <li><span class="INFO">I uploaded binaries of the SPV name lookup
+    client</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-114'>Jeremy_Rand</a>,
+    20:17:05)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">we need someone
+    to ACK/NACK the PR that adds that info to namecoin.org</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-115'>Jeremy_Rand</a>,
+    20:17:35)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin.org/pull/77">https://github.com/namecoin/namecoin.org/pull/77</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-116'>Jeremy_Rand</a>,
+    20:17:57)</span></li>
+  <li><span class="INFO">brand0 has ACKed
+    https://github.com/namecoin/namecoin.org/pull/77</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-122'>Jeremy_Rand</a>,
+    20:24:12)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">Can anyone look
+    into what privacy improvements the Bitsquare people made to their
+    fork of BitcoinJ?  I believe pigeons said they've done some useful
+    work on it, but I haven't really had a chance to examine it.</span>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-124'>Jeremy_Rand</a>,
+    20:25:17)</span></li>
+  <li><a
+    href="https://github.com/bitsquare/bitcoinj">https://github.com/bitsquare/bitcoinj</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-126'>pigeons</a>,
+    20:26:29)</span></li>
+  <li><span class="INFO">mkarrer is likely to be responsive in
+    #bitsquare according to pigeons</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-131'>Jeremy_Rand</a>,
+    20:28:20)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Protocol</b> <span class="details">(<a href='namecoin-meeting.2016-10-16-19.06.log.html#l-133'>Jeremy_Rand</a>, 20:31:15)</span>
+<ol type="a">
+  <li><span class="INFO">I've been doing some preliminary research on
+    detecting attacks on blockchain immutability for AuxPoW chains like
+    Namecoin</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-134'>Jeremy_Rand</a>,
+    20:31:52)</span></li>
+  <li><span class="INFO">The motivation is to force certain types of
+    Namecoin attackers to also have to attack Bitcoin if they want their
+    attack on Namecoin to be successful</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-135'>Jeremy_Rand</a>,
+    20:32:42)</span></li>
+  <li><span class="INFO">I will publish my data (and deployment ideas)
+    when I've had time to analyze more thoroughly</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-153'>Jeremy_Rand</a>,
+    20:44:20)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Tor</b> <span class="details">(<a href='namecoin-meeting.2016-10-16-19.06.log.html#l-160'>Jeremy_Rand</a>, 20:53:07)</span>
+<ol type="a">
+  <li><span class="INFO">The OnioNS Python/Stem codebase that we were
+    planning to use, is likely to be obsoleted by the pluggable naming
+    API in the future.  However, that API is not yet stable or usable
+    enough to be used for Namecoin right now.</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-189'>Jeremy_Rand</a>,
+    21:09:41)</span></li>
+  <li><i class="itemtype">AGREED</i>: <span class="AGREED">wyatt will
+    remain assigned to adapting the Python/Stem code from Jesse to work
+    with Namecoin.  We'll try to keep most of the logic in ncdns's
+    codebase (which should be future proof for the pluggable naming
+    API).  We'll re-evaluate once the pluggable naming API has
+    stabilized.</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-190'>Jeremy_Rand</a>,
+    21:10:30)</span></li>
+  <li><i class="itemtype">ACTION</i>: <span class="ACTION">Jeremy_Rand
+    will continue to engage with the Tor people to make sure that the
+    pluggable naming API meets our needs.</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-191'>Jeremy_Rand</a>,
+    21:11:41)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">TLS</b> <span class="details">(<a href='namecoin-meeting.2016-10-16-19.06.log.html#l-193'>Jeremy_Rand</a>, 21:15:35)</span>
+<ol type="a">
+  <li><span class="INFO">I've almost finished updating ncdns to use the
+    revised dehydrated cert spec, but I can't test that code until I get
+    my Windows VM working again.</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-194'>Jeremy_Rand</a>,
+    21:16:18)</span></li>
+  <li><span class="INFO">the Critical flag on the Extended Key Usage
+    field is probably being put on hold, because it's more annoying to
+    handle with Go's libs than I figured it would be, and it doesn't
+    seem to be of much practical significance</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-195'>Jeremy_Rand</a>,
+    21:17:05)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Public Relations</b> <span class="details">(<a href='namecoin-meeting.2016-10-16-19.06.log.html#l-199'>Jeremy_Rand</a>, 21:20:47)</span>
+<ol type="a">
+  <li><span class="INFO">I applied to give a talk at OU's Mosaic Social
+    Justice Symposium.</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-200'>Jeremy_Rand</a>,
+    21:21:07)</span></li>
+  <li><a
+    href="https://www.ou.edu/content/gec/equality-and-social-justice.html">https://www.ou.edu/content/gec/equality-and-social-justice.html</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-201'>Jeremy_Rand</a>,
+    21:21:19)</span></li>
+  <li><span class="INFO">Acceptance will be decided by October
+    21.</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-202'>Jeremy_Rand</a>,
+    21:21:31)</span></li>
+  <li><span class="INFO">If it's accepted, the talk will be November
+    5.</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-203'>Jeremy_Rand</a>,
+    21:21:41)</span></li>
+  <li><span class="INFO">jbisch talked to Goatpig about bug bounties.
+    Goatpig thinks paying for expert review is more productive than bug
+    bounties.</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-218'>Jeremy_Rand</a>,
+    21:34:23)</span></li>
+  <li><i class="itemtype">AGREED</i>: <span class="AGREED">We will not
+    pursue bug bounties at this time</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-219'>Jeremy_Rand</a>,
+    21:34:36)</span></li>
+  <li><span class="INFO">GSoC 2017 is announced.</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-220'>Jeremy_Rand</a>,
+    21:35:45)</span></li>
+  <li><i class="itemtype">IDEA</i>: <span class="IDEA">We may want to
+    start working on a GSoC ideas page early rather than leaving it to
+    the last couple weeks as we did previously</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-221'>Jeremy_Rand</a>,
+    21:36:13)</span></li>
+  <li><i class="itemtype">IDEA</i>: <span class="IDEA">Also, as
+    jonasbits said at the previous meeting, we may want to start an
+    "Easy Tasks for Beginners" list</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-222'>Jeremy_Rand</a>,
+    21:37:36)</span></li>
+  <li><i class="itemtype">IDEA</i>: <span class="IDEA">tag bugs on
+    GitHub with a "newcomer" or "helpwanted" tag</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-223'>jbisch</a>,
+    21:38:21)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Funding</b> <span class="details">(<a href='namecoin-meeting.2016-10-16-19.06.log.html#l-226'>Jeremy_Rand</a>, 21:43:16)</span>
+<ol type="a">
+  <li><span class="INFO">We're getting $15 USD/month from 1 recurring
+    supporter on Bountysource.   That brings our balance in Bountysource
+    to $329 USD.</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-227'>Jeremy_Rand</a>,
+    21:44:16)</span></li>
+  <li><span class="INFO">NMDF has not received BTC or NMC since the
+    previous meeting</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-228'>Jeremy_Rand</a>,
+    21:44:49)</span></li>
+  <li><span class="INFO">I talked to Phelix; he will work on moving NMDF
+    funds to an HD wallet.  It might take him some time to get that
+    done.</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-229'>Jeremy_Rand</a>,
+    21:45:39)</span></li>
+  <li><i class="itemtype">IDEA</i>: <span class="IDEA">It might be
+    useful to put a Donate link in the header of namecoin.org.  At the
+    moment the link is only available near the bottom of the home page,
+    which isn't necessarily obvious to people who are following deep
+    links to the site.</span> <span class="details">(<a
+    href='namecoin-meeting.2016-10-16-19.06.log.html#l-230'>Jeremy_Rand</a>,
+    21:46:31)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 22:24:34 UTC
+(<a href="namecoin-meeting.2016-10-16-19.06.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>Jeremy_Rand will backport https://github.com/namecoin/namecoin-core/pull/104 to master and 0.13 branches</li>
+  <li>cassiniNMC will submit https://github.com/namecoin/namecoin-core/pull/97 to dev branch with Jeremy_Rand's changes</li>
+  <li>Jeremy_Rand will try to test the name tab PR with an old 0.3.80 wallet</li>
+  <li>Jeremy_Rand will continue to engage with the Tor people to make sure that the pluggable naming API meets our needs.</li>
+</ol>
+<br><br>
+
+
+
+<h3>Action items, by person</h3>
+<ol>
+  <li> cassiniNMC <ol>
+    <li>cassiniNMC will submit https://github.com/namecoin/namecoin-core/pull/97 to dev branch with Jeremy_Rand's changes</li>
+  </ol></li>
+  <li> Jeremy_Rand <ol>
+    <li>Jeremy_Rand will backport https://github.com/namecoin/namecoin-core/pull/104 to master and 0.13 branches</li>
+    <li>cassiniNMC will submit https://github.com/namecoin/namecoin-core/pull/97 to dev branch with Jeremy_Rand's changes</li>
+    <li>Jeremy_Rand will try to test the name tab PR with an old 0.3.80 wallet</li>
+    <li>Jeremy_Rand will continue to engage with the Tor people to make sure that the pluggable naming API meets our needs.</li>
+  </ol></li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand (194)</li>
+  <li>cassiniNMC (40)</li>
+  <li>brand0 (23)</li>
+  <li>jbisch (6)</li>
+  <li>pigeons (3)</li>
+  <li>qpm (2)</li>
+  <li>wyatt (1)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

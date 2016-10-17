@@ -1,0 +1,296 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-meeting log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:06:58</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:06:58</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Oct 16 19:06:58 2016 UTC.  The chair is Jeremy_Rand. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:06:59</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:07:42</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#meetingtopic </span><span class="cmdline">Namecoin Development Meeting</span>
+<a name="l-5"></a><span class="tm">19:08:07</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> hey everyone, welcome to the meeting.  Sorry we're starting a few minutes late today
+<a name="l-6"></a><span class="tm">19:08:18</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Can we get a roll call of who's here today?
+<a name="l-7"></a><span class="tm">19:10:05</span><span class="nk"> &lt;cassiniNMC&gt;</span> Hi.
+<a name="l-8"></a><span class="tm">19:10:30</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> hey cassiniNMC
+<a name="l-9"></a><span class="tm">19:11:34</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> brand0 / jbisch / jonasbits / hl / midmightmagic / midmagic / pigeons / fluffypony: are you guys here?
+<a name="l-10"></a><span class="tm">19:13:42</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok, so I guess it's just us for now.  Let's get on with the first topic, then.
+<a name="l-11"></a><span class="tm">19:13:47</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Namecoin Core</span>
+<a name="l-12"></a><span class="tm">19:14:37</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I tested brand0's wallet unlocking fixes in the name tab PR.  I can confirm that they work properly in my tests.</span>
+<a name="l-13"></a><span class="tm">19:16:01</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">As per the previous meeting's discussion, I've tagged Namecoin Core nc0.13.99-name-tab-beta1.</span>
+<a name="l-14"></a><span class="tm">19:16:42</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've also uploaded GNU/Linux and Windows binaries, and Gitian sigs for nc0.13.99-name-tab-beta1.</span>
+<a name="l-15"></a><span class="tm">19:17:12</span><span class="nk"> &lt;cassiniNMC&gt;</span> Ah, "uploaded" where?
+<a name="l-16"></a><span class="tm">19:17:45</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">cassiniNMC:</span> I figured out how to upload files to namecoin.org, so we don't need to use Google Drive anymore
+<a name="l-17"></a><span class="tm">19:18:09</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#help </span><span class="cmdline">We need someone to ACK/NACK the PR that adds the release to to the namecoin.org betas page</span>
+<a name="l-18"></a><span class="tm">19:18:22</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin.org/pull/79</span>
+<a name="l-19"></a><span class="tm">19:19:41</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">cassiniNMC:</span> would you be up for reviewing that PR?
+<a name="l-20"></a><span class="tm">19:20:09</span><span class="nk"> &lt;brand0&gt;</span> (here, sorry -- late)
+<a name="l-21"></a><span class="tm">19:20:33</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> hey brand0
+<a name="l-22"></a><span class="tm">19:21:28</span><span class="nk"> &lt;cassiniNMC&gt;</span> ok, I can look at this PR in detail on Tuesday.
+<a name="l-23"></a><span class="tm">19:22:09</span><span class="nk"> &lt;wyatt&gt;</span> I am also here, I should mention.
+<a name="l-24"></a><span class="tm">19:22:11</span><span class="nk"> &lt;cassiniNMC&gt;</span> Ah, there are not so many "details to look at", so
+<a name="l-25"></a><span class="tm">19:22:24</span><span class="nk"> &lt;brand0&gt;</span> i've ACKED PR 79
+<a name="l-26"></a><span class="tm">19:22:49</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ah, ok.  Thanks brand0
+<a name="l-27"></a><span class="tm">19:23:01</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">brand0 has ACKed https://github.com/namecoin/namecoin.org/pull/79</span>
+<a name="l-28"></a><span class="tm">19:23:11</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> hey wyatt, welcome to the meeting
+<a name="l-29"></a><span class="tm">19:23:29</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> for anyone wondering, wyatt is one of the students from OU who will be working with us this year
+<a name="l-30"></a><span class="tm">19:25:25</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I noticed some errors in the Release Process docs; I submitted a PR to fix them</span>
+<a name="l-31"></a><span class="tm">19:25:35</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/104</span>
+<a name="l-32"></a><span class="tm">19:27:25</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">Domob has merged those fixes to the dev branch</span>
+<a name="l-33"></a><span class="tm">19:27:56</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">Those fixes still need to be backported to master and 0.13 branches</span>
+<a name="l-34"></a><span class="tm">19:28:31</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#action </span><span class="cmdline">Jeremy_Rand will backport https://github.com/namecoin/namecoin-core/pull/104 to master and 0.13 branches</span>
+<a name="l-35"></a><span class="tm">19:29:12</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Also related to build documentation,
+<a name="l-36"></a><span class="tm">19:29:55</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">kld confirmed that Whit Jackson's instructions for building on OS X do work, with my proposed changes.</span>
+<a name="l-37"></a><span class="tm">19:30:09</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/97</span>
+<a name="l-38"></a><span class="tm">19:30:48</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#help </span><span class="cmdline">we need to modify Whit's PR to add my changes, and target it for dev branch</span>
+<a name="l-39"></a><span class="tm">19:31:15</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I might be able to do that, unless anyone else is volunteering?
+<a name="l-40"></a><span class="tm">19:33:19</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok, so I guess I'll do that
+<a name="l-41"></a><span class="tm">19:33:56</span><span class="nk"> &lt;cassiniNMC&gt;</span> (It is only the build-osx.md file, isn't it?)
+<a name="l-42"></a><span class="tm">19:34:13</span><span class="nk"> &lt;cassiniNMC&gt;</span> I was wondering if there is any code file involved?!
+<a name="l-43"></a><span class="tm">19:34:37</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">cassiniNMC:</span> yes, it's just the build-osx.md file
+<a name="l-44"></a><span class="tm">19:35:26</span><span class="nk"> &lt;cassiniNMC&gt;</span> ok, should be no problem,
+<a name="l-45"></a><span class="tm">19:35:50</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">cassiniNMC:</span> ok, so are you volunteering for that task?
+<a name="l-46"></a><span class="tm">19:36:16</span><span class="nk"> &lt;cassiniNMC&gt;</span> provided I can remember the git commands (haven't done any git/github stuff for several months). Yes, I'll do it.
+<a name="l-47"></a><span class="tm">19:37:09</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#action </span><span class="cmdline">cassiniNMC will submit https://github.com/namecoin/namecoin-core/pull/97 to dev branch with Jeremy_Rand's changes</span>
+<a name="l-48"></a><span class="tm">19:37:12</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> thanks
+<a name="l-49"></a><span class="tm">19:37:50</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#help </span><span class="cmdline">We still need someone to help test 0.3.80 wallets with brand0's name tab PR</span>
+<a name="l-50"></a><span class="tm">19:38:26</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I think I have access to an old 0.3.80 wallet that I can put into Namecoin Core to see how it goes</span>
+<a name="l-51"></a><span class="tm">19:38:50</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> But if anyone else would like to try as well, feel free :)
+<a name="l-52"></a><span class="tm">19:39:21</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#action </span><span class="cmdline">Jeremy_Rand will try to test the name tab PR with an old 0.3.80 wallet</span>
+<a name="l-53"></a><span class="tm">19:39:41</span><span class="nk"> &lt;cassiniNMC&gt;</span> Is there release we want to aim at? In November I'll have plenty of
+<a name="l-54"></a><span class="tm">19:39:47</span><span class="nk"> &lt;cassiniNMC&gt;</span> time to spare for tests like this.
+<a name="l-55"></a><span class="tm">19:39:59</span><span class="nk"> &lt;cassiniNMC&gt;</span> /release/release date/
+<a name="l-56"></a><span class="tm">19:40:41</span><span class="nk"> &lt;cassiniNMC&gt;</span> grrr typos. Correct: Is there a release date we want to strive for?
+<a name="l-57"></a><span class="tm">19:41:05</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">cassiniNMC:</span> I'm not sure.  Probably the sooner the better, given that we're basically at the mercy of Bitcoin not trying to schedule a bunch of additional softforks before we activate AAA.
+<a name="l-58"></a><span class="tm">19:41:09</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> And AAA is dependent on the name tab PR
+<a name="l-59"></a><span class="tm">19:42:04</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> also FWIW, the report we got about crashing with 0.3.80 wallets is probably harmless -- it crashed on exit, and worked fine from then on
+<a name="l-60"></a><span class="tm">19:42:30</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> So if we can't easily reproduce it very soon, I am inclined to write it off as a nonblocker and worry about it after we merge the name tab
+<a name="l-61"></a><span class="tm">19:43:28</span><span class="nk"> &lt;cassiniNMC&gt;</span> Sounds ok. I had a similar effect last year with one of the manual Qt builds on Mac OS. Crashed on exit,
+<a name="l-62"></a><span class="tm">19:43:52</span><span class="nk"> &lt;cassiniNMC&gt;</span> but never caused any harm to the wallet or the db files.
+<a name="l-63"></a><span class="tm">19:44:34</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">cassiniNMC:</span> ok.  Yeah, crashes on exit seem to be fairly common in Bitcoin/Namecoin Git builds, and I've never had any damage as a result whenever it occurred to me.  Wasn't recent.
+<a name="l-64"></a><span class="tm">19:45:31</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I'm unaware of any other candidate blocker bugs for the name tab.  So after I test out the 0.3.80 wallet I have (probably later today), I'd lean toward publicizing the name tab beta and getting as many people to test it as possible
+<a name="l-65"></a><span class="tm">19:46:02</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> once it's been widely advertised for, say, 2 weeks, if no blocker bugs are found, I'd say merge it.
+<a name="l-66"></a><span class="tm">19:46:23</span><span class="nk"> &lt;cassiniNMC&gt;</span> <span class="cmd">#agreed</span><span class="cmdline"></span>
+<a name="l-67"></a><span class="tm">19:47:26</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> It might make sense to get Gitian sigs posted from 3 devs before we widely publicize it.  I've posted sigs for GNU/Linux and Windows, I think jbisch posted GNU/Linux sigs this morning
+<a name="l-68"></a><span class="tm">19:47:44</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> However, I don't want that to be a bottleneck, since it's still technically a beta release
+<a name="l-69"></a><span class="tm">19:48:14</span><span class="nk"> &lt;brand0&gt;</span> When we release we should instruct people to backup their wallets and all that
+<a name="l-70"></a><span class="tm">19:48:30</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">brand0:</span> yep, definitely
+<a name="l-71"></a><span class="tm">19:48:45</span><span class="nk"> &lt;brand0&gt;</span> But other than that, it should be fairly safe
+<a name="l-72"></a><span class="tm">19:49:18</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> yeah, I've been using it for general use with my primary Namecoin wallet with no issues
+<a name="l-73"></a><span class="tm">19:49:25</span><span class="nk"> &lt;brand0&gt;</span> Same
+<a name="l-74"></a><span class="tm">19:49:28</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> (other than the wallet unlocking issues that are fixed now)
+<a name="l-75"></a><span class="tm">19:50:02</span><span class="nk"> &lt;jbisch&gt;</span> Hi, I've also just finished with a Windows Gitian build too.
+<a name="l-76"></a><span class="tm">19:50:14</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch:</span> cool
+<a name="l-77"></a><span class="tm">19:52:17</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#agreed </span><span class="cmdline">After the 0.3.80 wallet testing, publicize the Namecoin Core nc0.13.99-name-tab-beta1 release; if no major issues found after 2 weeks, merge it to Namecoin Core</span>
+<a name="l-78"></a><span class="tm">19:53:27</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> any other Namecoin Core related things to bring up, or should we move on to the next topic (which is protocol-related stuff)?
+<a name="l-79"></a><span class="tm">19:54:16</span><span class="nk"> &lt;cassiniNMC&gt;</span> Well, people occasionally ask me what is the release status of
+<a name="l-80"></a><span class="tm">19:54:48</span><span class="nk"> &lt;cassiniNMC&gt;</span> Namecoin Core. There are no up-to-date Linux packages, are there?
+<a name="l-81"></a><span class="tm">19:55:11</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I'm thinking it would be useful to announce beta releases on the namecoin.org news page, rather than just silently post binaries on GitHub, the downloads page, the forum, Reddit, etc.
+<a name="l-82"></a><span class="tm">19:55:50</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Many people who just casually come across namecoin.org will probably want to know that beta releases are happening, since it reduces incorrect perception that the project is "dead"
+<a name="l-83"></a><span class="tm">19:56:15</span><span class="nk"> &lt;cassiniNMC&gt;</span> Precisely.
+<a name="l-84"></a><span class="tm">19:56:38</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">cassiniNMC:</span> Namecoin Core doesn't have any official Linux packages; Gitian generates statically linked Linux executables, not packages
+<a name="l-85"></a><span class="tm">19:56:53</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> That's an issue that's inherited from Bitcoin Core
+<a name="l-86"></a><span class="tm">19:56:56</span><span class="nk"> &lt;cassiniNMC&gt;</span> I see.
+<a name="l-87"></a><span class="tm">19:57:45</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I think Bitcoin Core has Matt Corallo maintain Ubuntu packages, but they're not reproducible AFAIK
+<a name="l-88"></a><span class="tm">19:58:26</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I'm not sure what setup Matt is using to create those packages, and I'm not really interested in that route until they're made reproducible
+<a name="l-89"></a><span class="tm">19:59:18</span><span class="nk"> &lt;cassiniNMC&gt;</span> I guess if we give Peter Conrad (pmc) some instructions where to find which release then he'll update our Linux packages pages.
+<a name="l-90"></a><span class="tm">19:59:48</span><span class="nk"> &lt;brand0&gt;</span> can't we just bundle our static gitian binaries into a .deb?
+<a name="l-91"></a><span class="tm">20:00:02</span><span class="nk"> &lt;brand0&gt;</span> it's just ar'd together two tar files
+<a name="l-92"></a><span class="tm">20:00:12</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">cassiniNMC:</span> yes, assuming that we want to keep using pmc's system (he's using OBS)
+<a name="l-93"></a><span class="tm">20:00:25</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I'm inclined to just ask users to use the static binaries from Gitian
+<a name="l-94"></a><span class="tm">20:00:52</span><span class="nk"> &lt;cassiniNMC&gt;</span> <span class="cmd">#idea </span><span class="cmdline">Actually, we need a summary page (e.g. on github) on the current status (with links) of (a) Namecoin Core, (b)</span>
+<a name="l-95"></a><span class="tm">20:01:27</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">brand0:</span> I'd love to see a way to package the Gitian binaries into reproducible .deb files, but that should probably be proposed to Bitcoin Core
+<a name="l-96"></a><span class="tm">20:01:43</span><span class="nk"> &lt;brand0&gt;</span> yeah good point Jeremy_Rand
+<a name="l-97"></a><span class="tm">20:02:01</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Last I heard, Luke-Jr was of the personal opinion that such proposals would be likely to be accepted if the code quality is okay and it doesn't produce a bunch of maintenance hassle
+<a name="l-98"></a><span class="tm">20:04:34</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok so sounds like we have agreement that,
+<a name="l-99"></a><span class="tm">20:05:06</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#agreed </span><span class="cmdline">Beta releases should be announced on the namecoin.org news section going forward</span>
+<a name="l-100"></a><span class="tm">20:05:58</span><span class="nk"> &lt;cassiniNMC&gt;</span> What about reddit?
+<a name="l-101"></a><span class="tm">20:06:08</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">cassiniNMC:</span> not sure if your message got cut off, it ended at "(a) Namecoin Core, (b)"
+<a name="l-102"></a><span class="tm">20:06:32</span><span class="nk"> &lt;cassiniNMC&gt;</span> Ah, sorry, one moment please...
+<a name="l-103"></a><span class="tm">20:08:01</span><span class="nk"> &lt;cassiniNMC&gt;</span> <span class="cmd">#idea </span><span class="cmdline">We need a summary page (e.g. on github) on the current status (with ETA, and with links to the repo) of (a) Namecoin Core, (b) GUI i.e. brand0's name tab PR, and (c) the SPV project.</span>
+<a name="l-104"></a><span class="tm">20:09:15</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">cassiniNMC:</span> I'd lean towards using the "Beta Downloads" page of namecoin.org for that, unless there's a reason you think it wouldn't fit there?
+<a name="l-105"></a><span class="tm">20:10:54</span><span class="nk"> &lt;cassiniNMC&gt;</span> All right, seems ok. Do you think you could include some info on your SPV code there?
+<a name="l-106"></a><span class="tm">20:11:38</span><span class="nk"> &lt;brand0&gt;</span> you mean like a roadmap cassiniNMC?
+<a name="l-107"></a><span class="tm">20:11:46</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">cassiniNMC:</span> funny you mention that... maybe I should make SPV our next meeting topic and come back to protocol-related things?
+<a name="l-108"></a><span class="tm">20:13:14</span><span class="nk"> &lt;cassiniNMC&gt;</span> ah ok. Anyway, I'd like to point people interested in experimenting with Namecoin to one summary page,
+<a name="l-109"></a><span class="tm">20:14:02</span><span class="nk"> &lt;cassiniNMC&gt;</span> particularly people interested in experimenting with "bleeding edge" projects.
+<a name="l-110"></a><span class="tm">20:14:10</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> yes, seems like the beta downloads page is well-suited to that
+<a name="l-111"></a><span class="tm">20:14:47</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok, any other Namecoin Core things to bring up before we move onto SPV?
+<a name="l-112"></a><span class="tm">20:14:51</span><span class="nk"> &lt;cassiniNMC&gt;</span> ok. Furthermore, ETA info would be quite helpful.
+<a name="l-113"></a><span class="tm">20:16:41</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">SPV</span>
+<a name="l-114"></a><span class="tm">20:17:05</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I uploaded binaries of the SPV name lookup client</span>
+<a name="l-115"></a><span class="tm">20:17:35</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#help </span><span class="cmdline">we need someone to ACK/NACK the PR that adds that info to namecoin.org</span>
+<a name="l-116"></a><span class="tm">20:17:57</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin.org/pull/77</span>
+<a name="l-117"></a><span class="tm">20:19:38</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Note that these binaries are on Google Drive, since this was before I figured out how to upload them to the namecoin.org server
+<a name="l-118"></a><span class="tm">20:19:51</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I will rectify that next time I'm uploading SPV client binaries
+<a name="l-119"></a><span class="tm">20:20:52</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Note that the instructions are pretty similar to the ones that I gave cassiniNMC for GETD#4
+<a name="l-120"></a><span class="tm">20:21:19</span><span class="nk"> &lt;brand0&gt;</span> I'm acking it right now, will note the move from google to namecoin servers in the future
+<a name="l-121"></a><span class="tm">20:23:25</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Thanks brand0
+<a name="l-122"></a><span class="tm">20:24:12</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">brand0 has ACKed https://github.com/namecoin/namecoin.org/pull/77</span>
+<a name="l-123"></a><span class="tm">20:24:57</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Other SPV-related thing, which is a repeat of something from previous meeting
+<a name="l-124"></a><span class="tm">20:25:17</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#help </span><span class="cmdline">Can anyone look into what privacy improvements the Bitsquare people made to their fork of BitcoinJ?  I believe pigeons said they've done some useful work on it, but I haven't really had a chance to examine it.</span>
+<a name="l-125"></a><span class="tm">20:25:55</span><span class="nk"> &lt;pigeons&gt;</span> they have a branch you can look at, it was mostly some of the bloom filter issues i think
+<a name="l-126"></a><span class="tm">20:26:29</span><span class="nk"> &lt;pigeons&gt;</span> https://github.com/bitsquare/bitcoinj
+<a name="l-127"></a><span class="tm">20:26:36</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">pigeons:</span> ok.  I think they were planning to do some things to improve the Tor support?
+<a name="l-128"></a><span class="tm">20:27:02</span><span class="nk"> &lt;pigeons&gt;</span> i dont know, mut mkarrer is responsive in #bitsquare
+<a name="l-129"></a><span class="tm">20:27:23</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> upstream BitcoinJ is using Orchid for its Tor support, which has been a disaster for BitcoinJ-based software that wants to use Tor from what I understand
+<a name="l-130"></a><span class="tm">20:27:45</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">pigeons:</span> ok thanks, I'll see if I can get qpm added to #bitsquare
+<a name="l-131"></a><span class="tm">20:28:20</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">mkarrer is likely to be responsive in #bitsquare according to pigeons</span>
+<a name="l-132"></a><span class="tm">20:29:13</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok -- any other SPV-related things that anyone would like to bring up before we move onto the next topic (protocol-related stuff)?
+<a name="l-133"></a><span class="tm">20:31:15</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Protocol</span>
+<a name="l-134"></a><span class="tm">20:31:52</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've been doing some preliminary research on detecting attacks on blockchain immutability for AuxPoW chains like Namecoin</span>
+<a name="l-135"></a><span class="tm">20:32:42</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">The motivation is to force certain types of Namecoin attackers to also have to attack Bitcoin if they want their attack on Namecoin to be successful</span>
+<a name="l-136"></a><span class="tm">20:33:33</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Specifically, I'm looking at the timestamps and block heights in the AuxPoW parent blocks
+<a name="l-137"></a><span class="tm">20:33:39</span><span class="nk"> &lt;brand0&gt;</span> interesting
+<a name="l-138"></a><span class="tm">20:34:42</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> This is based on the fact that for a Bitcoin block to be valid, it has to meet certain constraints on its timestamps and on its coinbase commitment to its block height
+<a name="l-139"></a><span class="tm">20:35:01</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> And both of those fields are in the Namecoin AuxPoW block headers
+<a name="l-140"></a><span class="tm">20:35:36</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> So, let's say that a hypothetical attacker wants to rewrite a day's worth of Namecoin history
+<a name="l-141"></a><span class="tm">20:36:05</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> But they don't want to attack Bitcoin (either because they don't have enough hashrate, or it will just cause too much collateral damage)
+<a name="l-142"></a><span class="tm">20:36:49</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> What they would probably do is continue mining Bitcoin as normal, but they would commit to Namecoin blocks that build on top of the Namecoin chain from a day ago
+<a name="l-143"></a><span class="tm">20:37:22</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> This is really easy to detect, because we would see the AuxPoW headers' parent blocks jump by a day in both timestamp and block height
+<a name="l-144"></a><span class="tm">20:37:40</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I did some simulations of this using historical Namecoin chain data
+<a name="l-145"></a><span class="tm">20:38:09</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> And my code actually found a bunch of candidate attack events.  All of them turned out to be from August/September 2014
+<a name="l-146"></a><span class="tm">20:38:19</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> That's when someone accidentally DoSed most of the Namecoin miners
+<a name="l-147"></a><span class="tm">20:38:53</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Which basically was an attack on the network, because only 1 of the miners was able to mine properly during that period
+<a name="l-148"></a><span class="tm">20:39:12</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> so I think it's correct behavior to detect that as a candidate attack event
+<a name="l-149"></a><span class="tm">20:39:49</span><span class="nk"> &lt;cassiniNMC&gt;</span> This was the "Great Aggregator" situation, wasn't it?
+<a name="l-150"></a><span class="tm">20:39:56</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">cassiniNMC:</span> yes
+<a name="l-151"></a><span class="tm">20:41:17</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I will publish my data (and deployment ideas) when I've had time to analyze more thoroughly, but the preliminary results suggest that we can pretty easily detect rewrites of 18 blocks or more without any problems
+<a name="l-152"></a><span class="tm">20:44:03</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> oh, whoops, that should have had an #info.  Lemme fix that for the minutes....
+<a name="l-153"></a><span class="tm">20:44:20</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I will publish my data (and deployment ideas) when I've had time to analyze more thoroughly</span>
+<a name="l-154"></a><span class="tm">20:45:45</span><span class="nk"> &lt;cassiniNMC&gt;</span> Trying to figure out if your forum post https://forum.namecoin.info/viewtopic.php?p=16829#p16829 is directly related to this.
+<a name="l-155"></a><span class="tm">20:47:39</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">cassiniNMC:</span> it is very loosely related, and my current work is derived from that 2AM brain dump.  However, my current thoughts on how this would be used are fairly different from what that post describes
+<a name="l-156"></a><span class="tm">20:49:59</span><span class="nk"> &lt;cassiniNMC&gt;</span> ok, eagerly awaiting your data, and particularly your deployment ideas.
+<a name="l-157"></a><span class="tm">20:50:27</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> thanks :)
+<a name="l-158"></a><span class="tm">20:51:15</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> By any chance are there other protocol-related things that anyone would like to bring up, or should we move onto our next topic (Tor)?
+<a name="l-159"></a><span class="tm">20:52:41</span><span class="nk"> &lt;brand0&gt;</span> next topic unless there's more
+<a name="l-160"></a><span class="tm">20:53:07</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Tor</span>
+<a name="l-161"></a><span class="tm">20:54:06</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> So, our plan from a few weeks ago was that wyatt would be initially working on porting Jesse's OnioNS Stem code to use Namecoin
+<a name="l-162"></a><span class="tm">20:54:25</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> There are a couple of hitches that came up since then
+<a name="l-163"></a><span class="tm">20:55:12</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> The first is that Jesse is planning to replace that Python code with C++ code in the future, so we can't rely on upstream fixes on that codebase
+<a name="l-164"></a><span class="tm">20:55:43</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> C++ is easier to build reproducibly, but also of course adds memory safety issues that I'm not really comfortable with
+<a name="l-165"></a><span class="tm">20:56:40</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> It's probably feasible to rewrite that Python code using Bulb (which is a Tor controller library in Golang)...
+<a name="l-166"></a><span class="tm">20:57:17</span><span class="nk"> &lt;brand0&gt;</span> What's the motivation to get away from python?
+<a name="l-167"></a><span class="tm">20:57:17</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> but Bulb is a lot more minimalist than Stem, so part of the work would involve adding a bunch of code to Bulb
+<a name="l-168"></a><span class="tm">20:57:48</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">brand0:</span> I have no idea what Jesse's motivation is for scrapping Python.  I think he said something about "reducing dependencies"
+<a name="l-169"></a><span class="tm">20:57:56</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> But it wasn't clear to me exactly what the thinking was there
+<a name="l-170"></a><span class="tm">20:58:41</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Anyway, the 2nd hitch that came up is that Tor is introducing a "pluggable naming systems" API, which is based on the pluggable transports API
+<a name="l-171"></a><span class="tm">20:59:01</span><span class="nk"> &lt;brand0&gt;</span> I saw that Tor-dev email
+<a name="l-172"></a><span class="tm">20:59:12</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> which means that using the Tor control port (via Stem, Bulb, or whatever thing Jesse is doing in C++) will become obsolete for our use cases anyway
+<a name="l-173"></a><span class="tm">20:59:27</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> So, here's my take on this
+<a name="l-174"></a><span class="tm">21:00:08</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Tor's primary goal here is to encourage experimentation with things like Namecoin, OnioNS, and GNS, because there just isn't enough real-world experience using these systems for Tor right now
+<a name="l-175"></a><span class="tm">21:00:30</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Tor also needs that experience to be gained fast, due to the impending increase in .onion name length
+<a name="l-176"></a><span class="tm">21:01:24</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> So my opinion is that it's perfectly consistent with those high-level goals, to continue with Jesse's Python/Stem code as planned, with the knowledge that the code will need to be replaced at some point
+<a name="l-177"></a><span class="tm">21:01:58</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> The pluggable naming systems draft spec, quite frankly, needs a lot of polishing before it's even going to be possible to implement in a useful way
+<a name="l-178"></a><span class="tm">21:02:18</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> And Jesse's C++ replacement for the Python/Stem code isn't started AFAIK
+<a name="l-179"></a><span class="tm">21:02:47</span><span class="nk"> &lt;brand0&gt;</span> are we thinking that we'll use whatever SPV implementation we end up with (that works with Tor) in conjunction with Tor's pluggable names?
+<a name="l-180"></a><span class="tm">21:03:08</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> and that Python code is small enough that I don't foresee any major problems from using it for a while until things are stabilized with the pluggable naming API
+<a name="l-181"></a><span class="tm">21:03:45</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">brand0:</span> Probably we would use an SPV implementation in combination with some of the ncdns codebase
+<a name="l-182"></a><span class="tm">21:03:58</span><span class="nk"> &lt;brand0&gt;</span> gotcha
+<a name="l-183"></a><span class="tm">21:04:22</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ncdns is also useful because pluggable transports are in Golang, meaning the pluggable naming API is likely to get a high-quality implementation in Golang as well
+<a name="l-184"></a><span class="tm">21:04:42</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> so using ncdns for as much of the logic as possible helps us future proof
+<a name="l-185"></a><span class="tm">21:05:48</span><span class="nk"> &lt;brand0&gt;</span> yeah I like that strategy
+<a name="l-186"></a><span class="tm">21:07:20</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Okay cool.  So are we agreed that wyatt will remain assigned to adapting the Python/Stem code from Jesse to work with Namecoin, that we'll try to keep most of the logic in ncdns's codebase, and that we'll re-evaluate once the pluggable naming API has stabilized?
+<a name="l-187"></a><span class="tm">21:07:46</span><span class="nk"> &lt;brand0&gt;</span> yeah sounds reasonable to me
+<a name="l-188"></a><span class="tm">21:08:19</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok cool.  Lemme try to summarize that for the minutes
+<a name="l-189"></a><span class="tm">21:09:41</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">The OnioNS Python/Stem codebase that we were planning to use, is likely to be obsoleted by the pluggable naming API in the future.  However, that API is not yet stable or usable enough to be used for Namecoin right now.</span>
+<a name="l-190"></a><span class="tm">21:10:30</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#agreed </span><span class="cmdline">wyatt will remain assigned to adapting the Python/Stem code from Jesse to work with Namecoin.  We'll try to keep most of the logic in ncdns's codebase (which should be future proof for the pluggable naming API).  We'll re-evaluate once the pluggable naming API has stabilized.</span>
+<a name="l-191"></a><span class="tm">21:11:41</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#action </span><span class="cmdline">Jeremy_Rand will continue to engage with the Tor people to make sure that the pluggable naming API meets our needs.</span>
+<a name="l-192"></a><span class="tm">21:12:43</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok.  Anything else about Tor, or should we move onto the next topic (TLS)?
+<a name="l-193"></a><span class="tm">21:15:35</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">TLS</span>
+<a name="l-194"></a><span class="tm">21:16:18</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've almost finished updating ncdns to use the revised dehydrated cert spec, but I can't test that code until I get my Windows VM working again.</span>
+<a name="l-195"></a><span class="tm">21:17:05</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">the Critical flag on the Extended Key Usage field is probably being put on hold, because it's more annoying to handle with Go's libs than I figured it would be, and it doesn't seem to be of much practical significance</span>
+<a name="l-196"></a><span class="tm">21:17:47</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Anyone else have other TLS-related things?
+<a name="l-197"></a><span class="tm">21:18:31</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Or, does anyone have other development-related topics?  Or should we move onto public relations?
+<a name="l-198"></a><span class="tm">21:20:39</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok, moving on,
+<a name="l-199"></a><span class="tm">21:20:47</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Public Relations</span>
+<a name="l-200"></a><span class="tm">21:21:07</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I applied to give a talk at OU's Mosaic Social Justice Symposium.</span>
+<a name="l-201"></a><span class="tm">21:21:19</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://www.ou.edu/content/gec/equality-and-social-justice.html</span>
+<a name="l-202"></a><span class="tm">21:21:31</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">Acceptance will be decided by October 21.</span>
+<a name="l-203"></a><span class="tm">21:21:41</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">If it's accepted, the talk will be November 5.</span>
+<a name="l-204"></a><span class="tm">21:22:46</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch:</span> you talked to Goatpig about the bug bounty thing?
+<a name="l-205"></a><span class="tm">21:22:59</span><span class="nk"> &lt;jbisch&gt;</span> Yes, I did.
+<a name="l-206"></a><span class="tm">21:24:35</span><span class="nk"> &lt;jbisch&gt;</span> Essentially, paying an individual a flat amount to find as many bugs pertaining to something (like the GUI) may be better than offering a broad bounty where we pay per bug, so that we don't deal with a bunch of duplicates.
+<a name="l-207"></a><span class="tm">21:26:16</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch:</span> were duplicates a problem in practice when Armory was doing bounties?  I got the impression that people didn't really mind losing out on duplicate bounties as long as Alan was transparent about the process.  But I never really participated in that, so I could be wrong.
+<a name="l-208"></a><span class="tm">21:27:43</span><span class="nk"> &lt;jbisch&gt;</span> I'm not sure how they actually handled it, but I imagine even if they didn't pay out for duplicates, even the time spent going through and identifying duplicates was not time well spent.
+<a name="l-209"></a><span class="tm">21:28:18</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch:</span> ok, yes, that makes sense
+<a name="l-210"></a><span class="tm">21:29:42</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> FYI, one of the Scaling Bitcoin 2016 talks had a question about this in the Q&amp;A.  I think it was Greg Sanders's talk
+<a name="l-211"></a><span class="tm">21:30:21</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> And he basically said the same thing as Goatpig: paying known-to-be-competent people to review things is more productive than bug bounties
+<a name="l-212"></a><span class="tm">21:30:45</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> (this was in the context of consensus-critical code, e.g. SegWit)
+<a name="l-213"></a><span class="tm">21:31:30</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> so it's unclear exactly how closely that applies to the stuff we're doing
+<a name="l-214"></a><span class="tm">21:32:49</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok, so are we agreed that bug bounties are NACKed for now?
+<a name="l-215"></a><span class="tm">21:33:01</span><span class="nk"> &lt;brand0&gt;</span> yeah agreed
+<a name="l-216"></a><span class="tm">21:33:03</span><span class="nk"> &lt;jbisch&gt;</span> yes
+<a name="l-217"></a><span class="tm">21:33:15</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok, summarizing for the minutes...
+<a name="l-218"></a><span class="tm">21:34:23</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">jbisch talked to Goatpig about bug bounties.  Goatpig thinks paying for expert review is more productive than bug bounties.</span>
+<a name="l-219"></a><span class="tm">21:34:36</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#agreed </span><span class="cmdline">We will not pursue bug bounties at this time</span>
+<a name="l-220"></a><span class="tm">21:35:45</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">GSoC 2017 is announced.</span>
+<a name="l-221"></a><span class="tm">21:36:13</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#idea </span><span class="cmdline">We may want to start working on a GSoC ideas page early rather than leaving it to the last couple weeks as we did previously</span>
+<a name="l-222"></a><span class="tm">21:37:36</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#idea </span><span class="cmdline">Also, as jonasbits said at the previous meeting, we may want to start an "Easy Tasks for Beginners" list</span>
+<a name="l-223"></a><span class="tm">21:38:21</span><span class="nk"> &lt;jbisch&gt;</span> <span class="cmd">#idea </span><span class="cmdline">tag bugs on GitHub with a "newcomer" or "helpwanted" tag</span>
+<a name="l-224"></a><span class="tm">21:39:30</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> sounds good to me
+<a name="l-225"></a><span class="tm">21:41:08</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok, any other things related public relations before we move onto funding?
+<a name="l-226"></a><span class="tm">21:43:16</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Funding</span>
+<a name="l-227"></a><span class="tm">21:44:16</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">We're getting $15 USD/month from 1 recurring supporter on Bountysource.   That brings our balance in Bountysource to $329 USD.</span>
+<a name="l-228"></a><span class="tm">21:44:49</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">NMDF has not received BTC or NMC since the previous meeting</span>
+<a name="l-229"></a><span class="tm">21:45:39</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I talked to Phelix; he will work on moving NMDF funds to an HD wallet.  It might take him some time to get that done.</span>
+<a name="l-230"></a><span class="tm">21:46:31</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#idea </span><span class="cmdline">It might be useful to put a Donate link in the header of namecoin.org.  At the moment the link is only available near the bottom of the home page, which isn't necessarily obvious to people who are following deep links to the site.</span>
+<a name="l-231"></a><span class="tm">21:47:04</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> That might require some reorganization of the header.  Which is probably needed anyway, e.g. why is Explorers easier to find than Downloads?
+<a name="l-232"></a><span class="tm">21:47:54</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> It might make sense to take a look at what some existing projects are doing wrt organizing their site header; the Qubes site seems to be doing a pretty nice job
+<a name="l-233"></a><span class="tm">21:49:35</span><span class="nk"> &lt;cassiniNMC&gt;</span> qubes-os.org ?
+<a name="l-234"></a><span class="tm">21:49:47</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">cassiniNMC:</span> yes
+<a name="l-235"></a><span class="tm">21:50:50</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I believe that Qubes-OS used some OTF funding to redo their website in the past year.
+<a name="l-236"></a><span class="tm">21:51:02</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> But I'm not certain of that
+<a name="l-237"></a><span class="tm">21:55:03</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok, any other funding-related things to bring up?
+<a name="l-238"></a><span class="tm">21:55:41</span><span class="nk"> &lt;cassiniNMC&gt;</span> IMO the Qubes site header isn't much better than ours.
+<a name="l-239"></a><span class="tm">21:56:49</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">cassiniNMC:</span> the thing that I like about the Qubes header is that Downloads and Docs are easy to find (they're near the left side), while things like Roadmap aren't cluttering the header
+<a name="l-240"></a><span class="tm">21:57:11</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Not really major differences per se
+<a name="l-241"></a><span class="tm">21:58:19</span><span class="nk"> &lt;cassiniNMC&gt;</span> Hmm, looks perfect to me (on my fairly small Notebook display)
+<a name="l-242"></a><span class="tm">22:00:28</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">cassiniNMC:</span> on the Namecoin site, Download is in the middle and is hard to find at a glance, and it's sufficiently cluttered that it uses 2 lines in Tor Browser's default resolution (which I think is 1000x1000 px?)
+<a name="l-243"></a><span class="tm">22:00:58</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> also News and Donate don't appear in the header on the Namecoin site, meaning you have to go to the home page in order to find those
+<a name="l-244"></a><span class="tm">22:01:45</span><span class="nk"> &lt;cassiniNMC&gt;</span> ok, News and Donate are indeed difficult to find
+<a name="l-245"></a><span class="tm">22:02:24</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> FWIW, I've been informed by circa 2 people who visited namecoin.org that they had to look at the header for many seconds to find the Download link
+<a name="l-246"></a><span class="tm">22:03:48</span><span class="nk"> &lt;brand0&gt;</span> yeah, it's a little buried
+<a name="l-247"></a><span class="tm">22:04:17</span><span class="nk"> &lt;brand0&gt;</span> and typically one of the first things you find on a landing page for open source projects is a download link
+<a name="l-248"></a><span class="tm">22:04:24</span><span class="nk"> &lt;brand0&gt;</span> even if it's already at the header
+<a name="l-249"></a><span class="tm">22:04:37</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> yeah
+<a name="l-250"></a><span class="tm">22:05:06</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I think there's also a subconscious bias among us here -- we've visited namecoin.org often enough that we already know where to look for the Download link
+<a name="l-251"></a><span class="tm">22:05:38</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I hadn't noticed that it was hard to find until those 2 people told me they had trouble finding it
+<a name="l-252"></a><span class="tm">22:06:04</span><span class="nk"> &lt;brand0&gt;</span> I had trouble finding it :P
+<a name="l-253"></a><span class="tm">22:06:20</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> heh
+<a name="l-254"></a><span class="tm">22:08:31</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok, so sounds like there's some optimization that can be done there
+<a name="l-255"></a><span class="tm">22:09:07</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> any other funding-related topics?  And for that matter, any other Namecoin topics to bring up before we end the meeting?
+<a name="l-256"></a><span class="tm">22:09:28</span><span class="nk"> &lt;cassiniNMC&gt;</span> There is a strange question at reddit,
+<a name="l-257"></a><span class="tm">22:09:47</span><span class="nk"> &lt;cassiniNMC&gt;</span> "...merged-mining ... Will it become obsolete once sidechains become mainstream?"
+<a name="l-258"></a><span class="tm">22:10:10</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">cassiniNMC:</span> ah yes, I did see that.  I haven't yet had a chance to reply
+<a name="l-259"></a><span class="tm">22:10:56</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Basically, merged mining is a type of sidechain.  I'm pretty sure that Satoshi coined the term "sidechain" when talking about merge-mined chains.
+<a name="l-260"></a><span class="tm">22:11:32</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> The Reddit person is probably thinking of "pegged sidechains" which were introduced by Blockstream.  Pegged sidechains are orthogonal to merge-mined sidechains
+<a name="l-261"></a><span class="tm">22:11:54</span><span class="nk"> &lt;cassiniNMC&gt;</span> Good point.
+<a name="l-262"></a><span class="tm">22:12:00</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> It's possible to have a pegged sidechain that is merge-mined, and it's possible have pegged sidechains that aren't merge-mined, and it's possible to have a merge-mined chain that isn't pegged
+<a name="l-263"></a><span class="tm">22:12:26</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Last I heard Blockstream intends for the pegged sidechain projects they're working on to be merge-mined eventually
+<a name="l-264"></a><span class="tm">22:14:45</span><span class="nk"> &lt;cassiniNMC&gt;</span> ok, sounds like you are the one who can answer that question best. I'll post my infamous pool statistics later.
+<a name="l-265"></a><span class="tm">22:15:11</span><span class="nk"> &lt;cassiniNMC&gt;</span> (The initial question was "Do we know which big players are merge mining NMC?")
+<a name="l-266"></a><span class="tm">22:16:11</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I'll see if I can answer in the next day or two.  I can't guarantee that that will occur though, so you're welcome to post your pool stats if a quick reply is needed.
+<a name="l-267"></a><span class="tm">22:19:06</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok, anything else anyone would like to bring up today?
+<a name="l-268"></a><span class="tm">22:24:26</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok, that's the end of the meeting then.  Thanks for being here everyone.
+<a name="l-269"></a><span class="tm">22:24:34</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>
