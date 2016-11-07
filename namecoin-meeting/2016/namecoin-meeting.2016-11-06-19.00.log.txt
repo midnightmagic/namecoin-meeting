@@ -1,0 +1,70 @@
+19:00:22 <Jeremy_Rand> #startmeeting
+19:00:22 <qpm> Meeting started Sun Nov  6 19:00:22 2016 UTC.  The chair is Jeremy_Rand. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:00:22 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:00:47 <Jeremy_Rand> #meetingtopic Namecoin Development Meeting
+19:01:12 <Jeremy_Rand> Hi everyone, welcome to the meeting
+19:01:20 <Jeremy_Rand> Can we get a roll call of who's here today?
+19:01:32 <jbisch_> hi
+19:01:41 <Jeremy_Rand> Hi jbisch_
+19:04:06 <Jeremy_Rand> Okay, so this is likely to be a shorter meeting than usual, due to the fact that I've been occupied the past few days and therefore have had less time than usual to put together an agenda
+19:05:03 <Jeremy_Rand> #topic Namecoin Core
+19:05:52 <Jeremy_Rand> So we still need to merge the namecoin.org PR that adds nc0.13.99-name-tab-beta1 to the website.
+19:06:02 <Jeremy_Rand> https://github.com/namecoin/namecoin.org/pull/79
+19:06:26 <Jeremy_Rand> I think I can get that done soon
+19:07:02 <Jeremy_Rand> #action Jeremy_Rand will aim to get nc0.13.99-name-tab-beta1 posted to the website
+19:07:05 <jbisch_> okay
+19:07:51 <Jeremy_Rand> #info Reminder that Namecoin devs should be PGP-signing their Git commits
+19:08:29 <Jeremy_Rand> #info jbisch_, it looks like your PGP key isn't associated with your GitHub account
+19:08:58 <jbisch_> yes
+19:09:36 <jbisch_> people shouldn't rely on GitHub displaying a verified symbol
+19:10:47 <Jeremy_Rand> jbisch_: generally agreed that trusting GitHub is a bad idea.  That said, Bitcoin Core devs all seem to have their keys linked to their accounts
+19:12:02 <jbisch_> hm, problem is that it isn't per org or per repo, displaying verified on the commits is all or nothing I think
+19:12:44 <Jeremy_Rand> jbisch_: yeah, I don't know of a way to do it per org/repo
+19:12:57 <Jeremy_Rand> unless you choose to use a different PGP key per org/repo
+19:13:43 <jbisch_> I guess I'll think about this. I guess the problem is that we don't want one contributors commits showing as unverified and scare people?
+19:15:05 <Jeremy_Rand> jbisch_: partially that, and also partially that people probably are verifying the GitHub symbol more frequently than they verify the sigs locally, so any compromise would probably be detected more quickly if GitHub verifies (unless GitHub is compromised, in which case it's not helpful)
+19:15:50 <jbisch_> Okay, I'll think about it.
+19:15:55 <Jeremy_Rand> ok
+19:16:33 <Jeremy_Rand> maybe I'll ask Luke what the rationale is for Bitcoin Core doing what they're doing; it's possible there's a rationale that I'm unaware of
+19:18:37 <Jeremy_Rand> #info brand0 fixed Qt4 compatibility in the name tab PR.
+19:20:41 <Jeremy_Rand> #info We need to merge release process fixes to master and 0.13 branches.
+19:21:02 <Jeremy_Rand> #link https://github.com/namecoin/namecoin-core/pull/106
+19:21:11 <Jeremy_Rand> #link https://github.com/namecoin/namecoin-core/pull/105
+19:23:20 <Jeremy_Rand> #info kld is tinkering around with static analysis via csbuild
+19:23:35 <Jeremy_Rand> Last I heard it's not fully working yet
+19:25:40 <Jeremy_Rand> any other Namecoin Core related things to bring up?
+19:26:23 <jbisch_> I ACKed those two links.
+19:26:29 <jbisch_> Nothing else.
+19:26:41 <Jeremy_Rand> jbisch_: thanks.
+19:26:46 <Jeremy_Rand> #topic SPV
+19:27:17 <Jeremy_Rand> #info I released the bitcoinj-addons name lookup client on the Beta Downloads page of namecoin.org
+19:27:56 <Jeremy_Rand> #help we still need people to test it
+19:30:11 <Jeremy_Rand> Any other SPV related things to bring up?
+19:30:35 <jbisch_> nope
+19:30:48 <Jeremy_Rand> #topic Tor
+19:31:17 <Jeremy_Rand> #info wyatt and I tinkered a bit with Jesse's Stem code.  And I fixed a bug in Jesse's code.
+19:31:38 <Jeremy_Rand> #info I'm hoping to have something working there soon
+19:32:28 <jbisch_> cool
+19:32:37 <Jeremy_Rand> Any other Tor related things to bring up?
+19:32:50 <jbisch_> nope
+19:33:02 <Jeremy_Rand> #topic Public Relations
+19:33:17 <Jeremy_Rand> #info I gave a talk at Mosaic
+19:33:59 <Jeremy_Rand> #info not many people were there, but some of the people who were present were quite interested.
+19:34:35 <Jeremy_Rand> #info One of the attendees has a bunch of friends who she thinks might be interested in Namecoin, I gave her my contact info to share with those friends
+19:36:08 <jbisch_> cool
+19:36:16 <Jeremy_Rand> Any other public relations stuff to bring up?
+19:36:49 <jbisch_> nope
+19:37:04 <Jeremy_Rand> #topic Funding
+19:37:16 <Jeremy_Rand> #info NMDF moved its BTC wallet to an Electrum wallet.
+19:37:30 <Jeremy_Rand> #info 2 developers currently have the seed.
+19:38:05 <jbisch_> okay
+19:38:05 <Jeremy_Rand> #info The website pull request that updates the address needs review.
+19:38:16 <Jeremy_Rand> #link https://github.com/namecoin/namecoin.org/pull/80
+19:40:06 <jbisch_> Looks like there is some change on line 51?
+19:42:07 <Jeremy_Rand> jbisch_: hmm, looks like it.  That probably should be fixed prior to merging
+19:44:16 <Jeremy_Rand> any other funding-related things to bring up?
+19:45:02 <jbisch_> nope
+19:45:19 <Jeremy_Rand> any other topics that we should cover today?
+19:45:25 <jbisch_> nope
+19:45:43 <Jeremy_Rand> ok then.  Thanks for being here.
+19:45:50 <Jeremy_Rand> #endmeeting

@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-meeting: Namecoin Development Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-meeting: Namecoin Development Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand at 19:00:22 UTC
+(<a href="namecoin-meeting.2016-11-06-19.00.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">Namecoin Core</b> <span class="details">(<a href='namecoin-meeting.2016-11-06-19.00.log.html#l-10'>Jeremy_Rand</a>, 19:05:03)</span>
+<ol type="a">
+  <li><a
+    href="https://github.com/namecoin/namecoin.org/pull/79">https://github.com/namecoin/namecoin.org/pull/79</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-12'>Jeremy_Rand</a>,
+    19:06:02)</span></li>
+  <li><i class="itemtype">ACTION</i>: <span class="ACTION">Jeremy_Rand
+    will aim to get nc0.13.99-name-tab-beta1 posted to the
+    website</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-14'>Jeremy_Rand</a>,
+    19:07:02)</span></li>
+  <li><span class="INFO">Reminder that Namecoin devs should be
+    PGP-signing their Git commits</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-16'>Jeremy_Rand</a>,
+    19:07:51)</span></li>
+  <li><span class="INFO">jbisch_, it looks like your PGP key isn't
+    associated with your GitHub account</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-17'>Jeremy_Rand</a>,
+    19:08:29)</span></li>
+  <li><span class="INFO">brand0 fixed Qt4 compatibility in the name tab
+    PR.</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-29'>Jeremy_Rand</a>,
+    19:18:37)</span></li>
+  <li><span class="INFO">We need to merge release process fixes to
+    master and 0.13 branches.</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-30'>Jeremy_Rand</a>,
+    19:20:41)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/106">https://github.com/namecoin/namecoin-core/pull/106</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-31'>Jeremy_Rand</a>,
+    19:21:02)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/105">https://github.com/namecoin/namecoin-core/pull/105</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-32'>Jeremy_Rand</a>,
+    19:21:11)</span></li>
+  <li><span class="INFO">kld is tinkering around with static analysis
+    via csbuild</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-33'>Jeremy_Rand</a>,
+    19:23:20)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">SPV</b> <span class="details">(<a href='namecoin-meeting.2016-11-06-19.00.log.html#l-39'>Jeremy_Rand</a>, 19:26:46)</span>
+<ol type="a">
+  <li><span class="INFO">I released the bitcoinj-addons name lookup
+    client on the Beta Downloads page of namecoin.org</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-40'>Jeremy_Rand</a>,
+    19:27:17)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">we still need
+    people to test it</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-41'>Jeremy_Rand</a>,
+    19:27:56)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Tor</b> <span class="details">(<a href='namecoin-meeting.2016-11-06-19.00.log.html#l-44'>Jeremy_Rand</a>, 19:30:48)</span>
+<ol type="a">
+  <li><span class="INFO">wyatt and I tinkered a bit with Jesse's Stem
+    code.  And I fixed a bug in Jesse's code.</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-45'>Jeremy_Rand</a>,
+    19:31:17)</span></li>
+  <li><span class="INFO">I'm hoping to have something working there
+    soon</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-46'>Jeremy_Rand</a>,
+    19:31:38)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Public Relations</b> <span class="details">(<a href='namecoin-meeting.2016-11-06-19.00.log.html#l-50'>Jeremy_Rand</a>, 19:33:02)</span>
+<ol type="a">
+  <li><span class="INFO">I gave a talk at Mosaic</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-51'>Jeremy_Rand</a>,
+    19:33:17)</span></li>
+  <li><span class="INFO">not many people were there, but some of the
+    people who were present were quite interested.</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-52'>Jeremy_Rand</a>,
+    19:33:59)</span></li>
+  <li><span class="INFO">One of the attendees has a bunch of friends who
+    she thinks might be interested in Namecoin, I gave her my contact
+    info to share with those friends</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-53'>Jeremy_Rand</a>,
+    19:34:35)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Funding</b> <span class="details">(<a href='namecoin-meeting.2016-11-06-19.00.log.html#l-57'>Jeremy_Rand</a>, 19:37:04)</span>
+<ol type="a">
+  <li><span class="INFO">NMDF moved its BTC wallet to an Electrum
+    wallet.</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-58'>Jeremy_Rand</a>,
+    19:37:16)</span></li>
+  <li><span class="INFO">2 developers currently have the seed.</span>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-59'>Jeremy_Rand</a>,
+    19:37:30)</span></li>
+  <li><span class="INFO">The website pull request that updates the
+    address needs review.</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-61'>Jeremy_Rand</a>,
+    19:38:05)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin.org/pull/80">https://github.com/namecoin/namecoin.org/pull/80</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-11-06-19.00.log.html#l-62'>Jeremy_Rand</a>,
+    19:38:16)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 19:45:50 UTC
+(<a href="namecoin-meeting.2016-11-06-19.00.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>Jeremy_Rand will aim to get nc0.13.99-name-tab-beta1 posted to the website</li>
+</ol>
+<br><br>
+
+
+
+<h3>Action items, by person</h3>
+<ol>
+  <li> Jeremy_Rand <ol>
+    <li>Jeremy_Rand will aim to get nc0.13.99-name-tab-beta1 posted to the website</li>
+  </ol></li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand (50)</li>
+  <li>jbisch_ (18)</li>
+  <li>qpm (2)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

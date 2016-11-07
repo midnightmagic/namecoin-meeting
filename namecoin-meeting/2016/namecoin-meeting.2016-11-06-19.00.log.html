@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-meeting log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:00:22</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:00:22</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Nov  6 19:00:22 2016 UTC.  The chair is Jeremy_Rand. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:00:22</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:00:47</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#meetingtopic </span><span class="cmdline">Namecoin Development Meeting</span>
+<a name="l-5"></a><span class="tm">19:01:12</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Hi everyone, welcome to the meeting
+<a name="l-6"></a><span class="tm">19:01:20</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Can we get a roll call of who's here today?
+<a name="l-7"></a><span class="tm">19:01:32</span><span class="nk"> &lt;jbisch_&gt;</span> hi
+<a name="l-8"></a><span class="tm">19:01:41</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Hi jbisch_
+<a name="l-9"></a><span class="tm">19:04:06</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Okay, so this is likely to be a shorter meeting than usual, due to the fact that I've been occupied the past few days and therefore have had less time than usual to put together an agenda
+<a name="l-10"></a><span class="tm">19:05:03</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Namecoin Core</span>
+<a name="l-11"></a><span class="tm">19:05:52</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> So we still need to merge the namecoin.org PR that adds nc0.13.99-name-tab-beta1 to the website.
+<a name="l-12"></a><span class="tm">19:06:02</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> https://github.com/namecoin/namecoin.org/pull/79
+<a name="l-13"></a><span class="tm">19:06:26</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> I think I can get that done soon
+<a name="l-14"></a><span class="tm">19:07:02</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#action </span><span class="cmdline">Jeremy_Rand will aim to get nc0.13.99-name-tab-beta1 posted to the website</span>
+<a name="l-15"></a><span class="tm">19:07:05</span><span class="nk"> &lt;jbisch_&gt;</span> okay
+<a name="l-16"></a><span class="tm">19:07:51</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">Reminder that Namecoin devs should be PGP-signing their Git commits</span>
+<a name="l-17"></a><span class="tm">19:08:29</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">jbisch_, it looks like your PGP key isn't associated with your GitHub account</span>
+<a name="l-18"></a><span class="tm">19:08:58</span><span class="nk"> &lt;jbisch_&gt;</span> yes
+<a name="l-19"></a><span class="tm">19:09:36</span><span class="nk"> &lt;jbisch_&gt;</span> people shouldn't rely on GitHub displaying a verified symbol
+<a name="l-20"></a><span class="tm">19:10:47</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch_:</span> generally agreed that trusting GitHub is a bad idea.  That said, Bitcoin Core devs all seem to have their keys linked to their accounts
+<a name="l-21"></a><span class="tm">19:12:02</span><span class="nk"> &lt;jbisch_&gt;</span> hm, problem is that it isn't per org or per repo, displaying verified on the commits is all or nothing I think
+<a name="l-22"></a><span class="tm">19:12:44</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch_:</span> yeah, I don't know of a way to do it per org/repo
+<a name="l-23"></a><span class="tm">19:12:57</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> unless you choose to use a different PGP key per org/repo
+<a name="l-24"></a><span class="tm">19:13:43</span><span class="nk"> &lt;jbisch_&gt;</span> I guess I'll think about this. I guess the problem is that we don't want one contributors commits showing as unverified and scare people?
+<a name="l-25"></a><span class="tm">19:15:05</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch_:</span> partially that, and also partially that people probably are verifying the GitHub symbol more frequently than they verify the sigs locally, so any compromise would probably be detected more quickly if GitHub verifies (unless GitHub is compromised, in which case it's not helpful)
+<a name="l-26"></a><span class="tm">19:15:50</span><span class="nk"> &lt;jbisch_&gt;</span> Okay, I'll think about it.
+<a name="l-27"></a><span class="tm">19:15:55</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok
+<a name="l-28"></a><span class="tm">19:16:33</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> maybe I'll ask Luke what the rationale is for Bitcoin Core doing what they're doing; it's possible there's a rationale that I'm unaware of
+<a name="l-29"></a><span class="tm">19:18:37</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">brand0 fixed Qt4 compatibility in the name tab PR.</span>
+<a name="l-30"></a><span class="tm">19:20:41</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">We need to merge release process fixes to master and 0.13 branches.</span>
+<a name="l-31"></a><span class="tm">19:21:02</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/106</span>
+<a name="l-32"></a><span class="tm">19:21:11</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/105</span>
+<a name="l-33"></a><span class="tm">19:23:20</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">kld is tinkering around with static analysis via csbuild</span>
+<a name="l-34"></a><span class="tm">19:23:35</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Last I heard it's not fully working yet
+<a name="l-35"></a><span class="tm">19:25:40</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> any other Namecoin Core related things to bring up?
+<a name="l-36"></a><span class="tm">19:26:23</span><span class="nk"> &lt;jbisch_&gt;</span> I ACKed those two links.
+<a name="l-37"></a><span class="tm">19:26:29</span><span class="nk"> &lt;jbisch_&gt;</span> Nothing else.
+<a name="l-38"></a><span class="tm">19:26:41</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch_:</span> thanks.
+<a name="l-39"></a><span class="tm">19:26:46</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">SPV</span>
+<a name="l-40"></a><span class="tm">19:27:17</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I released the bitcoinj-addons name lookup client on the Beta Downloads page of namecoin.org</span>
+<a name="l-41"></a><span class="tm">19:27:56</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#help </span><span class="cmdline">we still need people to test it</span>
+<a name="l-42"></a><span class="tm">19:30:11</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Any other SPV related things to bring up?
+<a name="l-43"></a><span class="tm">19:30:35</span><span class="nk"> &lt;jbisch_&gt;</span> nope
+<a name="l-44"></a><span class="tm">19:30:48</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Tor</span>
+<a name="l-45"></a><span class="tm">19:31:17</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">wyatt and I tinkered a bit with Jesse's Stem code.  And I fixed a bug in Jesse's code.</span>
+<a name="l-46"></a><span class="tm">19:31:38</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I'm hoping to have something working there soon</span>
+<a name="l-47"></a><span class="tm">19:32:28</span><span class="nk"> &lt;jbisch_&gt;</span> cool
+<a name="l-48"></a><span class="tm">19:32:37</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Any other Tor related things to bring up?
+<a name="l-49"></a><span class="tm">19:32:50</span><span class="nk"> &lt;jbisch_&gt;</span> nope
+<a name="l-50"></a><span class="tm">19:33:02</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Public Relations</span>
+<a name="l-51"></a><span class="tm">19:33:17</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I gave a talk at Mosaic</span>
+<a name="l-52"></a><span class="tm">19:33:59</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">not many people were there, but some of the people who were present were quite interested.</span>
+<a name="l-53"></a><span class="tm">19:34:35</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">One of the attendees has a bunch of friends who she thinks might be interested in Namecoin, I gave her my contact info to share with those friends</span>
+<a name="l-54"></a><span class="tm">19:36:08</span><span class="nk"> &lt;jbisch_&gt;</span> cool
+<a name="l-55"></a><span class="tm">19:36:16</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Any other public relations stuff to bring up?
+<a name="l-56"></a><span class="tm">19:36:49</span><span class="nk"> &lt;jbisch_&gt;</span> nope
+<a name="l-57"></a><span class="tm">19:37:04</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Funding</span>
+<a name="l-58"></a><span class="tm">19:37:16</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">NMDF moved its BTC wallet to an Electrum wallet.</span>
+<a name="l-59"></a><span class="tm">19:37:30</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">2 developers currently have the seed.</span>
+<a name="l-60"></a><span class="tm">19:38:05</span><span class="nk"> &lt;jbisch_&gt;</span> okay
+<a name="l-61"></a><span class="tm">19:38:05</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">The website pull request that updates the address needs review.</span>
+<a name="l-62"></a><span class="tm">19:38:16</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin.org/pull/80</span>
+<a name="l-63"></a><span class="tm">19:40:06</span><span class="nk"> &lt;jbisch_&gt;</span> Looks like there is some change on line 51?
+<a name="l-64"></a><span class="tm">19:42:07</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jbisch_:</span> hmm, looks like it.  That probably should be fixed prior to merging
+<a name="l-65"></a><span class="tm">19:44:16</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> any other funding-related things to bring up?
+<a name="l-66"></a><span class="tm">19:45:02</span><span class="nk"> &lt;jbisch_&gt;</span> nope
+<a name="l-67"></a><span class="tm">19:45:19</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> any other topics that we should cover today?
+<a name="l-68"></a><span class="tm">19:45:25</span><span class="nk"> &lt;jbisch_&gt;</span> nope
+<a name="l-69"></a><span class="tm">19:45:43</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok then.  Thanks for being here.
+<a name="l-70"></a><span class="tm">19:45:50</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>
