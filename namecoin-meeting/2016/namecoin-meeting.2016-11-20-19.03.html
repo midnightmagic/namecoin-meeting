@@ -1,0 +1,371 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-meeting: Namecoin Development Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-meeting: Namecoin Development Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand at 19:03:10 UTC
+(<a href="namecoin-meeting.2016-11-20-19.03.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">Namecoin Core</b> <span class="details">(<a href='namecoin-meeting.2016-11-20-19.03.log.html#l-12'>Jeremy_Rand</a>, 19:12:16)</span>
+<ol type="a">
+  <li><span class="INFO">I got the 0.13.99-name-tab-beta1 binaries
+    posted onto namecoin.org</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-13'>Jeremy_Rand</a>,
+    19:13:37)</span></li>
+  <li><a
+    href="https://namecoin.org/download/betas/">https://namecoin.org/download/betas/</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-14'>Jeremy_Rand</a>,
+    19:13:48)</span></li>
+  <li><span class="INFO">Even better, we appear to have actually gotten
+    some people testing them (based on some people who came into IRC to
+    report that it was working)</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-16'>Jeremy_Rand</a>,
+    19:14:33)</span></li>
+  <li><span class="INFO">Given that the name tab code seems to be pretty
+    stable, and the only reported bugs are minor and IMO not worthy of
+    blocker status, I've recommended that the code be merged if no one
+    strongly NACKs within a week</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-17'>Jeremy_Rand</a>,
+    19:16:08)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/67#issuecomment-261701217">https://github.com/namecoin/namecoin-core/pull/67#issuecomment-261701217</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-18'>Jeremy_Rand</a>,
+    19:16:21)</span></li>
+  <li><i class="itemtype">AGREED</i>: <span class="AGREED">brand0 and I
+    agree that it can be merged</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-22'>Jeremy_Rand</a>,
+    19:18:15)</span></li>
+  <li><i class="itemtype">IDEA</i>: <span class="IDEA">Once we're ready
+    to start torture-testing AAA, it might be beneficial to actually
+    deploy it on a testnet and explicitly ask a diverse set of mining
+    pools to merge-mine it for a few weeks to make sure it plays well
+    with their setups</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-36'>Jeremy_Rand</a>,
+    19:24:37)</span></li>
+  <li><span class="INFO">Right now, pools can't merge-mine both Namecoin
+    and Namecoin Testnet because they have the same Chain ID, but my
+    understanding from talking to Daniel is that there's no reason we
+    can't give Testnet2 a different Chain ID, seeing as we're resetting
+    it anyway</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-38'>Jeremy_Rand</a>,
+    19:25:45)</span></li>
+  <li><span class="INFO">In theory that would allow an evil mining pool
+    to intentionally DoS our testnet, but frankly that seems like a
+    stupid attack since the testnet is trivially easy to attack anyway
+    and there's not really any incentive to do it</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-39'>Jeremy_Rand</a>,
+    19:27:00)</span></li>
+  <li><span class="INFO">Generally I think it's really important to ask
+    mining pools to torture test it, because none of us are really
+    experts on the setup that the pools use</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-40'>Jeremy_Rand</a>,
+    19:28:44)</span></li>
+  <li><span class="INFO">I merged the release process fixes to master
+    and 0.13 branches</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-42'>Jeremy_Rand</a>,
+    19:31:24)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/106">https://github.com/namecoin/namecoin-core/pull/106</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-43'>Jeremy_Rand</a>,
+    19:31:37)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/105">https://github.com/namecoin/namecoin-core/pull/105</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-44'>Jeremy_Rand</a>,
+    19:31:48)</span></li>
+  <li><span class="INFO">kld made some progress with the static analysis
+    via csbuild on Travis</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-45'>Jeremy_Rand</a>,
+    19:32:25)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/111">https://github.com/namecoin/namecoin-core/pull/111</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-46'>Jeremy_Rand</a>,
+    19:32:36)</span></li>
+  <li><span class="INFO">Kevin (appears to be from Antpool) reported a
+    mining issue related to the BDB lock limit</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-47'>Jeremy_Rand</a>,
+    19:33:32)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/issues/114">https://github.com/namecoin/namecoin-core/issues/114</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-48'>Jeremy_Rand</a>,
+    19:33:48)</span></li>
+  <li><a
+    href="https://github.com/jonasbits/namecoin-core/commit/1069cccdada095f3891d26d83759514b5b8654db">https://github.com/jonasbits/namecoin-core/commit/1069cccdada095f3891d26d83759514b5b8654db</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-72'>jonasbits</a>,
+    20:09:20)</span></li>
+  <li><i class="itemtype">ACTION</i>: <span class="ACTION">jonasbits
+    will submit a PR to dev branch to fix Gitian build for OS X (change
+    "bitcoin" to "namecoin")</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-82'>Jeremy_Rand</a>,
+    20:15:22)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">ncdns</b> <span class="details">(<a href='namecoin-meeting.2016-11-20-19.03.log.html#l-85'>Jeremy_Rand</a>, 20:19:14)</span>
+<ol type="a">
+  <li><span class="INFO">hl did some cleanups of the ncdns codebase,
+    including fixing a bug involving binding to port 53.</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-86'>Jeremy_Rand</a>,
+    20:20:00)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Meta</b> <span class="details">(<a href='namecoin-meeting.2016-11-20-19.03.log.html#l-88'>Jeremy_Rand</a>, 20:24:54)</span>
+<ol type="a">
+  <li><span class="INFO">wyatt informed me on Friday that he has to
+    withdraw from Namecoin development due to unexpected schoolwork load
+    at the end of the semester</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-89'>Jeremy_Rand</a>,
+    20:25:31)</span></li>
+  <li><span class="INFO">Also noting for transparency purposes that on
+    October 31, some random malware vendor seems to have compromised an
+    old Skype account of mine.  The account hasn't been used for many
+    years (I think sometime around 2010)</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-90'>Jeremy_Rand</a>,
+    20:27:03)</span></li>
+  <li><span class="INFO">AFAICT the only data that the attacker would
+    have gotten was the account's social graph; all they appeared to do
+    was send a Baidu link to all of the account's contacts</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-91'>Jeremy_Rand</a>,
+    20:27:36)</span></li>
+  <li><span class="INFO">About half a day later, someone tried to
+    request a password reset against Dropbox accounts for me, jbisch,
+    and pigeons</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-92'>Jeremy_Rand</a>,
+    20:28:33)</span></li>
+  <li><span class="INFO">The attacks seem very poorly executed and
+    didn't seem to be making any attempt to be subtle.  So it's
+    inconsistent with a return of the State-Sponsored Actors
+    (TM).</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-93'>Jeremy_Rand</a>,
+    20:29:09)</span></li>
+  <li><span class="INFO">Possibly related to a leaked Dropbox password
+    database</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-94'>Jeremy_Rand</a>,
+    20:29:21)</span></li>
+  <li><a
+    href="https://nakedsecurity.sophos.com/2016/10/24/russian-indicted-over-linkedin-and-dropbox-mega-breaches/">https://nakedsecurity.sophos.com/2016/10/24/russian-indicted-over-linkedin-and-dropbox-mega-breaches/</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-95'>Jeremy_Rand</a>,
+    20:29:35)</span></li>
+  <li><span class="INFO">interestingly, I inquired in the DWS
+    Slack/Matrix channel about whether anyone there was affected; no one
+    there got any Dropbox password reset emails.</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-96'>Jeremy_Rand</a>,
+    20:30:13)</span></li>
+  <li><span class="INFO">I have no reason to believe that this has any
+    impact on Namecoin or even any relation to Namecoin</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-97'>Jeremy_Rand</a>,
+    20:30:40)</span></li>
+  <li><a href="that">that</a> said, given my membership in the State
+    Sponsored Actors Club https://state-sponsored-actors.net/ I figure
+    it's appropriate to disclose here. <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-98'>Jeremy_Rand</a>,
+    20:31:09)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Public Relations</b> <span class="details">(<a href='namecoin-meeting.2016-11-20-19.03.log.html#l-100'>Jeremy_Rand</a>, 20:33:41)</span>
+<ol type="a">
+  <li><i class="itemtype">HELP</i>: <span class="HELP">We could use some
+    help nominating GSoC candidate projects</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-102'>Jeremy_Rand</a>,
+    20:37:33)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">We could also use
+    some help on a newcomer / help wanted task list</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-103'>Jeremy_Rand</a>,
+    20:37:50)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">We could also
+    still use some help improving the website header's organization...
+    really hard to find the Downloads link at the moment</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-104'>Jeremy_Rand</a>,
+    20:39:56)</span></li>
+  <li><span class="INFO">The website now redirects HTTP to HTTPS, and
+    redirects .info to .org.  So that should boost security and our
+    search engine ranking.</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-105'>Jeremy_Rand</a>,
+    20:41:19)</span></li>
+  <li><span class="INFO">OU's CS department is likely to have a poster
+    session in early December.  I'll probably participate.</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-107'>Jeremy_Rand</a>,
+    20:43:14)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">Is anyone able to
+    write documentation / introduction to Namecoin that's suitable for
+    people who are experts in DNS but who don't have much/any expertise
+    in Bitcoin?  Are hl and ryan-c the best-suited people to do
+    that?</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-108'>Jeremy_Rand</a>,
+    20:44:53)</span></li>
+  <li><i class="itemtype">ACTION</i>: <span class="ACTION">hl is cool
+    with it</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-115'>Jeremy_Rand</a>,
+    20:47:29)</span></li>
+  <li><span class="INFO">I talked to the Kovri people a little bit.
+    Seems like they're interested in facilitating us.</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-117'>Jeremy_Rand</a>,
+    20:49:15)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Funding</b> <span class="details">(<a href='namecoin-meeting.2016-11-20-19.03.log.html#l-120'>Jeremy_Rand</a>, 20:54:04)</span>
+<ol type="a">
+  <li><i class="itemtype">HELP</i>: <span class="HELP">Can people please
+    review the PR that updates the donation address on the
+    website?</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-121'>Jeremy_Rand</a>,
+    20:54:42)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin.org/pull/82">https://github.com/namecoin/namecoin.org/pull/82</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-122'>Jeremy_Rand</a>,
+    20:54:54)</span></li>
+  <li><span class="INFO">All we need is 2 people to confirm that the BTC
+    address in the PR matches the one from Phelix's previous PR that
+    Daniel and I already ACKed but which had a formatting issue</span>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-123'>Jeremy_Rand</a>,
+    20:55:32)</span></li>
+  <li><span class="INFO">I've NACKed using Patreon for fundraising due
+    to ridiculous terms of use</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-124'>Jeremy_Rand</a>,
+    20:58:36)</span></li>
+  <li><a
+    href="https://web.archive.org/web/20160713013324/https://www.patreon.com/legal">https://web.archive.org/web/20160713013324/https://www.patreon.com/legal</a>
+    <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-125'>Jeremy_Rand</a>,
+    20:58:45)</span></li>
+  <li><span class="INFO">Among other things, Patreon has the right to
+    force arbitration, and we would have to correspond with Patreon via
+    snail mail for 1 month before we even have the right to initiate
+    arbitration, but Patreon can use email to contact us if they want to
+    harass us via arbitration.</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-126'>Jeremy_Rand</a>,
+    20:59:34)</span></li>
+  <li><span class="INFO">We're continuing to receive $15/month from 1
+    anonymous recurring supporter on Bountysource.  That brings our
+    balance to $344 USD</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-127'>Jeremy_Rand</a>,
+    21:00:55)</span></li>
+  <li><span class="INFO">I don't have BTC stats this meeting since we're
+    still in the process of moving the donation address</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-128'>Jeremy_Rand</a>,
+    21:01:22)</span></li>
+  <li><span class="INFO">The NMDF NMC address has received 17 NMC from 3
+    transactions since October 16</span> <span class="details">(<a
+    href='namecoin-meeting.2016-11-20-19.03.log.html#l-129'>Jeremy_Rand</a>,
+    21:02:02)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 21:11:11 UTC
+(<a href="namecoin-meeting.2016-11-20-19.03.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>jonasbits will submit a PR to dev branch to fix Gitian build for OS X (change "bitcoin" to "namecoin")</li>
+  <li>hl is cool with it</li>
+</ol>
+<br><br>
+
+
+
+<h3>Action items, by person</h3>
+<ol>
+  <li> hl <ol>
+    <li>hl is cool with it</li>
+  </ol></li>
+  <li> jonasbits <ol>
+    <li>jonasbits will submit a PR to dev branch to fix Gitian build for OS X (change "bitcoin" to "namecoin")</li>
+  </ol></li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand (103)</li>
+  <li>jonasbits (15)</li>
+  <li>brand0 (13)</li>
+  <li>qpm (2)</li>
+  <li>hl (2)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

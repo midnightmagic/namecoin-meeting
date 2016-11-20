@@ -1,0 +1,189 @@
+===============================================
+#namecoin-meeting: Namecoin Development Meeting
+===============================================
+
+
+Meeting started by Jeremy_Rand at 19:03:10 UTC. The full logs are
+available at
+https://midnightmagic.github.io/namecoin-meeting/namecoin-meeting/namecoin-meeting/2016/namecoin-meeting.2016-11-20-19.03.log.html
+.
+
+
+
+Meeting summary
+---------------
+* Namecoin Core  (Jeremy_Rand, 19:12:16)
+  * I got the 0.13.99-name-tab-beta1 binaries posted onto namecoin.org
+    (Jeremy_Rand, 19:13:37)
+  * LINK: https://namecoin.org/download/betas/   (Jeremy_Rand, 19:13:48)
+  * Even better, we appear to have actually gotten some people testing
+    them (based on some people who came into IRC to report that it was
+    working)  (Jeremy_Rand, 19:14:33)
+  * Given that the name tab code seems to be pretty stable, and the only
+    reported bugs are minor and IMO not worthy of blocker status, I've
+    recommended that the code be merged if no one strongly NACKs within
+    a week  (Jeremy_Rand, 19:16:08)
+  * LINK:
+    https://github.com/namecoin/namecoin-core/pull/67#issuecomment-261701217
+    (Jeremy_Rand, 19:16:21)
+  * AGREED: brand0 and I agree that it can be merged  (Jeremy_Rand,
+    19:18:15)
+  * IDEA: Once we're ready to start torture-testing AAA, it might be
+    beneficial to actually deploy it on a testnet and explicitly ask a
+    diverse set of mining pools to merge-mine it for a few weeks to make
+    sure it plays well with their setups  (Jeremy_Rand, 19:24:37)
+  * Right now, pools can't merge-mine both Namecoin and Namecoin Testnet
+    because they have the same Chain ID, but my understanding from
+    talking to Daniel is that there's no reason we can't give Testnet2 a
+    different Chain ID, seeing as we're resetting it anyway
+    (Jeremy_Rand, 19:25:45)
+  * In theory that would allow an evil mining pool to intentionally DoS
+    our testnet, but frankly that seems like a stupid attack since the
+    testnet is trivially easy to attack anyway and there's not really
+    any incentive to do it  (Jeremy_Rand, 19:27:00)
+  * Generally I think it's really important to ask mining pools to
+    torture test it, because none of us are really experts on the setup
+    that the pools use  (Jeremy_Rand, 19:28:44)
+  * I merged the release process fixes to master and 0.13 branches
+    (Jeremy_Rand, 19:31:24)
+  * LINK: https://github.com/namecoin/namecoin-core/pull/106
+    (Jeremy_Rand, 19:31:37)
+  * LINK: https://github.com/namecoin/namecoin-core/pull/105
+    (Jeremy_Rand, 19:31:48)
+  * kld made some progress with the static analysis via csbuild on
+    Travis  (Jeremy_Rand, 19:32:25)
+  * LINK: https://github.com/namecoin/namecoin-core/pull/111
+    (Jeremy_Rand, 19:32:36)
+  * Kevin (appears to be from Antpool) reported a mining issue related
+    to the BDB lock limit  (Jeremy_Rand, 19:33:32)
+  * LINK: https://github.com/namecoin/namecoin-core/issues/114
+    (Jeremy_Rand, 19:33:48)
+  * LINK:
+    https://github.com/jonasbits/namecoin-core/commit/1069cccdada095f3891d26d83759514b5b8654db
+    (jonasbits, 20:09:20)
+  * ACTION: jonasbits will submit a PR to dev branch to fix Gitian build
+    for OS X (change "bitcoin" to "namecoin")  (Jeremy_Rand, 20:15:22)
+
+* ncdns  (Jeremy_Rand, 20:19:14)
+  * hl did some cleanups of the ncdns codebase, including fixing a bug
+    involving binding to port 53.  (Jeremy_Rand, 20:20:00)
+
+* Meta  (Jeremy_Rand, 20:24:54)
+  * wyatt informed me on Friday that he has to withdraw from Namecoin
+    development due to unexpected schoolwork load at the end of the
+    semester  (Jeremy_Rand, 20:25:31)
+  * Also noting for transparency purposes that on October 31, some
+    random malware vendor seems to have compromised an old Skype account
+    of mine.  The account hasn't been used for many years (I think
+    sometime around 2010)  (Jeremy_Rand, 20:27:03)
+  * AFAICT the only data that the attacker would have gotten was the
+    account's social graph; all they appeared to do was send a Baidu
+    link to all of the account's contacts  (Jeremy_Rand, 20:27:36)
+  * About half a day later, someone tried to request a password reset
+    against Dropbox accounts for me, jbisch, and pigeons  (Jeremy_Rand,
+    20:28:33)
+  * The attacks seem very poorly executed and didn't seem to be making
+    any attempt to be subtle.  So it's inconsistent with a return of the
+    State-Sponsored Actors (TM).  (Jeremy_Rand, 20:29:09)
+  * Possibly related to a leaked Dropbox password database
+    (Jeremy_Rand, 20:29:21)
+  * LINK:
+    https://nakedsecurity.sophos.com/2016/10/24/russian-indicted-over-linkedin-and-dropbox-mega-breaches/
+    (Jeremy_Rand, 20:29:35)
+  * interestingly, I inquired in the DWS Slack/Matrix channel about
+    whether anyone there was affected; no one there got any Dropbox
+    password reset emails.  (Jeremy_Rand, 20:30:13)
+  * I have no reason to believe that this has any impact on Namecoin or
+    even any relation to Namecoin  (Jeremy_Rand, 20:30:40)
+  * LINK: that said, given my membership in the State Sponsored Actors
+    Club https://state-sponsored-actors.net/ I figure it's appropriate
+    to disclose here.  (Jeremy_Rand, 20:31:09)
+
+* Public Relations  (Jeremy_Rand, 20:33:41)
+  * HELP: We could use some help nominating GSoC candidate projects
+    (Jeremy_Rand, 20:37:33)
+  * HELP: We could also use some help on a newcomer / help wanted task
+    list  (Jeremy_Rand, 20:37:50)
+  * HELP: We could also still use some help improving the website
+    header's organization... really hard to find the Downloads link at
+    the moment  (Jeremy_Rand, 20:39:56)
+  * The website now redirects HTTP to HTTPS, and redirects .info to
+    .org.  So that should boost security and our search engine ranking.
+    (Jeremy_Rand, 20:41:19)
+  * OU's CS department is likely to have a poster session in early
+    December.  I'll probably participate.  (Jeremy_Rand, 20:43:14)
+  * HELP: Is anyone able to write documentation / introduction to
+    Namecoin that's suitable for people who are experts in DNS but who
+    don't have much/any expertise in Bitcoin?  Are hl and ryan-c the
+    best-suited people to do that?  (Jeremy_Rand, 20:44:53)
+  * ACTION: hl is cool with it  (Jeremy_Rand, 20:47:29)
+  * I talked to the Kovri people a little bit.  Seems like they're
+    interested in facilitating us.  (Jeremy_Rand, 20:49:15)
+
+* Funding  (Jeremy_Rand, 20:54:04)
+  * HELP: Can people please review the PR that updates the donation
+    address on the website?  (Jeremy_Rand, 20:54:42)
+  * LINK: https://github.com/namecoin/namecoin.org/pull/82
+    (Jeremy_Rand, 20:54:54)
+  * All we need is 2 people to confirm that the BTC address in the PR
+    matches the one from Phelix's previous PR that Daniel and I already
+    ACKed but which had a formatting issue  (Jeremy_Rand, 20:55:32)
+  * I've NACKed using Patreon for fundraising due to ridiculous terms of
+    use  (Jeremy_Rand, 20:58:36)
+  * LINK:
+    https://web.archive.org/web/20160713013324/https://www.patreon.com/legal
+    (Jeremy_Rand, 20:58:45)
+  * Among other things, Patreon has the right to force arbitration, and
+    we would have to correspond with Patreon via snail mail for 1 month
+    before we even have the right to initiate arbitration, but Patreon
+    can use email to contact us if they want to harass us via
+    arbitration.  (Jeremy_Rand, 20:59:34)
+  * We're continuing to receive $15/month from 1 anonymous recurring
+    supporter on Bountysource.  That brings our balance to $344 USD
+    (Jeremy_Rand, 21:00:55)
+  * I don't have BTC stats this meeting since we're still in the process
+    of moving the donation address  (Jeremy_Rand, 21:01:22)
+  * The NMDF NMC address has received 17 NMC from 3 transactions since
+    October 16  (Jeremy_Rand, 21:02:02)
+
+Meeting ended at 21:11:11 UTC.
+
+
+
+
+Action Items
+------------
+* jonasbits will submit a PR to dev branch to fix Gitian build for OS X
+  (change "bitcoin" to "namecoin")
+* hl is cool with it
+
+
+
+
+Action Items, by person
+-----------------------
+* hl
+  * hl is cool with it
+* jonasbits
+  * jonasbits will submit a PR to dev branch to fix Gitian build for OS
+    X (change "bitcoin" to "namecoin")
+* **UNASSIGNED**
+  * (none)
+
+
+
+
+People Present (lines said)
+---------------------------
+* Jeremy_Rand (103)
+* jonasbits (15)
+* brand0 (13)
+* qpm (2)
+* hl (2)
+
+
+
+
+Generated by `MeetBot`_ 0.1.4
+
+.. _`MeetBot`: https://wiki.debian.org/MeetBot

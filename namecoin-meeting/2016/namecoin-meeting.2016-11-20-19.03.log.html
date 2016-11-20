@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-meeting log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:03:10</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:03:10</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Nov 20 19:03:10 2016 UTC.  The chair is Jeremy_Rand. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:03:10</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:03:39</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#meetingtopic </span><span class="cmdline">Namecoin Development Meeting</span>
+<a name="l-5"></a><span class="tm">19:04:03</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Hello everyone, welcome to the meeting.  Sorry I'm about 3 minutes late.
+<a name="l-6"></a><span class="tm">19:04:16</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Can we get a roll call of who's here today?
+<a name="l-7"></a><span class="tm">19:10:44</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Err.  I certainly hope I'm not the only one here today...?
+<a name="l-8"></a><span class="tm">19:11:17</span><span class="nk"> &lt;brand0&gt;</span> i'm here
+<a name="l-9"></a><span class="tm">19:11:30</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Ah hey brand0
+<a name="l-10"></a><span class="tm">19:11:45</span><span class="nk"> &lt;brand0&gt;</span> sorry, was making coffee
+<a name="l-11"></a><span class="tm">19:11:58</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Well, let's get started and maybe some other people will join in later
+<a name="l-12"></a><span class="tm">19:12:16</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Namecoin Core</span>
+<a name="l-13"></a><span class="tm">19:13:37</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I got the 0.13.99-name-tab-beta1 binaries posted onto namecoin.org</span>
+<a name="l-14"></a><span class="tm">19:13:48</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://namecoin.org/download/betas/</span>
+<a name="l-15"></a><span class="tm">19:14:28</span><span class="nk"> &lt;brand0&gt;</span> looks like more people are testing now because of that
+<a name="l-16"></a><span class="tm">19:14:33</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">Even better, we appear to have actually gotten some people testing them (based on some people who came into IRC to report that it was working)</span>
+<a name="l-17"></a><span class="tm">19:16:08</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">Given that the name tab code seems to be pretty stable, and the only reported bugs are minor and IMO not worthy of blocker status, I've recommended that the code be merged if no one strongly NACKs within a week</span>
+<a name="l-18"></a><span class="tm">19:16:21</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/67#issuecomment-261701217</span>
+<a name="l-19"></a><span class="tm">19:17:09</span><span class="nk"> &lt;brand0&gt;</span> I'll continue to work on the non-blockers, in a new branch
+<a name="l-20"></a><span class="tm">19:17:28</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">brand0:</span> Would I be correct in assuming that you agree that it can be merged in its current state?
+<a name="l-21"></a><span class="tm">19:17:42</span><span class="nk"> &lt;brand0&gt;</span> yeah I think so
+<a name="l-22"></a><span class="tm">19:18:15</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#agreed </span><span class="cmdline">brand0 and I agree that it can be merged</span>
+<a name="l-23"></a><span class="tm">19:18:24</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> cool
+<a name="l-24"></a><span class="tm">19:18:38</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> that gets us one step closer to deploying AAA
+<a name="l-25"></a><span class="tm">19:18:49</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> and finally nuking the 0.3.80 codebase
+<a name="l-26"></a><span class="tm">19:18:51</span><span class="nk"> &lt;brand0&gt;</span> what remains?
+<a name="l-27"></a><span class="tm">19:19:57</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">brand0:</span> I think merging jonasbits's OS X build patches, and activating nVersion=4 blocks are the primary remaining blockers, but I am not 100% sure that those are the only things left
+<a name="l-28"></a><span class="tm">19:20:25</span><span class="nk"> &lt;brand0&gt;</span> alright
+<a name="l-29"></a><span class="tm">19:20:35</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Activating nVersion=4 should be pretty easy, I think there's only a few percent of hashpower remaining before we hit 95%
+<a name="l-30"></a><span class="tm">19:20:54</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> But I haven't looked at the statistics in a while
+<a name="l-31"></a><span class="tm">19:21:05</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> cassiniNMC would probably have current data
+<a name="l-32"></a><span class="tm">19:22:01</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Note that we really should be trying to activate nVersion=4 as soon as we can, seeing as the delay in activating nVersion=3 was responsible for us not being prepared for Sipa's OpenSSL security disclosure
+<a name="l-33"></a><span class="tm">19:22:52</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Of course, same goes for VersionBits, and CSV, and SegWit
+<a name="l-34"></a><span class="tm">19:23:35</span><span class="nk"> &lt;brand0&gt;</span> maybe with manage names out of the way, that will accelerate the rest
+<a name="l-35"></a><span class="tm">19:24:37</span><span class="nk"> &lt;brand0&gt;</span> i'm going to start running a full-time namecoin-core node so I can help testing and such
+<a name="l-36"></a><span class="tm">19:24:37</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#idea </span><span class="cmdline">Once we're ready to start torture-testing AAA, it might be beneficial to actually deploy it on a testnet and explicitly ask a diverse set of mining pools to merge-mine it for a few weeks to make sure it plays well with their setups</span>
+<a name="l-37"></a><span class="tm">19:25:00</span><span class="nk"> &lt;brand0&gt;</span> oh yeah that's a good idea
+<a name="l-38"></a><span class="tm">19:25:45</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">Right now, pools can't merge-mine both Namecoin and Namecoin Testnet because they have the same Chain ID, but my understanding from talking to Daniel is that there's no reason we can't give Testnet2 a different Chain ID, seeing as we're resetting it anyway</span>
+<a name="l-39"></a><span class="tm">19:27:00</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">In theory that would allow an evil mining pool to intentionally DoS our testnet, but frankly that seems like a stupid attack since the testnet is trivially easy to attack anyway and there's not really any incentive to do it</span>
+<a name="l-40"></a><span class="tm">19:28:44</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">Generally I think it's really important to ask mining pools to torture test it, because none of us are really experts on the setup that the pools use</span>
+<a name="l-41"></a><span class="tm">19:31:08</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> In other Namecoin Core related news
+<a name="l-42"></a><span class="tm">19:31:24</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I merged the release process fixes to master and 0.13 branches</span>
+<a name="l-43"></a><span class="tm">19:31:37</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/106</span>
+<a name="l-44"></a><span class="tm">19:31:48</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/105</span>
+<a name="l-45"></a><span class="tm">19:32:25</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">kld made some progress with the static analysis via csbuild on Travis</span>
+<a name="l-46"></a><span class="tm">19:32:36</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/111</span>
+<a name="l-47"></a><span class="tm">19:33:32</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">Kevin (appears to be from Antpool) reported a mining issue related to the BDB lock limit</span>
+<a name="l-48"></a><span class="tm">19:33:48</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/issues/114</span>
+<a name="l-49"></a><span class="tm">19:35:45</span><span class="nk"> &lt;jonasbits&gt;</span> what chainID would be appropriate for testnet2?
+<a name="l-50"></a><span class="tm">19:36:53</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jonasbits:</span> anything that no other SHA256 auxpow chain is using, I guess.  I think there's a forum thread on BitcoinTalk that lists all the chain ID's.
+<a name="l-51"></a><span class="tm">19:38:10</span><span class="nk"> &lt;jonasbits&gt;</span> its a old post - https://bitcointalk.org/index.php?topic=769073.0
+<a name="l-52"></a><span class="tm">19:38:24</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> In practice collisions probably aren't a huge impact because I strongly doubt that very many of the pools who would be mining Testnet2 for us would be mining most of the AuxPoW chains that exist
+<a name="l-53"></a><span class="tm">19:38:39</span><span class="nk"> &lt;jonasbits&gt;</span> how big can the value be? 65000?
+<a name="l-54"></a><span class="tm">19:38:41</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> But still, we should make an effort to avoid collisions
+<a name="l-55"></a><span class="tm">19:39:30</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jonasbits:</span> I'm not sure, I think the AuxPoW spec on the Bitcoin Wiki has that info, but probably safer to just ask Daniel
+<a name="l-56"></a><span class="tm">19:40:28</span><span class="nk"> &lt;jonasbits&gt;</span> i remember some discussion about making the chainID a hash of something
+<a name="l-57"></a><span class="tm">19:42:17</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jonasbits:</span> yes, I think that suggestion was from Jorge Timon.  It's actually a reasonable idea I think, and I'm not particularly opposed to it in principle.  Basically depends on how much we want to change things, given the uncertainty surrounding Luke-Jr's proposed Bitcoin hardfork that implements AuxPoW in a generally much cleaner way than Namecoin does
+<a name="l-58"></a><span class="tm">19:43:23</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> From my understanding, there's a lot of effort going into trying to get that Bitcoin hardfork to happen, so hopefully that goes somewhere productive
+<a name="l-59"></a><span class="tm">19:43:45</span><span class="nk"> &lt;jonasbits&gt;</span> allright
+<a name="l-60"></a><span class="tm">19:44:53</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> We probably should talk to Luke and see whether that's making any progress.  Also we should ask him whether it's likely that nVersion bit 8 will be used in Bitcoin anytime soon, since if it is likely, then we probably shouldn't be wasting time worrying about chain ID cleanliness
+<a name="l-61"></a><span class="tm">19:45:31</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Last I heard MAST was planned for bit 2?  I might be wrong on that
+<a name="l-62"></a><span class="tm">19:46:15</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Given that CSV was bit 0 and that activated... what, something like March?  It seems like we have some breathing room, but I don't want to assume that without more evidence
+<a name="l-63"></a><span class="tm">19:49:26</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> btw, I was hoping cassiniNMC would be here today since I was wondering how things are going with submitting the OS X build docs PR to the dev branch... I guess I'll have to ping him about that
+<a name="l-64"></a><span class="tm">19:51:08</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jonasbits:</span> did you have any luck submitting the OS X Gitian PR?
+<a name="l-65"></a><span class="tm">19:53:56</span><span class="nk"> &lt;jonasbits&gt;</span> i believe this was the needed commit to make it work - https://github.com/jonasbits/namecoin-core/commit/d38468082d16b06d1a9cb6d54dc5b39db690f636
+<a name="l-66"></a><span class="tm">19:58:40</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jonasbits:</span> hmm, I was pretty sure that commit was already in Namecoin Core?
+<a name="l-67"></a><span class="tm">19:59:38</span><span class="nk"> &lt;jonasbits&gt;</span> i will check
+<a name="l-68"></a><span class="tm">20:06:40</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jonasbits:</span> looks like it is present in Namecoin Core but under a different hash?  a6666b25c7fa196d3829f0df38104e0384408412
+<a name="l-69"></a><span class="tm">20:07:01</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> seems to be present in all relevant branches
+<a name="l-70"></a><span class="tm">20:07:17</span><span class="nk"> &lt;jonasbits&gt;</span> good
+<a name="l-71"></a><span class="tm">20:07:46</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> so I think the only commit that we need to have OS X Gitian work is the commit that renames bitcoin to namecoin in the Gitian descriptor?
+<a name="l-72"></a><span class="tm">20:09:20</span><span class="nk"> &lt;jonasbits&gt;</span> https://github.com/jonasbits/namecoin-core/commit/1069cccdada095f3891d26d83759514b5b8654db
+<a name="l-73"></a><span class="tm">20:09:28</span><span class="nk"> &lt;jonasbits&gt;</span> this should do it then
+<a name="l-74"></a><span class="tm">20:10:37</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jonasbits:</span> ok cool.  the repo URL will need to be changed (it points to your repo in that commit), other than that it looks okay
+<a name="l-75"></a><span class="tm">20:10:56</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> any chance you could make that change, modify the commit message slightly, and submit a PR?
+<a name="l-76"></a><span class="tm">20:11:23</span><span class="nk"> &lt;jonasbits&gt;</span> should i test a gitian build also?
+<a name="l-77"></a><span class="tm">20:12:20</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">jonasbits:</span> yes, if you can test a Gitian build that would be awesome.  Also please submit the PR to the dev branch, we can backport to master and 0.13 afterward
+<a name="l-78"></a><span class="tm">20:12:37</span><span class="nk"> &lt;jonasbits&gt;</span> allright
+<a name="l-79"></a><span class="tm">20:12:47</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> \me will be very happy when nVersion=4 is activated so we can stop having a separate dev branch
+<a name="l-80"></a><span class="tm">20:13:53</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> That said, the commit is pretty easy to audit, and it shouldn't make anything worse, so my opinion is that testing the Gitian build isn't necessary if not doing so gets a PR submitted faster
+<a name="l-81"></a><span class="tm">20:14:13</span><span class="nk"> &lt;jonasbits&gt;</span> sure
+<a name="l-82"></a><span class="tm">20:15:22</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#action </span><span class="cmdline">jonasbits will submit a PR to dev branch to fix Gitian build for OS X (change "bitcoin" to "namecoin")</span>
+<a name="l-83"></a><span class="tm">20:15:39</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> ok, any other Namecoin Core related things before we move on to the next topic?
+<a name="l-84"></a><span class="tm">20:18:19</span><span class="nk"> &lt;brand0&gt;</span> nope
+<a name="l-85"></a><span class="tm">20:19:14</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">ncdns</span>
+<a name="l-86"></a><span class="tm">20:20:00</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">hl did some cleanups of the ncdns codebase, including fixing a bug involving binding to port 53.</span>
+<a name="l-87"></a><span class="tm">20:22:35</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Are there other development-related topics anyone would like to bring up before we move onto meta-topics?
+<a name="l-88"></a><span class="tm">20:24:54</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Meta</span>
+<a name="l-89"></a><span class="tm">20:25:31</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">wyatt informed me on Friday that he has to withdraw from Namecoin development due to unexpected schoolwork load at the end of the semester</span>
+<a name="l-90"></a><span class="tm">20:27:03</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">Also noting for transparency purposes that on October 31, some random malware vendor seems to have compromised an old Skype account of mine.  The account hasn't been used for many years (I think sometime around 2010)</span>
+<a name="l-91"></a><span class="tm">20:27:36</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">AFAICT the only data that the attacker would have gotten was the account's social graph; all they appeared to do was send a Baidu link to all of the account's contacts</span>
+<a name="l-92"></a><span class="tm">20:28:33</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">About half a day later, someone tried to request a password reset against Dropbox accounts for me, jbisch, and pigeons</span>
+<a name="l-93"></a><span class="tm">20:29:09</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">The attacks seem very poorly executed and didn't seem to be making any attempt to be subtle.  So it's inconsistent with a return of the State-Sponsored Actors (TM).</span>
+<a name="l-94"></a><span class="tm">20:29:21</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">Possibly related to a leaked Dropbox password database</span>
+<a name="l-95"></a><span class="tm">20:29:35</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://nakedsecurity.sophos.com/2016/10/24/russian-indicted-over-linkedin-and-dropbox-mega-breaches/</span>
+<a name="l-96"></a><span class="tm">20:30:13</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">interestingly, I inquired in the DWS Slack/Matrix channel about whether anyone there was affected; no one there got any Dropbox password reset emails.</span>
+<a name="l-97"></a><span class="tm">20:30:40</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I have no reason to believe that this has any impact on Namecoin or even any relation to Namecoin</span>
+<a name="l-98"></a><span class="tm">20:31:09</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">that said, given my membership in the State Sponsored Actors Club https://state-sponsored-actors.net/ I figure it's appropriate to disclose here.</span>
+<a name="l-99"></a><span class="tm">20:33:36</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Anyway, with that out of the way, on to...
+<a name="l-100"></a><span class="tm">20:33:41</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Public Relations</span>
+<a name="l-101"></a><span class="tm">20:34:16</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Curious if there was any progress nominating GSoC candidate projects?
+<a name="l-102"></a><span class="tm">20:37:33</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#help </span><span class="cmdline">We could use some help nominating GSoC candidate projects</span>
+<a name="l-103"></a><span class="tm">20:37:50</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#help </span><span class="cmdline">We could also use some help on a newcomer / help wanted task list</span>
+<a name="l-104"></a><span class="tm">20:39:56</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#help </span><span class="cmdline">We could also still use some help improving the website header's organization... really hard to find the Downloads link at the moment</span>
+<a name="l-105"></a><span class="tm">20:41:19</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">The website now redirects HTTP to HTTPS, and redirects .info to .org.  So that should boost security and our search engine ranking.</span>
+<a name="l-106"></a><span class="tm">20:41:37</span><span class="nk"> &lt;jonasbits&gt;</span> good!
+<a name="l-107"></a><span class="tm">20:43:14</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">OU's CS department is likely to have a poster session in early December.  I'll probably participate.</span>
+<a name="l-108"></a><span class="tm">20:44:53</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#help </span><span class="cmdline">Is anyone able to write documentation / introduction to Namecoin that's suitable for people who are experts in DNS but who don't have much/any expertise in Bitcoin?  Are hl and ryan-c the best-suited people to do that?</span>
+<a name="l-109"></a><span class="tm">20:45:10</span><span class="nk"> &lt;hl&gt;</span> Hi.
+<a name="l-110"></a><span class="tm">20:45:20</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Hello hl
+<a name="l-111"></a><span class="tm">20:46:01</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">hl:</span> how would you like to write some kickass documentation?  :)
+<a name="l-112"></a><span class="tm">20:46:13</span><span class="nk"> &lt;hl&gt;</span> Sure, why not.
+<a name="l-113"></a><span class="tm">20:46:33</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> yay \o/
+<a name="l-114"></a><span class="tm">20:46:57</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="hi">hl:</span> hit me up on XMPP sometime in the next few days about it?
+<a name="l-115"></a><span class="tm">20:47:29</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#action </span><span class="cmdline">hl is cool with it</span>
+<a name="l-116"></a><span class="tm">20:48:04</span><span class="nk"> &lt;brand0&gt;</span> :)
+<a name="l-117"></a><span class="tm">20:49:15</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I talked to the Kovri people a little bit.  Seems like they're interested in facilitating us.</span>
+<a name="l-118"></a><span class="tm">20:49:43</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> (for anyone unaware, Kovri is the I2P implementation by the Monero team)
+<a name="l-119"></a><span class="tm">20:51:37</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> any other public relations things before we move onto funding?
+<a name="l-120"></a><span class="tm">20:54:04</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="topic">#topic </span><span class="topicline">Funding</span>
+<a name="l-121"></a><span class="tm">20:54:42</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#help </span><span class="cmdline">Can people please review the PR that updates the donation address on the website?</span>
+<a name="l-122"></a><span class="tm">20:54:54</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin.org/pull/82</span>
+<a name="l-123"></a><span class="tm">20:55:32</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">All we need is 2 people to confirm that the BTC address in the PR matches the one from Phelix's previous PR that Daniel and I already ACKed but which had a formatting issue</span>
+<a name="l-124"></a><span class="tm">20:58:36</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've NACKed using Patreon for fundraising due to ridiculous terms of use</span>
+<a name="l-125"></a><span class="tm">20:58:45</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://web.archive.org/web/20160713013324/https://www.patreon.com/legal</span>
+<a name="l-126"></a><span class="tm">20:59:34</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">Among other things, Patreon has the right to force arbitration, and we would have to correspond with Patreon via snail mail for 1 month before we even have the right to initiate arbitration, but Patreon can use email to contact us if they want to harass us via arbitration.</span>
+<a name="l-127"></a><span class="tm">21:00:55</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">We're continuing to receive $15/month from 1 anonymous recurring supporter on Bountysource.  That brings our balance to $344 USD</span>
+<a name="l-128"></a><span class="tm">21:01:22</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">I don't have BTC stats this meeting since we're still in the process of moving the donation address</span>
+<a name="l-129"></a><span class="tm">21:02:02</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#info </span><span class="cmdline">The NMDF NMC address has received 17 NMC from 3 transactions since October 16</span>
+<a name="l-130"></a><span class="tm">21:02:30</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Any other funding-related things anyone would like to bring up?
+<a name="l-131"></a><span class="tm">21:05:47</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Anything else on any topic that anyone would like to bring up today before we close the meeting?
+<a name="l-132"></a><span class="tm">21:07:18</span><span class="nk"> &lt;brand0&gt;</span> not I
+<a name="l-133"></a><span class="tm">21:11:02</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Okay then.  That's the end of the meeting.  Thanks for being here everyone.
+<a name="l-134"></a><span class="tm">21:11:04</span><span class="nk"> &lt;jonasbits&gt;</span> im good
+<a name="l-135"></a><span class="tm">21:11:11</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

@@ -1,0 +1,135 @@
+19:03:10 <Jeremy_Rand> #startmeeting
+19:03:10 <qpm> Meeting started Sun Nov 20 19:03:10 2016 UTC.  The chair is Jeremy_Rand. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:03:10 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:03:39 <Jeremy_Rand> #meetingtopic Namecoin Development Meeting
+19:04:03 <Jeremy_Rand> Hello everyone, welcome to the meeting.  Sorry I'm about 3 minutes late.
+19:04:16 <Jeremy_Rand> Can we get a roll call of who's here today?
+19:10:44 <Jeremy_Rand> Err.  I certainly hope I'm not the only one here today...?
+19:11:17 <brand0> i'm here
+19:11:30 <Jeremy_Rand> Ah hey brand0
+19:11:45 <brand0> sorry, was making coffee
+19:11:58 <Jeremy_Rand> Well, let's get started and maybe some other people will join in later
+19:12:16 <Jeremy_Rand> #topic Namecoin Core
+19:13:37 <Jeremy_Rand> #info I got the 0.13.99-name-tab-beta1 binaries posted onto namecoin.org
+19:13:48 <Jeremy_Rand> #link https://namecoin.org/download/betas/
+19:14:28 <brand0> looks like more people are testing now because of that
+19:14:33 <Jeremy_Rand> #info Even better, we appear to have actually gotten some people testing them (based on some people who came into IRC to report that it was working)
+19:16:08 <Jeremy_Rand> #info Given that the name tab code seems to be pretty stable, and the only reported bugs are minor and IMO not worthy of blocker status, I've recommended that the code be merged if no one strongly NACKs within a week
+19:16:21 <Jeremy_Rand> #link https://github.com/namecoin/namecoin-core/pull/67#issuecomment-261701217
+19:17:09 <brand0> I'll continue to work on the non-blockers, in a new branch
+19:17:28 <Jeremy_Rand> brand0: Would I be correct in assuming that you agree that it can be merged in its current state?
+19:17:42 <brand0> yeah I think so
+19:18:15 <Jeremy_Rand> #agreed brand0 and I agree that it can be merged
+19:18:24 <Jeremy_Rand> cool
+19:18:38 <Jeremy_Rand> that gets us one step closer to deploying AAA
+19:18:49 <Jeremy_Rand> and finally nuking the 0.3.80 codebase
+19:18:51 <brand0> what remains?
+19:19:57 <Jeremy_Rand> brand0: I think merging jonasbits's OS X build patches, and activating nVersion=4 blocks are the primary remaining blockers, but I am not 100% sure that those are the only things left
+19:20:25 <brand0> alright
+19:20:35 <Jeremy_Rand> Activating nVersion=4 should be pretty easy, I think there's only a few percent of hashpower remaining before we hit 95%
+19:20:54 <Jeremy_Rand> But I haven't looked at the statistics in a while
+19:21:05 <Jeremy_Rand> cassiniNMC would probably have current data
+19:22:01 <Jeremy_Rand> Note that we really should be trying to activate nVersion=4 as soon as we can, seeing as the delay in activating nVersion=3 was responsible for us not being prepared for Sipa's OpenSSL security disclosure
+19:22:52 <Jeremy_Rand> Of course, same goes for VersionBits, and CSV, and SegWit
+19:23:35 <brand0> maybe with manage names out of the way, that will accelerate the rest
+19:24:37 <brand0> i'm going to start running a full-time namecoin-core node so I can help testing and such
+19:24:37 <Jeremy_Rand> #idea Once we're ready to start torture-testing AAA, it might be beneficial to actually deploy it on a testnet and explicitly ask a diverse set of mining pools to merge-mine it for a few weeks to make sure it plays well with their setups
+19:25:00 <brand0> oh yeah that's a good idea
+19:25:45 <Jeremy_Rand> #info Right now, pools can't merge-mine both Namecoin and Namecoin Testnet because they have the same Chain ID, but my understanding from talking to Daniel is that there's no reason we can't give Testnet2 a different Chain ID, seeing as we're resetting it anyway
+19:27:00 <Jeremy_Rand> #info In theory that would allow an evil mining pool to intentionally DoS our testnet, but frankly that seems like a stupid attack since the testnet is trivially easy to attack anyway and there's not really any incentive to do it
+19:28:44 <Jeremy_Rand> #info Generally I think it's really important to ask mining pools to torture test it, because none of us are really experts on the setup that the pools use
+19:31:08 <Jeremy_Rand> In other Namecoin Core related news
+19:31:24 <Jeremy_Rand> #info I merged the release process fixes to master and 0.13 branches
+19:31:37 <Jeremy_Rand> #link https://github.com/namecoin/namecoin-core/pull/106
+19:31:48 <Jeremy_Rand> #link https://github.com/namecoin/namecoin-core/pull/105
+19:32:25 <Jeremy_Rand> #info kld made some progress with the static analysis via csbuild on Travis
+19:32:36 <Jeremy_Rand> #link https://github.com/namecoin/namecoin-core/pull/111
+19:33:32 <Jeremy_Rand> #info Kevin (appears to be from Antpool) reported a mining issue related to the BDB lock limit
+19:33:48 <Jeremy_Rand> #link https://github.com/namecoin/namecoin-core/issues/114
+19:35:45 <jonasbits> what chainID would be appropriate for testnet2?
+19:36:53 <Jeremy_Rand> jonasbits: anything that no other SHA256 auxpow chain is using, I guess.  I think there's a forum thread on BitcoinTalk that lists all the chain ID's.
+19:38:10 <jonasbits> its a old post - https://bitcointalk.org/index.php?topic=769073.0
+19:38:24 <Jeremy_Rand> In practice collisions probably aren't a huge impact because I strongly doubt that very many of the pools who would be mining Testnet2 for us would be mining most of the AuxPoW chains that exist
+19:38:39 <jonasbits> how big can the value be? 65000?
+19:38:41 <Jeremy_Rand> But still, we should make an effort to avoid collisions
+19:39:30 <Jeremy_Rand> jonasbits: I'm not sure, I think the AuxPoW spec on the Bitcoin Wiki has that info, but probably safer to just ask Daniel
+19:40:28 <jonasbits> i remember some discussion about making the chainID a hash of something
+19:42:17 <Jeremy_Rand> jonasbits: yes, I think that suggestion was from Jorge Timon.  It's actually a reasonable idea I think, and I'm not particularly opposed to it in principle.  Basically depends on how much we want to change things, given the uncertainty surrounding Luke-Jr's proposed Bitcoin hardfork that implements AuxPoW in a generally much cleaner way than Namecoin does
+19:43:23 <Jeremy_Rand> From my understanding, there's a lot of effort going into trying to get that Bitcoin hardfork to happen, so hopefully that goes somewhere productive
+19:43:45 <jonasbits> allright
+19:44:53 <Jeremy_Rand> We probably should talk to Luke and see whether that's making any progress.  Also we should ask him whether it's likely that nVersion bit 8 will be used in Bitcoin anytime soon, since if it is likely, then we probably shouldn't be wasting time worrying about chain ID cleanliness
+19:45:31 <Jeremy_Rand> Last I heard MAST was planned for bit 2?  I might be wrong on that
+19:46:15 <Jeremy_Rand> Given that CSV was bit 0 and that activated... what, something like March?  It seems like we have some breathing room, but I don't want to assume that without more evidence
+19:49:26 <Jeremy_Rand> btw, I was hoping cassiniNMC would be here today since I was wondering how things are going with submitting the OS X build docs PR to the dev branch... I guess I'll have to ping him about that
+19:51:08 <Jeremy_Rand> jonasbits: did you have any luck submitting the OS X Gitian PR?
+19:53:56 <jonasbits> i believe this was the needed commit to make it work - https://github.com/jonasbits/namecoin-core/commit/d38468082d16b06d1a9cb6d54dc5b39db690f636
+19:58:40 <Jeremy_Rand> jonasbits: hmm, I was pretty sure that commit was already in Namecoin Core?
+19:59:38 <jonasbits> i will check
+20:06:40 <Jeremy_Rand> jonasbits: looks like it is present in Namecoin Core but under a different hash?  a6666b25c7fa196d3829f0df38104e0384408412
+20:07:01 <Jeremy_Rand> seems to be present in all relevant branches
+20:07:17 <jonasbits> good
+20:07:46 <Jeremy_Rand> so I think the only commit that we need to have OS X Gitian work is the commit that renames bitcoin to namecoin in the Gitian descriptor?
+20:09:20 <jonasbits> https://github.com/jonasbits/namecoin-core/commit/1069cccdada095f3891d26d83759514b5b8654db
+20:09:28 <jonasbits> this should do it then
+20:10:37 <Jeremy_Rand> jonasbits: ok cool.  the repo URL will need to be changed (it points to your repo in that commit), other than that it looks okay
+20:10:56 <Jeremy_Rand> any chance you could make that change, modify the commit message slightly, and submit a PR?
+20:11:23 <jonasbits> should i test a gitian build also?
+20:12:20 <Jeremy_Rand> jonasbits: yes, if you can test a Gitian build that would be awesome.  Also please submit the PR to the dev branch, we can backport to master and 0.13 afterward
+20:12:37 <jonasbits> allright
+20:12:47 <Jeremy_Rand> \me will be very happy when nVersion=4 is activated so we can stop having a separate dev branch
+20:13:53 <Jeremy_Rand> That said, the commit is pretty easy to audit, and it shouldn't make anything worse, so my opinion is that testing the Gitian build isn't necessary if not doing so gets a PR submitted faster
+20:14:13 <jonasbits> sure
+20:15:22 <Jeremy_Rand> #action jonasbits will submit a PR to dev branch to fix Gitian build for OS X (change "bitcoin" to "namecoin")
+20:15:39 <Jeremy_Rand> ok, any other Namecoin Core related things before we move on to the next topic?
+20:18:19 <brand0> nope
+20:19:14 <Jeremy_Rand> #topic ncdns
+20:20:00 <Jeremy_Rand> #info hl did some cleanups of the ncdns codebase, including fixing a bug involving binding to port 53.
+20:22:35 <Jeremy_Rand> Are there other development-related topics anyone would like to bring up before we move onto meta-topics?
+20:24:54 <Jeremy_Rand> #topic Meta
+20:25:31 <Jeremy_Rand> #info wyatt informed me on Friday that he has to withdraw from Namecoin development due to unexpected schoolwork load at the end of the semester
+20:27:03 <Jeremy_Rand> #info Also noting for transparency purposes that on October 31, some random malware vendor seems to have compromised an old Skype account of mine.  The account hasn't been used for many years (I think sometime around 2010)
+20:27:36 <Jeremy_Rand> #info AFAICT the only data that the attacker would have gotten was the account's social graph; all they appeared to do was send a Baidu link to all of the account's contacts
+20:28:33 <Jeremy_Rand> #info About half a day later, someone tried to request a password reset against Dropbox accounts for me, jbisch, and pigeons
+20:29:09 <Jeremy_Rand> #info The attacks seem very poorly executed and didn't seem to be making any attempt to be subtle.  So it's inconsistent with a return of the State-Sponsored Actors (TM).
+20:29:21 <Jeremy_Rand> #info Possibly related to a leaked Dropbox password database
+20:29:35 <Jeremy_Rand> #link https://nakedsecurity.sophos.com/2016/10/24/russian-indicted-over-linkedin-and-dropbox-mega-breaches/
+20:30:13 <Jeremy_Rand> #info interestingly, I inquired in the DWS Slack/Matrix channel about whether anyone there was affected; no one there got any Dropbox password reset emails.
+20:30:40 <Jeremy_Rand> #info I have no reason to believe that this has any impact on Namecoin or even any relation to Namecoin
+20:31:09 <Jeremy_Rand> #link that said, given my membership in the State Sponsored Actors Club https://state-sponsored-actors.net/ I figure it's appropriate to disclose here.
+20:33:36 <Jeremy_Rand> Anyway, with that out of the way, on to...
+20:33:41 <Jeremy_Rand> #topic Public Relations
+20:34:16 <Jeremy_Rand> Curious if there was any progress nominating GSoC candidate projects?
+20:37:33 <Jeremy_Rand> #help We could use some help nominating GSoC candidate projects
+20:37:50 <Jeremy_Rand> #help We could also use some help on a newcomer / help wanted task list
+20:39:56 <Jeremy_Rand> #help We could also still use some help improving the website header's organization... really hard to find the Downloads link at the moment
+20:41:19 <Jeremy_Rand> #info The website now redirects HTTP to HTTPS, and redirects .info to .org.  So that should boost security and our search engine ranking.
+20:41:37 <jonasbits> good!
+20:43:14 <Jeremy_Rand> #info OU's CS department is likely to have a poster session in early December.  I'll probably participate.
+20:44:53 <Jeremy_Rand> #help Is anyone able to write documentation / introduction to Namecoin that's suitable for people who are experts in DNS but who don't have much/any expertise in Bitcoin?  Are hl and ryan-c the best-suited people to do that?
+20:45:10 <hl> Hi.
+20:45:20 <Jeremy_Rand> Hello hl
+20:46:01 <Jeremy_Rand> hl: how would you like to write some kickass documentation?  :)
+20:46:13 <hl> Sure, why not.
+20:46:33 <Jeremy_Rand> yay \o/
+20:46:57 <Jeremy_Rand> hl: hit me up on XMPP sometime in the next few days about it?
+20:47:29 <Jeremy_Rand> #action hl is cool with it
+20:48:04 <brand0> :)
+20:49:15 <Jeremy_Rand> #info I talked to the Kovri people a little bit.  Seems like they're interested in facilitating us.
+20:49:43 <Jeremy_Rand> (for anyone unaware, Kovri is the I2P implementation by the Monero team)
+20:51:37 <Jeremy_Rand> any other public relations things before we move onto funding?
+20:54:04 <Jeremy_Rand> #topic Funding
+20:54:42 <Jeremy_Rand> #help Can people please review the PR that updates the donation address on the website?
+20:54:54 <Jeremy_Rand> #link https://github.com/namecoin/namecoin.org/pull/82
+20:55:32 <Jeremy_Rand> #info All we need is 2 people to confirm that the BTC address in the PR matches the one from Phelix's previous PR that Daniel and I already ACKed but which had a formatting issue
+20:58:36 <Jeremy_Rand> #info I've NACKed using Patreon for fundraising due to ridiculous terms of use
+20:58:45 <Jeremy_Rand> #link https://web.archive.org/web/20160713013324/https://www.patreon.com/legal
+20:59:34 <Jeremy_Rand> #info Among other things, Patreon has the right to force arbitration, and we would have to correspond with Patreon via snail mail for 1 month before we even have the right to initiate arbitration, but Patreon can use email to contact us if they want to harass us via arbitration.
+21:00:55 <Jeremy_Rand> #info We're continuing to receive $15/month from 1 anonymous recurring supporter on Bountysource.  That brings our balance to $344 USD
+21:01:22 <Jeremy_Rand> #info I don't have BTC stats this meeting since we're still in the process of moving the donation address
+21:02:02 <Jeremy_Rand> #info The NMDF NMC address has received 17 NMC from 3 transactions since October 16
+21:02:30 <Jeremy_Rand> Any other funding-related things anyone would like to bring up?
+21:05:47 <Jeremy_Rand> Anything else on any topic that anyone would like to bring up today before we close the meeting?
+21:07:18 <brand0> not I
+21:11:02 <Jeremy_Rand> Okay then.  That's the end of the meeting.  Thanks for being here everyone.
+21:11:04 <jonasbits> im good
+21:11:11 <Jeremy_Rand> #endmeeting
