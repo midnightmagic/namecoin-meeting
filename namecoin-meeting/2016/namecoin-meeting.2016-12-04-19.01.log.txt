@@ -1,0 +1,36 @@
+19:01:31 <Jeremy_Rand> #startmeeting
+19:01:31 <qpm> Meeting started Sun Dec  4 19:01:31 2016 UTC.  The chair is Jeremy_Rand. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:01:31 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:02:19 <Jeremy_Rand> #meetingtopic Namecoin Development Meeting
+19:02:38 <Jeremy_Rand> Hi everyone, welcome to the meeting
+19:02:51 <Jeremy_Rand> Can we get a roll call of who's here today?
+19:05:42 <hl> Hello.
+19:05:52 <Jeremy_Rand[m]> Hmm, are we having issues with the qpm relay?
+19:07:32 <Jeremy_Rand[m]> seems qpm is only working in 1 direction today, and is suffering from a really bad delay
+19:08:06 <Jeremy_Rand[m]> Either that or the Matrix relay is having an issue that simulates qpm being broken
+19:08:27 <Jeremy_Rand[m]> ok, anyway... hl and I are here, anyone else here today?
+19:10:58 <Jeremy_Rand[m]> ok, I guess we're going to do the low-tech meeting style since qpm is apparently misbehaving (so no MeetBot)
+19:11:23 <Jeremy_Rand[m]> First topic on the agenda is Namecoin Core
+19:12:02 <Jeremy_Rand[m]> And we have big news there: brand0's name tab PR is merged to the master branch
+19:12:34 <Jeremy_Rand[m]> The non-blocking bugs that were still outstanding now have their own issues. We also need to port the name tab to 0.13 and dev branches
+19:13:18 <Jeremy_Rand[m]> In other Namecoin Core news, a bug report suggests it's possible to assert-crash Namecoin Core by using RPC to broadcast an invalid name transaction.
+19:13:31 <Jeremy_Rand[m]> https://github.com/namecoin/namecoin-core/issues/116
+19:13:46 <Jeremy_Rand[m]> domob has proposed a fix.
+19:13:58 <Jeremy_Rand[m]> https://github.com/namecoin/namecoin-core/pull/117
+19:19:03 <Jeremy_Rand[m]> There were a few other dev-related things I was going to bring up, but they're not really relevant given that hl and I are the only ones here today
+19:19:21 <Jeremy_Rand[m]> So maybe postpone those topics till the next meeting
+19:19:54 <Jeremy_Rand[m]> hl: were there other dev-related topics that you wanted to bring up today, or should I move onto meta topics?
+19:20:10 <hl> I don't think there's anything else.
+19:20:34 <Jeremy_Rand[m]> ok, so moving onto meta
+19:20:45 <Jeremy_Rand[m]> Finals week is approaching here at OU.
+19:21:39 <Jeremy_Rand[m]> This doesn't impact me since I don't have any finals (exclusively doing thesis is fun!), but it does mean that kld won't be able to work on Namecoin until after finals end on December 17
+19:22:48 <Jeremy_Rand[m]> In Public Relations topics, it's been pointed out that the Beta Downloads page is linking to old Namecoin Core betas hosted by brand0
+19:23:00 <Jeremy_Rand[m]> Those links are now dead and should be removed
+19:24:20 <Jeremy_Rand[m]> In the funding area, the new NMDF address is pushed to namecoin.org.
+19:24:50 <Jeremy_Rand[m]> Bountysource is having some technical issues today, so I wasn't able to check our balance, but assuming that the per-month funding hasn't changed,
+19:25:18 <Jeremy_Rand[m]> That would put us as getting another $15 USD, bringing our total blaance to $359 USD
+19:26:36 <Jeremy_Rand[m]> NMDF has received 55.3 mBTC and 13.934 NMC since November 20.
+19:28:52 <Jeremy_Rand[m]> hl: any other stuff you wanted to bring up today?
+19:28:59 <hl> I don't think so.
+19:30:39 <Jeremy_Rand[m]> ok then. That's probably our shortest meeting ever.
+19:30:43 <Jeremy_Rand> #endmeeting

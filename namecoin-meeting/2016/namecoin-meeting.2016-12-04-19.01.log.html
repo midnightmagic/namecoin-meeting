@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-meeting log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:01:31</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:01:31</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Dec  4 19:01:31 2016 UTC.  The chair is Jeremy_Rand. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:01:31</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:02:19</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#meetingtopic </span><span class="cmdline">Namecoin Development Meeting</span>
+<a name="l-5"></a><span class="tm">19:02:38</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Hi everyone, welcome to the meeting
+<a name="l-6"></a><span class="tm">19:02:51</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> Can we get a roll call of who's here today?
+<a name="l-7"></a><span class="tm">19:05:42</span><span class="nk"> &lt;hl&gt;</span> Hello.
+<a name="l-8"></a><span class="tm">19:05:52</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Hmm, are we having issues with the qpm relay?
+<a name="l-9"></a><span class="tm">19:07:32</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> seems qpm is only working in 1 direction today, and is suffering from a really bad delay
+<a name="l-10"></a><span class="tm">19:08:06</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Either that or the Matrix relay is having an issue that simulates qpm being broken
+<a name="l-11"></a><span class="tm">19:08:27</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok, anyway... hl and I are here, anyone else here today?
+<a name="l-12"></a><span class="tm">19:10:58</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok, I guess we're going to do the low-tech meeting style since qpm is apparently misbehaving (so no MeetBot)
+<a name="l-13"></a><span class="tm">19:11:23</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> First topic on the agenda is Namecoin Core
+<a name="l-14"></a><span class="tm">19:12:02</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> And we have big news there: brand0's name tab PR is merged to the master branch
+<a name="l-15"></a><span class="tm">19:12:34</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> The non-blocking bugs that were still outstanding now have their own issues. We also need to port the name tab to 0.13 and dev branches
+<a name="l-16"></a><span class="tm">19:13:18</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> In other Namecoin Core news, a bug report suggests it's possible to assert-crash Namecoin Core by using RPC to broadcast an invalid name transaction.
+<a name="l-17"></a><span class="tm">19:13:31</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> https://github.com/namecoin/namecoin-core/issues/116
+<a name="l-18"></a><span class="tm">19:13:46</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> domob has proposed a fix.
+<a name="l-19"></a><span class="tm">19:13:58</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> https://github.com/namecoin/namecoin-core/pull/117
+<a name="l-20"></a><span class="tm">19:19:03</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> There were a few other dev-related things I was going to bring up, but they're not really relevant given that hl and I are the only ones here today
+<a name="l-21"></a><span class="tm">19:19:21</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> So maybe postpone those topics till the next meeting
+<a name="l-22"></a><span class="tm">19:19:54</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> were there other dev-related topics that you wanted to bring up today, or should I move onto meta topics?
+<a name="l-23"></a><span class="tm">19:20:10</span><span class="nk"> &lt;hl&gt;</span> I don't think there's anything else.
+<a name="l-24"></a><span class="tm">19:20:34</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok, so moving onto meta
+<a name="l-25"></a><span class="tm">19:20:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Finals week is approaching here at OU.
+<a name="l-26"></a><span class="tm">19:21:39</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> This doesn't impact me since I don't have any finals (exclusively doing thesis is fun!), but it does mean that kld won't be able to work on Namecoin until after finals end on December 17
+<a name="l-27"></a><span class="tm">19:22:48</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> In Public Relations topics, it's been pointed out that the Beta Downloads page is linking to old Namecoin Core betas hosted by brand0
+<a name="l-28"></a><span class="tm">19:23:00</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Those links are now dead and should be removed
+<a name="l-29"></a><span class="tm">19:24:20</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> In the funding area, the new NMDF address is pushed to namecoin.org.
+<a name="l-30"></a><span class="tm">19:24:50</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Bountysource is having some technical issues today, so I wasn't able to check our balance, but assuming that the per-month funding hasn't changed,
+<a name="l-31"></a><span class="tm">19:25:18</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> That would put us as getting another $15 USD, bringing our total blaance to $359 USD
+<a name="l-32"></a><span class="tm">19:26:36</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> NMDF has received 55.3 mBTC and 13.934 NMC since November 20.
+<a name="l-33"></a><span class="tm">19:28:52</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> any other stuff you wanted to bring up today?
+<a name="l-34"></a><span class="tm">19:28:59</span><span class="nk"> &lt;hl&gt;</span> I don't think so.
+<a name="l-35"></a><span class="tm">19:30:39</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok then. That's probably our shortest meeting ever.
+<a name="l-36"></a><span class="tm">19:30:43</span><span class="nk"> &lt;Jeremy_Rand&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>
