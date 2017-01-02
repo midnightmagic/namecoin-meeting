@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-meeting: Namecoin Development Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-meeting: Namecoin Development Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand[m] at 19:02:55 UTC
+(<a href="namecoin-meeting.2017-01-01-19.02.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">Namecoin Core</b> <span class="details">(<a href='namecoin-meeting.2017-01-01-19.02.log.html#l-22'>Jeremy_Rand[m]</a>, 19:14:13)</span>
+<ol type="a">
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/136">https://github.com/namecoin/namecoin-core/pull/136</a>
+    fsb4000 Submitted a PR for rebranding the NSIS images. <span
+    class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-23'>Jeremy_Rand[m]</a>,
+    19:14:47)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">We need someone
+    to review fsb4000's PR for rebranding the NSIS images.</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-24'>Jeremy_Rand[m]</a>,
+    19:14:59)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/138">https://github.com/namecoin/namecoin-core/pull/138</a>
+    domob submitted a PR for re-enabling getblocktemplate. <span
+    class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-27'>Jeremy_Rand[m]</a>,
+    19:19:50)</span></li>
+  <li><span class="INFO">DrHaribo from BitMinter confirms it's
+    working.</span> <span class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-28'>Jeremy_Rand[m]</a>,
+    19:19:56)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/117">https://github.com/namecoin/namecoin-core/pull/117</a>
+    domob fixed a bug where Namecoin Core assert-crashes when a user
+    tries to broadcast an invalid name transaction. <span
+    class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-29'>Jeremy_Rand[m]</a>,
+    19:20:34)</span></li>
+  <li><span class="INFO">There are 2 miners left who are still mining
+    nVersion=3 blocks.</span> <span class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-30'>Jeremy_Rand[m]</a>,
+    19:21:19)</span></li>
+  <li><span class="INFO">The smaller is Eligius; I've contacted them
+    first so that they don't get kicked off the network when the larger
+    one upgrades.</span> <span class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-31'>Jeremy_Rand[m]</a>,
+    19:21:39)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">SPV</b> <span class="details">(<a href='namecoin-meeting.2017-01-01-19.02.log.html#l-34'>Jeremy_Rand[m]</a>, 19:24:47)</span>
+<ol type="a">
+  <li><span class="INFO">ahmed_ is planning to experiment with a
+    Namecoin port of Electrum.</span> <span class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-35'>Jeremy_Rand[m]</a>,
+    19:25:08)</span></li>
+  <li><span class="INFO">I reached out to the author of the ElectrumX
+    server implementation to discuss AuxPoW support</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-36'>Jeremy_Rand[m]</a>,
+    19:26:41)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">ncdns</b> <span class="details">(<a href='namecoin-meeting.2017-01-01-19.02.log.html#l-39'>Jeremy_Rand[m]</a>, 19:29:39)</span>
+<ol type="a">
+  <li><span class="INFO">hl and I are making significant progress on an
+    ncdns NSIS installer.</span> <span class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-40'>Jeremy_Rand[m]</a>,
+    19:30:12)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Public Relations</b> <span class="details">(<a href='namecoin-meeting.2017-01-01-19.02.log.html#l-45'>Jeremy_Rand[m]</a>, 19:35:02)</span>
+<ol type="a">
+  <li><a
+    href="https://github.com/namecoin/namecoin.org/pull/86">https://github.com/namecoin/namecoin.org/pull/86</a>
+    I submitted a website PR to improve the header layout organization.
+    <span class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-46'>Jeremy_Rand[m]</a>,
+    19:35:44)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">We need someone
+    to review my website PR to improve the header layout
+    organization.</span> <span class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-47'>Jeremy_Rand[m]</a>,
+    19:36:04)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin.org/pull/87">https://github.com/namecoin/namecoin.org/pull/87</a>
+    Sn0wmonster submitted a website PR to improve tagline placement.
+    <span class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-62'>Jeremy_Rand[m]</a>,
+    19:45:14)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">We need someone
+    to review Sn0wmonster's website PR to improve tagline
+    placement.</span> <span class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-63'>Jeremy_Rand[m]</a>,
+    19:45:42)</span></li>
+  <li><a
+    href="https://github.com/namecoin/meta/issues/40">https://github.com/namecoin/meta/issues/40</a>
+    Sn0wmonster suggested adding GitHub notifications over IRC. <span
+    class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-64'>Jeremy_Rand[m]</a>,
+    19:46:12)</span></li>
+  <li><a
+    href="https://namecoin.org/team/">https://namecoin.org/team/</a>
+    jbisch is now listed on the Team page. <span class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-67'>Jeremy_Rand[m]</a>,
+    19:49:23)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">We need to finish
+    up a GSoC mentor organization submission.</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-69'>Jeremy_Rand[m]</a>,
+    19:50:38)</span></li>
+  <li><i class="itemtype">ACTION</i>: <span
+    class="ACTION">Jeremy_Rand[m] will write up a draft Markdown page
+    for the GSoC ideas page.</span> <span class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-71'>Jeremy_Rand[m]</a>,
+    19:53:41)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">We need to remove
+    the old Beta Downloads links hosted by brand0.</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-72'>Jeremy_Rand[m]</a>,
+    19:54:29)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Funding</b> <span class="details">(<a href='namecoin-meeting.2017-01-01-19.02.log.html#l-74'>Jeremy_Rand[m]</a>, 19:57:16)</span>
+<ol type="a">
+  <li><a
+    href="https://github.com/namecoin/namecoin.org/pull/85">https://github.com/namecoin/namecoin.org/pull/85</a>
+    I submitted a website PR to allow issue/task-specific Bitcoin
+    donations. <span class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-75'>Jeremy_Rand[m]</a>,
+    19:57:49)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">We need someone
+    (probably domob) to review my website PR to allow
+    issue/task-specific Bitcoin donations.</span> <span
+    class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-76'>Jeremy_Rand[m]</a>,
+    19:58:02)</span></li>
+  <li><span class="INFO">On Bountysource we're receiving $15 USD/month
+    from 1 recurring supporter.</span> <span class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-77'>Jeremy_Rand[m]</a>,
+    19:58:58)</span></li>
+  <li><span class="INFO">On Bountysource our available balance is $359
+    USD.</span> <span class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-78'>Jeremy_Rand[m]</a>,
+    19:59:06)</span></li>
+  <li><span class="INFO">NMDF received 0.55 BTC during December.</span>
+    <span class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-79'>Jeremy_Rand[m]</a>,
+    19:59:34)</span></li>
+  <li><span class="INFO">NMDF's BTC balance is 4.58 BTC (some of which
+    is currently allocated to bounties)</span> <span class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-80'>Jeremy_Rand[m]</a>,
+    19:59:50)</span></li>
+  <li><span class="INFO">NMDF received 1 NMC during December.</span>
+    <span class="details">(<a
+    href='namecoin-meeting.2017-01-01-19.02.log.html#l-81'>Jeremy_Rand[m]</a>,
+    20:00:10)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 20:06:15 UTC
+(<a href="namecoin-meeting.2017-01-01-19.02.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>Jeremy_Rand[m] will write up a draft Markdown page for the GSoC ideas page.</li>
+</ol>
+<br><br>
+
+
+
+<h3>Action items, by person</h3>
+<ol>
+  <li> Jeremy_Rand[m] <ol>
+    <li>Jeremy_Rand[m] will write up a draft Markdown page for the GSoC ideas page.</li>
+  </ol></li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand[m] (73)</li>
+  <li>hl (8)</li>
+  <li>pigeons (2)</li>
+  <li>qpm (2)</li>
+  <li>jbisch (1)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

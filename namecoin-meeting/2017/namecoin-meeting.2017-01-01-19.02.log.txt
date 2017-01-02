@@ -1,0 +1,86 @@
+19:02:55 <Jeremy_Rand[m]> #startmeeting
+19:02:55 <qpm> Meeting started Sun Jan  1 19:02:55 2017 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:02:58 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:03:57 <Jeremy_Rand[m]> #meetingtopic Namecoin Development Meeting
+19:04:36 <Jeremy_Rand[m]> Hello everyone, welcome to the first Namecoin development meeting of 2017!
+19:05:04 <Jeremy_Rand[m]> Can we get a roll call of who's here today?
+19:05:38 <Jeremy_Rand[m]> jbisch / midnightmagic / brand0 / hl / jonasbits: are you here today?
+19:05:48 <hl> Jeremy_Rand[m]: Hi.
+19:06:00 <Jeremy_Rand[m]> Hi hl
+19:06:49 <Jeremy_Rand[m]> (I hope hl and I aren't the only ones here again today :) )
+19:07:37 <pigeons> i'm observing :)
+19:09:12 <Jeremy_Rand[m]> Hi pigeons!
+19:10:16 <Jeremy_Rand[m]> I'm aware that meetings on Jan 1 are likely to have lower attendance than usual
+19:10:35 <jbisch> yeah, i'm not here
+19:10:50 <Jeremy_Rand[m]> pigeons: Did Monero have a meeting earlier today?
+19:11:41 <Jeremy_Rand[m]> I've been meaning to attend the Monero meetings but have been overly busy :(
+19:13:20 <pigeons> no its Jan 8
+19:13:32 <Jeremy_Rand[m]> pigeons: ok
+19:13:44 <Jeremy_Rand[m]> Maybe I'll make the next meeting.  Maybe.  I hope.
+19:13:58 <Jeremy_Rand[m]> Anyways
+19:14:08 <Jeremy_Rand[m]> First topic of the meeting is...
+19:14:13 <Jeremy_Rand[m]> #topic Namecoin Core
+19:14:47 <Jeremy_Rand[m]> #link https://github.com/namecoin/namecoin-core/pull/136 fsb4000 Submitted a PR for rebranding the NSIS images.
+19:14:59 <Jeremy_Rand[m]> #help We need someone to review fsb4000's PR for rebranding the NSIS images.
+19:15:28 <Jeremy_Rand[m]> Anyone up for looking at that?
+19:17:28 <Jeremy_Rand[m]> (Given the people who are currently attending this meeting, I suspect there won't be any takers)
+19:19:50 <Jeremy_Rand[m]> #link https://github.com/namecoin/namecoin-core/pull/138 domob submitted a PR for re-enabling getblocktemplate.
+19:19:56 <Jeremy_Rand[m]> #info DrHaribo from BitMinter confirms it's working.
+19:20:34 <Jeremy_Rand[m]> #link https://github.com/namecoin/namecoin-core/pull/117 domob fixed a bug where Namecoin Core assert-crashes when a user tries to broadcast an invalid name transaction.
+19:21:19 <Jeremy_Rand[m]> #info There are 2 miners left who are still mining nVersion=3 blocks.
+19:21:39 <Jeremy_Rand[m]> #info The smaller is Eligius; I've contacted them first so that they don't get kicked off the network when the larger one upgrades.
+19:22:14 <Jeremy_Rand[m]> Any other Namecoin Core things to bring up today?
+19:24:40 <Jeremy_Rand[m]> Okay, moving onto the next topic
+19:24:47 <Jeremy_Rand[m]> #topic SPV
+19:25:08 <Jeremy_Rand[m]> #info ahmed_ is planning to experiment with a Namecoin port of Electrum.
+19:26:41 <Jeremy_Rand[m]> #info I reached out to the author of the ElectrumX server implementation to discuss AuxPoW support
+19:27:14 <Jeremy_Rand[m]> Any other SPV-related topics to discuss before we move on to the next topic?
+19:29:16 <Jeremy_Rand[m]> Okay, moving on...
+19:29:39 <Jeremy_Rand[m]> #topic ncdns
+19:30:12 <Jeremy_Rand[m]> #info hl and I are making significant progress on an ncdns NSIS installer.
+19:30:39 <Jeremy_Rand[m]> The Namecoin Bountysource account is funding hl's work on this.
+19:31:07 <Jeremy_Rand[m]> So huge thanks to the anonymous person who's funding us on Bountysource.  :)
+19:32:20 <Jeremy_Rand[m]> Any other ncdns things that anyone would like to bring up before we move on?
+19:34:53 <Jeremy_Rand[m]> Okay, moving on again
+19:35:02 <Jeremy_Rand[m]> #topic Public Relations
+19:35:44 <Jeremy_Rand[m]> #link https://github.com/namecoin/namecoin.org/pull/86 I submitted a website PR to improve the header layout organization.
+19:36:04 <Jeremy_Rand[m]> #help We need someone to review my website PR to improve the header layout organization.
+19:37:06 <Jeremy_Rand[m]> hl: Since this PR makes things work better when Javascript is disabled, you might enjoy reviewing it.
+19:39:06 <hl> Jeremy_Rand[m]: the noscript tag is generally a bad way to do things. I recommend you add a 'nojs' class to <html>, change the CSS to be conditional on it, and remove that class from <html> with a script tag just before </body>
+19:39:36 <hl> This works in cases where the browser doesn't consider JS to be disabled, but where the JS doesn't work for some reason anyway.
+19:40:45 <Jeremy_Rand[m]> hl: Hmm, isn't there a risk of that causing flickering or something?
+19:40:59 <hl> Possibly. If you don't want that, put the script in <head>.
+19:42:23 <Jeremy_Rand[m]> hl: Hmm.  Last I heard it's recommended not to use inline Javascript and instead use external Javascript resources (due to certain attacks); will an external .js file referenced inside <head> still run before anything in <body> is displayed?
+19:42:42 <hl> Yes.
+19:42:54 <Jeremy_Rand[m]> Interesting.
+19:43:19 <hl> I'm not sure inline JavaScript concerns are relevant for static sites, of course. Mainly that seems like an issue if you want to use CSP, but there doesn't seem much point for static sites.
+19:43:32 <Jeremy_Rand[m]> hl: ok, can you post that suggestion in that GitHub thread and I'll look at fixing it?
+19:43:36 <hl> <script> tags are always blocking unless async="" is set on them, and that's a relatively 'new' feature.
+19:43:38 <hl> OK
+19:43:56 <Jeremy_Rand[m]> thanks
+19:44:45 <Jeremy_Rand[m]> It's definitely less of an issue for static sites, but I figure it can't hurt to have some defense in depth
+19:45:14 <Jeremy_Rand[m]> #link https://github.com/namecoin/namecoin.org/pull/87 Sn0wmonster submitted a website PR to improve tagline placement.
+19:45:42 <Jeremy_Rand[m]> #help We need someone to review Sn0wmonster's website PR to improve tagline placement.
+19:46:12 <Jeremy_Rand[m]> #link https://github.com/namecoin/meta/issues/40 Sn0wmonster suggested adding GitHub notifications over IRC.
+19:46:54 <Jeremy_Rand[m]> We already receive Travis CI notifications in #namecoin-dev, will anyone be annoyed if we add GitHub notifications there?
+19:48:55 <Jeremy_Rand[m]> I will interpret the lack of dissent as agreement.  :)
+19:49:23 <Jeremy_Rand[m]> #link https://namecoin.org/team/ jbisch is now listed on the Team page.
+19:49:54 <Jeremy_Rand[m]> This is kind of long overdue, but better late then never
+19:50:38 <Jeremy_Rand[m]> #help We need to finish up a GSoC mentor organization submission.
+19:52:55 <Jeremy_Rand[m]> (Or, as the market manipulators would claim without evidence, we need to finish up selling control of the Namecoin network to Big Goo so we can make buckets of money and retire to a CIA base)
+19:53:41 <Jeremy_Rand[m]> #action Jeremy_Rand[m] will write up a draft Markdown page for the GSoC ideas page.
+19:54:29 <Jeremy_Rand[m]> #help We need to remove the old Beta Downloads links hosted by brand0.
+19:55:15 <Jeremy_Rand[m]> Any other public relations things before we move on to the next topic?
+19:57:16 <Jeremy_Rand[m]> #topic Funding
+19:57:49 <Jeremy_Rand[m]> #link https://github.com/namecoin/namecoin.org/pull/85 I submitted a website PR to allow issue/task-specific Bitcoin donations.
+19:58:02 <Jeremy_Rand[m]> #help We need someone (probably domob) to review my website PR to allow issue/task-specific Bitcoin donations.
+19:58:58 <Jeremy_Rand[m]> #info On Bountysource we're receiving $15 USD/month from 1 recurring supporter.
+19:59:06 <Jeremy_Rand[m]> #info On Bountysource our available balance is $359 USD.
+19:59:34 <Jeremy_Rand[m]> #info NMDF received 0.55 BTC during December.
+19:59:50 <Jeremy_Rand[m]> #info NMDF's BTC balance is 4.58 BTC (some of which is currently allocated to bounties)
+20:00:10 <Jeremy_Rand[m]> #info NMDF received 1 NMC during December.
+20:00:39 <Jeremy_Rand[m]> Any other funding-related things to bring up today?
+20:02:56 <Jeremy_Rand[m]> Any other topics that anyone would like to bring up before we adjourn the meeting for today?
+20:05:50 <Jeremy_Rand[m]> Okay then.  Relatively quiet meeting, but unsurprising given today's date.
+20:06:00 <Jeremy_Rand[m]> Thanks for being here everyone.
+20:06:15 <Jeremy_Rand[m]> #endmeeting
