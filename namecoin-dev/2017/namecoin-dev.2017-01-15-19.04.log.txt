@@ -1,0 +1,48 @@
+19:04:08 <Jeremy_Rand[m]> #startmeeting
+19:04:08 <qpm> Meeting started Sun Jan 15 19:04:08 2017 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:04:11 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:05:13 <Jeremy_Rand[m]> #meetingtopic Namecoin Development Meeting
+19:05:44 <Jeremy_Rand[m]> Hello everyone, welcome to the meeting
+19:05:57 <Jeremy_Rand[m]> Can we get a roll call of who's here today?
+19:11:01 <Jeremy_Rand[m]> Anyone here today?
+19:12:18 <brand0> yes
+19:12:32 <Jeremy_Rand[m]> Hey brand0
+19:12:57 <jbisch> hi
+19:13:11 <Jeremy_Rand[m]> Hello jbisch
+19:14:25 <Jeremy_Rand[m]> Okay, so this is likely to be a short meeting today
+19:14:44 <Jeremy_Rand[m]> #topic Namecoin Core
+19:15:03 <Jeremy_Rand[m]> #link https://github.com/namecoin/namecoin-core/pull/138 domob re-enabled getblocktemplate.
+19:17:47 <Jeremy_Rand[m]> #info There are still 2 miners left who are mining nVersion=3 blocks.
+19:17:50 <Jeremy_Rand[m]> #action Jeremy_Rand[m] will ping Eligius again to ask them to upgrade.
+19:18:10 <Jeremy_Rand[m]> brand0: What is the status on porting the Qt name tab to the dev branch?
+19:18:28 <Jeremy_Rand[m]> Should we wait until the dev branch is consensus-compatible (i.e. wait for nVersion=4 to activate)?
+19:18:33 <Jeremy_Rand[m]> Or should we port the name tab to dev before that point?
+19:18:52 <brand0> Maybe wait until it's consensus compat
+19:18:59 <brand0> It shouldn't be too hard either way
+19:19:36 <Jeremy_Rand[m]> brand0: ok.  Waiting for nVersion=4 seems reasonable to me.
+19:21:53 <Jeremy_Rand[m]> Any other Namecoin Core related things to bring up?
+19:22:02 <jbisch> no
+19:23:00 <Jeremy_Rand[m]> #topic SPV
+19:23:41 <Jeremy_Rand[m]> #help We need someone to test whether my libdohj name lookup client works properly, and post a test report.
+19:25:07 <brand0> I can probably help with that this afternoon
+19:25:13 <brand0> Where is the repo?
+19:26:11 <Jeremy_Rand[m]> brand0: go to the Beta Downloads page on the Namecoin website; the SPV client is at the bottom (along with a link to instructions)
+19:26:28 <Jeremy_Rand[m]> brand0: Make sure that you test it in leveldbtxcache mode
+19:31:52 <Jeremy_Rand[m]> Any other SPV-related things to bring up?
+19:32:18 <brand0> nope
+19:32:44 <jbisch> no
+19:33:22 <Jeremy_Rand[m]> #action brand0 will look into testing the libdohj client
+19:33:51 <Jeremy_Rand[m]> #topic Public Relations
+19:35:15 <Jeremy_Rand[m]> #info As you've probably heard, we've decided not to apply to GSoC this year, due to our developers being unable to handle the time commitment this year.
+19:35:51 <Jeremy_Rand[m]> #info That said, I think it would still be useful to maintain the Project Ideas List, since it has use cases other than GSoC
+19:36:22 <brand0> Yea that's a good idea for random new people who might be interested in helping but don't know where to start
+19:36:54 <Jeremy_Rand[m]> yeah
+19:38:28 <Jeremy_Rand[m]> any other public relations stuff to bring up?
+19:40:13 <brand0> nope
+19:40:24 <jbisch> no
+19:42:27 <Jeremy_Rand[m]> Okay.  I was doing maintenance on my VM that I usually use to check on funding, so I don't have statistics on Bountysource or NMDF today; I'll have those statistics ready for our next meeting.
+19:43:13 <Jeremy_Rand[m]> Are there any other topics that anyone would like to bring up for today's meeting?
+19:43:48 <jbisch> no
+19:44:16 <brand0> i think w'ere good, i do have a question about the spv wallet (not meeting related)
+19:44:55 <Jeremy_Rand[m]> ok then.  Thanks for being here everyone.
+19:45:04 <Jeremy_Rand[m]> #endmeeting

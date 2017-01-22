@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:04:08</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:04:08</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Jan 15 19:04:08 2017 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:04:11</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:05:13</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#meetingtopic </span><span class="cmdline">Namecoin Development Meeting</span>
+<a name="l-5"></a><span class="tm">19:05:44</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Hello everyone, welcome to the meeting
+<a name="l-6"></a><span class="tm">19:05:57</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Can we get a roll call of who's here today?
+<a name="l-7"></a><span class="tm">19:11:01</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Anyone here today?
+<a name="l-8"></a><span class="tm">19:12:18</span><span class="nk"> &lt;brand0&gt;</span> yes
+<a name="l-9"></a><span class="tm">19:12:32</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Hey brand0
+<a name="l-10"></a><span class="tm">19:12:57</span><span class="nk"> &lt;jbisch&gt;</span> hi
+<a name="l-11"></a><span class="tm">19:13:11</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Hello jbisch
+<a name="l-12"></a><span class="tm">19:14:25</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Okay, so this is likely to be a short meeting today
+<a name="l-13"></a><span class="tm">19:14:44</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Namecoin Core</span>
+<a name="l-14"></a><span class="tm">19:15:03</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/138 domob re-enabled getblocktemplate.</span>
+<a name="l-15"></a><span class="tm">19:17:47</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">There are still 2 miners left who are mining nVersion=3 blocks.</span>
+<a name="l-16"></a><span class="tm">19:17:50</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#action </span><span class="cmdline">Jeremy_Rand[m] will ping Eligius again to ask them to upgrade.</span>
+<a name="l-17"></a><span class="tm">19:18:10</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">brand0:</span> What is the status on porting the Qt name tab to the dev branch?
+<a name="l-18"></a><span class="tm">19:18:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Should we wait until the dev branch is consensus-compatible (i.e. wait for nVersion=4 to activate)?
+<a name="l-19"></a><span class="tm">19:18:33</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Or should we port the name tab to dev before that point?
+<a name="l-20"></a><span class="tm">19:18:52</span><span class="nk"> &lt;brand0&gt;</span> Maybe wait until it's consensus compat
+<a name="l-21"></a><span class="tm">19:18:59</span><span class="nk"> &lt;brand0&gt;</span> It shouldn't be too hard either way
+<a name="l-22"></a><span class="tm">19:19:36</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">brand0:</span> ok.  Waiting for nVersion=4 seems reasonable to me.
+<a name="l-23"></a><span class="tm">19:21:53</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Any other Namecoin Core related things to bring up?
+<a name="l-24"></a><span class="tm">19:22:02</span><span class="nk"> &lt;jbisch&gt;</span> no
+<a name="l-25"></a><span class="tm">19:23:00</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">SPV</span>
+<a name="l-26"></a><span class="tm">19:23:41</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#help </span><span class="cmdline">We need someone to test whether my libdohj name lookup client works properly, and post a test report.</span>
+<a name="l-27"></a><span class="tm">19:25:07</span><span class="nk"> &lt;brand0&gt;</span> I can probably help with that this afternoon
+<a name="l-28"></a><span class="tm">19:25:13</span><span class="nk"> &lt;brand0&gt;</span> Where is the repo?
+<a name="l-29"></a><span class="tm">19:26:11</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">brand0:</span> go to the Beta Downloads page on the Namecoin website; the SPV client is at the bottom (along with a link to instructions)
+<a name="l-30"></a><span class="tm">19:26:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">brand0:</span> Make sure that you test it in leveldbtxcache mode
+<a name="l-31"></a><span class="tm">19:31:52</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Any other SPV-related things to bring up?
+<a name="l-32"></a><span class="tm">19:32:18</span><span class="nk"> &lt;brand0&gt;</span> nope
+<a name="l-33"></a><span class="tm">19:32:44</span><span class="nk"> &lt;jbisch&gt;</span> no
+<a name="l-34"></a><span class="tm">19:33:22</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#action </span><span class="cmdline">brand0 will look into testing the libdohj client</span>
+<a name="l-35"></a><span class="tm">19:33:51</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Public Relations</span>
+<a name="l-36"></a><span class="tm">19:35:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">As you've probably heard, we've decided not to apply to GSoC this year, due to our developers being unable to handle the time commitment this year.</span>
+<a name="l-37"></a><span class="tm">19:35:51</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">That said, I think it would still be useful to maintain the Project Ideas List, since it has use cases other than GSoC</span>
+<a name="l-38"></a><span class="tm">19:36:22</span><span class="nk"> &lt;brand0&gt;</span> Yea that's a good idea for random new people who might be interested in helping but don't know where to start
+<a name="l-39"></a><span class="tm">19:36:54</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> yeah
+<a name="l-40"></a><span class="tm">19:38:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> any other public relations stuff to bring up?
+<a name="l-41"></a><span class="tm">19:40:13</span><span class="nk"> &lt;brand0&gt;</span> nope
+<a name="l-42"></a><span class="tm">19:40:24</span><span class="nk"> &lt;jbisch&gt;</span> no
+<a name="l-43"></a><span class="tm">19:42:27</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Okay.  I was doing maintenance on my VM that I usually use to check on funding, so I don't have statistics on Bountysource or NMDF today; I'll have those statistics ready for our next meeting.
+<a name="l-44"></a><span class="tm">19:43:13</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Are there any other topics that anyone would like to bring up for today's meeting?
+<a name="l-45"></a><span class="tm">19:43:48</span><span class="nk"> &lt;jbisch&gt;</span> no
+<a name="l-46"></a><span class="tm">19:44:16</span><span class="nk"> &lt;brand0&gt;</span> i think w'ere good, i do have a question about the spv wallet (not meeting related)
+<a name="l-47"></a><span class="tm">19:44:55</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok then.  Thanks for being here everyone.
+<a name="l-48"></a><span class="tm">19:45:04</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>
