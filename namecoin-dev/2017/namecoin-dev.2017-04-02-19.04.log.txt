@@ -1,0 +1,153 @@
+19:04:48 <jonasbits> #startmeeting
+19:04:48 <qpm> Meeting started Sun Apr  2 19:04:48 2017 UTC.  The chair is jonasbits. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:04:50 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:05:41 <jonasbits> Can we get a roll call of people here today
+19:05:57 <Jeremy_Rand[m]> I'm here today.
+19:06:08 <GrantEckstein[m]> I'm also here.
+19:06:16 <jonasbits> hi Jeremy, hi Grant
+19:06:29 * Jeremy_Rand[m] waves hello to Grant
+19:06:42 <jonasbits> #meetingtopic Namecoin Development Meeting
+19:09:17 <brand0> here
+19:09:26 <jonasbits> are you guys present ahmed_, hl, squidicuz
+19:09:29 <jonasbits> hi brand0
+19:10:59 <squidicuz> yo
+19:11:05 <jonasbits> hi squidicuz
+19:11:32 <squidicuz> i am around.  on vacation.  but i can hang around for a bits
+19:11:35 <squidicuz> hiya
+19:11:51 <jonasbits> sound good
+19:12:54 <jonasbits> Lets begin with the Version 4 blocks, brand0, Jeremy_Rand[m] any estimate when that is going to lock in?
+19:13:15 <Jeremy_Rand[m]> jonasbits: BIP65 (nVersion=4) has locked in on Namecoin mainnet
+19:13:55 <jonasbits> thats great, correct me if i got this wrong, but now its a go to merge nametab ?!
+19:14:24 <Jeremy_Rand[m]> I checked all the block explorers and found no evidence of any network partitioning issues; mhanne's explorer was stuck but he says it was due to the VM running out of disk space, not a softfork issue (it's fixed now)
+19:15:30 <Jeremy_Rand[m]> jonasbits: My understanding is that brand0 will be submitted a PR for the name tab to the dev branch soon.  brand0, do I understand that correctly?
+19:15:40 <Jeremy_Rand[m]> s/submitted/submitting
+19:15:43 <brand0> I ran into problems with the merge but yes that's the plan
+19:16:01 <Jeremy_Rand[m]> brand0: how big were the problems?
+19:16:03 <jonasbits> thats great news!
+19:16:23 <brand0> some files got reorganized in dev branch that conflicts with the old structure
+19:16:31 <squidicuz> I turned off merge mining on my p2pool nodes due to hdd space issues.  I havent turned it back on yet...  i'll get nmc merged mining up again soon though,  need to pick up a bigger SSD first though
+19:16:46 <Jeremy_Rand[m]> ah.  Yeah, my understanding is that the 0.14 development cycle did a lot of refactoring
+19:16:56 <brand0> so basically the compiler system gets broken after merge, i'm gonna have to go through the dev branch very carefully
+19:16:59 <Jeremy_Rand[m]> (in Bitcoin upstream, I mean)
+19:17:11 <brand0> yea it did
+19:17:54 <Jeremy_Rand[m]> brand0: ok.  Feel free to ask Daniel for help if you need it -- I'm sure he's aware of most of the refactoring that's been done.
+19:18:21 <Jeremy_Rand[m]> Although I doubt Daniel has looked at the Qt-specific refactors
+19:19:41 <jonasbits> I could help build and test for macOS if that is needed
+19:20:03 <brand0> i'm not too worried about that stuff, i think it's the autotools chain that i'm breaking somehow
+19:20:38 <Jeremy_Rand[m]> jonasbits: yeah, macOS building/testing would be great.  Last I checked the dev branch doesn't yet have your Gitian descriptor patch?
+19:20:58 <jonasbits> its mostly renaming bitcoin to namecoin
+19:21:08 <Jeremy_Rand[m]> yeah that
+19:21:36 <Jeremy_Rand[m]> should be easy to cherrypick that commit and apply it to the dev branch -- any volunteers for submitting a PR of that?
+19:21:44 <jonasbits> So when nametab is merged, is there going to be an official version number?
+19:22:24 <Jeremy_Rand[m]> jonasbits: Once it's merged to dev, probably would make sense to backport it to the 0.14 branch, and include it in the nc0.14.0 release
+19:22:55 <jonasbits> cool
+19:24:57 <jonasbits> #action jonasbits will cherrypick macOS gitian descriptor for dev branch
+19:25:17 <Jeremy_Rand[m]> btw, looking at the bigger picture, now that BIP65 is activated and the dev branch will imminently replace the master branch, that means the next consensus fork will presumably be the AAA hardfork
+19:26:40 <jonasbits> https://github.com/namecoin/namecoin-core/pull/75
+19:27:35 <Jeremy_Rand[m]> Yep.. I'm guessing Daniel will need to rebase that PR a bit, but yeah, soon we'll get to start torture-testing that PR
+19:28:05 <Jeremy_Rand[m]> I'm probably going to ask some mining pools to merge-mine testnet with AAA enabled to make sure that nothing blows up
+19:28:07 <jonasbits> was this related to testnet2 for namecoin?
+19:28:53 <Jeremy_Rand[m]> jonasbits: yep.  We'll need to reset testnet, and then enable AAA on testnet and let some mining pools run that for a while.  That means testnet2 will need to have a different chain ID than mainnet
+19:29:26 <jonasbits> interesting!
+19:30:32 <Jeremy_Rand[m]> I'm guessing that F2Pool will probably be happy to help us with that.  Not sure who else will -- I'll ask all the mining pools and hopefully a sufficient number will say yes
+19:30:57 <Jeremy_Rand[m]> BitMinter is also likely to say yes I think -- they've been really responsive and helpful in the past
+19:32:08 <squidicuz> i can help with that. I have plenty of miners and system space avaiable (minus SDD drives), but i could spin up some things to help out there
+19:32:41 <Jeremy_Rand[m]> squidicuz: cool.  You mine with P2Pool if I recall correctly?
+19:32:43 <squidicuz> yup
+19:32:46 <jonasbits> #action squidicuz will help with testing AAA on testnet
+19:33:13 <Jeremy_Rand[m]> squidicuz: awesome -- yeah, it's important for us to make sure that P2Pool doesn't break with AAA
+19:33:37 <squidicuz> yup.  with the auxwork and all... speaking of that,  any progress on that auxwork changes?
+19:34:10 <Jeremy_Rand[m]> squidicuz: are you referring to the changes that would enable a Namecoin sharechain?
+19:34:17 <squidicuz> a sharechain would be nice for nmc, like btc has on p2pool.  if i can recall correctly, it is possibly, but requires changes
+19:34:20 <squidicuz> yes
+19:34:49 <jonasbits> interesting!
+19:34:52 <squidicuz> there is some code and ideas floating around for implementing it.  but requires auxwork changes to namecoin
+19:35:06 <squidicuz> i think we where waiting on hardend specs from bitcoin
+19:35:20 <Jeremy_Rand[m]> squidicuz: the 2 proposals on the table for that each have issues.  P2Pool's proposal uses hash midstate proofs, and we're not comfortable with the cryptographic implications of that; Luke-Jr's proposal doesn't have that issue but requires a hardfork in Bitcoin (which isn't happening anytime soon)
+19:35:45 <Jeremy_Rand[m]> So, it might happen in the future, but AFAIK no one's working on it right now
+19:35:47 <squidicuz> aah, yes. what i keep running into :D
+19:35:50 <Jeremy_Rand[m]> :(
+19:36:05 <squidicuz> ill keep it in mind though
+19:36:24 <jonasbits> anything more in the mining department?
+19:36:42 <Jeremy_Rand[m]> nothing there from me
+19:36:57 <squidicuz> which version is safe to mine on now, so i may note it for when i fix my minnig nodes.  i see latest isn't?
+19:37:23 <squidicuz> (latest on the site that is)
+19:37:45 <Jeremy_Rand[m]> (btw, I think Grant Eckstein is waiting to introduce himself -- maybe we could have that be the next topic after mining?)
+19:38:03 <squidicuz> :)
+19:38:06 <Jeremy_Rand[m]> squidicuz: I think the Downloads page on the website lists a version that's safe to mine with (at the bottom of the page), but binaries aren't available for it
+19:38:16 * squidicuz checks
+19:38:26 <Jeremy_Rand[m]> so if you can build that tag from source, you should be fine
+19:38:40 <squidicuz> oh, i see it. ha. thnaks
+19:38:47 <squidicuz> cool
+19:38:52 <Jeremy_Rand[m]> cool
+19:39:11 <jonasbits> Yes please tell us everything GrantEckstein[m] :-)
+19:40:15 <GrantEckstein[m]> Well, hello, I am a friend of Jeremy's. He invited me here to see if I can help with anything.
+19:41:03 <jonasbits> Welcome Grant!
+19:41:06 <squidicuz> greetings! :)
+19:41:16 <GrantEckstein[m]> Thank you!
+19:42:02 <Jeremy_Rand[m]> Grant Eckstein was one of the top students on a robotics team I mentored a few years ago; he's interested in practical crypto/security
+19:42:14 <jonasbits> Beginners mind is always good, do you have something you want to talk about?
+19:42:25 <squidicuz> nice!  I love robotics.
+19:42:57 <squidicuz> I am fairly skilled in hardware designs/circuits and low level systems, myself
+19:43:26 <GrantEckstein[m]> I really do not have any topic in mind, I am trying to learn as much as possible.
+19:43:34 <GrantEckstein[m]> And contribute if needed
+19:44:04 <ahmed_> Sorry I was eating
+19:44:06 * Jeremy_Rand[m] is digging up a list of possible topics/categories to see what Grant might find most interesting
+19:44:34 <jonasbits> That sound great, there is a lot to do, take your pick :-)
+19:45:03 <squidicuz> oh. On that note... I am working on a Raspberry Pi HAT, that would supplement crypto currenices, targeting btc and nmc first.  it could be useful for those who run nodes off a raspi, or a secure wallet.
+19:45:20 <ahmed_> Hat?
+19:45:36 <squidicuz> addon board/module
+19:45:44 <squidicuz> Pi foundation has a standard they call HAT.
+19:45:49 <ahmed_> Ohhhh
+19:45:52 <ahmed_> Yeah I remember
+19:46:36 <jonasbits> welcome ahmed!
+19:46:38 <Jeremy_Rand[m]> list of topics from the Software Studio flier I distributed last fall: Python, C++, Go, Javascript, PHP, Qt GUI's, PyQt GUI's, usability testing, documentation, packaging for any OS, browser extensions, Android apps, DNS, TLS, Bitcoin, Tor (and similar), AppArmor (and similar), basic applied cryptography, unit/integration testing, static analysis
+19:46:52 <ahmed_> Sounds awesome. Need to setup a home node myself instead of using a vps, might buy one off you when your ready :)
+19:46:57 <squidicuz> ya. they're pretty nifty.  still playing with it, but ya.  if anyone with hardware skills wants to touch base with me on that, could be a fun project.  but not priority
+19:46:59 <Jeremy_Rand[m]> Grant Eckstein: any of those sound interesting?
+19:47:02 <squidicuz> sweet!
+19:47:04 <ahmed_> Hey jonasbits
+19:47:30 <GrantEckstein[m]> Sure, TLS seems fun.
+19:47:33 <Jeremy_Rand[m]> (and feel free to ask for more details on any of those)
+19:47:44 <GrantEckstein[m]> Sure, I'll email you later
+19:48:49 <jonasbits> i will be running a rpi3 with namecoin testnet, we need more testnet nodes
+19:49:20 <Jeremy_Rand[m]> Grant Eckstein: ok cool.  We definitely have a bunch of TLS-related stuff that would benefit from another person working on it.  Would you like to discuss further now or wait till after the meeting finishes?
+19:49:59 <GrantEckstein[m]> lets wait until after the meeting.
+19:50:06 <Jeremy_Rand[m]> Grant Eckstein: ok
+19:50:19 <squidicuz> I can setup a testnet node when i get back home.  I have just a full node running on mainnet currently, and my mining node is down.
+19:51:44 <jonasbits> that would be great squidicuz, #action jonasbits and squidicuz will run more testnet nodes
+19:52:05 <squidicuz> I built a datacenter in my basement.  if we need more nodes, that is fairly easy to bring online :)
+19:52:13 <jonasbits> nice
+19:52:32 <jonasbits> next #topic ncdns
+19:52:35 * Jeremy_Rand[m] needs to set up a datacenter in my basement, once I set up a basement
+19:53:11 <Jeremy_Rand[m]> jonasbits: btw I have no idea whether MeetBot allows the commands to occur in the middle of a message, they might need to be at the beginning of a message
+19:53:24 <squidicuz> hehe
+19:53:26 <jonasbits> good to know
+19:53:29 <jonasbits> learning by doing
+19:53:48 <Jeremy_Rand[m]> best way to learn :)
+19:54:17 <jonasbits> i here a lot of interesting chatter on ncdns, what are you guys doing hl, Jeremy_Rand[m]
+19:55:00 <Jeremy_Rand[m]> jonasbits: yeah, so hl is working on an NSIS installer to magically set up ncdns (with my TLS support) on Windows
+19:56:33 <Jeremy_Rand[m]> Lots of cool stuff there, most recently we're debugging some interesting issues where Unbound seems to be rejecting the DNSSEC sigs from ncdns.
+19:56:35 <Jeremy_Rand[m]> Once we've got that figured out, it'll be almost ready for release I think.  (Well, besides the TLS support I'm working on, which still needs to be reviewed by other people.)
+19:57:09 <jonasbits> cool
+19:57:15 <Jeremy_Rand[m]> This particular work is funded by Namecoin's Bountysource account
+19:57:43 <Jeremy_Rand[m]> So if anyone's wondering where the money goes when you donate to us on Bountysource, here's your answer.
+19:57:48 <Jeremy_Rand[m]> :)
+19:58:13 <jonasbits> Anything new about libdohj?
+19:58:53 <squidicuz> oh cool.  thats where those donations went ;)
+19:59:38 <Jeremy_Rand[m]> jonasbits: Ross Nicoll from Dogecoin finally merged my security fix from last year.  Which means we'll be able to remove the warning that tells people not to use a particular non-default mode of the SPV client.
+19:59:53 <jonasbits> cool
+20:00:04 <Jeremy_Rand[m]> Other than that, not much new with libdohj.  I noticed that Ross appears to now be employed by R3.
+20:00:59 <jonasbits> ahmed_: anything you want to bring up today?
+20:02:00 <brand0> i need to leave
+20:02:06 <brand0> sorry to leave early
+20:02:16 <Jeremy_Rand[m]> brand0: no worries
+20:02:18 <jonasbits> thanks for atending brand0
+20:02:53 <jonasbits> squidicuz: anything you want to bring to our attention?
+20:03:20 <squidicuz> not that i can think of at the moment
+20:03:33 <squidicuz> just what i said aboves
+20:03:49 <jonasbits> thanks squidicuz
+20:04:19 <jonasbits> I think that is a wrap, stop me if you want to talk
+20:04:38 <Jeremy_Rand[m]> Nothing else from me today
+20:04:48 <squidicuz> im good.  thanks everyone
+20:04:53 <jonasbits> #endmeeting

@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:04:48</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:04:48</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Apr  2 19:04:48 2017 UTC.  The chair is jonasbits. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:04:50</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:05:41</span><span class="nk"> &lt;jonasbits&gt;</span> Can we get a roll call of people here today
+<a name="l-5"></a><span class="tm">19:05:57</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I'm here today.
+<a name="l-6"></a><span class="tm">19:06:08</span><span class="nk"> &lt;GrantEckstein[m]&gt;</span> I'm also here.
+<a name="l-7"></a><span class="tm">19:06:16</span><span class="nk"> &lt;jonasbits&gt;</span> hi Jeremy, hi Grant
+<a name="l-8"></a><span class="tm">19:06:29 </span><span class="nka">* Jeremy_Rand[m]</span> <span class="ac">waves hello to Grant</span>
+<a name="l-9"></a><span class="tm">19:06:42</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#meetingtopic </span><span class="cmdline">Namecoin Development Meeting</span>
+<a name="l-10"></a><span class="tm">19:09:17</span><span class="nk"> &lt;brand0&gt;</span> here
+<a name="l-11"></a><span class="tm">19:09:26</span><span class="nk"> &lt;jonasbits&gt;</span> are you guys present ahmed_, hl, squidicuz
+<a name="l-12"></a><span class="tm">19:09:29</span><span class="nk"> &lt;jonasbits&gt;</span> hi brand0
+<a name="l-13"></a><span class="tm">19:10:59</span><span class="nk"> &lt;squidicuz&gt;</span> yo
+<a name="l-14"></a><span class="tm">19:11:05</span><span class="nk"> &lt;jonasbits&gt;</span> hi squidicuz
+<a name="l-15"></a><span class="tm">19:11:32</span><span class="nk"> &lt;squidicuz&gt;</span> i am around.  on vacation.  but i can hang around for a bits
+<a name="l-16"></a><span class="tm">19:11:35</span><span class="nk"> &lt;squidicuz&gt;</span> hiya
+<a name="l-17"></a><span class="tm">19:11:51</span><span class="nk"> &lt;jonasbits&gt;</span> sound good
+<a name="l-18"></a><span class="tm">19:12:54</span><span class="nk"> &lt;jonasbits&gt;</span> Lets begin with the Version 4 blocks, brand0, Jeremy_Rand[m] any estimate when that is going to lock in?
+<a name="l-19"></a><span class="tm">19:13:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> BIP65 (nVersion=4) has locked in on Namecoin mainnet
+<a name="l-20"></a><span class="tm">19:13:55</span><span class="nk"> &lt;jonasbits&gt;</span> thats great, correct me if i got this wrong, but now its a go to merge nametab ?!
+<a name="l-21"></a><span class="tm">19:14:24</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I checked all the block explorers and found no evidence of any network partitioning issues; mhanne's explorer was stuck but he says it was due to the VM running out of disk space, not a softfork issue (it's fixed now)
+<a name="l-22"></a><span class="tm">19:15:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> My understanding is that brand0 will be submitted a PR for the name tab to the dev branch soon.  brand0, do I understand that correctly?
+<a name="l-23"></a><span class="tm">19:15:40</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> s/submitted/submitting
+<a name="l-24"></a><span class="tm">19:15:43</span><span class="nk"> &lt;brand0&gt;</span> I ran into problems with the merge but yes that's the plan
+<a name="l-25"></a><span class="tm">19:16:01</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">brand0:</span> how big were the problems?
+<a name="l-26"></a><span class="tm">19:16:03</span><span class="nk"> &lt;jonasbits&gt;</span> thats great news!
+<a name="l-27"></a><span class="tm">19:16:23</span><span class="nk"> &lt;brand0&gt;</span> some files got reorganized in dev branch that conflicts with the old structure
+<a name="l-28"></a><span class="tm">19:16:31</span><span class="nk"> &lt;squidicuz&gt;</span> I turned off merge mining on my p2pool nodes due to hdd space issues.  I havent turned it back on yet...  i'll get nmc merged mining up again soon though,  need to pick up a bigger SSD first though
+<a name="l-29"></a><span class="tm">19:16:46</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ah.  Yeah, my understanding is that the 0.14 development cycle did a lot of refactoring
+<a name="l-30"></a><span class="tm">19:16:56</span><span class="nk"> &lt;brand0&gt;</span> so basically the compiler system gets broken after merge, i'm gonna have to go through the dev branch very carefully
+<a name="l-31"></a><span class="tm">19:16:59</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (in Bitcoin upstream, I mean)
+<a name="l-32"></a><span class="tm">19:17:11</span><span class="nk"> &lt;brand0&gt;</span> yea it did
+<a name="l-33"></a><span class="tm">19:17:54</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">brand0:</span> ok.  Feel free to ask Daniel for help if you need it -- I'm sure he's aware of most of the refactoring that's been done.
+<a name="l-34"></a><span class="tm">19:18:21</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Although I doubt Daniel has looked at the Qt-specific refactors
+<a name="l-35"></a><span class="tm">19:19:41</span><span class="nk"> &lt;jonasbits&gt;</span> I could help build and test for macOS if that is needed
+<a name="l-36"></a><span class="tm">19:20:03</span><span class="nk"> &lt;brand0&gt;</span> i'm not too worried about that stuff, i think it's the autotools chain that i'm breaking somehow
+<a name="l-37"></a><span class="tm">19:20:38</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> yeah, macOS building/testing would be great.  Last I checked the dev branch doesn't yet have your Gitian descriptor patch?
+<a name="l-38"></a><span class="tm">19:20:58</span><span class="nk"> &lt;jonasbits&gt;</span> its mostly renaming bitcoin to namecoin
+<a name="l-39"></a><span class="tm">19:21:08</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> yeah that
+<a name="l-40"></a><span class="tm">19:21:36</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> should be easy to cherrypick that commit and apply it to the dev branch -- any volunteers for submitting a PR of that?
+<a name="l-41"></a><span class="tm">19:21:44</span><span class="nk"> &lt;jonasbits&gt;</span> So when nametab is merged, is there going to be an official version number?
+<a name="l-42"></a><span class="tm">19:22:24</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> Once it's merged to dev, probably would make sense to backport it to the 0.14 branch, and include it in the nc0.14.0 release
+<a name="l-43"></a><span class="tm">19:22:55</span><span class="nk"> &lt;jonasbits&gt;</span> cool
+<a name="l-44"></a><span class="tm">19:24:57</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#action </span><span class="cmdline">jonasbits will cherrypick macOS gitian descriptor for dev branch</span>
+<a name="l-45"></a><span class="tm">19:25:17</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> btw, looking at the bigger picture, now that BIP65 is activated and the dev branch will imminently replace the master branch, that means the next consensus fork will presumably be the AAA hardfork
+<a name="l-46"></a><span class="tm">19:26:40</span><span class="nk"> &lt;jonasbits&gt;</span> https://github.com/namecoin/namecoin-core/pull/75
+<a name="l-47"></a><span class="tm">19:27:35</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Yep.. I'm guessing Daniel will need to rebase that PR a bit, but yeah, soon we'll get to start torture-testing that PR
+<a name="l-48"></a><span class="tm">19:28:05</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I'm probably going to ask some mining pools to merge-mine testnet with AAA enabled to make sure that nothing blows up
+<a name="l-49"></a><span class="tm">19:28:07</span><span class="nk"> &lt;jonasbits&gt;</span> was this related to testnet2 for namecoin?
+<a name="l-50"></a><span class="tm">19:28:53</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> yep.  We'll need to reset testnet, and then enable AAA on testnet and let some mining pools run that for a while.  That means testnet2 will need to have a different chain ID than mainnet
+<a name="l-51"></a><span class="tm">19:29:26</span><span class="nk"> &lt;jonasbits&gt;</span> interesting!
+<a name="l-52"></a><span class="tm">19:30:32</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I'm guessing that F2Pool will probably be happy to help us with that.  Not sure who else will -- I'll ask all the mining pools and hopefully a sufficient number will say yes
+<a name="l-53"></a><span class="tm">19:30:57</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> BitMinter is also likely to say yes I think -- they've been really responsive and helpful in the past
+<a name="l-54"></a><span class="tm">19:32:08</span><span class="nk"> &lt;squidicuz&gt;</span> i can help with that. I have plenty of miners and system space avaiable (minus SDD drives), but i could spin up some things to help out there
+<a name="l-55"></a><span class="tm">19:32:41</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">squidicuz:</span> cool.  You mine with P2Pool if I recall correctly?
+<a name="l-56"></a><span class="tm">19:32:43</span><span class="nk"> &lt;squidicuz&gt;</span> yup
+<a name="l-57"></a><span class="tm">19:32:46</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#action </span><span class="cmdline">squidicuz will help with testing AAA on testnet</span>
+<a name="l-58"></a><span class="tm">19:33:13</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">squidicuz:</span> awesome -- yeah, it's important for us to make sure that P2Pool doesn't break with AAA
+<a name="l-59"></a><span class="tm">19:33:37</span><span class="nk"> &lt;squidicuz&gt;</span> yup.  with the auxwork and all... speaking of that,  any progress on that auxwork changes?
+<a name="l-60"></a><span class="tm">19:34:10</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">squidicuz:</span> are you referring to the changes that would enable a Namecoin sharechain?
+<a name="l-61"></a><span class="tm">19:34:17</span><span class="nk"> &lt;squidicuz&gt;</span> a sharechain would be nice for nmc, like btc has on p2pool.  if i can recall correctly, it is possibly, but requires changes
+<a name="l-62"></a><span class="tm">19:34:20</span><span class="nk"> &lt;squidicuz&gt;</span> yes
+<a name="l-63"></a><span class="tm">19:34:49</span><span class="nk"> &lt;jonasbits&gt;</span> interesting!
+<a name="l-64"></a><span class="tm">19:34:52</span><span class="nk"> &lt;squidicuz&gt;</span> there is some code and ideas floating around for implementing it.  but requires auxwork changes to namecoin
+<a name="l-65"></a><span class="tm">19:35:06</span><span class="nk"> &lt;squidicuz&gt;</span> i think we where waiting on hardend specs from bitcoin
+<a name="l-66"></a><span class="tm">19:35:20</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">squidicuz:</span> the 2 proposals on the table for that each have issues.  P2Pool's proposal uses hash midstate proofs, and we're not comfortable with the cryptographic implications of that; Luke-Jr's proposal doesn't have that issue but requires a hardfork in Bitcoin (which isn't happening anytime soon)
+<a name="l-67"></a><span class="tm">19:35:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> So, it might happen in the future, but AFAIK no one's working on it right now
+<a name="l-68"></a><span class="tm">19:35:47</span><span class="nk"> &lt;squidicuz&gt;</span> aah, yes. what i keep running into :D
+<a name="l-69"></a><span class="tm">19:35:50</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> :(
+<a name="l-70"></a><span class="tm">19:36:05</span><span class="nk"> &lt;squidicuz&gt;</span> ill keep it in mind though
+<a name="l-71"></a><span class="tm">19:36:24</span><span class="nk"> &lt;jonasbits&gt;</span> anything more in the mining department?
+<a name="l-72"></a><span class="tm">19:36:42</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> nothing there from me
+<a name="l-73"></a><span class="tm">19:36:57</span><span class="nk"> &lt;squidicuz&gt;</span> which version is safe to mine on now, so i may note it for when i fix my minnig nodes.  i see latest isn't?
+<a name="l-74"></a><span class="tm">19:37:23</span><span class="nk"> &lt;squidicuz&gt;</span> (latest on the site that is)
+<a name="l-75"></a><span class="tm">19:37:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (btw, I think Grant Eckstein is waiting to introduce himself -- maybe we could have that be the next topic after mining?)
+<a name="l-76"></a><span class="tm">19:38:03</span><span class="nk"> &lt;squidicuz&gt;</span> :)
+<a name="l-77"></a><span class="tm">19:38:06</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">squidicuz:</span> I think the Downloads page on the website lists a version that's safe to mine with (at the bottom of the page), but binaries aren't available for it
+<a name="l-78"></a><span class="tm">19:38:16 </span><span class="nka">* squidicuz</span> <span class="ac">checks</span>
+<a name="l-79"></a><span class="tm">19:38:26</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> so if you can build that tag from source, you should be fine
+<a name="l-80"></a><span class="tm">19:38:40</span><span class="nk"> &lt;squidicuz&gt;</span> oh, i see it. ha. thnaks
+<a name="l-81"></a><span class="tm">19:38:47</span><span class="nk"> &lt;squidicuz&gt;</span> cool
+<a name="l-82"></a><span class="tm">19:38:52</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> cool
+<a name="l-83"></a><span class="tm">19:39:11</span><span class="nk"> &lt;jonasbits&gt;</span> Yes please tell us everything GrantEckstein[m] :-)
+<a name="l-84"></a><span class="tm">19:40:15</span><span class="nk"> &lt;GrantEckstein[m]&gt;</span> Well, hello, I am a friend of Jeremy's. He invited me here to see if I can help with anything.
+<a name="l-85"></a><span class="tm">19:41:03</span><span class="nk"> &lt;jonasbits&gt;</span> Welcome Grant!
+<a name="l-86"></a><span class="tm">19:41:06</span><span class="nk"> &lt;squidicuz&gt;</span> greetings! :)
+<a name="l-87"></a><span class="tm">19:41:16</span><span class="nk"> &lt;GrantEckstein[m]&gt;</span> Thank you!
+<a name="l-88"></a><span class="tm">19:42:02</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Grant Eckstein was one of the top students on a robotics team I mentored a few years ago; he's interested in practical crypto/security
+<a name="l-89"></a><span class="tm">19:42:14</span><span class="nk"> &lt;jonasbits&gt;</span> Beginners mind is always good, do you have something you want to talk about?
+<a name="l-90"></a><span class="tm">19:42:25</span><span class="nk"> &lt;squidicuz&gt;</span> nice!  I love robotics.
+<a name="l-91"></a><span class="tm">19:42:57</span><span class="nk"> &lt;squidicuz&gt;</span> I am fairly skilled in hardware designs/circuits and low level systems, myself
+<a name="l-92"></a><span class="tm">19:43:26</span><span class="nk"> &lt;GrantEckstein[m]&gt;</span> I really do not have any topic in mind, I am trying to learn as much as possible.
+<a name="l-93"></a><span class="tm">19:43:34</span><span class="nk"> &lt;GrantEckstein[m]&gt;</span> And contribute if needed
+<a name="l-94"></a><span class="tm">19:44:04</span><span class="nk"> &lt;ahmed_&gt;</span> Sorry I was eating
+<a name="l-95"></a><span class="tm">19:44:06 </span><span class="nka">* Jeremy_Rand[m]</span> <span class="ac">is digging up a list of possible topics/categories to see what Grant might find most interesting</span>
+<a name="l-96"></a><span class="tm">19:44:34</span><span class="nk"> &lt;jonasbits&gt;</span> That sound great, there is a lot to do, take your pick :-)
+<a name="l-97"></a><span class="tm">19:45:03</span><span class="nk"> &lt;squidicuz&gt;</span> oh. On that note... I am working on a Raspberry Pi HAT, that would supplement crypto currenices, targeting btc and nmc first.  it could be useful for those who run nodes off a raspi, or a secure wallet.
+<a name="l-98"></a><span class="tm">19:45:20</span><span class="nk"> &lt;ahmed_&gt;</span> Hat?
+<a name="l-99"></a><span class="tm">19:45:36</span><span class="nk"> &lt;squidicuz&gt;</span> addon board/module
+<a name="l-100"></a><span class="tm">19:45:44</span><span class="nk"> &lt;squidicuz&gt;</span> Pi foundation has a standard they call HAT.
+<a name="l-101"></a><span class="tm">19:45:49</span><span class="nk"> &lt;ahmed_&gt;</span> Ohhhh
+<a name="l-102"></a><span class="tm">19:45:52</span><span class="nk"> &lt;ahmed_&gt;</span> Yeah I remember
+<a name="l-103"></a><span class="tm">19:46:36</span><span class="nk"> &lt;jonasbits&gt;</span> welcome ahmed!
+<a name="l-104"></a><span class="tm">19:46:38</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> list of topics from the Software Studio flier I distributed last fall: Python, C++, Go, Javascript, PHP, Qt GUI's, PyQt GUI's, usability testing, documentation, packaging for any OS, browser extensions, Android apps, DNS, TLS, Bitcoin, Tor (and similar), AppArmor (and similar), basic applied cryptography, unit/integration testing, static analysis
+<a name="l-105"></a><span class="tm">19:46:52</span><span class="nk"> &lt;ahmed_&gt;</span> Sounds awesome. Need to setup a home node myself instead of using a vps, might buy one off you when your ready :)
+<a name="l-106"></a><span class="tm">19:46:57</span><span class="nk"> &lt;squidicuz&gt;</span> ya. they're pretty nifty.  still playing with it, but ya.  if anyone with hardware skills wants to touch base with me on that, could be a fun project.  but not priority
+<a name="l-107"></a><span class="tm">19:46:59</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Grant Eckstein: any of those sound interesting?
+<a name="l-108"></a><span class="tm">19:47:02</span><span class="nk"> &lt;squidicuz&gt;</span> sweet!
+<a name="l-109"></a><span class="tm">19:47:04</span><span class="nk"> &lt;ahmed_&gt;</span> Hey jonasbits
+<a name="l-110"></a><span class="tm">19:47:30</span><span class="nk"> &lt;GrantEckstein[m]&gt;</span> Sure, TLS seems fun.
+<a name="l-111"></a><span class="tm">19:47:33</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (and feel free to ask for more details on any of those)
+<a name="l-112"></a><span class="tm">19:47:44</span><span class="nk"> &lt;GrantEckstein[m]&gt;</span> Sure, I'll email you later
+<a name="l-113"></a><span class="tm">19:48:49</span><span class="nk"> &lt;jonasbits&gt;</span> i will be running a rpi3 with namecoin testnet, we need more testnet nodes
+<a name="l-114"></a><span class="tm">19:49:20</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Grant Eckstein: ok cool.  We definitely have a bunch of TLS-related stuff that would benefit from another person working on it.  Would you like to discuss further now or wait till after the meeting finishes?
+<a name="l-115"></a><span class="tm">19:49:59</span><span class="nk"> &lt;GrantEckstein[m]&gt;</span> lets wait until after the meeting.
+<a name="l-116"></a><span class="tm">19:50:06</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Grant Eckstein: ok
+<a name="l-117"></a><span class="tm">19:50:19</span><span class="nk"> &lt;squidicuz&gt;</span> I can setup a testnet node when i get back home.  I have just a full node running on mainnet currently, and my mining node is down.
+<a name="l-118"></a><span class="tm">19:51:44</span><span class="nk"> &lt;jonasbits&gt;</span> that would be great squidicuz, #action jonasbits and squidicuz will run more testnet nodes
+<a name="l-119"></a><span class="tm">19:52:05</span><span class="nk"> &lt;squidicuz&gt;</span> I built a datacenter in my basement.  if we need more nodes, that is fairly easy to bring online :)
+<a name="l-120"></a><span class="tm">19:52:13</span><span class="nk"> &lt;jonasbits&gt;</span> nice
+<a name="l-121"></a><span class="tm">19:52:32</span><span class="nk"> &lt;jonasbits&gt;</span> next #topic ncdns
+<a name="l-122"></a><span class="tm">19:52:35 </span><span class="nka">* Jeremy_Rand[m]</span> <span class="ac">needs to set up a datacenter in my basement, once I set up a basement</span>
+<a name="l-123"></a><span class="tm">19:53:11</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> btw I have no idea whether MeetBot allows the commands to occur in the middle of a message, they might need to be at the beginning of a message
+<a name="l-124"></a><span class="tm">19:53:24</span><span class="nk"> &lt;squidicuz&gt;</span> hehe
+<a name="l-125"></a><span class="tm">19:53:26</span><span class="nk"> &lt;jonasbits&gt;</span> good to know
+<a name="l-126"></a><span class="tm">19:53:29</span><span class="nk"> &lt;jonasbits&gt;</span> learning by doing
+<a name="l-127"></a><span class="tm">19:53:48</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> best way to learn :)
+<a name="l-128"></a><span class="tm">19:54:17</span><span class="nk"> &lt;jonasbits&gt;</span> i here a lot of interesting chatter on ncdns, what are you guys doing hl, Jeremy_Rand[m]
+<a name="l-129"></a><span class="tm">19:55:00</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> yeah, so hl is working on an NSIS installer to magically set up ncdns (with my TLS support) on Windows
+<a name="l-130"></a><span class="tm">19:56:33</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Lots of cool stuff there, most recently we're debugging some interesting issues where Unbound seems to be rejecting the DNSSEC sigs from ncdns.
+<a name="l-131"></a><span class="tm">19:56:35</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Once we've got that figured out, it'll be almost ready for release I think.  (Well, besides the TLS support I'm working on, which still needs to be reviewed by other people.)
+<a name="l-132"></a><span class="tm">19:57:09</span><span class="nk"> &lt;jonasbits&gt;</span> cool
+<a name="l-133"></a><span class="tm">19:57:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> This particular work is funded by Namecoin's Bountysource account
+<a name="l-134"></a><span class="tm">19:57:43</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> So if anyone's wondering where the money goes when you donate to us on Bountysource, here's your answer.
+<a name="l-135"></a><span class="tm">19:57:48</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> :)
+<a name="l-136"></a><span class="tm">19:58:13</span><span class="nk"> &lt;jonasbits&gt;</span> Anything new about libdohj?
+<a name="l-137"></a><span class="tm">19:58:53</span><span class="nk"> &lt;squidicuz&gt;</span> oh cool.  thats where those donations went ;)
+<a name="l-138"></a><span class="tm">19:59:38</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> Ross Nicoll from Dogecoin finally merged my security fix from last year.  Which means we'll be able to remove the warning that tells people not to use a particular non-default mode of the SPV client.
+<a name="l-139"></a><span class="tm">19:59:53</span><span class="nk"> &lt;jonasbits&gt;</span> cool
+<a name="l-140"></a><span class="tm">20:00:04</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Other than that, not much new with libdohj.  I noticed that Ross appears to now be employed by R3.
+<a name="l-141"></a><span class="tm">20:00:59</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="hi">ahmed_:</span> anything you want to bring up today?
+<a name="l-142"></a><span class="tm">20:02:00</span><span class="nk"> &lt;brand0&gt;</span> i need to leave
+<a name="l-143"></a><span class="tm">20:02:06</span><span class="nk"> &lt;brand0&gt;</span> sorry to leave early
+<a name="l-144"></a><span class="tm">20:02:16</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">brand0:</span> no worries
+<a name="l-145"></a><span class="tm">20:02:18</span><span class="nk"> &lt;jonasbits&gt;</span> thanks for atending brand0
+<a name="l-146"></a><span class="tm">20:02:53</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="hi">squidicuz:</span> anything you want to bring to our attention?
+<a name="l-147"></a><span class="tm">20:03:20</span><span class="nk"> &lt;squidicuz&gt;</span> not that i can think of at the moment
+<a name="l-148"></a><span class="tm">20:03:33</span><span class="nk"> &lt;squidicuz&gt;</span> just what i said aboves
+<a name="l-149"></a><span class="tm">20:03:49</span><span class="nk"> &lt;jonasbits&gt;</span> thanks squidicuz
+<a name="l-150"></a><span class="tm">20:04:19</span><span class="nk"> &lt;jonasbits&gt;</span> I think that is a wrap, stop me if you want to talk
+<a name="l-151"></a><span class="tm">20:04:38</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Nothing else from me today
+<a name="l-152"></a><span class="tm">20:04:48</span><span class="nk"> &lt;squidicuz&gt;</span> im good.  thanks everyone
+<a name="l-153"></a><span class="tm">20:04:53</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>
