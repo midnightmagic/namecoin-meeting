@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev: Namecoin Development Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev: Namecoin Development Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand[m] at 19:08:22 UTC
+(<a href="namecoin-dev.2017-04-16-19.08.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">Namecoin Core</b> <span class="details">(<a href='namecoin-dev.2017-04-16-19.08.log.html#l-14'>Jeremy_Rand[m]</a>, 19:13:59)</span>
+<ol type="a">
+  <li><span class="INFO">Daniel has a pull request pending to finalize
+    the block height at which BIP65 activated; once that's reviewed and
+    merged, we should be able to switch to the dev branch</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-04-16-19.08.log.html#l-15'>Jeremy_Rand[m]</a>,
+    19:15:01)</span></li>
+  <li><i class="itemtype">ACTION</i>: <span class="ACTION">brand0 might
+    be able to try porting the name tab to dev branch tonight</span>
+    <span class="details">(<a
+    href='namecoin-dev.2017-04-16-19.08.log.html#l-20'>Jeremy_Rand[m]</a>,
+    19:18:28)</span></li>
+  <li><span class="INFO">Someone is asking on Reddit about macOS
+    binaries for Namecoin Core.</span> <span class="details">(<a
+    href='namecoin-dev.2017-04-16-19.08.log.html#l-21'>Jeremy_Rand[m]</a>,
+    19:19:03)</span></li>
+  <li><a
+    href="https://github.com/jonasbits/namecoin-core/commit/1069cccdada095f3891d26d83759514b5b8654db">https://github.com/jonasbits/namecoin-core/commit/1069cccdada095f3891d26d83759514b5b8654db</a>
+    <span class="details">(<a
+    href='namecoin-dev.2017-04-16-19.08.log.html#l-26'>jonasbits</a>,
+    19:22:02)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">Someone should
+    submit jonasbits's changes for the Gitian descriptor for
+    macOS</span> <span class="details">(<a
+    href='namecoin-dev.2017-04-16-19.08.log.html#l-31'>Jeremy_Rand[m]</a>,
+    19:27:27)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">ncdns</b> <span class="details">(<a href='namecoin-dev.2017-04-16-19.08.log.html#l-36'>Jeremy_Rand[m]</a>, 19:33:03)</span>
+<ol type="a">
+  <li><span class="INFO">Cookie support has been added to ncdns.</span>
+    <span class="details">(<a
+    href='namecoin-dev.2017-04-16-19.08.log.html#l-44'>hl</a>,
+    19:39:10)</span></li>
+  <li><span class="INFO">The Windows installer bundle for ncdns now has
+    its basic functionality complete, with chained installation of
+    DNSSEC Trigger and Namecoin Core.</span> <span class="details">(<a
+    href='namecoin-dev.2017-04-16-19.08.log.html#l-45'>hl</a>,
+    19:39:18)</span></li>
+  <li><span class="INFO">The Windows installer bundle is now mostly
+    done; all that remains is to allow people to opt out of installation
+    of DNSSEC Trigger and Namecoin Core, if they wish to use their own
+    installations on other machines.</span> <span class="details">(<a
+    href='namecoin-dev.2017-04-16-19.08.log.html#l-46'>hl</a>,
+    19:39:26)</span></li>
+  <li><i class="itemtype">IDEA</i>: <span class="IDEA">we should look
+    into moving ncdns and ncdns-nsis's official repos to the "namecoin"
+    GitHub organization</span> <span class="details">(<a
+    href='namecoin-dev.2017-04-16-19.08.log.html#l-48'>Jeremy_Rand[m]</a>,
+    19:40:28)</span></li>
+  <li><i class="itemtype">IDEA</i>: <span class="IDEA">I'd suggest that
+    hl and I have commit privileges to said repos, and that 1 ACK by a
+    Namecoin developer who isn't the original submitter should be
+    sufficient to merge a PR</span> <span class="details">(<a
+    href='namecoin-dev.2017-04-16-19.08.log.html#l-49'>Jeremy_Rand[m]</a>,
+    19:41:45)</span></li>
+  <li><i class="itemtype">ACTION</i>: <span class="ACTION">Jeremy_Rand
+    will fork the ncdns and ncdns-nsis repos to the namecoin GitHub
+    organization.  I think I have the needed privs on GitHub to fork the
+    repos and set up permissions; if not I'll ask Daniel to do
+    it.</span> <span class="details">(<a
+    href='namecoin-dev.2017-04-16-19.08.log.html#l-52'>Jeremy_Rand[m]</a>,
+    19:44:18)</span></li>
+  <li><span class="INFO">by the way, breaking news from a few minutes
+    ago... David Conrad got back to me, he says my writeup of ICANN58
+    looks fine to him, with the exception of one nit omission (I
+    mentioned David's title but not Adiel's)... I will fix that and then
+    we should be good for posting it on the website.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-04-16-19.08.log.html#l-54'>Jeremy_Rand[m]</a>,
+    19:48:20)</span></li>
+  <li><i class="itemtype">ACTION</i>: <span class="ACTION">hl will
+    transfer the repos to the namecoin organization instead of having
+    Jeremy_Rand fork them</span> <span class="details">(<a
+    href='namecoin-dev.2017-04-16-19.08.log.html#l-66'>Jeremy_Rand[m]</a>,
+    20:02:23)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Tor</b> <span class="details">(<a href='namecoin-dev.2017-04-16-19.08.log.html#l-86'>Jeremy_Rand[m]</a>, 20:09:02)</span>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 20:38:11 UTC
+(<a href="namecoin-dev.2017-04-16-19.08.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>brand0 might be able to try porting the name tab to dev branch tonight</li>
+  <li>Jeremy_Rand will fork the ncdns and ncdns-nsis repos to the namecoin GitHub organization.  I think I have the needed privs on GitHub to fork the repos and set up permissions; if not I'll ask Daniel to do it.</li>
+  <li>hl will transfer the repos to the namecoin organization instead of having Jeremy_Rand fork them</li>
+</ol>
+<br><br>
+
+
+
+<h3>Action items, by person</h3>
+<ol>
+  <li> brand0 <ol>
+    <li>brand0 might be able to try porting the name tab to dev branch tonight</li>
+  </ol></li>
+  <li> hl <ol>
+    <li>hl will transfer the repos to the namecoin organization instead of having Jeremy_Rand fork them</li>
+  </ol></li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand[m] (73)</li>
+  <li>hl (32)</li>
+  <li>jonasbits (9)</li>
+  <li>brand0 (4)</li>
+  <li>qpm (2)</li>
+  <li>Squidicuz (1)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

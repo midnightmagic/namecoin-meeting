@@ -1,0 +1,121 @@
+19:08:22 <Jeremy_Rand[m]> #startmeeting
+19:08:22 <qpm> Meeting started Sun Apr 16 19:08:22 2017 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:08:24 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:08:52 <Jeremy_Rand[m]> Hello everyone, sorry we started a little bit late today
+19:09:05 <Jeremy_Rand[m]> Can we get a roll call of who's here today?
+19:10:14 <Jeremy_Rand[m]> brand0 / midnightmagic / hl / cannon-c / squidicuz / Grant Eckstein / jonasbits / jbisch: are you here?
+19:10:52 <jonasbits> here
+19:11:11 <Jeremy_Rand[m]> hi jonasbits
+19:11:13 <brand0> here
+19:11:23 <Jeremy_Rand[m]> hi brand0
+19:11:59 <hl> Hi.
+19:12:07 <Jeremy_Rand[m]> hi hl
+19:13:48 <Jeremy_Rand[m]> #meetingtopic Namecoin Development Meeting
+19:13:59 <Jeremy_Rand[m]> #topic Namecoin Core
+19:15:01 <Jeremy_Rand[m]> #info Daniel has a pull request pending to finalize the block height at which BIP65 activated; once that's reviewed and merged, we should be able to switch to the dev branch
+19:15:38 <Jeremy_Rand[m]> brand0: how are things going with porting the name tab to the dev branch?
+19:17:14 <brand0> i haven't had any time to work on it since my first attempt
+19:17:28 <brand0> i might be able to take another stab tonight
+19:17:58 <Jeremy_Rand[m]> ok
+19:18:28 <Jeremy_Rand[m]> #action brand0 might be able to try porting the name tab to dev branch tonight
+19:19:03 <Jeremy_Rand[m]> #info Someone is asking on Reddit about macOS binaries for Namecoin Core.
+19:19:31 <Jeremy_Rand[m]> I guess we should finally merge jonasbits's changes to get the Gitian descriptor working for macOS
+19:20:03 <Squidicuz> i am around
+19:20:29 <Jeremy_Rand[m]> Any volunteers to submit that commit cherrypicked as a PR to the dev branch?
+19:20:43 <Jeremy_Rand[m]> hey Squidicuz, welcome
+19:22:02 <jonasbits> https://github.com/jonasbits/namecoin-core/commit/1069cccdada095f3891d26d83759514b5b8654db
+19:22:33 <jonasbits> only 5 changes
+19:22:50 <Jeremy_Rand[m]> yeah, it should be easy
+19:23:22 <jonasbits> maybe easier to redo the changes, dont need to be cherrypicked
+19:23:48 <Jeremy_Rand[m]> jonasbits: true I guess
+19:27:27 <Jeremy_Rand[m]> #help Someone should submit jonasbits's changes for the Gitian descriptor for macOS
+19:27:32 <Jeremy_Rand[m]> anything else about Namecoin Core before we move on?
+19:29:18 <jonasbits> that should be commited to the dev branch, not the dev-0.14 branch?
+19:29:46 <Jeremy_Rand[m]> jonasbits: dev branch is probably higher priority, but backporting to the dev-0.14 branch is also useful
+19:32:52 <Jeremy_Rand[m]> ok, so moving on...
+19:33:03 <Jeremy_Rand[m]> #topic ncdns
+19:33:20 <Jeremy_Rand[m]> hl: would you like to update everyone on the progress of ncdns?
+19:33:34 <hl> Cookie support has been added to ncdns.
+19:33:56 <hl> The Windows installer bundle for ncdns now has its basic functionality complete, with chained installation of DNSSEC Trigger and Namecoin Core.
+19:34:27 <hl> The Windows installer bundle is now mostly done; all that remains is to allow people to opt out of installation of DNSSEC Trigger and Namecoin Core, if they wish to use their own installations on other machines.
+19:36:30 <jonasbits> cool
+19:36:35 <Jeremy_Rand[m]> yay
+19:37:28 <Jeremy_Rand[m]> hl: btw, those are great points for the #info command in MeetBot so that they show up in the meeting summary -- any chance you could repost those 3 comments with #info at the beginning?  :)
+19:39:10 <hl> #info Cookie support has been added to ncdns.
+19:39:18 <hl> #info The Windows installer bundle for ncdns now has its basic functionality complete, with chained installation of DNSSEC Trigger and Namecoin Core.
+19:39:26 <hl> #info The Windows installer bundle is now mostly done; all that remains is to allow people to opt out of installation of DNSSEC Trigger and Namecoin Core, if they wish to use their own installations on other machines.
+19:39:37 <Jeremy_Rand[m]> thanks hl
+19:40:28 <Jeremy_Rand[m]> #idea we should look into moving ncdns and ncdns-nsis's official repos to the "namecoin" GitHub organization
+19:41:45 <Jeremy_Rand[m]> #idea I'd suggest that hl and I have commit privileges to said repos, and that 1 ACK by a Namecoin developer who isn't the original submitter should be sufficient to merge a PR
+19:41:55 <Jeremy_Rand[m]> thoughts on this?
+19:42:34 <hl> Sounds fine.
+19:44:18 <Jeremy_Rand[m]> #action Jeremy_Rand will fork the ncdns and ncdns-nsis repos to the namecoin GitHub organization.  I think I have the needed privs on GitHub to fork the repos and set up permissions; if not I'll ask Daniel to do it.
+19:45:48 <hl> Jeremy_Rand: I should just move them.
+19:48:20 <Jeremy_Rand[m]> #info by the way, breaking news from a few minutes ago... David Conrad got back to me, he says my writeup of ICANN58 looks fine to him, with the exception of one nit omission (I mentioned David's title but not Adiel's)... I will fix that and then we should be good for posting it on the website.
+19:49:17 <brand0> awesome
+19:50:23 <Jeremy_Rand[m]> (I'm actually mildly surprised that he didn't request any bigger changes, I was worried that some of my comments were prone to annoy people.  I guess I'm more diplomatic than I thought.)
+19:51:48 <Jeremy_Rand[m]> hl: what exactly do you mean by "move them"?  Is there a semantic difference between moving and forking a repo on GitHub that I'm unfamiliar with?
+19:52:02 <jonasbits> ( PR for macOS done, not tested with gitian yet)
+19:52:18 <Jeremy_Rand[m]> jonasbits: awesome!
+19:57:18 <Jeremy_Rand[m]> (as an aside, I can't wait to see how the market manipulators try to spin the good ICANN58 news as some kind of evil sellout.  I doubt they'll have any effect on the markets, since they failed last time, but the stupidity might at least provide some entertainment value)
+19:58:40 <hl> Jeremy_Rand: https://i.imgur.com/umY5FJj.png
+19:59:12 <jonasbits> cool
+20:01:43 <Jeremy_Rand[m]> hl: oh.  Hmm, cool, I didn't know that was a thing on GitHub.  Okay yeah, that sounds like a good plan
+20:02:04 <hl> Jeremy_Rand: Whoever owns the Namecoin org will get an approval e. mail after I initiate it, so tell me when.
+20:02:20 <hl> Jeremy_Rand: I'll keep the ncdns-nsis repository where it is until I'm done finishing it.
+20:02:23 <Jeremy_Rand[m]> #action hl will transfer the repos to the namecoin organization instead of having Jeremy_Rand fork them
+20:02:29 <Jeremy_Rand[m]> hl: ok
+20:03:01 <Jeremy_Rand[m]> I don't think I have ownership of the namecoin org but I think I have enough privileges to approve it, based on your screenshot
+20:03:17 <Jeremy_Rand[m]> if not, Daniel is the person to approve it
+20:03:30 <hl> Well, I'll try it for ncdns now.
+20:03:37 <Jeremy_Rand[m]> ok
+20:04:17 <Jeremy_Rand[m]> (I'm not logged into GitHub right now, so I won't be able to approve it until I'm logged in later today)
+20:04:29 <hl> "You don’t have the permission to create repositories on namecoin"
+20:04:31 <Jeremy_Rand[m]> but I should get an email notification if I have the privs, I guess
+20:04:39 <hl> Weird. The documentation implies an e. mail will be sent, but it just rejected it.
+20:05:40 <Jeremy_Rand[m]> hl: hmm... so the solution should be to either give me ownership rights to your ncdns repo, or for Daniel to give you repo creation rights on the namecoin org
+20:05:44 <hl> Ah. Looks like that's only for individuals as targets.
+20:05:47 <hl> "Users must have admin or owner permissions within the receiving organization before they can transfer a repository that they individually own."
+20:05:57 <Jeremy_Rand[m]> sigh
+20:06:19 <hl> Jeremy_Rand: Hmm, that's a good workaround. Though I wonder if the automated redirect will work through another layer of indirection if I transfer it to you first... I'd like to keep hlandau/ncdns working.
+20:06:29 <Jeremy_Rand[m]> I suspect Daniel will not be happy about granting those permissions to more people
+20:06:42 <hl> Indolering is still on the list...
+20:07:23 <Jeremy_Rand[m]> hl: he'll be removed soon, I just haven't gotten around to asking Daniel to clean up the list.  If it's only repo creation permission that's needed, I think Daniel will be fine with adding that for you
+20:07:29 <hl> OK.
+20:08:26 <Jeremy_Rand[m]> anyways, let's continue this particular discussion after the meeting
+20:09:02 <Jeremy_Rand[m]> #topic Tor
+20:09:30 <Jeremy_Rand[m]> As you may have heard, there's some unfortunate political controversy over at the Tor mailing list about special use name TLD's
+20:09:52 <hl> Hmm, really?
+20:09:57 <Jeremy_Rand[m]> (yes, that cancer has metastacized to the Tor mailing list now)
+20:10:51 <Jeremy_Rand[m]> long story short, a subset of people over there want to place some kind of DRM-like mechanism on the new naming API, so that the only TLD permitted is .onion (on the alleged grounds that not doing this will annoy IETF)
+20:11:11 <hl> wait what?
+20:11:16 <hl> New naming API?
+20:11:20 <Jeremy_Rand[m]> It probably goes without saying that this is a stupid idea
+20:12:03 <Jeremy_Rand[m]> hl: yeah, Tor is adding a new pluggable naming API for systems like Namecoin/OnioNS/GNS/etc to interact with.  Except it might have DRM.
+20:12:20 <hl> That's great! That's ...WTF??????
+20:12:48 <hl> Jeremy_Rand: also what is the point of replacing hardcoded .onion with a pluggable system hardcoded only to accept an .onion plugin?
+20:12:56 <Jeremy_Rand[m]> If they end up having DRM, we can keep using the API we're currently using, which is less secure but won't have DRM
+20:13:02 <hl> Jeremy_Rand: also is this a Tor daemon change or a Tor browser change or both?
+20:13:12 <Jeremy_Rand[m]> hl: only a Tor daemon change
+20:13:29 <hl> hm.
+20:13:32 <hl> How are these extensions loaded/shipped?
+20:14:14 <Jeremy_Rand[m]> hl: the new API uses (I think) a line in torrc that specifies naming systems to use.  Very similar to the pluggable transports API for bridges.
+20:14:22 <hl> So a separate process?
+20:14:33 <Jeremy_Rand[m]> yeah.
+20:15:07 <hl> Also since when is 'will annoy IETF' an argument?
+20:15:11 <hl> Nobody owes the IETF anything whatsoever.
+20:16:06 <Jeremy_Rand[m]> hl: no idea, but I'm honestly skeptical that it actually would annoy IETF in the first place, because Unbound and BIND allow the user to configure TLD's that aren't approved by ICANN or IETF, and AFAICT no one has ever complained to those projects about that capability
+20:16:30 <hl> Yes.
+20:17:04 <Jeremy_Rand[m]> If it's something shipped with Tor Browser to end users that's enabled by default, then I could see IETF caring
+20:17:15 <Jeremy_Rand[m]> But that's not on the table right now anyway
+20:19:42 <Jeremy_Rand[m]> anyway, it's not clear to me what Tor will end up doing on this.  I certainly hope that sanity wins.  If it doesn't, we'll keep using the old, less secure API that already works in my internal testing.
+20:20:13 <Jeremy_Rand[m]> And if users complain about the attack surface in such a case, my reply will be "not our problem"
+20:20:45 <Jeremy_Rand[m]> I'm definitely not interested in creating a hostile "LibreTor" fork or any stupidity like that
+20:21:34 <Jeremy_Rand[m]> (although I do suspect that the only reason no one will do so is that there aren't enough Tor users who care about naming systems)
+20:24:44 <Jeremy_Rand[m]> anyways, that's all that I have for today.  Does anyone else have things they'd like to bring up today?
+20:25:54 <jonasbits> Maybe what to do about testnet2, should that have a different aux chain id? if so, how should it look like
+20:26:35 <Jeremy_Rand[m]> jonasbits: honestly I'm not sure how exactly the auxpow chain ID's work.  Probably Daniel could answer that question
+20:27:22 <Jeremy_Rand[m]> in theory I think the main concern is just to avoid collisions with any other SHA256D auxpow chains, but there are some other weird issues that supposedly effect efficiency that I don't understand
+20:33:14 <Jeremy_Rand[m]> anything else to bring up today?
+20:38:08 <Jeremy_Rand[m]> okay then, I guess that's the end of the meeting.  Thanks for being here everyone.
+20:38:11 <Jeremy_Rand[m]> #endmeeting

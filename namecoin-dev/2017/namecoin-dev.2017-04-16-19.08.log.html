@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:08:22</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:08:22</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Apr 16 19:08:22 2017 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:08:24</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:08:52</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Hello everyone, sorry we started a little bit late today
+<a name="l-5"></a><span class="tm">19:09:05</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Can we get a roll call of who's here today?
+<a name="l-6"></a><span class="tm">19:10:14</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> brand0 / midnightmagic / hl / cannon-c / squidicuz / Grant Eckstein / jonasbits / jbisch: are you here?
+<a name="l-7"></a><span class="tm">19:10:52</span><span class="nk"> &lt;jonasbits&gt;</span> here
+<a name="l-8"></a><span class="tm">19:11:11</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> hi jonasbits
+<a name="l-9"></a><span class="tm">19:11:13</span><span class="nk"> &lt;brand0&gt;</span> here
+<a name="l-10"></a><span class="tm">19:11:23</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> hi brand0
+<a name="l-11"></a><span class="tm">19:11:59</span><span class="nk"> &lt;hl&gt;</span> Hi.
+<a name="l-12"></a><span class="tm">19:12:07</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> hi hl
+<a name="l-13"></a><span class="tm">19:13:48</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#meetingtopic </span><span class="cmdline">Namecoin Development Meeting</span>
+<a name="l-14"></a><span class="tm">19:13:59</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Namecoin Core</span>
+<a name="l-15"></a><span class="tm">19:15:01</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">Daniel has a pull request pending to finalize the block height at which BIP65 activated; once that's reviewed and merged, we should be able to switch to the dev branch</span>
+<a name="l-16"></a><span class="tm">19:15:38</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">brand0:</span> how are things going with porting the name tab to the dev branch?
+<a name="l-17"></a><span class="tm">19:17:14</span><span class="nk"> &lt;brand0&gt;</span> i haven't had any time to work on it since my first attempt
+<a name="l-18"></a><span class="tm">19:17:28</span><span class="nk"> &lt;brand0&gt;</span> i might be able to take another stab tonight
+<a name="l-19"></a><span class="tm">19:17:58</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok
+<a name="l-20"></a><span class="tm">19:18:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#action </span><span class="cmdline">brand0 might be able to try porting the name tab to dev branch tonight</span>
+<a name="l-21"></a><span class="tm">19:19:03</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">Someone is asking on Reddit about macOS binaries for Namecoin Core.</span>
+<a name="l-22"></a><span class="tm">19:19:31</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I guess we should finally merge jonasbits's changes to get the Gitian descriptor working for macOS
+<a name="l-23"></a><span class="tm">19:20:03</span><span class="nk"> &lt;Squidicuz&gt;</span> i am around
+<a name="l-24"></a><span class="tm">19:20:29</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Any volunteers to submit that commit cherrypicked as a PR to the dev branch?
+<a name="l-25"></a><span class="tm">19:20:43</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> hey Squidicuz, welcome
+<a name="l-26"></a><span class="tm">19:22:02</span><span class="nk"> &lt;jonasbits&gt;</span> https://github.com/jonasbits/namecoin-core/commit/1069cccdada095f3891d26d83759514b5b8654db
+<a name="l-27"></a><span class="tm">19:22:33</span><span class="nk"> &lt;jonasbits&gt;</span> only 5 changes
+<a name="l-28"></a><span class="tm">19:22:50</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> yeah, it should be easy
+<a name="l-29"></a><span class="tm">19:23:22</span><span class="nk"> &lt;jonasbits&gt;</span> maybe easier to redo the changes, dont need to be cherrypicked
+<a name="l-30"></a><span class="tm">19:23:48</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> true I guess
+<a name="l-31"></a><span class="tm">19:27:27</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#help </span><span class="cmdline">Someone should submit jonasbits's changes for the Gitian descriptor for macOS</span>
+<a name="l-32"></a><span class="tm">19:27:32</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> anything else about Namecoin Core before we move on?
+<a name="l-33"></a><span class="tm">19:29:18</span><span class="nk"> &lt;jonasbits&gt;</span> that should be commited to the dev branch, not the dev-0.14 branch?
+<a name="l-34"></a><span class="tm">19:29:46</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> dev branch is probably higher priority, but backporting to the dev-0.14 branch is also useful
+<a name="l-35"></a><span class="tm">19:32:52</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok, so moving on...
+<a name="l-36"></a><span class="tm">19:33:03</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">ncdns</span>
+<a name="l-37"></a><span class="tm">19:33:20</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> would you like to update everyone on the progress of ncdns?
+<a name="l-38"></a><span class="tm">19:33:34</span><span class="nk"> &lt;hl&gt;</span> Cookie support has been added to ncdns.
+<a name="l-39"></a><span class="tm">19:33:56</span><span class="nk"> &lt;hl&gt;</span> The Windows installer bundle for ncdns now has its basic functionality complete, with chained installation of DNSSEC Trigger and Namecoin Core.
+<a name="l-40"></a><span class="tm">19:34:27</span><span class="nk"> &lt;hl&gt;</span> The Windows installer bundle is now mostly done; all that remains is to allow people to opt out of installation of DNSSEC Trigger and Namecoin Core, if they wish to use their own installations on other machines.
+<a name="l-41"></a><span class="tm">19:36:30</span><span class="nk"> &lt;jonasbits&gt;</span> cool
+<a name="l-42"></a><span class="tm">19:36:35</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> yay
+<a name="l-43"></a><span class="tm">19:37:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> btw, those are great points for the #info command in MeetBot so that they show up in the meeting summary -- any chance you could repost those 3 comments with #info at the beginning?  :)
+<a name="l-44"></a><span class="tm">19:39:10</span><span class="nk"> &lt;hl&gt;</span> <span class="cmd">#info </span><span class="cmdline">Cookie support has been added to ncdns.</span>
+<a name="l-45"></a><span class="tm">19:39:18</span><span class="nk"> &lt;hl&gt;</span> <span class="cmd">#info </span><span class="cmdline">The Windows installer bundle for ncdns now has its basic functionality complete, with chained installation of DNSSEC Trigger and Namecoin Core.</span>
+<a name="l-46"></a><span class="tm">19:39:26</span><span class="nk"> &lt;hl&gt;</span> <span class="cmd">#info </span><span class="cmdline">The Windows installer bundle is now mostly done; all that remains is to allow people to opt out of installation of DNSSEC Trigger and Namecoin Core, if they wish to use their own installations on other machines.</span>
+<a name="l-47"></a><span class="tm">19:39:37</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> thanks hl
+<a name="l-48"></a><span class="tm">19:40:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#idea </span><span class="cmdline">we should look into moving ncdns and ncdns-nsis's official repos to the "namecoin" GitHub organization</span>
+<a name="l-49"></a><span class="tm">19:41:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#idea </span><span class="cmdline">I'd suggest that hl and I have commit privileges to said repos, and that 1 ACK by a Namecoin developer who isn't the original submitter should be sufficient to merge a PR</span>
+<a name="l-50"></a><span class="tm">19:41:55</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> thoughts on this?
+<a name="l-51"></a><span class="tm">19:42:34</span><span class="nk"> &lt;hl&gt;</span> Sounds fine.
+<a name="l-52"></a><span class="tm">19:44:18</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#action </span><span class="cmdline">Jeremy_Rand will fork the ncdns and ncdns-nsis repos to the namecoin GitHub organization.  I think I have the needed privs on GitHub to fork the repos and set up permissions; if not I'll ask Daniel to do it.</span>
+<a name="l-53"></a><span class="tm">19:45:48</span><span class="nk"> &lt;hl&gt;</span> <span class="hi">Jeremy_Rand:</span> I should just move them.
+<a name="l-54"></a><span class="tm">19:48:20</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">by the way, breaking news from a few minutes ago... David Conrad got back to me, he says my writeup of ICANN58 looks fine to him, with the exception of one nit omission (I mentioned David's title but not Adiel's)... I will fix that and then we should be good for posting it on the website.</span>
+<a name="l-55"></a><span class="tm">19:49:17</span><span class="nk"> &lt;brand0&gt;</span> awesome
+<a name="l-56"></a><span class="tm">19:50:23</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (I'm actually mildly surprised that he didn't request any bigger changes, I was worried that some of my comments were prone to annoy people.  I guess I'm more diplomatic than I thought.)
+<a name="l-57"></a><span class="tm">19:51:48</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> what exactly do you mean by "move them"?  Is there a semantic difference between moving and forking a repo on GitHub that I'm unfamiliar with?
+<a name="l-58"></a><span class="tm">19:52:02</span><span class="nk"> &lt;jonasbits&gt;</span> ( PR for macOS done, not tested with gitian yet)
+<a name="l-59"></a><span class="tm">19:52:18</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> awesome!
+<a name="l-60"></a><span class="tm">19:57:18</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (as an aside, I can't wait to see how the market manipulators try to spin the good ICANN58 news as some kind of evil sellout.  I doubt they'll have any effect on the markets, since they failed last time, but the stupidity might at least provide some entertainment value)
+<a name="l-61"></a><span class="tm">19:58:40</span><span class="nk"> &lt;hl&gt;</span> <span class="hi">Jeremy_Rand:</span> https://i.imgur.com/umY5FJj.png
+<a name="l-62"></a><span class="tm">19:59:12</span><span class="nk"> &lt;jonasbits&gt;</span> cool
+<a name="l-63"></a><span class="tm">20:01:43</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> oh.  Hmm, cool, I didn't know that was a thing on GitHub.  Okay yeah, that sounds like a good plan
+<a name="l-64"></a><span class="tm">20:02:04</span><span class="nk"> &lt;hl&gt;</span> <span class="hi">Jeremy_Rand:</span> Whoever owns the Namecoin org will get an approval e. mail after I initiate it, so tell me when.
+<a name="l-65"></a><span class="tm">20:02:20</span><span class="nk"> &lt;hl&gt;</span> <span class="hi">Jeremy_Rand:</span> I'll keep the ncdns-nsis repository where it is until I'm done finishing it.
+<a name="l-66"></a><span class="tm">20:02:23</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#action </span><span class="cmdline">hl will transfer the repos to the namecoin organization instead of having Jeremy_Rand fork them</span>
+<a name="l-67"></a><span class="tm">20:02:29</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> ok
+<a name="l-68"></a><span class="tm">20:03:01</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I don't think I have ownership of the namecoin org but I think I have enough privileges to approve it, based on your screenshot
+<a name="l-69"></a><span class="tm">20:03:17</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> if not, Daniel is the person to approve it
+<a name="l-70"></a><span class="tm">20:03:30</span><span class="nk"> &lt;hl&gt;</span> Well, I'll try it for ncdns now.
+<a name="l-71"></a><span class="tm">20:03:37</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok
+<a name="l-72"></a><span class="tm">20:04:17</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (I'm not logged into GitHub right now, so I won't be able to approve it until I'm logged in later today)
+<a name="l-73"></a><span class="tm">20:04:29</span><span class="nk"> &lt;hl&gt;</span> "You don’t have the permission to create repositories on namecoin"
+<a name="l-74"></a><span class="tm">20:04:31</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> but I should get an email notification if I have the privs, I guess
+<a name="l-75"></a><span class="tm">20:04:39</span><span class="nk"> &lt;hl&gt;</span> Weird. The documentation implies an e. mail will be sent, but it just rejected it.
+<a name="l-76"></a><span class="tm">20:05:40</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> hmm... so the solution should be to either give me ownership rights to your ncdns repo, or for Daniel to give you repo creation rights on the namecoin org
+<a name="l-77"></a><span class="tm">20:05:44</span><span class="nk"> &lt;hl&gt;</span> Ah. Looks like that's only for individuals as targets.
+<a name="l-78"></a><span class="tm">20:05:47</span><span class="nk"> &lt;hl&gt;</span> "Users must have admin or owner permissions within the receiving organization before they can transfer a repository that they individually own."
+<a name="l-79"></a><span class="tm">20:05:57</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> sigh
+<a name="l-80"></a><span class="tm">20:06:19</span><span class="nk"> &lt;hl&gt;</span> <span class="hi">Jeremy_Rand:</span> Hmm, that's a good workaround. Though I wonder if the automated redirect will work through another layer of indirection if I transfer it to you first... I'd like to keep hlandau/ncdns working.
+<a name="l-81"></a><span class="tm">20:06:29</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I suspect Daniel will not be happy about granting those permissions to more people
+<a name="l-82"></a><span class="tm">20:06:42</span><span class="nk"> &lt;hl&gt;</span> Indolering is still on the list...
+<a name="l-83"></a><span class="tm">20:07:23</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> he'll be removed soon, I just haven't gotten around to asking Daniel to clean up the list.  If it's only repo creation permission that's needed, I think Daniel will be fine with adding that for you
+<a name="l-84"></a><span class="tm">20:07:29</span><span class="nk"> &lt;hl&gt;</span> OK.
+<a name="l-85"></a><span class="tm">20:08:26</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> anyways, let's continue this particular discussion after the meeting
+<a name="l-86"></a><span class="tm">20:09:02</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Tor</span>
+<a name="l-87"></a><span class="tm">20:09:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> As you may have heard, there's some unfortunate political controversy over at the Tor mailing list about special use name TLD's
+<a name="l-88"></a><span class="tm">20:09:52</span><span class="nk"> &lt;hl&gt;</span> Hmm, really?
+<a name="l-89"></a><span class="tm">20:09:57</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (yes, that cancer has metastacized to the Tor mailing list now)
+<a name="l-90"></a><span class="tm">20:10:51</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> long story short, a subset of people over there want to place some kind of DRM-like mechanism on the new naming API, so that the only TLD permitted is .onion (on the alleged grounds that not doing this will annoy IETF)
+<a name="l-91"></a><span class="tm">20:11:11</span><span class="nk"> &lt;hl&gt;</span> wait what?
+<a name="l-92"></a><span class="tm">20:11:16</span><span class="nk"> &lt;hl&gt;</span> New naming API?
+<a name="l-93"></a><span class="tm">20:11:20</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> It probably goes without saying that this is a stupid idea
+<a name="l-94"></a><span class="tm">20:12:03</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> yeah, Tor is adding a new pluggable naming API for systems like Namecoin/OnioNS/GNS/etc to interact with.  Except it might have DRM.
+<a name="l-95"></a><span class="tm">20:12:20</span><span class="nk"> &lt;hl&gt;</span> That's great! That's ...WTF??????
+<a name="l-96"></a><span class="tm">20:12:48</span><span class="nk"> &lt;hl&gt;</span> <span class="hi">Jeremy_Rand:</span> also what is the point of replacing hardcoded .onion with a pluggable system hardcoded only to accept an .onion plugin?
+<a name="l-97"></a><span class="tm">20:12:56</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> If they end up having DRM, we can keep using the API we're currently using, which is less secure but won't have DRM
+<a name="l-98"></a><span class="tm">20:13:02</span><span class="nk"> &lt;hl&gt;</span> <span class="hi">Jeremy_Rand:</span> also is this a Tor daemon change or a Tor browser change or both?
+<a name="l-99"></a><span class="tm">20:13:12</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> only a Tor daemon change
+<a name="l-100"></a><span class="tm">20:13:29</span><span class="nk"> &lt;hl&gt;</span> hm.
+<a name="l-101"></a><span class="tm">20:13:32</span><span class="nk"> &lt;hl&gt;</span> How are these extensions loaded/shipped?
+<a name="l-102"></a><span class="tm">20:14:14</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> the new API uses (I think) a line in torrc that specifies naming systems to use.  Very similar to the pluggable transports API for bridges.
+<a name="l-103"></a><span class="tm">20:14:22</span><span class="nk"> &lt;hl&gt;</span> So a separate process?
+<a name="l-104"></a><span class="tm">20:14:33</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> yeah.
+<a name="l-105"></a><span class="tm">20:15:07</span><span class="nk"> &lt;hl&gt;</span> Also since when is 'will annoy IETF' an argument?
+<a name="l-106"></a><span class="tm">20:15:11</span><span class="nk"> &lt;hl&gt;</span> Nobody owes the IETF anything whatsoever.
+<a name="l-107"></a><span class="tm">20:16:06</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> no idea, but I'm honestly skeptical that it actually would annoy IETF in the first place, because Unbound and BIND allow the user to configure TLD's that aren't approved by ICANN or IETF, and AFAICT no one has ever complained to those projects about that capability
+<a name="l-108"></a><span class="tm">20:16:30</span><span class="nk"> &lt;hl&gt;</span> Yes.
+<a name="l-109"></a><span class="tm">20:17:04</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> If it's something shipped with Tor Browser to end users that's enabled by default, then I could see IETF caring
+<a name="l-110"></a><span class="tm">20:17:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> But that's not on the table right now anyway
+<a name="l-111"></a><span class="tm">20:19:42</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> anyway, it's not clear to me what Tor will end up doing on this.  I certainly hope that sanity wins.  If it doesn't, we'll keep using the old, less secure API that already works in my internal testing.
+<a name="l-112"></a><span class="tm">20:20:13</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> And if users complain about the attack surface in such a case, my reply will be "not our problem"
+<a name="l-113"></a><span class="tm">20:20:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I'm definitely not interested in creating a hostile "LibreTor" fork or any stupidity like that
+<a name="l-114"></a><span class="tm">20:21:34</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (although I do suspect that the only reason no one will do so is that there aren't enough Tor users who care about naming systems)
+<a name="l-115"></a><span class="tm">20:24:44</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> anyways, that's all that I have for today.  Does anyone else have things they'd like to bring up today?
+<a name="l-116"></a><span class="tm">20:25:54</span><span class="nk"> &lt;jonasbits&gt;</span> Maybe what to do about testnet2, should that have a different aux chain id? if so, how should it look like
+<a name="l-117"></a><span class="tm">20:26:35</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> honestly I'm not sure how exactly the auxpow chain ID's work.  Probably Daniel could answer that question
+<a name="l-118"></a><span class="tm">20:27:22</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> in theory I think the main concern is just to avoid collisions with any other SHA256D auxpow chains, but there are some other weird issues that supposedly effect efficiency that I don't understand
+<a name="l-119"></a><span class="tm">20:33:14</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> anything else to bring up today?
+<a name="l-120"></a><span class="tm">20:38:08</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> okay then, I guess that's the end of the meeting.  Thanks for being here everyone.
+<a name="l-121"></a><span class="tm">20:38:11</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>
