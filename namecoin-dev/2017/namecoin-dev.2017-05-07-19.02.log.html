@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:02:50</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:02:50</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun May  7 19:02:50 2017 UTC.  The chair is jonasbits. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:02:53</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:04:04</span><span class="nk"> &lt;jonasbits&gt;</span> who is here today, say hello :-)
+<a name="l-5"></a><span class="tm">19:04:09</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Hello!
+<a name="l-6"></a><span class="tm">19:05:49</span><span class="nk"> &lt;jonasbits&gt;</span> are you guys here? hl, brand0, ryan-c, Squidicuz
+<a name="l-7"></a><span class="tm">19:07:48</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="topic">#topic </span><span class="topicline">Namecoin-Core</span>
+<a name="l-8"></a><span class="tm">19:10:15</span><span class="nk"> &lt;jonasbits&gt;</span> Its kinda empty today
+<a name="l-9"></a><span class="tm">19:10:29</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/issues/147 I noticed that namecoin-tx has trouble creating name outputs; fixing this would be great for facilitating hackers.</span>
+<a name="l-10"></a><span class="tm">19:12:16</span><span class="nk"> &lt;jonasbits&gt;</span> I agree, and fixing testnet.
+<a name="l-11"></a><span class="tm">19:13:01</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> yes
+<a name="l-12"></a><span class="tm">19:13:07</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/issues/131 A user reports that names that have been transferred out of a wallet still appear in the name tab GUI.</span>
+<a name="l-13"></a><span class="tm">19:13:41</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> presumably brand0 is the one who would be best placed to fix this?
+<a name="l-14"></a><span class="tm">19:15:43</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/issues/148 A NixOS user requested changes to Namecoin Core in order to play well with NixOS's filesystem layout; I referred them to Bitcoin Core upstream.</span>
+<a name="l-15"></a><span class="tm">19:16:10</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Looks like Bitcoin Core is close to merging a fix for that
+<a name="l-16"></a><span class="tm">19:17:00</span><span class="nk"> &lt;jonasbits&gt;</span> cool
+<a name="l-17"></a><span class="tm">19:18:03</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> so what's the situation with the macOS Gitian descriptor?  We merged your renaming PR, is there anything else expected to be needed in order to build macOS binaries in Gitian?
+<a name="l-18"></a><span class="tm">19:19:02</span><span class="nk"> &lt;jonasbits&gt;</span> i fail building the dev repo, im going to first try to build bitcoin gitian and than try again with namecoin
+<a name="l-19"></a><span class="tm">19:20:40</span><span class="nk"> &lt;jonasbits&gt;</span> one contributing factor could be me building on a win10 host system with virtaulbox
+<a name="l-20"></a><span class="tm">19:20:55</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> I noticed when I was testing on a macOS machine a couple weeks ago that running "make deploy" on macOS is yielding a file called "Bitcoin-Qt.dmg" instead of "Namecoin-Qt.dmg"
+<a name="l-21"></a><span class="tm">19:21:05</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> is that likely to be the cause of the Gitian descriptor failing?
+<a name="l-22"></a><span class="tm">19:22:00</span><span class="nk"> &lt;jonasbits&gt;</span> Not sure, but good catch, we should try to fix native and gitian builds
+<a name="l-23"></a><span class="tm">19:22:38</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Yeah.  I haven't looked at what exactly "make deploy" does on macOS, but hopefully it's easy to rename Bitcoin to Namecoin there
+<a name="l-24"></a><span class="tm">19:23:36</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Also, the dmg file has the Bitcoin logo instead of the Namecoin logo
+<a name="l-25"></a><span class="tm">19:23:47</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Although that might be fixed by fsb4000's PR for NSIS logos, not certain
+<a name="l-26"></a><span class="tm">19:24:41</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok, summarizing the above for the minutes:
+<a name="l-27"></a><span class="tm">19:25:25</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">jonasbits failed to build the dev branch for macOS in Gitian, even with the renaming PR merged</span>
+<a name="l-28"></a><span class="tm">19:26:03</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I think this may be related to "make deploy" on macOS yielding a file called "Bitcoin-Qt.dmg" instead of "Namecoin-Qt.dmg"</span>
+<a name="l-29"></a><span class="tm">19:26:46</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> By the way, also related to macOS:
+<a name="l-30"></a><span class="tm">19:27:12</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">Since Namecoin is no longer participating in OU's Software Studio, it's unclear if I will continue to have access to a macOS machine to test stuff on</span>
+<a name="l-31"></a><span class="tm">19:28:03</span><span class="nk"> &lt;jonasbits&gt;</span> maybe a virtual macOS system could be a way forward
+<a name="l-32"></a><span class="tm">19:29:04</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> yeah.  My understanding is that macOS VPS's with VNC access can be rented easily?
+<a name="l-33"></a><span class="tm">19:29:12</span><span class="nk"> &lt;jonasbits&gt;</span> cool
+<a name="l-34"></a><span class="tm">19:29:35</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Not really sure that I want to spend Namecoin project funds on that though
+<a name="l-35"></a><span class="tm">19:33:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> That's all from me in the Namecoin Core department
+<a name="l-36"></a><span class="tm">19:34:05</span><span class="nk"> &lt;jonasbits&gt;</span> moving on then
+<a name="l-37"></a><span class="tm">19:34:18</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="topic">#topic </span><span class="topicline">ncdns</span>
+<a name="l-38"></a><span class="tm">19:35:00</span><span class="nk"> &lt;jonasbits&gt;</span> something you want to bring up Jeremy?
+<a name="l-39"></a><span class="tm">19:37:10</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">hl and I have been continuing to iterate on the ncdns NSIS installer.  It works pretty well already, and can bundle Namecoin Core and Dnssec-Trigger in the installer.</span>
+<a name="l-40"></a><span class="tm">19:37:57</span><span class="nk"> &lt;jonasbits&gt;</span> Cool
+<a name="l-41"></a><span class="tm">19:38:35</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#idea </span><span class="cmdline">We should look into moving the main ncdns and ncdns-nsis repos to the namecoin GitHub organization.  (They're currently under hl's username)</span>
+<a name="l-42"></a><span class="tm">19:41:11</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I did some preliminary research on using EMET for cert pinning on Windows.  This will probably take a backseat to getting TLS working on GNU/Linux though.</span>
+<a name="l-43"></a><span class="tm">19:42:08</span><span class="nk"> &lt;jonasbits&gt;</span> is it possible to test ncdns on linux?
+<a name="l-44"></a><span class="tm">19:42:50</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> it should work fine on GNU/Linux, but TLS cert injection isn't implemented yet
+<a name="l-45"></a><span class="tm">19:43:04</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I've used ncdns on GNU/Linux before, though not recently.
+<a name="l-46"></a><span class="tm">19:44:42</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Most of the TLS cert injection code from Windows should be applicable to GNU/Linux's NSS cert store, I think the main task remaining is just executing certutil (and of course actually testing to make sure it works properly)
+<a name="l-47"></a><span class="tm">19:45:34 </span><span class="nka">* Squidicuz</span> <span class="ac">waves</span>
+<a name="l-48"></a><span class="tm">19:45:56</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> hey Squidicuz
+<a name="l-49"></a><span class="tm">19:46:15</span><span class="nk"> &lt;Squidicuz&gt;</span> sorry, following.,. just way behind :3
+<a name="l-50"></a><span class="tm">19:47:22</span><span class="nk"> &lt;jonasbits&gt;</span> sounds interesting
+<a name="l-51"></a><span class="tm">19:49:41</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> That's all from me for the ncdns department
+<a name="l-52"></a><span class="tm">19:52:01</span><span class="nk"> &lt;Squidicuz&gt;</span> what is wrong with testnet?  I have some nodes running, but I haven't checked them in a week.. *shrug*
+<a name="l-53"></a><span class="tm">19:52:46</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">Squidicuz:</span> I think it had something to do with a bunch of old nodes being on the wrong side of a softfork.  Not really certain.
+<a name="l-54"></a><span class="tm">19:53:51</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Anyway, we're going to reset testnet with a new AuxPoW chain ID, so that we can try to deploy AAA on testnet
+<a name="l-55"></a><span class="tm">19:56:09</span><span class="nk"> &lt;Squidicuz&gt;</span> cool. sounds good
+<a name="l-56"></a><span class="tm">20:02:21</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="hi">Squidicuz:</span> anything you want to talk about?
+<a name="l-57"></a><span class="tm">20:03:17</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (I've got a few other miscellaneous things to bring up if Squidicuz doesn't have anything)
+<a name="l-58"></a><span class="tm">20:05:47</span><span class="nk"> &lt;jonasbits&gt;</span> Should i change the topic?
+<a name="l-59"></a><span class="tm">20:06:22</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> sure; change it to "Protocol"
+<a name="l-60"></a><span class="tm">20:06:49</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="topic">#topic </span><span class="topicline">Protocol</span>
+<a name="l-61"></a><span class="tm">20:07:10</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/meta/issues/43 I posted a proposal for "pure name transactions" to improve privacy and scalability.</span>
+<a name="l-62"></a><span class="tm">20:08:38</span><span class="nk"> &lt;jonasbits&gt;</span> this is really nice
+<a name="l-63"></a><span class="tm">20:09:56</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Nothing quite like getting a bunch of useful constructive criticism from ICANN people about Namecoin scalability in order to get me to work on stuff like this :)
+<a name="l-64"></a><span class="tm">20:11:01</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> And of course it also plays pretty well with the anonymity improvements that I was discussing with fluffypony
+<a name="l-65"></a><span class="tm">20:11:49</span><span class="nk"> &lt;fluffypony&gt;</span> +1
+<a name="l-66"></a><span class="tm">20:12:02</span><span class="nk"> &lt;jonasbits&gt;</span> welcome fluffypony
+<a name="l-67"></a><span class="tm">20:12:14 </span><span class="nka">* fluffypony</span> <span class="ac">is always here :)</span>
+<a name="l-68"></a><span class="tm">20:12:22</span><span class="nk"> &lt;jonasbits&gt;</span> :-)
+<a name="l-69"></a><span class="tm">20:12:26</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (this, by the way, is the main reason I'm hoping namecoin-tx can add proper support for name outputs, it would make this kind of experiment much easier)
+<a name="l-70"></a><span class="tm">20:12:55 </span><span class="nka">* Jeremy_Rand[m]</span> <span class="ac">waves hello to fluffypony</span>
+<a name="l-71"></a><span class="tm">20:13:26 </span><span class="nka">* Jeremy_Rand[m]</span> <span class="ac">would also tip my hat, but I'm not currently wearing a hat</span>
+<a name="l-72"></a><span class="tm">20:13:33</span><span class="nk"> &lt;fluffypony&gt;</span> lol
+<a name="l-73"></a><span class="tm">20:13:37</span><span class="nk"> &lt;fluffypony&gt;</span> m'lady
+<a name="l-74"></a><span class="tm">20:15:32</span><span class="nk"> &lt;jonasbits&gt;</span> any other topic?
+<a name="l-75"></a><span class="tm">20:15:54</span><span class="nk"> &lt;sn0wmonster&gt;</span> yes!
+<a name="l-76"></a><span class="tm">20:16:01</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> anyway, it'd be cool if anyone wants to do some peer review of that proposal.
+<a name="l-77"></a><span class="tm">20:16:12</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> That's all I have for the Protocol topic; next topic I'd like to briefly cover is SPV
+<a name="l-78"></a><span class="tm">20:16:23</span><span class="nk"> &lt;sn0wmonster&gt;</span> I made a pull request 6 months ago to namecoin.org's repo and it was never accepted, so i closed it and made a new one.
+<a name="l-79"></a><span class="tm">20:16:30</span><span class="nk"> &lt;sn0wmonster&gt;</span> Are things like this being handled by anyone particular?
+<a name="l-80"></a><span class="tm">20:16:50</span><span class="nk"> &lt;sn0wmonster&gt;</span> is there some formal process of review and i'm stepping over all of that without knowing?
+<a name="l-81"></a><span class="tm">20:17:26</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">sn0wmonster:</span> I think in theory I'm usually the one who does the review/merging (jonasbits also does that sometimes), I've just been busy lately with other things and the website has been a bit neglected as a result
+<a name="l-82"></a><span class="tm">20:17:50</span><span class="nk"> &lt;sn0wmonster&gt;</span> that's all well and good, but what's the solution? just wait indefinitely?
+<a name="l-83"></a><span class="tm">20:18:04</span><span class="nk"> &lt;jonasbits&gt;</span> https://github.com/namecoin/namecoin.org/pull/138
+<a name="l-84"></a><span class="tm">20:18:30</span><span class="nk"> &lt;sn0wmonster&gt;</span> <span class="hi">jonasbits:</span> ty. should i have used #link for that?
+<a name="l-85"></a><span class="tm">20:18:45</span><span class="nk"> &lt;sn0wmonster&gt;</span> or does that only work after i use #topic?
+<a name="l-86"></a><span class="tm">20:18:47</span><span class="nk"> &lt;jonasbits&gt;</span> I would need something about what this solves
+<a name="l-87"></a><span class="tm">20:18:50</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Turns out that it's a little bit hard to be the Lead Application Engineer and the Community Organizer at the same time as trying to finish my thesis and graduate :(
+<a name="l-88"></a><span class="tm">20:19:23</span><span class="nk"> &lt;jonasbits&gt;</span> yeah, we should help out more :-)
+<a name="l-89"></a><span class="tm">20:19:26</span><span class="nk"> &lt;sn0wmonster&gt;</span> Jeremy_Rand[m], i understand perfectly, i think lower-priority things should be micro-managed by others whenever possible though
+<a name="l-90"></a><span class="tm">20:19:36</span><span class="nk"> &lt;sn0wmonster&gt;</span> one cook in the kitchen isn't great for business
+<a name="l-91"></a><span class="tm">20:19:54</span><span class="nk"> &lt;sn0wmonster&gt;</span> jonasbits, i understand, i'll add that now
+<a name="l-92"></a><span class="tm">20:20:24</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">sn0wmonster:</span> usually it's easier for me to review content/markdown changes than template changes, because the content can easily be reviewed without doing a Jekyll build.  That unfortunately means that PR's like yours which fix template issues take longer to review properly
+<a name="l-93"></a><span class="tm">20:20:32</span><span class="nk"> &lt;jonasbits&gt;</span> whats wrong, how this makes it better, then ill sure ACK it, its a simple fix
+<a name="l-94"></a><span class="tm">20:21:25</span><span class="nk"> &lt;sn0wmonster&gt;</span> Jeremy_Rand[m], that too is a good explanation, i have no qualms, just wantt o be more involved in namecoin in general and find it a huge turnoff for 6 month old requests
+<a name="l-95"></a><span class="tm">20:21:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">sn0wmonster:</span> FWIW if another developer reviews and ACKs it, I'll merge without reviewing myself.  I'm not a gatekeeper in terms of reviewing, I'm just de facto the one who usually does it.  (although jonasbits does quite a bit as well)
+<a name="l-96"></a><span class="tm">20:21:50</span><span class="nk"> &lt;sn0wmonster&gt;</span> thank you, i probably should have asked that previously!
+<a name="l-97"></a><span class="tm">20:21:58</span><span class="nk"> &lt;sn0wmonster&gt;</span> now i know whose door to bang on
+<a name="l-98"></a><span class="tm">20:23:25</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">sn0wmonster:</span> generally speaking, if a PR looks like it's being neglected, feel free to @-mention one of the people who frequently reviews or merges stuff in that repo, and hopefully that'll get their attention.
+<a name="l-99"></a><span class="tm">20:23:28</span><span class="nk"> &lt;sn0wmonster&gt;</span> jonasbits, https://github.com/namecoin/namecoin.org/pull/138/files it's a single change in the margin spacing to properly align the leaderboard with the content body -- it fixes the awkward misalignment that goes against the design's gridlines
+<a name="l-100"></a><span class="tm">20:23:37</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Generally speaking my approximate guideline is that if something hasn't seen action for a week, @-mentioning one person is okay.
+<a name="l-101"></a><span class="tm">20:23:49</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> If another week goes by, @-mention another person
+<a name="l-102"></a><span class="tm">20:23:51</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> etc
+<a name="l-103"></a><span class="tm">20:24:00</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> That's not a formal rule, it's just what I usually do
+<a name="l-104"></a><span class="tm">20:24:22</span><span class="nk"> &lt;sn0wmonster&gt;</span> Jeremy_Rand[m], as someone who hopes to have a successful large-scale open source project someday soon, i am looking for the best ways to manage as well. to me, if github issues are being used, they should be the bible.
+<a name="l-105"></a><span class="tm">20:24:59</span><span class="nk"> &lt;sn0wmonster&gt;</span> is there any reason i'm not grasping having not been involved as much as you guys at this scale, why doing itthat way isn't productive?
+<a name="l-106"></a><span class="tm">20:25:15</span><span class="nk"> &lt;sn0wmonster&gt;</span> is issue-tracking not in depth enough conversation about the issues? does IRC need to be involved and reminders sent ?
+<a name="l-107"></a><span class="tm">20:26:10</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">sn0wmonster:</span> doesn't need to be IRC.  @-mentioning someone on GitHub works fine.  And is probably better since there's more of a permanent record.
+<a name="l-108"></a><span class="tm">20:26:34</span><span class="nk"> &lt;sn0wmonster&gt;</span> oh that's what you meant, my bad!
+<a name="l-109"></a><span class="tm">20:26:41</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> IRC is great for low-latency discussion
+<a name="l-110"></a><span class="tm">20:26:44</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> :)
+<a name="l-111"></a><span class="tm">20:27:01</span><span class="nk"> &lt;sn0wmonster&gt;</span> i thought meant mentioning an OP (@) on IRC. my symbols are getting confuddled.
+<a name="l-112"></a><span class="tm">20:27:25</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> no worries
+<a name="l-113"></a><span class="tm">20:28:11</span><span class="nk"> &lt;jonasbits&gt;</span> moving on
+<a name="l-114"></a><span class="tm">20:28:17</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="topic">#topic </span><span class="topicline">SPV</span>
+<a name="l-115"></a><span class="tm">20:28:37</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/kyuupichan/electrumx/issues/83 ElectrumX merged a fix for partial AuxPoW support.</span>
+<a name="l-116"></a><span class="tm">20:29:54</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> This patch, AFAICT, doesn't actually provide the AuxPoW proof in the Electrum protocol, but it does do enough parsing that it can process Namecoin and Dogecoin blocks without getting confused by the AuxPoW data
+<a name="l-117"></a><span class="tm">20:30:13</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Probably not incredibly hard to do a further patch to actually add the AuxPoW proofs to the Electrum protocol
+<a name="l-118"></a><span class="tm">20:30:39</span><span class="nk"> &lt;jonasbits&gt;</span> cool
+<a name="l-119"></a><span class="tm">20:31:00</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Also,
+<a name="l-120"></a><span class="tm">20:31:05</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/dogecoin/libdohj/pull/19 Ross Nicoll merged my security fix to libdohj upstream.</span>
+<a name="l-121"></a><span class="tm">20:31:16</span><span class="nk"> &lt;jonasbits&gt;</span> nice
+<a name="l-122"></a><span class="tm">20:31:33</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> So libdohj-namecoin should now be safe to use with the mode that I had previously warned people not to try
+<a name="l-123"></a><span class="tm">20:32:46</span><span class="nk"> &lt;jonasbits&gt;</span> is it possible to build libdohj deterministic?
+<a name="l-124"></a><span class="tm">20:33:13</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> last topic I'd like to talk about is Public Relations
+<a name="l-125"></a><span class="tm">20:34:01</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> I don't think libdohj builds deterministically right now, but I've heard from Manfred at Bitsquare that Gitian works fine for Java code in his limited testing
+<a name="l-126"></a><span class="tm">20:34:13</span><span class="nk"> &lt;jonasbits&gt;</span> cool
+<a name="l-127"></a><span class="tm">20:34:34</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="topic">#topic </span><span class="topicline">Public Relations</span>
+<a name="l-128"></a><span class="tm">20:34:49</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/traity/didentity/issues/1 I contacted Traity in March about their incorrect usage of Namecoin; they never got back to me.</span>
+<a name="l-129"></a><span class="tm">20:35:20</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> It's unclear to me exactly what to make of their lack of response.  I'm really hoping this doesn't turn into another Onename.
+<a name="l-130"></a><span class="tm">20:36:49</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Some press reports suggested that they intend to migrate from Namecoin to Ethereum.  If that's the case, then it's arguably not worth worrying about their weird transactions since they'll be gone soon anyway.
+<a name="l-131"></a><span class="tm">20:37:00</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> On the other hand, it seems generally useful to try to reach out to projects that are using Namecoin, to help them use Namecoin more effectively.
+<a name="l-132"></a><span class="tm">20:37:08</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I'm not really sure what the best course of action here is.
+<a name="l-133"></a><span class="tm">20:37:51</span><span class="nk"> &lt;jonasbits&gt;</span> The repo is not so polished, and there is very little documentation
+<a name="l-134"></a><span class="tm">20:38:13</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Yeah.  Not sure what to make of that either.
+<a name="l-135"></a><span class="tm">20:40:24</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Aside from the namespace issue, it's also unclear to me why they even need to use Namecoin for storing that stuff.  Seems like a timestamped merkle root (which works fine in Bitcoin) would make more sense than storing every hash in a name.
+<a name="l-136"></a><span class="tm">20:40:38</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Maybe there's something in their threat model that necessitates what they're doing there, but I don't see it.
+<a name="l-137"></a><span class="tm">20:41:12</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Their transaction volume for the few blocks I looked at seems to be greater than d/'s transaction volume, which could arguably classify it as spam
+<a name="l-138"></a><span class="tm">20:42:12</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I assume that a lot of my concerns would be resolved if they were actually responsive to my contact attempt
+<a name="l-139"></a><span class="tm">20:44:16</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> in other news,
+<a name="l-140"></a><span class="tm">20:44:25</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/meta/issues/40 I enabled GitHub IRC integration for the gitian.sigs, meta, namecoin.info, namecoin.info-dotbit, and namecoin.org repos.</span>
+<a name="l-141"></a><span class="tm">20:44:38</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#help </span><span class="cmdline">We still need to enable GitHub IRC integration for namecoin-core and nameid repos.</span>
+<a name="l-142"></a><span class="tm">20:44:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I think Daniel is the one who has to do that
+<a name="l-143"></a><span class="tm">20:45:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://www.namecoin.org/resources/chat/ Matrix and IRC channel info is listed on the website.</span>
+<a name="l-144"></a><span class="tm">20:45:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin.org/pull/123 I added an ICS calendar for dev meetings to namecoin.org.</span>
+<a name="l-145"></a><span class="tm">20:45:56</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Also,
+<a name="l-146"></a><span class="tm">20:45:59</span><span class="nk"> &lt;Squidicuz&gt;</span> ni. i have nothing to talk about... unless you want to hear about the dimension....
+<a name="l-147"></a><span class="tm">20:46:02</span><span class="nk"> &lt;Squidicuz&gt;</span> 5th*
+<a name="l-148"></a><span class="tm">20:46:25</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">Namecoin will not participate in OU's Software Studio going forward.</span>
+<a name="l-149"></a><span class="tm">20:46:46</span><span class="nk"> &lt;jonasbits&gt;</span> ICS calender helped a lot, gave the correct time for the meeting and everything
+<a name="l-150"></a><span class="tm">20:47:34</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> This is primarily due to concerns about management incompetence and new policies at Software Studio that make it unfeasible for us to keep participating
+<a name="l-151"></a><span class="tm">20:48:14</span><span class="nk"> &lt;jonasbits&gt;</span> Great, i think this is a wrap!
+<a name="l-152"></a><span class="tm">20:48:17</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I'm totally open to trying to recruit students via other means though
+<a name="l-153"></a><span class="tm">20:48:25</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> and that's it from me :)
+<a name="l-154"></a><span class="tm">20:48:38</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

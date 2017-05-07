@@ -1,0 +1,154 @@
+19:02:50 <jonasbits> #startmeeting
+19:02:50 <qpm> Meeting started Sun May  7 19:02:50 2017 UTC.  The chair is jonasbits. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:02:53 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:04:04 <jonasbits> who is here today, say hello :-)
+19:04:09 <Jeremy_Rand[m]> Hello!
+19:05:49 <jonasbits> are you guys here? hl, brand0, ryan-c, Squidicuz
+19:07:48 <jonasbits> #topic Namecoin-Core
+19:10:15 <jonasbits> Its kinda empty today
+19:10:29 <Jeremy_Rand[m]> #link https://github.com/namecoin/namecoin-core/issues/147 I noticed that namecoin-tx has trouble creating name outputs; fixing this would be great for facilitating hackers.
+19:12:16 <jonasbits> I agree, and fixing testnet.
+19:13:01 <Jeremy_Rand[m]> yes
+19:13:07 <Jeremy_Rand[m]> #link https://github.com/namecoin/namecoin-core/issues/131 A user reports that names that have been transferred out of a wallet still appear in the name tab GUI.
+19:13:41 <Jeremy_Rand[m]> presumably brand0 is the one who would be best placed to fix this?
+19:15:43 <Jeremy_Rand[m]> #link https://github.com/namecoin/namecoin-core/issues/148 A NixOS user requested changes to Namecoin Core in order to play well with NixOS's filesystem layout; I referred them to Bitcoin Core upstream.
+19:16:10 <Jeremy_Rand[m]> Looks like Bitcoin Core is close to merging a fix for that
+19:17:00 <jonasbits> cool
+19:18:03 <Jeremy_Rand[m]> jonasbits: so what's the situation with the macOS Gitian descriptor?  We merged your renaming PR, is there anything else expected to be needed in order to build macOS binaries in Gitian?
+19:19:02 <jonasbits> i fail building the dev repo, im going to first try to build bitcoin gitian and than try again with namecoin
+19:20:40 <jonasbits> one contributing factor could be me building on a win10 host system with virtaulbox
+19:20:55 <Jeremy_Rand[m]> jonasbits: I noticed when I was testing on a macOS machine a couple weeks ago that running "make deploy" on macOS is yielding a file called "Bitcoin-Qt.dmg" instead of "Namecoin-Qt.dmg"
+19:21:05 <Jeremy_Rand[m]> jonasbits: is that likely to be the cause of the Gitian descriptor failing?
+19:22:00 <jonasbits> Not sure, but good catch, we should try to fix native and gitian builds
+19:22:38 <Jeremy_Rand[m]> Yeah.  I haven't looked at what exactly "make deploy" does on macOS, but hopefully it's easy to rename Bitcoin to Namecoin there
+19:23:36 <Jeremy_Rand[m]> Also, the dmg file has the Bitcoin logo instead of the Namecoin logo
+19:23:47 <Jeremy_Rand[m]> Although that might be fixed by fsb4000's PR for NSIS logos, not certain
+19:24:41 <Jeremy_Rand[m]> ok, summarizing the above for the minutes:
+19:25:25 <Jeremy_Rand[m]> #info jonasbits failed to build the dev branch for macOS in Gitian, even with the renaming PR merged
+19:26:03 <Jeremy_Rand[m]> #info I think this may be related to "make deploy" on macOS yielding a file called "Bitcoin-Qt.dmg" instead of "Namecoin-Qt.dmg"
+19:26:46 <Jeremy_Rand[m]> By the way, also related to macOS:
+19:27:12 <Jeremy_Rand[m]> #info Since Namecoin is no longer participating in OU's Software Studio, it's unclear if I will continue to have access to a macOS machine to test stuff on
+19:28:03 <jonasbits> maybe a virtual macOS system could be a way forward
+19:29:04 <Jeremy_Rand[m]> jonasbits: yeah.  My understanding is that macOS VPS's with VNC access can be rented easily?
+19:29:12 <jonasbits> cool
+19:29:35 <Jeremy_Rand[m]> Not really sure that I want to spend Namecoin project funds on that though
+19:33:45 <Jeremy_Rand[m]> That's all from me in the Namecoin Core department
+19:34:05 <jonasbits> moving on then
+19:34:18 <jonasbits> #topic ncdns
+19:35:00 <jonasbits> something you want to bring up Jeremy?
+19:37:10 <Jeremy_Rand[m]> #info hl and I have been continuing to iterate on the ncdns NSIS installer.  It works pretty well already, and can bundle Namecoin Core and Dnssec-Trigger in the installer.
+19:37:57 <jonasbits> Cool
+19:38:35 <Jeremy_Rand[m]> #idea We should look into moving the main ncdns and ncdns-nsis repos to the namecoin GitHub organization.  (They're currently under hl's username)
+19:41:11 <Jeremy_Rand[m]> #info I did some preliminary research on using EMET for cert pinning on Windows.  This will probably take a backseat to getting TLS working on GNU/Linux though.
+19:42:08 <jonasbits> is it possible to test ncdns on linux?
+19:42:50 <Jeremy_Rand[m]> jonasbits: it should work fine on GNU/Linux, but TLS cert injection isn't implemented yet
+19:43:04 <Jeremy_Rand[m]> I've used ncdns on GNU/Linux before, though not recently.
+19:44:42 <Jeremy_Rand[m]> Most of the TLS cert injection code from Windows should be applicable to GNU/Linux's NSS cert store, I think the main task remaining is just executing certutil (and of course actually testing to make sure it works properly)
+19:45:34 * Squidicuz waves
+19:45:56 <Jeremy_Rand[m]> hey Squidicuz
+19:46:15 <Squidicuz> sorry, following.,. just way behind :3
+19:47:22 <jonasbits> sounds interesting
+19:49:41 <Jeremy_Rand[m]> That's all from me for the ncdns department
+19:52:01 <Squidicuz> what is wrong with testnet?  I have some nodes running, but I haven't checked them in a week.. *shrug*
+19:52:46 <Jeremy_Rand[m]> Squidicuz: I think it had something to do with a bunch of old nodes being on the wrong side of a softfork.  Not really certain.
+19:53:51 <Jeremy_Rand[m]> Anyway, we're going to reset testnet with a new AuxPoW chain ID, so that we can try to deploy AAA on testnet
+19:56:09 <Squidicuz> cool. sounds good
+20:02:21 <jonasbits> Squidicuz: anything you want to talk about?
+20:03:17 <Jeremy_Rand[m]> (I've got a few other miscellaneous things to bring up if Squidicuz doesn't have anything)
+20:05:47 <jonasbits> Should i change the topic?
+20:06:22 <Jeremy_Rand[m]> sure; change it to "Protocol"
+20:06:49 <jonasbits> #topic Protocol
+20:07:10 <Jeremy_Rand[m]> #link https://github.com/namecoin/meta/issues/43 I posted a proposal for "pure name transactions" to improve privacy and scalability.
+20:08:38 <jonasbits> this is really nice
+20:09:56 <Jeremy_Rand[m]> Nothing quite like getting a bunch of useful constructive criticism from ICANN people about Namecoin scalability in order to get me to work on stuff like this :)
+20:11:01 <Jeremy_Rand[m]> And of course it also plays pretty well with the anonymity improvements that I was discussing with fluffypony
+20:11:49 <fluffypony> +1
+20:12:02 <jonasbits> welcome fluffypony
+20:12:14 * fluffypony is always here :)
+20:12:22 <jonasbits> :-)
+20:12:26 <Jeremy_Rand[m]> (this, by the way, is the main reason I'm hoping namecoin-tx can add proper support for name outputs, it would make this kind of experiment much easier)
+20:12:55 * Jeremy_Rand[m] waves hello to fluffypony
+20:13:26 * Jeremy_Rand[m] would also tip my hat, but I'm not currently wearing a hat
+20:13:33 <fluffypony> lol
+20:13:37 <fluffypony> m'lady
+20:15:32 <jonasbits> any other topic?
+20:15:54 <sn0wmonster> yes!
+20:16:01 <Jeremy_Rand[m]> anyway, it'd be cool if anyone wants to do some peer review of that proposal.
+20:16:12 <Jeremy_Rand[m]> That's all I have for the Protocol topic; next topic I'd like to briefly cover is SPV
+20:16:23 <sn0wmonster> I made a pull request 6 months ago to namecoin.org's repo and it was never accepted, so i closed it and made a new one.
+20:16:30 <sn0wmonster> Are things like this being handled by anyone particular?
+20:16:50 <sn0wmonster> is there some formal process of review and i'm stepping over all of that without knowing?
+20:17:26 <Jeremy_Rand[m]> sn0wmonster: I think in theory I'm usually the one who does the review/merging (jonasbits also does that sometimes), I've just been busy lately with other things and the website has been a bit neglected as a result
+20:17:50 <sn0wmonster> that's all well and good, but what's the solution? just wait indefinitely?
+20:18:04 <jonasbits> https://github.com/namecoin/namecoin.org/pull/138
+20:18:30 <sn0wmonster> jonasbits: ty. should i have used #link for that?
+20:18:45 <sn0wmonster> or does that only work after i use #topic?
+20:18:47 <jonasbits> I would need something about what this solves
+20:18:50 <Jeremy_Rand[m]> Turns out that it's a little bit hard to be the Lead Application Engineer and the Community Organizer at the same time as trying to finish my thesis and graduate :(
+20:19:23 <jonasbits> yeah, we should help out more :-)
+20:19:26 <sn0wmonster> Jeremy_Rand[m], i understand perfectly, i think lower-priority things should be micro-managed by others whenever possible though
+20:19:36 <sn0wmonster> one cook in the kitchen isn't great for business
+20:19:54 <sn0wmonster> jonasbits, i understand, i'll add that now
+20:20:24 <Jeremy_Rand[m]> sn0wmonster: usually it's easier for me to review content/markdown changes than template changes, because the content can easily be reviewed without doing a Jekyll build.  That unfortunately means that PR's like yours which fix template issues take longer to review properly
+20:20:32 <jonasbits> whats wrong, how this makes it better, then ill sure ACK it, its a simple fix
+20:21:25 <sn0wmonster> Jeremy_Rand[m], that too is a good explanation, i have no qualms, just wantt o be more involved in namecoin in general and find it a huge turnoff for 6 month old requests
+20:21:28 <Jeremy_Rand[m]> sn0wmonster: FWIW if another developer reviews and ACKs it, I'll merge without reviewing myself.  I'm not a gatekeeper in terms of reviewing, I'm just de facto the one who usually does it.  (although jonasbits does quite a bit as well)
+20:21:50 <sn0wmonster> thank you, i probably should have asked that previously!
+20:21:58 <sn0wmonster> now i know whose door to bang on
+20:23:25 <Jeremy_Rand[m]> sn0wmonster: generally speaking, if a PR looks like it's being neglected, feel free to @-mention one of the people who frequently reviews or merges stuff in that repo, and hopefully that'll get their attention.
+20:23:28 <sn0wmonster> jonasbits, https://github.com/namecoin/namecoin.org/pull/138/files it's a single change in the margin spacing to properly align the leaderboard with the content body -- it fixes the awkward misalignment that goes against the design's gridlines
+20:23:37 <Jeremy_Rand[m]> Generally speaking my approximate guideline is that if something hasn't seen action for a week, @-mentioning one person is okay.
+20:23:49 <Jeremy_Rand[m]> If another week goes by, @-mention another person
+20:23:51 <Jeremy_Rand[m]> etc
+20:24:00 <Jeremy_Rand[m]> That's not a formal rule, it's just what I usually do
+20:24:22 <sn0wmonster> Jeremy_Rand[m], as someone who hopes to have a successful large-scale open source project someday soon, i am looking for the best ways to manage as well. to me, if github issues are being used, they should be the bible.
+20:24:59 <sn0wmonster> is there any reason i'm not grasping having not been involved as much as you guys at this scale, why doing itthat way isn't productive?
+20:25:15 <sn0wmonster> is issue-tracking not in depth enough conversation about the issues? does IRC need to be involved and reminders sent ?
+20:26:10 <Jeremy_Rand[m]> sn0wmonster: doesn't need to be IRC.  @-mentioning someone on GitHub works fine.  And is probably better since there's more of a permanent record.
+20:26:34 <sn0wmonster> oh that's what you meant, my bad!
+20:26:41 <Jeremy_Rand[m]> IRC is great for low-latency discussion
+20:26:44 <Jeremy_Rand[m]> :)
+20:27:01 <sn0wmonster> i thought meant mentioning an OP (@) on IRC. my symbols are getting confuddled.
+20:27:25 <Jeremy_Rand[m]> no worries
+20:28:11 <jonasbits> moving on
+20:28:17 <jonasbits> #topic SPV
+20:28:37 <Jeremy_Rand[m]> #link https://github.com/kyuupichan/electrumx/issues/83 ElectrumX merged a fix for partial AuxPoW support.
+20:29:54 <Jeremy_Rand[m]> This patch, AFAICT, doesn't actually provide the AuxPoW proof in the Electrum protocol, but it does do enough parsing that it can process Namecoin and Dogecoin blocks without getting confused by the AuxPoW data
+20:30:13 <Jeremy_Rand[m]> Probably not incredibly hard to do a further patch to actually add the AuxPoW proofs to the Electrum protocol
+20:30:39 <jonasbits> cool
+20:31:00 <Jeremy_Rand[m]> Also,
+20:31:05 <Jeremy_Rand[m]> #link https://github.com/dogecoin/libdohj/pull/19 Ross Nicoll merged my security fix to libdohj upstream.
+20:31:16 <jonasbits> nice
+20:31:33 <Jeremy_Rand[m]> So libdohj-namecoin should now be safe to use with the mode that I had previously warned people not to try
+20:32:46 <jonasbits> is it possible to build libdohj deterministic?
+20:33:13 <Jeremy_Rand[m]> last topic I'd like to talk about is Public Relations
+20:34:01 <Jeremy_Rand[m]> jonasbits: I don't think libdohj builds deterministically right now, but I've heard from Manfred at Bitsquare that Gitian works fine for Java code in his limited testing
+20:34:13 <jonasbits> cool
+20:34:34 <jonasbits> #topic Public Relations
+20:34:49 <Jeremy_Rand[m]> #link https://github.com/traity/didentity/issues/1 I contacted Traity in March about their incorrect usage of Namecoin; they never got back to me.
+20:35:20 <Jeremy_Rand[m]> It's unclear to me exactly what to make of their lack of response.  I'm really hoping this doesn't turn into another Onename.
+20:36:49 <Jeremy_Rand[m]> Some press reports suggested that they intend to migrate from Namecoin to Ethereum.  If that's the case, then it's arguably not worth worrying about their weird transactions since they'll be gone soon anyway.
+20:37:00 <Jeremy_Rand[m]> On the other hand, it seems generally useful to try to reach out to projects that are using Namecoin, to help them use Namecoin more effectively.
+20:37:08 <Jeremy_Rand[m]> I'm not really sure what the best course of action here is.
+20:37:51 <jonasbits> The repo is not so polished, and there is very little documentation
+20:38:13 <Jeremy_Rand[m]> Yeah.  Not sure what to make of that either.
+20:40:24 <Jeremy_Rand[m]> Aside from the namespace issue, it's also unclear to me why they even need to use Namecoin for storing that stuff.  Seems like a timestamped merkle root (which works fine in Bitcoin) would make more sense than storing every hash in a name.
+20:40:38 <Jeremy_Rand[m]> Maybe there's something in their threat model that necessitates what they're doing there, but I don't see it.
+20:41:12 <Jeremy_Rand[m]> Their transaction volume for the few blocks I looked at seems to be greater than d/'s transaction volume, which could arguably classify it as spam
+20:42:12 <Jeremy_Rand[m]> I assume that a lot of my concerns would be resolved if they were actually responsive to my contact attempt
+20:44:16 <Jeremy_Rand[m]> in other news,
+20:44:25 <Jeremy_Rand[m]> #link https://github.com/namecoin/meta/issues/40 I enabled GitHub IRC integration for the gitian.sigs, meta, namecoin.info, namecoin.info-dotbit, and namecoin.org repos.
+20:44:38 <Jeremy_Rand[m]> #help We still need to enable GitHub IRC integration for namecoin-core and nameid repos.
+20:44:45 <Jeremy_Rand[m]> I think Daniel is the one who has to do that
+20:45:30 <Jeremy_Rand[m]> #link https://www.namecoin.org/resources/chat/ Matrix and IRC channel info is listed on the website.
+20:45:45 <Jeremy_Rand[m]> #link https://github.com/namecoin/namecoin.org/pull/123 I added an ICS calendar for dev meetings to namecoin.org.
+20:45:56 <Jeremy_Rand[m]> Also,
+20:45:59 <Squidicuz> ni. i have nothing to talk about... unless you want to hear about the dimension....
+20:46:02 <Squidicuz> 5th*
+20:46:25 <Jeremy_Rand[m]> #info Namecoin will not participate in OU's Software Studio going forward.
+20:46:46 <jonasbits> ICS calender helped a lot, gave the correct time for the meeting and everything
+20:47:34 <Jeremy_Rand[m]> This is primarily due to concerns about management incompetence and new policies at Software Studio that make it unfeasible for us to keep participating
+20:48:14 <jonasbits> Great, i think this is a wrap!
+20:48:17 <Jeremy_Rand[m]> I'm totally open to trying to recruit students via other means though
+20:48:25 <Jeremy_Rand[m]> and that's it from me :)
+20:48:38 <jonasbits> #endmeeting

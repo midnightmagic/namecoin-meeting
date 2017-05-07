@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev Meeting</h1>
+<span class="details">
+Meeting started by jonasbits at 19:02:50 UTC
+(<a href="namecoin-dev.2017-05-07-19.02.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">Namecoin-Core</b> <span class="details">(<a href='namecoin-dev.2017-05-07-19.02.log.html#l-7'>jonasbits</a>, 19:07:48)</span>
+<ol type="a">
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/issues/147">https://github.com/namecoin/namecoin-core/issues/147</a>
+    I noticed that namecoin-tx has trouble creating name outputs; fixing
+    this would be great for facilitating hackers. <span
+    class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-9'>Jeremy_Rand[m]</a>,
+    19:10:29)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/issues/131">https://github.com/namecoin/namecoin-core/issues/131</a>
+    A user reports that names that have been transferred out of a wallet
+    still appear in the name tab GUI. <span class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-12'>Jeremy_Rand[m]</a>,
+    19:13:07)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/issues/148">https://github.com/namecoin/namecoin-core/issues/148</a>
+    A NixOS user requested changes to Namecoin Core in order to play
+    well with NixOS's filesystem layout; I referred them to Bitcoin Core
+    upstream. <span class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-14'>Jeremy_Rand[m]</a>,
+    19:15:43)</span></li>
+  <li><span class="INFO">jonasbits failed to build the dev branch for
+    macOS in Gitian, even with the renaming PR merged</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-27'>Jeremy_Rand[m]</a>,
+    19:25:25)</span></li>
+  <li><span class="INFO">I think this may be related to "make deploy" on
+    macOS yielding a file called "Bitcoin-Qt.dmg" instead of
+    "Namecoin-Qt.dmg"</span> <span class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-28'>Jeremy_Rand[m]</a>,
+    19:26:03)</span></li>
+  <li><span class="INFO">Since Namecoin is no longer participating in
+    OU's Software Studio, it's unclear if I will continue to have access
+    to a macOS machine to test stuff on</span> <span class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-30'>Jeremy_Rand[m]</a>,
+    19:27:12)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">ncdns</b> <span class="details">(<a href='namecoin-dev.2017-05-07-19.02.log.html#l-37'>jonasbits</a>, 19:34:18)</span>
+<ol type="a">
+  <li><span class="INFO">hl and I have been continuing to iterate on the
+    ncdns NSIS installer.  It works pretty well already, and can bundle
+    Namecoin Core and Dnssec-Trigger in the installer.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-39'>Jeremy_Rand[m]</a>,
+    19:37:10)</span></li>
+  <li><i class="itemtype">IDEA</i>: <span class="IDEA">We should look
+    into moving the main ncdns and ncdns-nsis repos to the namecoin
+    GitHub organization.  (They're currently under hl's username)</span>
+    <span class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-41'>Jeremy_Rand[m]</a>,
+    19:38:35)</span></li>
+  <li><span class="INFO">I did some preliminary research on using EMET
+    for cert pinning on Windows.  This will probably take a backseat to
+    getting TLS working on GNU/Linux though.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-42'>Jeremy_Rand[m]</a>,
+    19:41:11)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Protocol</b> <span class="details">(<a href='namecoin-dev.2017-05-07-19.02.log.html#l-60'>jonasbits</a>, 20:06:49)</span>
+<ol type="a">
+  <li><a
+    href="https://github.com/namecoin/meta/issues/43">https://github.com/namecoin/meta/issues/43</a>
+    I posted a proposal for "pure name transactions" to improve privacy
+    and scalability. <span class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-61'>Jeremy_Rand[m]</a>,
+    20:07:10)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin.org/pull/138">https://github.com/namecoin/namecoin.org/pull/138</a>
+    <span class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-83'>jonasbits</a>,
+    20:18:04)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">SPV</b> <span class="details">(<a href='namecoin-dev.2017-05-07-19.02.log.html#l-114'>jonasbits</a>, 20:28:17)</span>
+<ol type="a">
+  <li><a
+    href="https://github.com/kyuupichan/electrumx/issues/83">https://github.com/kyuupichan/electrumx/issues/83</a>
+    ElectrumX merged a fix for partial AuxPoW support. <span
+    class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-115'>Jeremy_Rand[m]</a>,
+    20:28:37)</span></li>
+  <li><a
+    href="https://github.com/dogecoin/libdohj/pull/19">https://github.com/dogecoin/libdohj/pull/19</a>
+    Ross Nicoll merged my security fix to libdohj upstream. <span
+    class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-120'>Jeremy_Rand[m]</a>,
+    20:31:05)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Public Relations</b> <span class="details">(<a href='namecoin-dev.2017-05-07-19.02.log.html#l-127'>jonasbits</a>, 20:34:34)</span>
+<ol type="a">
+  <li><a
+    href="https://github.com/traity/didentity/issues/1">https://github.com/traity/didentity/issues/1</a>
+    I contacted Traity in March about their incorrect usage of Namecoin;
+    they never got back to me. <span class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-128'>Jeremy_Rand[m]</a>,
+    20:34:49)</span></li>
+  <li><a
+    href="https://github.com/namecoin/meta/issues/40">https://github.com/namecoin/meta/issues/40</a>
+    I enabled GitHub IRC integration for the gitian.sigs, meta,
+    namecoin.info, namecoin.info-dotbit, and namecoin.org repos. <span
+    class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-140'>Jeremy_Rand[m]</a>,
+    20:44:25)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">We still need to
+    enable GitHub IRC integration for namecoin-core and nameid
+    repos.</span> <span class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-141'>Jeremy_Rand[m]</a>,
+    20:44:38)</span></li>
+  <li><a
+    href="https://www.namecoin.org/resources/chat/">https://www.namecoin.org/resources/chat/</a>
+    Matrix and IRC channel info is listed on the website. <span
+    class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-143'>Jeremy_Rand[m]</a>,
+    20:45:30)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin.org/pull/123">https://github.com/namecoin/namecoin.org/pull/123</a>
+    I added an ICS calendar for dev meetings to namecoin.org. <span
+    class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-144'>Jeremy_Rand[m]</a>,
+    20:45:45)</span></li>
+  <li><span class="INFO">Namecoin will not participate in OU's Software
+    Studio going forward.</span> <span class="details">(<a
+    href='namecoin-dev.2017-05-07-19.02.log.html#l-148'>Jeremy_Rand[m]</a>,
+    20:46:25)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 20:48:38 UTC
+(<a href="namecoin-dev.2017-05-07-19.02.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>(none)</li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand[m] (83)</li>
+  <li>jonasbits (40)</li>
+  <li>sn0wmonster (19)</li>
+  <li>Squidicuz (6)</li>
+  <li>fluffypony (4)</li>
+  <li>qpm (2)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>
