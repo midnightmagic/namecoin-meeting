@@ -1,0 +1,9 @@
+19:11:21 <Jeremy_Rand[m]> #startmeeting
+19:11:28 <qpm> Meeting started Sun Jun  4 19:11:21 2017 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:11:32 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:11:54 <Jeremy_Rand[m]> #meetingtopic Namecoin Development Meeting
+19:12:34 <Jeremy_Rand[m]> Hey everyone, welcome to the meeting.  Can we get a roll call of who's here today?
+19:12:42 <midnightmagic> half here but rapidly falling asleep
+19:15:39 <Jeremy_Rand[m]> hmm, I hope midnightmagic and I aren't the only ones here?
+19:25:08 <Jeremy_Rand[m]> okay, so I guess there's not much point in doing the meeting if a sleepy midnightmagic and I are the only ones here
+19:25:18 <Jeremy_Rand[m]> #endmeeting
