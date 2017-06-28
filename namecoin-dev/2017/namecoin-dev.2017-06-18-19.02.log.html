@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:02:57</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:03:03</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Jun 18 19:02:57 2017 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:03:06</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:03:29</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#meetingtopic </span><span class="cmdline">Namecoin Development Meeting</span>
+<a name="l-5"></a><span class="tm">19:03:56</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Hi everyone, welcome to the meeting
+<a name="l-6"></a><span class="tm">19:04:02</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Can we get a roll call of who's here today?
+<a name="l-7"></a><span class="tm">19:04:05</span><span class="nk"> &lt;cannon-c&gt;</span> Here
+<a name="l-8"></a><span class="tm">19:04:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Hi cannon-c
+<a name="l-9"></a><span class="tm">19:04:45</span><span class="nk"> &lt;cannon-c&gt;</span> hello Jeremy_Rand[m]
+<a name="l-10"></a><span class="tm">19:07:47</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Okay, so this meeting will basically be a review of the various news items I've submitted to namecoin.org over the past few weeks, since that covers basically everything that's been happening lately
+<a name="l-11"></a><span class="tm">19:09:12</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">ncdns</span>
+<a name="l-12"></a><span class="tm">19:09:55</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">hl released the Windows installer for ncdns.</span>
+<a name="l-13"></a><span class="tm">19:10:39</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">This includes Namecoin Core and Dnssec-Trigger, so it's basically all you need to view .bit domains on Windows</span>
+<a name="l-14"></a><span class="tm">19:11:18</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">Doesn't yet include the TLS support, because it wasn't merged at the time of release</span>
+<a name="l-15"></a><span class="tm">19:12:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">hl has ACKed the CryptoAPI TLS support for merge, I just need to squash the commits and then it'll be merged.</span>
+<a name="l-16"></a><span class="tm">19:13:12</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I added a tool to ncdns that sets up the NUMS key pin in Chromium; hl has ACKed and merged it.</span>
+<a name="l-17"></a><span class="tm">19:13:40</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">We haven't yet integrated that tool to the NSIS script</span>
+<a name="l-18"></a><span class="tm">19:16:14</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I started working on NSS TLS support for ncdns, it basically works but it's quite slow because NSS's certutil takes about 700ms to add a cert</span>
+<a name="l-19"></a><span class="tm">19:16:53</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I figured out that the main reason certutil is so slow is that it doesn't group SQLite writes into a single transaction properly</span>
+<a name="l-20"></a><span class="tm">19:17:05</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I plan to submit a bug to NSS upstream about that</span>
+<a name="l-21"></a><span class="tm">19:18:06</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I think that's all the ncdns news, anyone have questions/comments/things to bring up about ncdns?
+<a name="l-22"></a><span class="tm">19:19:19</span><span class="nk"> &lt;cannon-c&gt;</span> question,
+<a name="l-23"></a><span class="tm">19:19:31</span><span class="nk"> &lt;cannon-c&gt;</span> ncdns integrate with Tor .onion sites?
+<a name="l-24"></a><span class="tm">19:20:11</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">cannon-c:</span> I'm actually going to talk about that later in the meeting; the .onion support is technically a separate component from ncdns
+<a name="l-25"></a><span class="tm">19:20:37</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (oh, and before I forget:)
+<a name="l-26"></a><span class="tm">19:20:55</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">All of the above ncdns work is thanks to NLnet.  A little bit of it is also supported by NMDF and Namecoin Bountysource</span>
+<a name="l-27"></a><span class="tm">19:21:43</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Other questions/comments, or should we switch topics to Tor?
+<a name="l-28"></a><span class="tm">19:23:48</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Tor</span>
+<a name="l-29"></a><span class="tm">19:24:44</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">As people may remember, I released a fork of OnioNS's Stem component a few months ago that enabled Namecoin naming support in Tor.</span>
+<a name="l-30"></a><span class="tm">19:25:31</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">The OnioNS Stem fork was really proof-of-concept-ish, e.g. it didn't support most of the .bit spec, it didn't support the libdohj SPV client, and it didn't use the Prop279 spec (instead using the Tor controller API)</span>
+<a name="l-31"></a><span class="tm">19:26:13</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've fixed those 3 issues in a new release, this time based on Miek Gieben's q tool</span>
+<a name="l-32"></a><span class="tm">19:27:06</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">The new tool is basically a bridge between Prop279 clients and DNS servers.</span>
+<a name="l-33"></a><span class="tm">19:28:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">So you can use TorNS by meejah, tell it to use this tool as a pluggable naming system, and give this tool ncdns's port+IP, and Namecoin naming will work in Tor</span>
+<a name="l-34"></a><span class="tm">19:29:02</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">There were some licensing issues with TorNS that are now resolved (meejah had forgotten to list the license; it's now public domain).</span>
+<a name="l-35"></a><span class="tm">19:29:27</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">There were also some issues with TorNS restricting the TLD's to .onion, which of course doesn't make sense for Namecoin.  meejah is willing to accept a PR to remove that restriction; I'll be submitting that shortly.</span>
+<a name="l-36"></a><span class="tm">19:29:52</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">(Until that PR is merged, I have a fork called LibreTorNS that doesn't have that restriction)</span>
+<a name="l-37"></a><span class="tm">19:30:38</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">so this tool works for redirecting .bit domains to IP addresses, DNS names, and onion services.  It can also redirect .bit.onion domains to onion services.</span>
+<a name="l-38"></a><span class="tm">19:31:24</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">Works perfectly fine with the SPV client, and with basically all of the .bit spec (except for NS records) -- both of these are because it uses ncdns instead of talking directly to Namecoin Core</span>
+<a name="l-39"></a><span class="tm">19:33:22</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">It should be noted that there's no Namecoin-specific code in this tool.  You could give it a regular DNS server instead of ncdns, and it would let you automatically redirect DNS names to onion services (and you could presumably use the ICANN root key as a trust root for this if you wanted)</span>
+<a name="l-40"></a><span class="tm">19:34:23</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">Because it's designed to be interoperable with DNS, that means that the way onion services are specified in Namecoin names has changed.  It no longer uses the "tor" field, it instead uses the "txt" field of the "_tor" subdomain</span>
+<a name="l-41"></a><span class="tm">19:34:44</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">This is consistent with how things are usually done in the DNS world.</span>
+<a name="l-42"></a><span class="tm">19:35:52</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Any comments/questions/things to bring up about Tor?
+<a name="l-43"></a><span class="tm">19:35:58</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">cannon-c:</span> ^
+<a name="l-44"></a><span class="tm">19:36:10</span><span class="nk"> &lt;cannon-c&gt;</span> what do you mean by "txt" field of th e"_tor" subdomain?
+<a name="l-45"></a><span class="tm">19:37:36</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">cannon-c:</span> let's say you have a Namecoin domain name.  Your JSON would look like this.  {"ip": "1.2.3.4", "map":{"_tor":{"txt":"xyz.onion"}}}
+<a name="l-46"></a><span class="tm">19:37:50</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Obviously substitute the IP and .onion address that point to your site
+<a name="l-47"></a><span class="tm">19:37:54</span><span class="nk"> &lt;cannon-c&gt;</span> ok. I understand now
+<a name="l-48"></a><span class="tm">19:38:29</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">cannon-c:</span> I look forward to your test reports :)
+<a name="l-49"></a><span class="tm">19:39:49</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Anything else about Tor support that anyone would like to bring up?
+<a name="l-50"></a><span class="tm">19:41:34</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok, so moving on...
+<a name="l-51"></a><span class="tm">19:41:39</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Electrum</span>
+<a name="l-52"></a><span class="tm">19:42:44</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">ahmed_ has been doing some work on Electrum-NMC</span>
+<a name="l-53"></a><span class="tm">19:42:47</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">ahmed_:</span> are you here at the moment?
+<a name="l-54"></a><span class="tm">19:42:50</span><span class="nk"> &lt;ahmed_&gt;</span> i am
+<a name="l-55"></a><span class="tm">19:43:02</span><span class="nk"> &lt;ahmed_&gt;</span> not been able to do much since the last update. Too much overtime @ work
+<a name="l-56"></a><span class="tm">19:43:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">ahmed_:</span> ok.  Is there anything we can do to help?  btw Phelix says he should be able to join in on the Electrum efforts in circa 1-2 weeks
+<a name="l-57"></a><span class="tm">19:46:26</span><span class="nk"> &lt;ahmed_&gt;</span> atm its just a case of working on electrumX ive not started on it yet. But getting a copy up, getting it to sync and porting in AUXPOW verification to it
+<a name="l-58"></a><span class="tm">19:46:52</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">ahmed_:</span> ok
+<a name="l-59"></a><span class="tm">19:48:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">ahmed_:</span> btw, can't remember if I already mentioned this -- feel free to keep track of an estimate of time you spend on Electrum-NMC stuff so that NLnet can pay you for your time
+<a name="l-60"></a><span class="tm">19:48:28</span><span class="nk"> &lt;ahmed_&gt;</span> ahh you didnt, but i'll try and work it out
+<a name="l-61"></a><span class="tm">19:48:44</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok
+<a name="l-62"></a><span class="tm">19:49:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> summarizing the above for the meeting minutes:
+<a name="l-63"></a><span class="tm">19:50:26</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">ahmed_ says the next step in Electrum-NMC is getting an electrumX instance running and synced with the Namecoin chain, and adding AuxPoW verification</span>
+<a name="l-64"></a><span class="tm">19:51:11</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I think that's all the topics I was going to bring up today.  Anything else we should cover?
+<a name="l-65"></a><span class="tm">19:51:14</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">cannon-c:</span> ^
+<a name="l-66"></a><span class="tm">19:52:37</span><span class="nk"> &lt;cannon-c&gt;</span> Electrum-NMC support name registrations?
+<a name="l-67"></a><span class="tm">19:53:10</span><span class="nk"> &lt;cannon-c&gt;</span> or management
+<a name="l-68"></a><span class="tm">19:53:13</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">cannon-c:</span> that is planned, right after AuxPoW support is added, if I understand correctly
+<a name="l-69"></a><span class="tm">19:54:09</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">cannon-c:</span> for name registrations, Electrum-NMC won't necessarily be able to check whether the name already exists, so you'll have to check on e.g. a block explorer or the libdohj client before you try to register a name
+<a name="l-70"></a><span class="tm">19:54:42</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (or you can just try to register it, and the name_firstupdate will be rejected if it's already registered.  But that'll cost you 0.01 NMC that you won't be able to get back)
+<a name="l-71"></a><span class="tm">19:55:26</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Management of existing names won't have any such problems
+<a name="l-72"></a><span class="tm">19:56:09</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> In the future we can probably add the already-registered check to Electrum, but it's complicated enough that we weren't able to get NLnet funding for that, so it's not a high priority
+<a name="l-73"></a><span class="tm">19:57:12</span><span class="nk"> &lt;cannon-c&gt;</span> maybe Electrum plugin to API a block explorer?
+<a name="l-74"></a><span class="tm">19:57:34</span><span class="nk"> &lt;cannon-c&gt;</span> just for purpose of checking if name is registered or available?
+<a name="l-75"></a><span class="tm">19:57:57</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">cannon-c:</span> yeah, that's probably feasible short-term, as long as it's opt-in (some users don't want Electrum issuing traffic to a block explorer)
+<a name="l-76"></a><span class="tm">19:59:08</span><span class="nk"> &lt;cannon-c&gt;</span> or if run behind Tor proxy for such query
+<a name="l-77"></a><span class="tm">19:59:11</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> A different plugin could presumably ask the libdohj SPV client to check if the name is available
+<a name="l-78"></a><span class="tm">19:59:44</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">cannon-c:</span> yeah.
+<a name="l-79"></a><span class="tm">20:00:18</span><span class="nk"> &lt;cannon-c&gt;</span> like a check box in plugin if enable to, (redirect to localhost tor process)
+<a name="l-80"></a><span class="tm">20:01:12</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">cannon-c:</span> I think Electrum already has proxy support, so we probably don't need a separate checkbox for this.  But it would be nice if Electrum added stream isolation support.
+<a name="l-81"></a><span class="tm">20:03:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Also should be noted that the only 2 Namecoin block explorers that support name lookups are Webbtc and Namecha.in.  Namecha.in isn't Tor-friendly or open-source, and Webbtc uses a non-Namecoin-Core consensus codebase and consequently can occasionally get forked off of the correct blockchain
+<a name="l-82"></a><span class="tm">20:03:25</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> So neither is really optimal to be relying on
+<a name="l-83"></a><span class="tm">20:04:26</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> But since this is a short-term kludge until Electrum-NMC has protocol support for this, I'm not really that worried about it
+<a name="l-84"></a><span class="tm">20:04:49</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">cannon-c:</span> any other stuff you'd like to bring up today?
+<a name="l-85"></a><span class="tm">20:05:37</span><span class="nk"> &lt;cannon-c&gt;</span> My questions have been answered. Thank you
+<a name="l-86"></a><span class="tm">20:05:54</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok cool
+<a name="l-87"></a><span class="tm">20:06:54</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">cannon-c:</span> are you likely to have some free time in the next week or so to beta-test the TLS support and/or the Tor support?
+<a name="l-88"></a><span class="tm">20:07:06</span><span class="nk"> &lt;cannon-c&gt;</span> <span class="hi">Jeremy_Rand[m]:</span> sure
+<a name="l-89"></a><span class="tm">20:08:27</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">cannon-c:</span> cool.  I'll ping you in this channel when we've got the betas released.  Shouldn't take long to get them released
+<a name="l-90"></a><span class="tm">20:08:58</span><span class="nk"> &lt;cannon-c&gt;</span> I'm not always on freenode
+<a name="l-91"></a><span class="tm">20:09:22</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">cannon-c:</span> ok.  If you're not online, should I Bitmessage you?
+<a name="l-92"></a><span class="tm">20:09:26</span><span class="nk"> &lt;cannon-c&gt;</span> sure,
+<a name="l-93"></a><span class="tm">20:09:53</span><span class="nk"> &lt;cannon-c&gt;</span> or ricochet
+<a name="l-94"></a><span class="tm">20:10:39</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">cannon-c:</span> oh, yes, Ricochet is better -- I assume I can look up your Ricochet username the same way I looked up your Bitmessage address?
+<a name="l-95"></a><span class="tm">20:10:49</span><span class="nk"> &lt;cannon-c&gt;</span> should be in my namecoin ID
+<a name="l-96"></a><span class="tm">20:10:53</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> cool
+<a name="l-97"></a><span class="tm">20:10:57</span><span class="nk"> &lt;cannon-c&gt;</span> id/cannon
+<a name="l-98"></a><span class="tm">20:11:41</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok then.  Anyone else have stuff to bring up?
+<a name="l-99"></a><span class="tm">20:14:24</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Okay, I guess that's the end of the meeting.
+<a name="l-100"></a><span class="tm">20:14:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

@@ -1,0 +1,100 @@
+19:02:57 <Jeremy_Rand[m]> #startmeeting
+19:03:03 <qpm> Meeting started Sun Jun 18 19:02:57 2017 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:03:06 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:03:29 <Jeremy_Rand[m]> #meetingtopic Namecoin Development Meeting
+19:03:56 <Jeremy_Rand[m]> Hi everyone, welcome to the meeting
+19:04:02 <Jeremy_Rand[m]> Can we get a roll call of who's here today?
+19:04:05 <cannon-c> Here
+19:04:15 <Jeremy_Rand[m]> Hi cannon-c
+19:04:45 <cannon-c> hello Jeremy_Rand[m]
+19:07:47 <Jeremy_Rand[m]> Okay, so this meeting will basically be a review of the various news items I've submitted to namecoin.org over the past few weeks, since that covers basically everything that's been happening lately
+19:09:12 <Jeremy_Rand[m]> #topic ncdns
+19:09:55 <Jeremy_Rand[m]> #info hl released the Windows installer for ncdns.
+19:10:39 <Jeremy_Rand[m]> #info This includes Namecoin Core and Dnssec-Trigger, so it's basically all you need to view .bit domains on Windows
+19:11:18 <Jeremy_Rand[m]> #info Doesn't yet include the TLS support, because it wasn't merged at the time of release
+19:12:30 <Jeremy_Rand[m]> #info hl has ACKed the CryptoAPI TLS support for merge, I just need to squash the commits and then it'll be merged.
+19:13:12 <Jeremy_Rand[m]> #info I added a tool to ncdns that sets up the NUMS key pin in Chromium; hl has ACKed and merged it.
+19:13:40 <Jeremy_Rand[m]> #info We haven't yet integrated that tool to the NSIS script
+19:16:14 <Jeremy_Rand[m]> #info I started working on NSS TLS support for ncdns, it basically works but it's quite slow because NSS's certutil takes about 700ms to add a cert
+19:16:53 <Jeremy_Rand[m]> #info I figured out that the main reason certutil is so slow is that it doesn't group SQLite writes into a single transaction properly
+19:17:05 <Jeremy_Rand[m]> #info I plan to submit a bug to NSS upstream about that
+19:18:06 <Jeremy_Rand[m]> I think that's all the ncdns news, anyone have questions/comments/things to bring up about ncdns?
+19:19:19 <cannon-c> question,
+19:19:31 <cannon-c> ncdns integrate with Tor .onion sites?
+19:20:11 <Jeremy_Rand[m]> cannon-c: I'm actually going to talk about that later in the meeting; the .onion support is technically a separate component from ncdns
+19:20:37 <Jeremy_Rand[m]> (oh, and before I forget:)
+19:20:55 <Jeremy_Rand[m]> #info All of the above ncdns work is thanks to NLnet.  A little bit of it is also supported by NMDF and Namecoin Bountysource
+19:21:43 <Jeremy_Rand[m]> Other questions/comments, or should we switch topics to Tor?
+19:23:48 <Jeremy_Rand[m]> #topic Tor
+19:24:44 <Jeremy_Rand[m]> #info As people may remember, I released a fork of OnioNS's Stem component a few months ago that enabled Namecoin naming support in Tor.
+19:25:31 <Jeremy_Rand[m]> #info The OnioNS Stem fork was really proof-of-concept-ish, e.g. it didn't support most of the .bit spec, it didn't support the libdohj SPV client, and it didn't use the Prop279 spec (instead using the Tor controller API)
+19:26:13 <Jeremy_Rand[m]> #info I've fixed those 3 issues in a new release, this time based on Miek Gieben's q tool
+19:27:06 <Jeremy_Rand[m]> #info The new tool is basically a bridge between Prop279 clients and DNS servers.
+19:28:15 <Jeremy_Rand[m]> #info So you can use TorNS by meejah, tell it to use this tool as a pluggable naming system, and give this tool ncdns's port+IP, and Namecoin naming will work in Tor
+19:29:02 <Jeremy_Rand[m]> #info There were some licensing issues with TorNS that are now resolved (meejah had forgotten to list the license; it's now public domain).
+19:29:27 <Jeremy_Rand[m]> #info There were also some issues with TorNS restricting the TLD's to .onion, which of course doesn't make sense for Namecoin.  meejah is willing to accept a PR to remove that restriction; I'll be submitting that shortly.
+19:29:52 <Jeremy_Rand[m]> #info (Until that PR is merged, I have a fork called LibreTorNS that doesn't have that restriction)
+19:30:38 <Jeremy_Rand[m]> #info so this tool works for redirecting .bit domains to IP addresses, DNS names, and onion services.  It can also redirect .bit.onion domains to onion services.
+19:31:24 <Jeremy_Rand[m]> #info Works perfectly fine with the SPV client, and with basically all of the .bit spec (except for NS records) -- both of these are because it uses ncdns instead of talking directly to Namecoin Core
+19:33:22 <Jeremy_Rand[m]> #info It should be noted that there's no Namecoin-specific code in this tool.  You could give it a regular DNS server instead of ncdns, and it would let you automatically redirect DNS names to onion services (and you could presumably use the ICANN root key as a trust root for this if you wanted)
+19:34:23 <Jeremy_Rand[m]> #info Because it's designed to be interoperable with DNS, that means that the way onion services are specified in Namecoin names has changed.  It no longer uses the "tor" field, it instead uses the "txt" field of the "_tor" subdomain
+19:34:44 <Jeremy_Rand[m]> #info This is consistent with how things are usually done in the DNS world.
+19:35:52 <Jeremy_Rand[m]> Any comments/questions/things to bring up about Tor?
+19:35:58 <Jeremy_Rand[m]> cannon-c: ^
+19:36:10 <cannon-c> what do you mean by "txt" field of th e"_tor" subdomain?
+19:37:36 <Jeremy_Rand[m]> cannon-c: let's say you have a Namecoin domain name.  Your JSON would look like this.  {"ip": "1.2.3.4", "map":{"_tor":{"txt":"xyz.onion"}}}
+19:37:50 <Jeremy_Rand[m]> Obviously substitute the IP and .onion address that point to your site
+19:37:54 <cannon-c> ok. I understand now
+19:38:29 <Jeremy_Rand[m]> cannon-c: I look forward to your test reports :)
+19:39:49 <Jeremy_Rand[m]> Anything else about Tor support that anyone would like to bring up?
+19:41:34 <Jeremy_Rand[m]> ok, so moving on...
+19:41:39 <Jeremy_Rand[m]> #topic Electrum
+19:42:44 <Jeremy_Rand[m]> #info ahmed_ has been doing some work on Electrum-NMC
+19:42:47 <Jeremy_Rand[m]> ahmed_: are you here at the moment?
+19:42:50 <ahmed_> i am
+19:43:02 <ahmed_> not been able to do much since the last update. Too much overtime @ work
+19:43:45 <Jeremy_Rand[m]> ahmed_: ok.  Is there anything we can do to help?  btw Phelix says he should be able to join in on the Electrum efforts in circa 1-2 weeks
+19:46:26 <ahmed_> atm its just a case of working on electrumX ive not started on it yet. But getting a copy up, getting it to sync and porting in AUXPOW verification to it
+19:46:52 <Jeremy_Rand[m]> ahmed_: ok
+19:48:15 <Jeremy_Rand[m]> ahmed_: btw, can't remember if I already mentioned this -- feel free to keep track of an estimate of time you spend on Electrum-NMC stuff so that NLnet can pay you for your time
+19:48:28 <ahmed_> ahh you didnt, but i'll try and work it out
+19:48:44 <Jeremy_Rand[m]> ok
+19:49:30 <Jeremy_Rand[m]> summarizing the above for the meeting minutes:
+19:50:26 <Jeremy_Rand[m]> #info ahmed_ says the next step in Electrum-NMC is getting an electrumX instance running and synced with the Namecoin chain, and adding AuxPoW verification
+19:51:11 <Jeremy_Rand[m]> I think that's all the topics I was going to bring up today.  Anything else we should cover?
+19:51:14 <Jeremy_Rand[m]> cannon-c: ^
+19:52:37 <cannon-c> Electrum-NMC support name registrations?
+19:53:10 <cannon-c> or management
+19:53:13 <Jeremy_Rand[m]> cannon-c: that is planned, right after AuxPoW support is added, if I understand correctly
+19:54:09 <Jeremy_Rand[m]> cannon-c: for name registrations, Electrum-NMC won't necessarily be able to check whether the name already exists, so you'll have to check on e.g. a block explorer or the libdohj client before you try to register a name
+19:54:42 <Jeremy_Rand[m]> (or you can just try to register it, and the name_firstupdate will be rejected if it's already registered.  But that'll cost you 0.01 NMC that you won't be able to get back)
+19:55:26 <Jeremy_Rand[m]> Management of existing names won't have any such problems
+19:56:09 <Jeremy_Rand[m]> In the future we can probably add the already-registered check to Electrum, but it's complicated enough that we weren't able to get NLnet funding for that, so it's not a high priority
+19:57:12 <cannon-c> maybe Electrum plugin to API a block explorer?
+19:57:34 <cannon-c> just for purpose of checking if name is registered or available?
+19:57:57 <Jeremy_Rand[m]> cannon-c: yeah, that's probably feasible short-term, as long as it's opt-in (some users don't want Electrum issuing traffic to a block explorer)
+19:59:08 <cannon-c> or if run behind Tor proxy for such query
+19:59:11 <Jeremy_Rand[m]> A different plugin could presumably ask the libdohj SPV client to check if the name is available
+19:59:44 <Jeremy_Rand[m]> cannon-c: yeah.
+20:00:18 <cannon-c> like a check box in plugin if enable to, (redirect to localhost tor process)
+20:01:12 <Jeremy_Rand[m]> cannon-c: I think Electrum already has proxy support, so we probably don't need a separate checkbox for this.  But it would be nice if Electrum added stream isolation support.
+20:03:15 <Jeremy_Rand[m]> Also should be noted that the only 2 Namecoin block explorers that support name lookups are Webbtc and Namecha.in.  Namecha.in isn't Tor-friendly or open-source, and Webbtc uses a non-Namecoin-Core consensus codebase and consequently can occasionally get forked off of the correct blockchain
+20:03:25 <Jeremy_Rand[m]> So neither is really optimal to be relying on
+20:04:26 <Jeremy_Rand[m]> But since this is a short-term kludge until Electrum-NMC has protocol support for this, I'm not really that worried about it
+20:04:49 <Jeremy_Rand[m]> cannon-c: any other stuff you'd like to bring up today?
+20:05:37 <cannon-c> My questions have been answered. Thank you
+20:05:54 <Jeremy_Rand[m]> ok cool
+20:06:54 <Jeremy_Rand[m]> cannon-c: are you likely to have some free time in the next week or so to beta-test the TLS support and/or the Tor support?
+20:07:06 <cannon-c> Jeremy_Rand[m]: sure
+20:08:27 <Jeremy_Rand[m]> cannon-c: cool.  I'll ping you in this channel when we've got the betas released.  Shouldn't take long to get them released
+20:08:58 <cannon-c> I'm not always on freenode
+20:09:22 <Jeremy_Rand[m]> cannon-c: ok.  If you're not online, should I Bitmessage you?
+20:09:26 <cannon-c> sure,
+20:09:53 <cannon-c> or ricochet
+20:10:39 <Jeremy_Rand[m]> cannon-c: oh, yes, Ricochet is better -- I assume I can look up your Ricochet username the same way I looked up your Bitmessage address?
+20:10:49 <cannon-c> should be in my namecoin ID
+20:10:53 <Jeremy_Rand[m]> cool
+20:10:57 <cannon-c> id/cannon
+20:11:41 <Jeremy_Rand[m]> ok then.  Anyone else have stuff to bring up?
+20:14:24 <Jeremy_Rand[m]> Okay, I guess that's the end of the meeting.
+20:14:28 <Jeremy_Rand[m]> #endmeeting

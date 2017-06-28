@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev: Namecoin Development Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev: Namecoin Development Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand[m] at 19:02:57 UTC
+(<a href="namecoin-dev.2017-06-18-19.02.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">ncdns</b> <span class="details">(<a href='namecoin-dev.2017-06-18-19.02.log.html#l-11'>Jeremy_Rand[m]</a>, 19:09:12)</span>
+<ol type="a">
+  <li><span class="INFO">hl released the Windows installer for
+    ncdns.</span> <span class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-12'>Jeremy_Rand[m]</a>,
+    19:09:55)</span></li>
+  <li><span class="INFO">This includes Namecoin Core and Dnssec-Trigger,
+    so it's basically all you need to view .bit domains on
+    Windows</span> <span class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-13'>Jeremy_Rand[m]</a>,
+    19:10:39)</span></li>
+  <li><span class="INFO">Doesn't yet include the TLS support, because it
+    wasn't merged at the time of release</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-14'>Jeremy_Rand[m]</a>,
+    19:11:18)</span></li>
+  <li><span class="INFO">hl has ACKed the CryptoAPI TLS support for
+    merge, I just need to squash the commits and then it'll be
+    merged.</span> <span class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-15'>Jeremy_Rand[m]</a>,
+    19:12:30)</span></li>
+  <li><span class="INFO">I added a tool to ncdns that sets up the NUMS
+    key pin in Chromium; hl has ACKed and merged it.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-16'>Jeremy_Rand[m]</a>,
+    19:13:12)</span></li>
+  <li><span class="INFO">We haven't yet integrated that tool to the NSIS
+    script</span> <span class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-17'>Jeremy_Rand[m]</a>,
+    19:13:40)</span></li>
+  <li><span class="INFO">I started working on NSS TLS support for ncdns,
+    it basically works but it's quite slow because NSS's certutil takes
+    about 700ms to add a cert</span> <span class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-18'>Jeremy_Rand[m]</a>,
+    19:16:14)</span></li>
+  <li><span class="INFO">I figured out that the main reason certutil is
+    so slow is that it doesn't group SQLite writes into a single
+    transaction properly</span> <span class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-19'>Jeremy_Rand[m]</a>,
+    19:16:53)</span></li>
+  <li><span class="INFO">I plan to submit a bug to NSS upstream about
+    that</span> <span class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-20'>Jeremy_Rand[m]</a>,
+    19:17:05)</span></li>
+  <li><span class="INFO">All of the above ncdns work is thanks to NLnet.
+    A little bit of it is also supported by NMDF and Namecoin
+    Bountysource</span> <span class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-26'>Jeremy_Rand[m]</a>,
+    19:20:55)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Tor</b> <span class="details">(<a href='namecoin-dev.2017-06-18-19.02.log.html#l-28'>Jeremy_Rand[m]</a>, 19:23:48)</span>
+<ol type="a">
+  <li><span class="INFO">As people may remember, I released a fork of
+    OnioNS's Stem component a few months ago that enabled Namecoin
+    naming support in Tor.</span> <span class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-29'>Jeremy_Rand[m]</a>,
+    19:24:44)</span></li>
+  <li><span class="INFO">The OnioNS Stem fork was really
+    proof-of-concept-ish, e.g. it didn't support most of the .bit spec,
+    it didn't support the libdohj SPV client, and it didn't use the
+    Prop279 spec (instead using the Tor controller API)</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-30'>Jeremy_Rand[m]</a>,
+    19:25:31)</span></li>
+  <li><span class="INFO">I've fixed those 3 issues in a new release,
+    this time based on Miek Gieben's q tool</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-31'>Jeremy_Rand[m]</a>,
+    19:26:13)</span></li>
+  <li><span class="INFO">The new tool is basically a bridge between
+    Prop279 clients and DNS servers.</span> <span class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-32'>Jeremy_Rand[m]</a>,
+    19:27:06)</span></li>
+  <li><span class="INFO">So you can use TorNS by meejah, tell it to use
+    this tool as a pluggable naming system, and give this tool ncdns's
+    port+IP, and Namecoin naming will work in Tor</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-33'>Jeremy_Rand[m]</a>,
+    19:28:15)</span></li>
+  <li><span class="INFO">There were some licensing issues with TorNS
+    that are now resolved (meejah had forgotten to list the license;
+    it's now public domain).</span> <span class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-34'>Jeremy_Rand[m]</a>,
+    19:29:02)</span></li>
+  <li><span class="INFO">There were also some issues with TorNS
+    restricting the TLD's to .onion, which of course doesn't make sense
+    for Namecoin.  meejah is willing to accept a PR to remove that
+    restriction; I'll be submitting that shortly.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-35'>Jeremy_Rand[m]</a>,
+    19:29:27)</span></li>
+  <li><span class="INFO">(Until that PR is merged, I have a fork called
+    LibreTorNS that doesn't have that restriction)</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-36'>Jeremy_Rand[m]</a>,
+    19:29:52)</span></li>
+  <li><span class="INFO">so this tool works for redirecting .bit domains
+    to IP addresses, DNS names, and onion services.  It can also
+    redirect .bit.onion domains to onion services.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-37'>Jeremy_Rand[m]</a>,
+    19:30:38)</span></li>
+  <li><span class="INFO">Works perfectly fine with the SPV client, and
+    with basically all of the .bit spec (except for NS records) -- both
+    of these are because it uses ncdns instead of talking directly to
+    Namecoin Core</span> <span class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-38'>Jeremy_Rand[m]</a>,
+    19:31:24)</span></li>
+  <li><span class="INFO">It should be noted that there's no
+    Namecoin-specific code in this tool.  You could give it a regular
+    DNS server instead of ncdns, and it would let you automatically
+    redirect DNS names to onion services (and you could presumably use
+    the ICANN root key as a trust root for this if you wanted)</span>
+    <span class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-39'>Jeremy_Rand[m]</a>,
+    19:33:22)</span></li>
+  <li><span class="INFO">Because it's designed to be interoperable with
+    DNS, that means that the way onion services are specified in
+    Namecoin names has changed.  It no longer uses the "tor" field, it
+    instead uses the "txt" field of the "_tor" subdomain</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-40'>Jeremy_Rand[m]</a>,
+    19:34:23)</span></li>
+  <li><span class="INFO">This is consistent with how things are usually
+    done in the DNS world.</span> <span class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-41'>Jeremy_Rand[m]</a>,
+    19:34:44)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Electrum</b> <span class="details">(<a href='namecoin-dev.2017-06-18-19.02.log.html#l-51'>Jeremy_Rand[m]</a>, 19:41:39)</span>
+<ol type="a">
+  <li><span class="INFO">ahmed_ has been doing some work on
+    Electrum-NMC</span> <span class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-52'>Jeremy_Rand[m]</a>,
+    19:42:44)</span></li>
+  <li><span class="INFO">ahmed_ says the next step in Electrum-NMC is
+    getting an electrumX instance running and synced with the Namecoin
+    chain, and adding AuxPoW verification</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-06-18-19.02.log.html#l-63'>Jeremy_Rand[m]</a>,
+    19:50:26)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 20:14:28 UTC
+(<a href="namecoin-dev.2017-06-18-19.02.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>(none)</li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand[m] (75)</li>
+  <li>cannon-c (19)</li>
+  <li>ahmed_ (4)</li>
+  <li>qpm (2)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

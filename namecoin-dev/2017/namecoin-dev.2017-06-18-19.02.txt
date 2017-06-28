@@ -1,0 +1,124 @@
+===========================================
+#namecoin-dev: Namecoin Development Meeting
+===========================================
+
+
+Meeting started by Jeremy_Rand[m] at 19:02:57 UTC. The full logs are
+available at
+https://midnightmagic.github.io/namecoin-meeting/namecoin-dev/2017/namecoin-dev.2017-06-18-19.02.log.html
+.
+
+
+
+Meeting summary
+---------------
+* ncdns  (Jeremy_Rand[m], 19:09:12)
+  * hl released the Windows installer for ncdns.  (Jeremy_Rand[m],
+    19:09:55)
+  * This includes Namecoin Core and Dnssec-Trigger, so it's basically
+    all you need to view .bit domains on Windows  (Jeremy_Rand[m],
+    19:10:39)
+  * Doesn't yet include the TLS support, because it wasn't merged at the
+    time of release  (Jeremy_Rand[m], 19:11:18)
+  * hl has ACKed the CryptoAPI TLS support for merge, I just need to
+    squash the commits and then it'll be merged.  (Jeremy_Rand[m],
+    19:12:30)
+  * I added a tool to ncdns that sets up the NUMS key pin in Chromium;
+    hl has ACKed and merged it.  (Jeremy_Rand[m], 19:13:12)
+  * We haven't yet integrated that tool to the NSIS script
+    (Jeremy_Rand[m], 19:13:40)
+  * I started working on NSS TLS support for ncdns, it basically works
+    but it's quite slow because NSS's certutil takes about 700ms to add
+    a cert  (Jeremy_Rand[m], 19:16:14)
+  * I figured out that the main reason certutil is so slow is that it
+    doesn't group SQLite writes into a single transaction properly
+    (Jeremy_Rand[m], 19:16:53)
+  * I plan to submit a bug to NSS upstream about that  (Jeremy_Rand[m],
+    19:17:05)
+  * All of the above ncdns work is thanks to NLnet.  A little bit of it
+    is also supported by NMDF and Namecoin Bountysource
+    (Jeremy_Rand[m], 19:20:55)
+
+* Tor  (Jeremy_Rand[m], 19:23:48)
+  * As people may remember, I released a fork of OnioNS's Stem component
+    a few months ago that enabled Namecoin naming support in Tor.
+    (Jeremy_Rand[m], 19:24:44)
+  * The OnioNS Stem fork was really proof-of-concept-ish, e.g. it didn't
+    support most of the .bit spec, it didn't support the libdohj SPV
+    client, and it didn't use the Prop279 spec (instead using the Tor
+    controller API)  (Jeremy_Rand[m], 19:25:31)
+  * I've fixed those 3 issues in a new release, this time based on Miek
+    Gieben's q tool  (Jeremy_Rand[m], 19:26:13)
+  * The new tool is basically a bridge between Prop279 clients and DNS
+    servers.  (Jeremy_Rand[m], 19:27:06)
+  * So you can use TorNS by meejah, tell it to use this tool as a
+    pluggable naming system, and give this tool ncdns's port+IP, and
+    Namecoin naming will work in Tor  (Jeremy_Rand[m], 19:28:15)
+  * There were some licensing issues with TorNS that are now resolved
+    (meejah had forgotten to list the license; it's now public domain).
+    (Jeremy_Rand[m], 19:29:02)
+  * There were also some issues with TorNS restricting the TLD's to
+    .onion, which of course doesn't make sense for Namecoin.  meejah is
+    willing to accept a PR to remove that restriction; I'll be
+    submitting that shortly.  (Jeremy_Rand[m], 19:29:27)
+  * (Until that PR is merged, I have a fork called LibreTorNS that
+    doesn't have that restriction)  (Jeremy_Rand[m], 19:29:52)
+  * so this tool works for redirecting .bit domains to IP addresses, DNS
+    names, and onion services.  It can also redirect .bit.onion domains
+    to onion services.  (Jeremy_Rand[m], 19:30:38)
+  * Works perfectly fine with the SPV client, and with basically all of
+    the .bit spec (except for NS records) -- both of these are because
+    it uses ncdns instead of talking directly to Namecoin Core
+    (Jeremy_Rand[m], 19:31:24)
+  * It should be noted that there's no Namecoin-specific code in this
+    tool.  You could give it a regular DNS server instead of ncdns, and
+    it would let you automatically redirect DNS names to onion services
+    (and you could presumably use the ICANN root key as a trust root for
+    this if you wanted)  (Jeremy_Rand[m], 19:33:22)
+  * Because it's designed to be interoperable with DNS, that means that
+    the way onion services are specified in Namecoin names has changed.
+    It no longer uses the "tor" field, it instead uses the "txt" field
+    of the "_tor" subdomain  (Jeremy_Rand[m], 19:34:23)
+  * This is consistent with how things are usually done in the DNS
+    world.  (Jeremy_Rand[m], 19:34:44)
+
+* Electrum  (Jeremy_Rand[m], 19:41:39)
+  * ahmed_ has been doing some work on Electrum-NMC  (Jeremy_Rand[m],
+    19:42:44)
+  * ahmed_ says the next step in Electrum-NMC is getting an electrumX
+    instance running and synced with the Namecoin chain, and adding
+    AuxPoW verification  (Jeremy_Rand[m], 19:50:26)
+
+Meeting ended at 20:14:28 UTC.
+
+
+
+
+Action Items
+------------
+
+
+
+
+
+Action Items, by person
+-----------------------
+* **UNASSIGNED**
+  * (none)
+
+
+
+
+People Present (lines said)
+---------------------------
+* Jeremy_Rand[m] (75)
+* cannon-c (19)
+* ahmed_ (4)
+* qpm (2)
+
+
+
+
+Generated by `MeetBot`_ 0.1.4
+
+.. _`MeetBot`: https://wiki.debian.org/MeetBot
