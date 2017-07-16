@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:06:38</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:06:49</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Jul 16 19:06:38 2017 UTC.  The chair is Jeremy_Rand_Inse. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:06:55</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:07:26</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="cmd">#meetingtopic </span><span class="cmdline">Namecoin Development Meeting</span>
+<a name="l-5"></a><span class="tm">19:07:44</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> Hi everyone, welcome to the meeting
+<a name="l-6"></a><span class="tm">19:07:55</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> Can we get a roll call of who's here today?
+<a name="l-7"></a><span class="tm">19:08:03</span><span class="nk"> &lt;hl&gt;</span> Hi.
+<a name="l-8"></a><span class="tm">19:08:12</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">hl:</span> hello!
+<a name="l-9"></a><span class="tm">19:09:51</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> Okay, so this meeting will be somewhat less structured than usual, since I'm on an insecure computer that doesn't have my usual notes.
+<a name="l-10"></a><span class="tm">19:10:26</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="topic">#topic </span><span class="topicline">Tor</span>
+<a name="l-11"></a><span class="tm">19:11:08</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> I recently got Namecoin naming for Tor working, using Prop279 (the Tor pluggable naming API)
+<a name="l-12"></a><span class="tm">19:12:33</span><span class="nk"> &lt;hl&gt;</span> Excellent.
+<a name="l-13"></a><span class="tm">19:12:52</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/dns-prop279</span>
+<a name="l-14"></a><span class="tm">19:13:18</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> It's a fork of Miekg's q tool, and it works with any DNS server, not just ncdns
+<a name="l-15"></a><span class="tm">19:13:40</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> So you could use this, if desired, to implement .onion naming via the DNS
+<a name="l-16"></a><span class="tm">19:14:00</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> DNSSEC support isn't yet tested, but should be feasible
+<a name="l-17"></a><span class="tm">19:15:43</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> Interestingly, a couple days after I released this, an apparent scammer on BitcoinTalk announced a similar-sounding project.
+<a name="l-18"></a><span class="tm">19:16:11</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> I assume that by now, everyone knows not to download and execute code posted by random newbies on BitcoinTalk
+<a name="l-19"></a><span class="tm">19:17:10</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> I still need to announce this on the tor-dev mailing list, I'll be doing that shortly after I have access to my main computer again
+<a name="l-20"></a><span class="tm">19:17:24</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> I probably should write more documentation first, though
+<a name="l-21"></a><span class="tm">19:19:22</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> Anyone have anything else to say about Tor before we move on?
+<a name="l-22"></a><span class="tm">19:20:35</span><span class="nk"> &lt;hl&gt;</span> No.
+<a name="l-23"></a><span class="tm">19:21:25</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> (is brand0 here today?)
+<a name="l-24"></a><span class="tm">19:25:18</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="topic">#topic </span><span class="topicline">SPV</span>
+<a name="l-25"></a><span class="tm">19:26:20</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> I've been cleaning up the libdohj and bitcoinj-addons code, aiming to get them merged upstream
+<a name="l-26"></a><span class="tm">19:26:24</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> I've submitted a PR to libdohj that includes the leveldbtxcache algorithm
+<a name="l-27"></a><span class="tm">19:26:29</span><span class="nk"> &lt;hl&gt;</span> Ah, right.
+<a name="l-28"></a><span class="tm">19:26:59</span><span class="nk"> &lt;hl&gt;</span> So I will implement SPV for ncdns-nsis as an install-time option, so we can distribute a single EXE installer. What is your preference for the SPV implementation to be bundled, and is it ready yet?
+<a name="l-29"></a><span class="tm">19:28:39</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> (looks like Ross Nicoll has requested some changes to my PR, I'll deal with those when I'm back on my main computer)
+<a name="l-30"></a><span class="tm">19:29:05</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">hl:</span> the BitcoinJ client listed on the Beta Downloads page of namecoin.org is recommended at the moment (specifically the bleeding-edge branch)
+<a name="l-31"></a><span class="tm">19:29:20</span><span class="nk"> &lt;hl&gt;</span> OK.
+<a name="l-32"></a><span class="tm">19:30:02</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">hl:</span> I'd say it's probably ready for inclusion to ncdns-nsis, but installation is going to be a little bit interesting because there's no installer for the BitcoinJ client right now
+<a name="l-33"></a><span class="tm">19:30:46</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> The build scripts generate a .jar; instructions for how to run it are linked to from the Beta Downloads page
+<a name="l-34"></a><span class="tm">19:31:34</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> I also have no idea whether we have legal rights to distribute the Windows Java installer.  I don't think OpenJDK has official Windows binaries, and I don't know what license Oracle's binaries are under
+<a name="l-35"></a><span class="tm">19:31:57</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> I guess we can just assume that most people have Java already, and if we detect that they don't, we can tell them to install it
+<a name="l-36"></a><span class="tm">19:32:58</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">hl:</span> also note that the BitcoinJ client requires a Visual C++ runtime, I don't recall what version... I'll check that when I'm back on my main computer
+<a name="l-37"></a><span class="tm">19:33:21</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> It's a different runtime version than the BIND tools require
+<a name="l-38"></a><span class="tm">19:35:38</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> switching gears...
+<a name="l-39"></a><span class="tm">19:35:50</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> ahmed_ / jbisch: any news on Electrum?
+<a name="l-40"></a><span class="tm">19:36:40</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> (not sure if they're here today)
+<a name="l-41"></a><span class="tm">19:39:25</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> anyone else have anything to say about SPV before we move on?
+<a name="l-42"></a><span class="tm">19:41:11</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> ok, moving on...
+<a name="l-43"></a><span class="tm">19:41:38</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="topic">#topic </span><span class="topicline">Consensus Rules</span>
+<a name="l-44"></a><span class="tm">19:42:35</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> A while back we discussed the issue that removing the BDB lock limit as part of AAA would effectively be a block size increase, which might cause problems with centralization
+<a name="l-45"></a><span class="tm">19:43:03</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> So I actually checked what block size is typical for Namecoin right now
+<a name="l-46"></a><span class="tm">19:43:35</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> and our peak block size in the month before I checked, was something like 33 KiB
+<a name="l-47"></a><span class="tm">19:43:42</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> Average was about 3 KiB
+<a name="l-48"></a><span class="tm">19:44:11</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> So basically, there's no reason to increase the block size anytime soon, we're not anywhere near the limit
+<a name="l-49"></a><span class="tm">19:44:43</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> And if we did hit the limit, that would just mean that tx fees go up.  For Namecoin, that's actually a good thing, because it makes squatting more expensive
+<a name="l-50"></a><span class="tm">19:45:37</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> Anyway, I talked to Luke-Jr about what block size is actually safe in terms of centralization, and he suggested circa 256 KiB limit
+<a name="l-51"></a><span class="tm">19:45:55</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> Which is 8x higher than our peak usage right now
+<a name="l-52"></a><span class="tm">19:46:39</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> So, what I've suggested is, we combine AAA with a softfork that lowers the block size limit to 256 KiB, and have that softfork component sunset after a year
+<a name="l-53"></a><span class="tm">19:47:17</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> There's basically no way that we're going to have our usage increase so much in the next year that the limit becomes a problem, and by sunsetting it after a year, we won't have to hardfork to get rid of it later
+<a name="l-54"></a><span class="tm">19:47:51</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> Daniel has ACKed this plan; I'm curious if anyone else has comments on it
+<a name="l-55"></a><span class="tm">19:47:54</span><span class="nk"> &lt;midnightmagic&gt;</span> I don't suppose you have any input from e.g. Bitmain re: their comments about a smaller blocksize for namecoin?
+<a name="l-56"></a><span class="tm">19:48:38</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">midnightmagic:</span> I'm unaware of any Bitmain comments about Namecoin's block size, can you elaborate?
+<a name="l-57"></a><span class="tm">19:48:43</span><span class="nk"> &lt;midnightmagic&gt;</span> Or do any of the poolops care what we do, they're just selling namecoins, no biggie?
+<a name="l-58"></a><span class="tm">19:49:07</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> oh, I see
+<a name="l-59"></a><span class="tm">19:49:22 </span><span class="nka">* Jeremy_Rand_Inse</span> <span class="ac">misread midnightmagic's message</span>
+<a name="l-60"></a><span class="tm">19:49:25</span><span class="nk"> &lt;midnightmagic&gt;</span> Bitmain extracts promises from people regarding changes where they have control or some kind of power in the ecosystem to hash-power-veto changes in the consensus layer.
+<a name="l-61"></a><span class="tm">19:50:03</span><span class="nk"> &lt;midnightmagic&gt;</span> Namecoin could be seen by them as an example to use against them re: the Bitcoin .. problems ..
+<a name="l-62"></a><span class="tm">19:50:09</span><span class="nk"> &lt;midnightmagic&gt;</span> Or not. Maybe they don't care.
+<a name="l-63"></a><span class="tm">19:50:15</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">midnightmagic:</span> right -- generally I don't think any of the miners care what softforks we ask them to do, we're not economically relevant enough for them to bother worrying about it
+<a name="l-64"></a><span class="tm">19:50:49</span><span class="nk"> &lt;midnightmagic&gt;</span> Hopefully.
+<a name="l-65"></a><span class="tm">19:50:53</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> But yes, obviously we would need to run all of this by the miners
+<a name="l-66"></a><span class="tm">19:51:20</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">midnightmagic:</span> I've been holding back on talking to miners about AAA until we actually have code ready for them to test.
+<a name="l-67"></a><span class="tm">19:51:32</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> The intention is to have Namecoin Testnet activate AAA before mainnet, and ask all the major pools to mine Namecoin Testnet and make sure that it works okay for their setups
+<a name="l-68"></a><span class="tm">19:52:05</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> But yeah -- generally I don't think anyone will be able to use Namecoin's block size as an argument about Bitcoin's block size
+<a name="l-69"></a><span class="tm">19:52:17</span><span class="nk"> &lt;hl&gt;</span> What's AAA again?
+<a name="l-70"></a><span class="tm">19:52:20</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> It's pretty clear that Bitcoin can't work with a block size of 256 KiB, due to tx volume (unless Lightning were factored in, which isn't a thing for Namecoin)
+<a name="l-71"></a><span class="tm">19:52:38</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">hl:</span> the hardfork to make AuxPoW work with VersionBits
+<a name="l-72"></a><span class="tm">19:52:45</span><span class="nk"> &lt;hl&gt;</span> Ah.
+<a name="l-73"></a><span class="tm">19:52:55</span><span class="nk"> &lt;hl&gt;</span> It stands for what, exactly?
+<a name="l-74"></a><span class="tm">19:53:08</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">hl:</span> AlwaysAuxpowActive
+<a name="l-75"></a><span class="tm">19:53:11</span><span class="nk"> &lt;hl&gt;</span> Ah.
+<a name="l-76"></a><span class="tm">19:53:14</span><span class="nk"> &lt;midnightmagic&gt;</span> ha ha
+<a name="l-77"></a><span class="tm">19:55:15</span><span class="nk"> &lt;midnightmagic&gt;</span> Bitcoin couldn't work at 256KB in any event. It would break *soooooo* much. ha ha..
+<a name="l-78"></a><span class="tm">19:56:00</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> the GitHub issue for this discussion is https://github.com/namecoin/meta/issues/45 if anyone's interested
+<a name="l-79"></a><span class="tm">19:56:55</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">midnightmagic:</span> what would break in Bitcoin at 256 KiB?  It would definitely make fees go really high ... but for Namecoin that's actually a good thing (squatting)
+<a name="l-80"></a><span class="tm">19:59:04</span><span class="nk"> &lt;midnightmagic&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/meta/issues/45 Decrease the block size limit issue</span>
+<a name="l-81"></a><span class="tm">20:00:03</span><span class="nk"> &lt;midnightmagic&gt;</span> <span class="hi">Jeremy_Rand_Inse:</span> Massive legacy software breakage, huge, massive public freak-out, huge political ramifications, horrorshow at every turn.
+<a name="l-82"></a><span class="tm">20:01:00</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">midnightmagic:</span> fair enough.  I guess those don't have much effect on us?
+<a name="l-83"></a><span class="tm">20:01:21</span><span class="nk"> &lt;midnightmagic&gt;</span> No, thank god. We're still at the stage where things can be changed here.
+<a name="l-84"></a><span class="tm">20:01:37</span><span class="nk"> &lt;midnightmagic&gt;</span> The world's our oyster, sir!
+<a name="l-85"></a><span class="tm">20:02:38</span><span class="nk"> &lt;midnightmagic&gt;</span> <span class="cmd">#agreed </span><span class="cmdline">The world (of development possibilities) is our oyster!</span>
+<a name="l-86"></a><span class="tm">20:03:05</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> Actually, I do recall one case where some big-block activists cited Namecoin's AuxPoW hardfork as an example of why Bitcoin could pull off a hardfork without any trouble
+<a name="l-87"></a><span class="tm">20:03:31</span><span class="nk"> &lt;midnightmagic&gt;</span> I'll guess that fell basically flat and nobody cared.
+<a name="l-88"></a><span class="tm">20:03:50</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">midnightmagic:</span> yeah, I think no one cared
+<a name="l-89"></a><span class="tm">20:05:06</span><span class="nk"> &lt;midnightmagic&gt;</span> They spout things and measure to see what sticks, and then harp on the stuff that does forever.
+<a name="l-90"></a><span class="tm">20:05:23</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> (and of course, the only reason why Namecoin did the AuxPoW hardfork was because there was an imminent thread of a 51% attack, and even with that, the AuxPoW hardfork didn't go that well)
+<a name="l-91"></a><span class="tm">20:05:47</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> Like, they had to change the block height target after it was already scheduled
+<a name="l-92"></a><span class="tm">20:07:13</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> anyway -- anyone have anything else to say about AAA and/or the block size before we move on?
+<a name="l-93"></a><span class="tm">20:07:29</span><span class="nk"> &lt;midnightmagic&gt;</span> No, sir.
+<a name="l-94"></a><span class="tm">20:09:22</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> ok, moving on...
+<a name="l-95"></a><span class="tm">20:09:25</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="topic">#topic </span><span class="topicline">Public Relations</span>
+<a name="l-96"></a><span class="tm">20:10:10</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> So I spent the past week at GCER 2017 (which, happily, was in Norman this year, so I didn't have to do any travel)
+<a name="l-97"></a><span class="tm">20:10:56</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> My talk went very well.  The main goal was to try to generate interest among the students there, in the hopes that we get to recruit some awesome students to work on Namecoin
+<a name="l-98"></a><span class="tm">20:11:13</span><span class="nk"> &lt;midnightmagic&gt;</span> Awesome!
+<a name="l-99"></a><span class="tm">20:12:05</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> One of the students who was at my talk told me afterwards that he's going to share info about Namecoin on the internal channels that his team uses to talk to about 7-8 other teams (all of those teams are among the top-performing teams in the world)
+<a name="l-100"></a><span class="tm">20:13:09</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> also I met a couple of NASA interns there who think Namecoin sounds really cool.  Also I met the CEO of an IoT startup who also thinks Namecoin sounds really cool.
+<a name="l-101"></a><span class="tm">20:14:13</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> Anyway yeah -- definitely a productive week I'd say
+<a name="l-102"></a><span class="tm">20:16:09</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> so, yeah, I think that's all I was planning to bring up today.  hl, anything you'd like to bring up today?
+<a name="l-103"></a><span class="tm">20:16:18</span><span class="nk"> &lt;hl&gt;</span> Sure.
+<a name="l-104"></a><span class="tm">20:16:21</span><span class="nk"> &lt;hl&gt;</span> <span class="topic">#topic </span><span class="topicline">ncdns</span>
+<a name="l-105"></a><span class="tm">20:16:40</span><span class="nk"> &lt;hl&gt;</span> As you know, we intend to package ncdns for two Linux distributions pursuant to the nlnet MoU.
+<a name="l-106"></a><span class="tm">20:16:55</span><span class="nk"> &lt;hl&gt;</span> In order to maximise the utility of this, we should do those packages for the most popular distributions.
+<a name="l-107"></a><span class="tm">20:17:04</span><span class="nk"> &lt;hl&gt;</span> This basically means packaging for deb-based distros and rpm-based distros.
+<a name="l-108"></a><span class="tm">20:17:19</span><span class="nk"> &lt;midnightmagic&gt;</span> Hopefully Ubuntu is one of them? Did anybody say they'd accept it upstream or are you doing it as an independent ppa?
+<a name="l-109"></a><span class="tm">20:17:35</span><span class="nk"> &lt;hl&gt;</span> Both Debian and Fedora, as far as I am aware, have tiresome conventions regarding the packaging of Go code.
+<a name="l-110"></a><span class="tm">20:17:43</span><span class="nk"> &lt;midnightmagic&gt;</span> ah
+<a name="l-111"></a><span class="tm">20:18:21</span><span class="nk"> &lt;hl&gt;</span> This involves converting every single Go repository into a deb/rpm package. Since all Go binaries are statically linked, this is extremely senseless, and these packages are basically /usr/src packages of code which form part of a GOPATH (search path) used when building Go packages for distribution packaging.
+<a name="l-112"></a><span class="tm">20:19:17</span><span class="nk"> &lt;hl&gt;</span> Really, they could accomplish the same thing by keeping a file of commit hashes by repository with their packaging control files.
+<a name="l-113"></a><span class="tm">20:19:34</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">hl:</span> in terms of which distros we support, I'd favor considering as candidates any distro endorsed by PRISM-Break, any distro endorsed by FSF, and also Ubuntu and Mint (even though I hate Ubuntu and Mint, they're popular enough that they can't be ignored)
+<a name="l-114"></a><span class="tm">20:20:00</span><span class="nk"> &lt;hl&gt;</span> At any rate, by packaging according to these conventions we lose control of the versions of Go library code against which ncdns, even libraries I maintain.
+<a name="l-115"></a><span class="tm">20:20:05</span><span class="nk"> &lt;hl&gt;</span> *ncdns links.
+<a name="l-116"></a><span class="tm">20:20:33</span><span class="nk"> &lt;hl&gt;</span> And we restrict the update cadence of those libraries, as with ncdns, to the often extremely conservative cadence of such distros.
+<a name="l-117"></a><span class="tm">20:20:58</span><span class="nk"> &lt;hl&gt;</span> IMO, this creates a high packaging and workload overhead for zero benefit, but since it's distribution policies, our options are basically this:
+<a name="l-118"></a><span class="tm">20:21:12</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">hl:</span> FWIW, I suspect that most distros won't be willing to offer ncdns in their official repos unless Namecoin Core is offered as well
+<a name="l-119"></a><span class="tm">20:21:15</span><span class="nk"> &lt;hl&gt;</span> - eschew these silly policies and maintain our own PPA, or
+<a name="l-120"></a><span class="tm">20:21:27</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> And Namecoin Core is difficult to package officially for the same reasons that Bitcoin Core is
+<a name="l-121"></a><span class="tm">20:21:30</span><span class="nk"> &lt;hl&gt;</span> - do packaging according to these policies with the ambition of eventual inclusion in main package repositories
+<a name="l-122"></a><span class="tm">20:22:00</span><span class="nk"> &lt;hl&gt;</span> Really hoping those present will support me doing the former.
+<a name="l-123"></a><span class="tm">20:22:04</span><span class="nk"> &lt;hl&gt;</span> :P
+<a name="l-124"></a><span class="tm">20:22:21</span><span class="nk"> &lt;midnightmagic&gt;</span> +1 maintaining your own PPA.
+<a name="l-125"></a><span class="tm">20:22:32</span><span class="nk"> &lt;midnightmagic&gt;</span> And making sure to link it to the main project website.
+<a name="l-126"></a><span class="tm">20:22:42</span><span class="nk"> &lt;hl&gt;</span> OK.
+<a name="l-127"></a><span class="tm">20:23:04</span><span class="nk"> &lt;midnightmagic&gt;</span> (So a chain of some sort of authority can be used to help ensure that the PPA isn't "just some rando doing it."
+<a name="l-128"></a><span class="tm">20:23:12</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">hl:</span> I prefer to try to follow official distro guidelines except when there's a strong reason not to.  Namecoin Core's issues qualify as a strong reason IMO.
+<a name="l-129"></a><span class="tm">20:23:46</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> I don't know whether Go's issues qualify -- is there an existing precedent that we can cite (e.g. a well-respected privacy project)?
+<a name="l-130"></a><span class="tm">20:23:49</span><span class="nk"> &lt;hl&gt;</span> Yes.
+<a name="l-131"></a><span class="tm">20:24:17</span><span class="nk"> &lt;hl&gt;</span> Not sure. But Bitcoin Core is very particular about what shared library versions they link with for security reasons, no?
+<a name="l-132"></a><span class="tm">20:24:57</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">hl:</span> Bitcoin Core's devs are of the opinion that the major GNU/Linux distros don't perform sufficient QA testing to be safe for consensus protocols
+<a name="l-133"></a><span class="tm">20:25:10</span><span class="nk"> &lt;hl&gt;</span> Since Go binaries are statically linked, Debian/Fedora's insistence on using a communal /usr/src pool full of potentially dated library versions provides zero actual benefit, and substantial risk.
+<a name="l-134"></a><span class="tm">20:25:13</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> Hence they statically link everything that's consensus-critical
+<a name="l-135"></a><span class="tm">20:28:54</span><span class="nk"> &lt;midnightmagic&gt;</span> :-o
+<a name="l-136"></a><span class="tm">20:29:21</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">hl:</span> generally I don't think I'll be able to endorse an exception to distro policy on the vague grounds of "outdated software is insecure", unless we can cite a reason why ncdns is unusually affected by this
+<a name="l-137"></a><span class="tm">20:29:37</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> People who want up-to-date software don't usually use Debian
+<a name="l-138"></a><span class="tm">20:29:51</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> And Fedora is usually up to date anyway
+<a name="l-139"></a><span class="tm">20:30:21</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> (actually, Debian users who want up-to-date software do exist, but they use backports and/or sid)
+<a name="l-140"></a><span class="tm">20:32:01</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">hl:</span> all that said -- I don't think most distros will be willing to package ncdns, and therefore I don't think they'll be willing to package its dependencies for the sake of ncdns
+<a name="l-141"></a><span class="tm">20:32:27</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> As a result, I'm probably fine with maintaining up-to-date PPA's for all of ncdns's dependencies that aren't already packages
+<a name="l-142"></a><span class="tm">20:33:18</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> As long as those PPA's are in a form that is compatible with the distro's guidelines, I'm fine with having those PPA's use an up-to-date version of those dependencies
+<a name="l-143"></a><span class="tm">20:34:23</span><span class="nk"> &lt;hl&gt;</span> Okay, but you're talking about one Debian package per github repository referenced in any import statement.
+<a name="l-144"></a><span class="tm">20:34:45</span><span class="nk"> &lt;hl&gt;</span> Each needing to be maintained and updated in lockstep with the repository.
+<a name="l-145"></a><span class="tm">20:36:13</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">hl:</span> yes.  FWIW, that's not that far from what we'd have to do to build reproducibly anyway (each dependency needs to be retrievable in a reproducible way)
+<a name="l-146"></a><span class="tm">20:36:54</span><span class="nk"> &lt;hl&gt;</span> You can do that with a file mapping repositories to commit hashes. It accomplishes the same thing with a fraction of the overhead.
+<a name="l-147"></a><span class="tm">20:37:31</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> All that said... the Tor folks are distributing Go code as part of TBB.  What are they doing at the moment for packaging?  Last I checked TBB isn't even packaged at all
+<a name="l-148"></a><span class="tm">20:38:05</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="hi">hl:</span> how much extra overhead is there, if we use a script to convert the commit hashes and repo URL's into packages?
+<a name="l-149"></a><span class="tm">20:38:09</span><span class="nk"> &lt;hl&gt;</span> In fact, hashes are far more specific than (package name, min package version, max package version) specifiers.
+<a name="l-150"></a><span class="tm">20:38:15</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> Surely that's something people do regularly?
+<a name="l-151"></a><span class="tm">20:40:25</span><span class="nk"> &lt;hl&gt;</span> Not sure yet.
+<a name="l-152"></a><span class="tm">20:41:15</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> https://github.com/Debian/dh-make-golang , https://wiki.debian.org/MichaelStapelberg/GoPackaging , and https://pkg-go.alioth.debian.org/packaging.html seem relevant
+<a name="l-153"></a><span class="tm">20:50:58</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> ok, so let's defer this decision until we can better evaluate what the procedure for meeting Debian's requirements is.
+<a name="l-154"></a><span class="tm">20:51:14</span><span class="nk"> &lt;hl&gt;</span> OK.
+<a name="l-155"></a><span class="tm">20:53:01</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> anything else about ncdns to bring up?
+<a name="l-156"></a><span class="tm">20:54:09</span><span class="nk"> &lt;hl&gt;</span> No.
+<a name="l-157"></a><span class="tm">20:54:34</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> ok.  hl: any other topics to bring up?
+<a name="l-158"></a><span class="tm">20:54:37</span><span class="nk"> &lt;hl&gt;</span> No.
+<a name="l-159"></a><span class="tm">20:54:53</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> ok.  midnightmagic, anything you'd like to bring up today?
+<a name="l-160"></a><span class="tm">20:56:12</span><span class="nk"> &lt;midnightmagic&gt;</span> Not I.
+<a name="l-161"></a><span class="tm">20:57:17</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> ok.  Thanks for being here.
+<a name="l-162"></a><span class="tm">20:57:21</span><span class="nk"> &lt;Jeremy_Rand_Inse&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>
