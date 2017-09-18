@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:01:14</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:01:14</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Sep 17 19:01:14 2017 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:01:14</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:01:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> hey cool, qpm actually is working this time!
+<a name="l-5"></a><span class="tm">19:01:59</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#meetingtopic </span><span class="cmdline">Namecoin Development Meeting</span>
+<a name="l-6"></a><span class="tm">19:02:17</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Hello everyone, welcome to the meeting!
+<a name="l-7"></a><span class="tm">19:02:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Can we get a roll call of who's here today?
+<a name="l-8"></a><span class="tm">19:04:09 </span><span class="nka">* Jeremy_Rand[m]</span> <span class="ac">hopes some people are actually here today, since qpm actually took the trouble to not slack off</span>
+<a name="l-9"></a><span class="tm">19:04:54</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> hl / brand0 / jbisch : you guys around?
+<a name="l-10"></a><span class="tm">19:12:44</span><span class="nk"> &lt;jbisch&gt;</span> Hi, I'm here.
+<a name="l-11"></a><span class="tm">19:12:56</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> hey jbisch
+<a name="l-12"></a><span class="tm">19:13:48</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jbisch:</span> is there any news regarding Electrum that's worth mentioning?  I haven't been keeping up with that lately
+<a name="l-13"></a><span class="tm">19:14:14</span><span class="nk"> &lt;jbisch&gt;</span> I don't have any news.
+<a name="l-14"></a><span class="tm">19:14:17</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok
+<a name="l-15"></a><span class="tm">19:14:42</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> so on my end of things,
+<a name="l-16"></a><span class="tm">19:14:49</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Namecoin Core</span>
+<a name="l-17"></a><span class="tm">19:15:24</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I started tinkering with the raw tx API, and noticed that the name support in the raw tx API was really inflexible</span>
+<a name="l-18"></a><span class="tm">19:15:34</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I posted a suggested spec for a refactor</span>
+<a name="l-19"></a><span class="tm">19:15:44</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">Daniel has implemented that spec, it's awaiting testing</span>
+<a name="l-20"></a><span class="tm">19:15:59</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I'm planning to do some development against it and see how it goes</span>
+<a name="l-21"></a><span class="tm">19:16:09</span><span class="nk"> &lt;brand0&gt;</span> i'm here
+<a name="l-22"></a><span class="tm">19:16:16</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> hey brand0
+<a name="l-23"></a><span class="tm">19:16:27</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> good timing, the current topic is Namecoin Core
+<a name="l-24"></a><span class="tm">19:16:46</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">brand0:</span> how is the name tab merge going?
+<a name="l-25"></a><span class="tm">19:16:58</span><span class="nk"> &lt;brand0&gt;</span> I read through domob's comments on github
+<a name="l-26"></a><span class="tm">19:17:31</span><span class="nk"> &lt;brand0&gt;</span> I think he's right, there's something wrong with the logic in the name tabs code. I still need to go back in and analyze further. I think I can do that this week.
+<a name="l-27"></a><span class="tm">19:17:54</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> yeah, so interestingly, Daniel's comments might explain why I was encountering duplicate `name_firstupdate` ops being queued in 0.13.99-name-tab-beta1
+<a name="l-28"></a><span class="tm">19:18:04</span><span class="nk"> &lt;brand0&gt;</span> yes
+<a name="l-29"></a><span class="tm">19:18:13</span><span class="nk"> &lt;brand0&gt;</span> I would also like to fix the refresh issue with the PR on merging
+<a name="l-30"></a><span class="tm">19:18:53</span><span class="nk"> &lt;brand0&gt;</span> So that's my plan.
+<a name="l-31"></a><span class="tm">19:18:57</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok cool
+<a name="l-32"></a><span class="tm">19:19:14</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I might plausibly have some raw transaction stuff ready for you in the next week or two
+<a name="l-33"></a><span class="tm">19:19:31</span><span class="nk"> &lt;brand0&gt;</span> Alright that sounds good
+<a name="l-34"></a><span class="tm">19:20:46</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">brand0:</span> I'm curious, how does the code for queueing name_firstupdate ops currently work?  Are the ops indexed by the block height that they activate at?
+<a name="l-35"></a><span class="tm">19:21:13</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I'm trying to make my sample Python code for the raw tx API mimic your logic as closely as feasible
+<a name="l-36"></a><span class="tm">19:22:55</span><span class="nk"> &lt;brand0&gt;</span> Currently we save the transaction ID of the name_new and all the required information for the firstupdate in the wallet
+<a name="l-37"></a><span class="tm">19:23:15</span><span class="nk"> &lt;brand0&gt;</span> Every block, if there are any pendings stored, we check the txid to see if the required number of blocks have passed
+<a name="l-38"></a><span class="tm">19:24:54</span><span class="nk"> &lt;brand0&gt;</span> (Then we issue it if so and remove the pending data)
+<a name="l-39"></a><span class="tm">19:25:39</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">brand0:</span> ok, so if my logic just gives you a raw transaction, you can store that in the wallet, and check every block to see if it can be broadcast?
+<a name="l-40"></a><span class="tm">19:26:03</span><span class="nk"> &lt;brand0&gt;</span> yeah
+<a name="l-41"></a><span class="tm">19:26:40</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok.  Does the wallet have to be unlocked in order to access the data stored there, given that it's just a raw transaction that's already been signed before we store it?
+<a name="l-42"></a><span class="tm">19:27:28</span><span class="nk"> &lt;brand0&gt;</span> Not to access the data, but it does need to be unlocked if any signing needs to be done. So if we do all that stuff first, then we should just be able to broadcast the rawtx
+<a name="l-43"></a><span class="tm">19:28:18</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok.  And can we delete the stored raw tx after we've broadcasted it and it's confirmed, without unlocking the wallet?
+<a name="l-44"></a><span class="tm">19:28:33</span><span class="nk"> &lt;brand0&gt;</span> yes ,we can
+<a name="l-45"></a><span class="tm">19:28:53</span><span class="nk"> &lt;brand0&gt;</span> That's how it works currently as well.
+<a name="l-46"></a><span class="tm">19:29:20</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> cool.  Am I correct in guessing that scalability isn't going to be a problem, i.e. iterating through a large number of raw transactions stored in the wallet each block won't be a performance bottleneck?
+<a name="l-47"></a><span class="tm">19:29:51</span><span class="nk"> &lt;brand0&gt;</span> I haven't tested it, but it shouldn't be too much overhead
+<a name="l-48"></a><span class="tm">19:30:13</span><span class="nk"> &lt;brand0&gt;</span> I'm not 100% certain on that though. We will want to test it
+<a name="l-49"></a><span class="tm">19:30:37</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Like, let's say that Alice has 500 names, and she wants to set each of them to auto-renew for 10 years
+<a name="l-50"></a><span class="tm">19:30:41</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> without ever unlocking her wallet during that period
+<a name="l-51"></a><span class="tm">19:30:53</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> is that level of usage likely to be a problem?
+<a name="l-52"></a><span class="tm">19:32:08</span><span class="nk"> &lt;brand0&gt;</span> I don't think it would be. We have all the required information to check when things should be sent already, so it should be be 500 simple lookups.
+<a name="l-53"></a><span class="tm">19:32:49</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok.  That sounds good to me.  And will save me a bunch of trouble with my Python code.  :)
+<a name="l-54"></a><span class="tm">19:33:04</span><span class="nk"> &lt;brand0&gt;</span> The UI already does similar stuff with displaying transactions
+<a name="l-55"></a><span class="tm">19:36:40</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">brand0:</span> btw, did you have any thoughts on the weird GUI/wallet bug that the person on the forum was having?
+<a name="l-56"></a><span class="tm">19:37:12</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I'm not sure whether I should ask the user to do a salvagewallet or if there's some other way to resolve it
+<a name="l-57"></a><span class="tm">19:37:45</span><span class="nk"> &lt;brand0&gt;</span> I didn't see the post, let me check real quick
+<a name="l-58"></a><span class="tm">19:38:07</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (I think I emailed you a link)
+<a name="l-59"></a><span class="tm">19:38:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> the thread is 6 pages long, the specific post with the screenshot is in the email I sent
+<a name="l-60"></a><span class="tm">19:40:07</span><span class="nk"> &lt;brand0&gt;</span> I'm not seeing anything in my email about this
+<a name="l-61"></a><span class="tm">19:40:29</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I'll dig up a link, one sec...
+<a name="l-62"></a><span class="tm">19:41:06</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (not sure why the email didn't deliver, I wonder if that's happened to anything else I sent recently...)
+<a name="l-63"></a><span class="tm">19:42:14</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> https://forum.namecoin.org/viewtopic.php?p=17176#p17176
+<a name="l-64"></a><span class="tm">19:42:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> the blank transactions are name operations, if I understand correctly
+<a name="l-65"></a><span class="tm">19:42:57</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Note that the amount listed is 0 NMC
+<a name="l-66"></a><span class="tm">19:43:06</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> so it's not just failing to process name ops or something like that
+<a name="l-67"></a><span class="tm">19:43:36</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> it's like the entire transaction's data is empty, but the date/time is still valid
+<a name="l-68"></a><span class="tm">19:43:40</span><span class="nk"> &lt;brand0&gt;</span> hmmmm that's very strange, all his txs are messed up
+<a name="l-69"></a><span class="tm">19:44:31</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I believe this wallet.dat was opened in both 0.3.80 and Core, switching between the two several times and doing name operations in each
+<a name="l-70"></a><span class="tm">19:44:36</span><span class="nk"> &lt;brand0&gt;</span> Hmmm
+<a name="l-71"></a><span class="tm">19:44:39</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I wonder if that corrupted something
+<a name="l-72"></a><span class="tm">19:45:24</span><span class="nk"> &lt;brand0&gt;</span> It's possible. Much has changed between the two. I'd suggest they back up the wallet and try to rebuild the chain database
+<a name="l-73"></a><span class="tm">19:46:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Okay, so back up the wallet, rescan/reindex, and then try a salvagewallet if it's not fixed already?
+<a name="l-74"></a><span class="tm">19:47:09</span><span class="nk"> &lt;brand0&gt;</span> that's what i would try
+<a name="l-75"></a><span class="tm">19:47:41</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok.  I'll see if I can walk them through that.  This user is not particularly great with the command line, which makes this kind of thing trickier
+<a name="l-76"></a><span class="tm">19:50:11</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> oh, quick question about the wallet storage of name_firstupdates
+<a name="l-77"></a><span class="tm">19:51:24</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">brand0:</span> how exactly is it calculating the block height at which they get broadcast?  Is the block height stored in the wallet entry directly, or is it calculated on the fly based on the name_new input, or something else?
+<a name="l-78"></a><span class="tm">19:53:03</span><span class="nk"> &lt;brand0&gt;</span> It just makes sure the name_new transaction has 12 confirms
+<a name="l-79"></a><span class="tm">19:53:43</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok, so it looks up the confirmation count on the input txid?
+<a name="l-80"></a><span class="tm">19:56:24</span><span class="nk"> &lt;brand0&gt;</span> yup
+<a name="l-81"></a><span class="tm">19:57:20</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">brand0:</span> ok, so do I need to provide an input txid to the wallet for this purpose, or can you just parse the tx, extract the inputs, and check all of them for confirmation count?
+<a name="l-82"></a><span class="tm">19:59:16</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (And also, I guess that means I need to supply a minimum confirmation count per transaction, since it's no longer a constant 12 block interval?)
+<a name="l-83"></a><span class="tm">19:59:19</span><span class="nk"> &lt;brand0&gt;</span> I haven't messed with the raw transactions inside the namecoin codebase, so I'm not sure how difficult it will be to get all the input txids
+<a name="l-84"></a><span class="tm">19:59:52</span><span class="nk"> &lt;brand0&gt;</span> I'm guessing it won't be to difficult?
+<a name="l-85"></a><span class="tm">19:59:54</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">brand0:</span> I *think* there's an RPC call where you provide the raw tx in hex, and it will give you a JSON object that include the input txid's
+<a name="l-86"></a><span class="tm">20:00:07</span><span class="nk"> &lt;brand0&gt;</span> Okay then yeah that's what I'll do
+<a name="l-87"></a><span class="tm">20:00:32</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok.  And I should provide a minimum confirmation count per tx?
+<a name="l-88"></a><span class="tm">20:00:51</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> so basically we store a tuple (confirmationCount, rawTx)?
+<a name="l-89"></a><span class="tm">20:00:56</span><span class="nk"> &lt;brand0&gt;</span> Use the RPC command then iterate over the input txids, just like one would do using the API (and some auxiliary code). And yes a minimum confirm count would be helpful if you don't want to hardcode it to 12
+<a name="l-90"></a><span class="tm">20:02:22</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">brand0:</span> what if we want the transaction to activate at a constant block height?  I'm thinking of the use case I mentioned a while back of trying to register a name as soon as it expires.
+<a name="l-91"></a><span class="tm">20:04:57</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Maybe store a 3-tuple?  (minimumConfirmationCount, minimumBlockHeight, rawTx)?
+<a name="l-92"></a><span class="tm">20:15:29</span><span class="nk"> &lt;brand0&gt;</span> yeah something like that could work
+<a name="l-93"></a><span class="tm">20:19:13</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok cool
+<a name="l-94"></a><span class="tm">20:20:05</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> so I think that's everything from the Namecoin Core end of things... anything else about Core from you brand0 ?
+<a name="l-95"></a><span class="tm">20:24:07</span><span class="nk"> &lt;brand0&gt;</span> That's it for me
+<a name="l-96"></a><span class="tm">20:24:22</span><span class="nk"> &lt;jonasbits&gt;</span> hi all!
+<a name="l-97"></a><span class="tm">20:24:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Search</span>
+<a name="l-98"></a><span class="tm">20:24:53</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> hello jonasbits!
+<a name="l-99"></a><span class="tm">20:25:29</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> So someone contacted us via Twitter, and is interested in funding work on a search engine for .bit websites
+<a name="l-100"></a><span class="tm">20:26:16</span><span class="nk"> &lt;jonasbits&gt;</span> Cool
+<a name="l-101"></a><span class="tm">20:26:21</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I'm pretty sure this is something I can do in a few days using YaCy and ncdns
+<a name="l-102"></a><span class="tm">20:26:55</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (maybe even a few hours if Murphy doesn't rear his head)
+<a name="l-103"></a><span class="tm">20:27:02</span><span class="nk"> &lt;jonasbits&gt;</span> I have some limited experience with YaCy
+<a name="l-104"></a><span class="tm">20:27:19</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ah cool
+<a name="l-105"></a><span class="tm">20:27:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> so basically the rough idea I have for how it would be done is:
+<a name="l-106"></a><span class="tm">20:28:11</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> 1. Set a P2P YaCy node's blacklist to a RegEx that covers everything other than .bit.
+<a name="l-107"></a><span class="tm">20:30:09</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (2) Modify the ncdns ncdumpzone tool to dump a list of URL's.  Basicaly take every FQDN in the zone file, remove the trailing dot, remove a leading "*.", optionally add a leading "www.", add the protocol handlers http://, https://, ftp://, and ftps://, and put all this into a text file
+<a name="l-108"></a><span class="tm">20:30:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (3) Send this text file to YaCy as a crawl job
+<a name="l-109"></a><span class="tm">20:30:44</span><span class="nk"> &lt;jonasbits&gt;</span> sound great!
+<a name="l-110"></a><span class="tm">20:31:05</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Might need to split the text file into 1000-line parts or so so that YaCy doesn't freak out with a huge text file
+<a name="l-111"></a><span class="tm">20:32:05</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> FWIW, since you're not currently getting any NLnet funds, if you'd like to implement the above (and log your time) you're welcome to do it and get the bounty (assuming the person who contacted us actually puts up money)
+<a name="l-112"></a><span class="tm">20:32:27</span><span class="nk"> &lt;jonasbits&gt;</span> Cool
+<a name="l-113"></a><span class="tm">20:33:12</span><span class="nk"> &lt;jonasbits&gt;</span> Would more YaCy nodes be able to join, with the same blacklist to only index .bit domains
+<a name="l-114"></a><span class="tm">20:34:08</span><span class="nk"> &lt;jonasbits&gt;</span> if we seed periodically with new domains that gets added to namecoin
+<a name="l-115"></a><span class="tm">20:35:29</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> Yes.  The YaCy node would be a standard P2P node on the freeworld network, and they would be able to exchange data with each other (and with YaCy peers that don't have the blacklist).  I've been told by the YaCy lead dev that the YaCy nodes should be able to store any index data that they're sent for .bit sites, and that anyone who does a search on their own standard YaCy node will see those .bit
+<a name="l-116"></a><span class="tm">20:35:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> results as long as they have .bit support in their DNS resolver
+<a name="l-117"></a><span class="tm">20:36:07</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I'm thinking it would be nice to basically have a script that can be run as a cron job, that periodically runs the modified ncdumpzone and gets YaCy to crawl the results
+<a name="l-118"></a><span class="tm">20:36:55</span><span class="nk"> &lt;jonasbits&gt;</span> cool
+<a name="l-119"></a><span class="tm">20:37:49</span><span class="nk"> &lt;jonasbits&gt;</span> im trying out ncdns right now, testing with "dig nf.bit @localhost -p 5353"
+<a name="l-120"></a><span class="tm">20:38:17</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> The person who contacted us has a budget of 100 USD for it.  My estimate is that if Murphy's Law strikes, it would be higher than that, but if Murphy doesn't show up 100 USD is probably doable.  Also I can ask on Twitter and Reddit to see if anyone else wants to donate to a bounty for this; I suspect there are other people who would chip in
+<a name="l-121"></a><span class="tm">20:38:53</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (Just don't consider the 100 USD to be guaranteed until the money is in our hands)
+<a name="l-122"></a><span class="tm">20:39:04</span><span class="nk"> &lt;jonasbits&gt;</span> Cool, i would really want to help out!
+<a name="l-123"></a><span class="tm">20:40:03</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> cool cool
+<a name="l-124"></a><span class="tm">20:41:43</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> is Go an acceptable language for you?  Generally we seem to be favoring Go due to its good support for reproducible builds
+<a name="l-125"></a><span class="tm">20:42:02</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (and the fact that ncdumpzone is already in Go :) )
+<a name="l-126"></a><span class="tm">20:42:49</span><span class="nk"> &lt;jonasbits&gt;</span> I just started to learn go a little, what version of golang do you guys use right now? I have  go1.7.4
+<a name="l-127"></a><span class="tm">20:43:06</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> one minor issue that you might run into is that I think Namecoin Core has a bug in name_scan that might make ncdumpzone fail.  If you run into that, I think Namecoin 0.3.80 will work fine for this purpose
+<a name="l-128"></a><span class="tm">20:43:47</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> I think we're on 1.8.3.  Generally we try to use whatever the Tor devs are using in their build scripts, so that the Tor people can wrestle with whatever issues come up with new releases instead of us doing so
+<a name="l-129"></a><span class="tm">20:45:20</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> 1.7.x will probably work fine though.  As long as ncdns compiles properly, I'd be surprised if any issues come up with a slightly old Go release
+<a name="l-130"></a><span class="tm">20:46:20</span><span class="nk"> &lt;jonasbits&gt;</span> i will test some more, but will use 1.8.3 in the future
+<a name="l-131"></a><span class="tm">20:46:49</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok cool
+<a name="l-132"></a><span class="tm">20:47:09</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> definitely let me or hl know if you have any questions.
+<a name="l-133"></a><span class="tm">20:47:17</span><span class="nk"> &lt;jonasbits&gt;</span> allright!
+<a name="l-134"></a><span class="tm">20:48:46</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I think that's all I was going to bring up today -- anything else anyone would like to bring up?
+<a name="l-135"></a><span class="tm">20:50:29</span><span class="nk"> &lt;jonasbits&gt;</span> I did take the expired nmctest.net domain, i was thinking of using that for a "offline faucet", hdw seed with testnet coins
+<a name="l-136"></a><span class="tm">20:50:52</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> cool
+<a name="l-137"></a><span class="tm">20:53:54</span><span class="nk"> &lt;jonasbits&gt;</span> Thanks for moderating Jeremy_Rand[m]
+<a name="l-138"></a><span class="tm">20:54:19</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> no problem.
+<a name="l-139"></a><span class="tm">20:54:21</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

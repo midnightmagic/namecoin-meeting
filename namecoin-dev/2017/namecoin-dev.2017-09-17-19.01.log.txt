@@ -1,0 +1,139 @@
+19:01:14 <Jeremy_Rand[m]> #startmeeting
+19:01:14 <qpm> Meeting started Sun Sep 17 19:01:14 2017 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:01:14 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:01:28 <Jeremy_Rand[m]> hey cool, qpm actually is working this time!
+19:01:59 <Jeremy_Rand[m]> #meetingtopic Namecoin Development Meeting
+19:02:17 <Jeremy_Rand[m]> Hello everyone, welcome to the meeting!
+19:02:28 <Jeremy_Rand[m]> Can we get a roll call of who's here today?
+19:04:09 * Jeremy_Rand[m] hopes some people are actually here today, since qpm actually took the trouble to not slack off
+19:04:54 <Jeremy_Rand[m]> hl / brand0 / jbisch : you guys around?
+19:12:44 <jbisch> Hi, I'm here.
+19:12:56 <Jeremy_Rand[m]> hey jbisch
+19:13:48 <Jeremy_Rand[m]> jbisch: is there any news regarding Electrum that's worth mentioning?  I haven't been keeping up with that lately
+19:14:14 <jbisch> I don't have any news.
+19:14:17 <Jeremy_Rand[m]> ok
+19:14:42 <Jeremy_Rand[m]> so on my end of things,
+19:14:49 <Jeremy_Rand[m]> #topic Namecoin Core
+19:15:24 <Jeremy_Rand[m]> #info I started tinkering with the raw tx API, and noticed that the name support in the raw tx API was really inflexible
+19:15:34 <Jeremy_Rand[m]> #info I posted a suggested spec for a refactor
+19:15:44 <Jeremy_Rand[m]> #info Daniel has implemented that spec, it's awaiting testing
+19:15:59 <Jeremy_Rand[m]> #info I'm planning to do some development against it and see how it goes
+19:16:09 <brand0> i'm here
+19:16:16 <Jeremy_Rand[m]> hey brand0
+19:16:27 <Jeremy_Rand[m]> good timing, the current topic is Namecoin Core
+19:16:46 <Jeremy_Rand[m]> brand0: how is the name tab merge going?
+19:16:58 <brand0> I read through domob's comments on github
+19:17:31 <brand0> I think he's right, there's something wrong with the logic in the name tabs code. I still need to go back in and analyze further. I think I can do that this week.
+19:17:54 <Jeremy_Rand[m]> yeah, so interestingly, Daniel's comments might explain why I was encountering duplicate `name_firstupdate` ops being queued in 0.13.99-name-tab-beta1
+19:18:04 <brand0> yes
+19:18:13 <brand0> I would also like to fix the refresh issue with the PR on merging
+19:18:53 <brand0> So that's my plan.
+19:18:57 <Jeremy_Rand[m]> ok cool
+19:19:14 <Jeremy_Rand[m]> I might plausibly have some raw transaction stuff ready for you in the next week or two
+19:19:31 <brand0> Alright that sounds good
+19:20:46 <Jeremy_Rand[m]> brand0: I'm curious, how does the code for queueing name_firstupdate ops currently work?  Are the ops indexed by the block height that they activate at?
+19:21:13 <Jeremy_Rand[m]> I'm trying to make my sample Python code for the raw tx API mimic your logic as closely as feasible
+19:22:55 <brand0> Currently we save the transaction ID of the name_new and all the required information for the firstupdate in the wallet
+19:23:15 <brand0> Every block, if there are any pendings stored, we check the txid to see if the required number of blocks have passed
+19:24:54 <brand0> (Then we issue it if so and remove the pending data)
+19:25:39 <Jeremy_Rand[m]> brand0: ok, so if my logic just gives you a raw transaction, you can store that in the wallet, and check every block to see if it can be broadcast?
+19:26:03 <brand0> yeah
+19:26:40 <Jeremy_Rand[m]> ok.  Does the wallet have to be unlocked in order to access the data stored there, given that it's just a raw transaction that's already been signed before we store it?
+19:27:28 <brand0> Not to access the data, but it does need to be unlocked if any signing needs to be done. So if we do all that stuff first, then we should just be able to broadcast the rawtx
+19:28:18 <Jeremy_Rand[m]> ok.  And can we delete the stored raw tx after we've broadcasted it and it's confirmed, without unlocking the wallet?
+19:28:33 <brand0> yes ,we can
+19:28:53 <brand0> That's how it works currently as well.
+19:29:20 <Jeremy_Rand[m]> cool.  Am I correct in guessing that scalability isn't going to be a problem, i.e. iterating through a large number of raw transactions stored in the wallet each block won't be a performance bottleneck?
+19:29:51 <brand0> I haven't tested it, but it shouldn't be too much overhead
+19:30:13 <brand0> I'm not 100% certain on that though. We will want to test it
+19:30:37 <Jeremy_Rand[m]> Like, let's say that Alice has 500 names, and she wants to set each of them to auto-renew for 10 years
+19:30:41 <Jeremy_Rand[m]> without ever unlocking her wallet during that period
+19:30:53 <Jeremy_Rand[m]> is that level of usage likely to be a problem?
+19:32:08 <brand0> I don't think it would be. We have all the required information to check when things should be sent already, so it should be be 500 simple lookups.
+19:32:49 <Jeremy_Rand[m]> ok.  That sounds good to me.  And will save me a bunch of trouble with my Python code.  :)
+19:33:04 <brand0> The UI already does similar stuff with displaying transactions
+19:36:40 <Jeremy_Rand[m]> brand0: btw, did you have any thoughts on the weird GUI/wallet bug that the person on the forum was having?
+19:37:12 <Jeremy_Rand[m]> I'm not sure whether I should ask the user to do a salvagewallet or if there's some other way to resolve it
+19:37:45 <brand0> I didn't see the post, let me check real quick
+19:38:07 <Jeremy_Rand[m]> (I think I emailed you a link)
+19:38:30 <Jeremy_Rand[m]> the thread is 6 pages long, the specific post with the screenshot is in the email I sent
+19:40:07 <brand0> I'm not seeing anything in my email about this
+19:40:29 <Jeremy_Rand[m]> I'll dig up a link, one sec...
+19:41:06 <Jeremy_Rand[m]> (not sure why the email didn't deliver, I wonder if that's happened to anything else I sent recently...)
+19:42:14 <Jeremy_Rand[m]> https://forum.namecoin.org/viewtopic.php?p=17176#p17176
+19:42:30 <Jeremy_Rand[m]> the blank transactions are name operations, if I understand correctly
+19:42:57 <Jeremy_Rand[m]> Note that the amount listed is 0 NMC
+19:43:06 <Jeremy_Rand[m]> so it's not just failing to process name ops or something like that
+19:43:36 <Jeremy_Rand[m]> it's like the entire transaction's data is empty, but the date/time is still valid
+19:43:40 <brand0> hmmmm that's very strange, all his txs are messed up
+19:44:31 <Jeremy_Rand[m]> I believe this wallet.dat was opened in both 0.3.80 and Core, switching between the two several times and doing name operations in each
+19:44:36 <brand0> Hmmm
+19:44:39 <Jeremy_Rand[m]> I wonder if that corrupted something
+19:45:24 <brand0> It's possible. Much has changed between the two. I'd suggest they back up the wallet and try to rebuild the chain database
+19:46:15 <Jeremy_Rand[m]> Okay, so back up the wallet, rescan/reindex, and then try a salvagewallet if it's not fixed already?
+19:47:09 <brand0> that's what i would try
+19:47:41 <Jeremy_Rand[m]> ok.  I'll see if I can walk them through that.  This user is not particularly great with the command line, which makes this kind of thing trickier
+19:50:11 <Jeremy_Rand[m]> oh, quick question about the wallet storage of name_firstupdates
+19:51:24 <Jeremy_Rand[m]> brand0: how exactly is it calculating the block height at which they get broadcast?  Is the block height stored in the wallet entry directly, or is it calculated on the fly based on the name_new input, or something else?
+19:53:03 <brand0> It just makes sure the name_new transaction has 12 confirms
+19:53:43 <Jeremy_Rand[m]> ok, so it looks up the confirmation count on the input txid?
+19:56:24 <brand0> yup
+19:57:20 <Jeremy_Rand[m]> brand0: ok, so do I need to provide an input txid to the wallet for this purpose, or can you just parse the tx, extract the inputs, and check all of them for confirmation count?
+19:59:16 <Jeremy_Rand[m]> (And also, I guess that means I need to supply a minimum confirmation count per transaction, since it's no longer a constant 12 block interval?)
+19:59:19 <brand0> I haven't messed with the raw transactions inside the namecoin codebase, so I'm not sure how difficult it will be to get all the input txids
+19:59:52 <brand0> I'm guessing it won't be to difficult?
+19:59:54 <Jeremy_Rand[m]> brand0: I *think* there's an RPC call where you provide the raw tx in hex, and it will give you a JSON object that include the input txid's
+20:00:07 <brand0> Okay then yeah that's what I'll do
+20:00:32 <Jeremy_Rand[m]> ok.  And I should provide a minimum confirmation count per tx?
+20:00:51 <Jeremy_Rand[m]> so basically we store a tuple (confirmationCount, rawTx)?
+20:00:56 <brand0> Use the RPC command then iterate over the input txids, just like one would do using the API (and some auxiliary code). And yes a minimum confirm count would be helpful if you don't want to hardcode it to 12
+20:02:22 <Jeremy_Rand[m]> brand0: what if we want the transaction to activate at a constant block height?  I'm thinking of the use case I mentioned a while back of trying to register a name as soon as it expires.
+20:04:57 <Jeremy_Rand[m]> Maybe store a 3-tuple?  (minimumConfirmationCount, minimumBlockHeight, rawTx)?
+20:15:29 <brand0> yeah something like that could work
+20:19:13 <Jeremy_Rand[m]> ok cool
+20:20:05 <Jeremy_Rand[m]> so I think that's everything from the Namecoin Core end of things... anything else about Core from you brand0 ?
+20:24:07 <brand0> That's it for me
+20:24:22 <jonasbits> hi all!
+20:24:45 <Jeremy_Rand[m]> #topic Search
+20:24:53 <Jeremy_Rand[m]> hello jonasbits!
+20:25:29 <Jeremy_Rand[m]> So someone contacted us via Twitter, and is interested in funding work on a search engine for .bit websites
+20:26:16 <jonasbits> Cool
+20:26:21 <Jeremy_Rand[m]> I'm pretty sure this is something I can do in a few days using YaCy and ncdns
+20:26:55 <Jeremy_Rand[m]> (maybe even a few hours if Murphy doesn't rear his head)
+20:27:02 <jonasbits> I have some limited experience with YaCy
+20:27:19 <Jeremy_Rand[m]> ah cool
+20:27:45 <Jeremy_Rand[m]> jonasbits: so basically the rough idea I have for how it would be done is:
+20:28:11 <Jeremy_Rand[m]> 1. Set a P2P YaCy node's blacklist to a RegEx that covers everything other than .bit.
+20:30:09 <Jeremy_Rand[m]> (2) Modify the ncdns ncdumpzone tool to dump a list of URL's.  Basicaly take every FQDN in the zone file, remove the trailing dot, remove a leading "*.", optionally add a leading "www.", add the protocol handlers http://, https://, ftp://, and ftps://, and put all this into a text file
+20:30:28 <Jeremy_Rand[m]> (3) Send this text file to YaCy as a crawl job
+20:30:44 <jonasbits> sound great!
+20:31:05 <Jeremy_Rand[m]> Might need to split the text file into 1000-line parts or so so that YaCy doesn't freak out with a huge text file
+20:32:05 <Jeremy_Rand[m]> jonasbits: FWIW, since you're not currently getting any NLnet funds, if you'd like to implement the above (and log your time) you're welcome to do it and get the bounty (assuming the person who contacted us actually puts up money)
+20:32:27 <jonasbits> Cool
+20:33:12 <jonasbits> Would more YaCy nodes be able to join, with the same blacklist to only index .bit domains
+20:34:08 <jonasbits> if we seed periodically with new domains that gets added to namecoin
+20:35:29 <Jeremy_Rand[m]> jonasbits: Yes.  The YaCy node would be a standard P2P node on the freeworld network, and they would be able to exchange data with each other (and with YaCy peers that don't have the blacklist).  I've been told by the YaCy lead dev that the YaCy nodes should be able to store any index data that they're sent for .bit sites, and that anyone who does a search on their own standard YaCy node will see those .bit
+20:35:30 <Jeremy_Rand[m]> results as long as they have .bit support in their DNS resolver
+20:36:07 <Jeremy_Rand[m]> I'm thinking it would be nice to basically have a script that can be run as a cron job, that periodically runs the modified ncdumpzone and gets YaCy to crawl the results
+20:36:55 <jonasbits> cool
+20:37:49 <jonasbits> im trying out ncdns right now, testing with "dig nf.bit @localhost -p 5353"
+20:38:17 <Jeremy_Rand[m]> The person who contacted us has a budget of 100 USD for it.  My estimate is that if Murphy's Law strikes, it would be higher than that, but if Murphy doesn't show up 100 USD is probably doable.  Also I can ask on Twitter and Reddit to see if anyone else wants to donate to a bounty for this; I suspect there are other people who would chip in
+20:38:53 <Jeremy_Rand[m]> (Just don't consider the 100 USD to be guaranteed until the money is in our hands)
+20:39:04 <jonasbits> Cool, i would really want to help out!
+20:40:03 <Jeremy_Rand[m]> cool cool
+20:41:43 <Jeremy_Rand[m]> jonasbits: is Go an acceptable language for you?  Generally we seem to be favoring Go due to its good support for reproducible builds
+20:42:02 <Jeremy_Rand[m]> (and the fact that ncdumpzone is already in Go :) )
+20:42:49 <jonasbits> I just started to learn go a little, what version of golang do you guys use right now? I have  go1.7.4
+20:43:06 <Jeremy_Rand[m]> jonasbits: one minor issue that you might run into is that I think Namecoin Core has a bug in name_scan that might make ncdumpzone fail.  If you run into that, I think Namecoin 0.3.80 will work fine for this purpose
+20:43:47 <Jeremy_Rand[m]> jonasbits: I think we're on 1.8.3.  Generally we try to use whatever the Tor devs are using in their build scripts, so that the Tor people can wrestle with whatever issues come up with new releases instead of us doing so
+20:45:20 <Jeremy_Rand[m]> 1.7.x will probably work fine though.  As long as ncdns compiles properly, I'd be surprised if any issues come up with a slightly old Go release
+20:46:20 <jonasbits> i will test some more, but will use 1.8.3 in the future
+20:46:49 <Jeremy_Rand[m]> ok cool
+20:47:09 <Jeremy_Rand[m]> definitely let me or hl know if you have any questions.
+20:47:17 <jonasbits> allright!
+20:48:46 <Jeremy_Rand[m]> I think that's all I was going to bring up today -- anything else anyone would like to bring up?
+20:50:29 <jonasbits> I did take the expired nmctest.net domain, i was thinking of using that for a "offline faucet", hdw seed with testnet coins
+20:50:52 <Jeremy_Rand[m]> cool
+20:53:54 <jonasbits> Thanks for moderating Jeremy_Rand[m]
+20:54:19 <Jeremy_Rand[m]> no problem.
+20:54:21 <Jeremy_Rand[m]> #endmeeting

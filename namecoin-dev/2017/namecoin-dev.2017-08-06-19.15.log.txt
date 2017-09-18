@@ -1,0 +1,15 @@
+19:15:17 <jbisch> #startmeeting
+19:15:17 <qpm> Meeting started Sun Aug  6 19:15:17 2017 UTC.  The chair is jbisch. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:15:20 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:26:21 <jbisch> alright, meeting is cancelled
+03:11:52 <hl> Jeremy_Rand: ermm... I forgot, I'm using some weird version of nginx right now that doesn't support ECDSA certificates, so maybe not, though I can look at it again if it'd be a pain for you to do
+03:13:39 <Jeremy_Rand[m]> hl: I guess I'll try to get Phelix to do it.  Or Daniel, or Cannon-C.  I'm not likely to have any luck getting a VPS up anytime soon.
+03:14:19 <Jeremy_Rand[m]> midnightmagic: do you have any .bit domains that you'd like to make support TLS?
+03:17:16 <Jeremy_Rand[m]> hl: that said -- it's unlikely that NLnet will want to pay us unless we have a test domain available.  So if you want to get paid sooner, it's in your interest for a test domain to exist.  :)
+03:17:56 <Jeremy_Rand[m]> As an aside... what version of Nginx can't do ECDSA...?
+03:18:42 <Jeremy_Rand[m]> I had an old CentOS 6 VPS a while back that handled ECDSA without any trouble, I was under the impression support was basically ubiquitious at this point
+03:30:24 <hl> It's a jitney fork of nginx called Tengine maintained by Alibaba. I used it because I wanted health checking.
+03:32:39 <Jeremy_Rand[m]> hmm, ok
+04:35:51 <Jeremy_Rand[m]> hl: so since the ncdns NSIS installer is working (at least the version that installs Namecoin Core), we need to figure out what milestone you'll be focusing on next.
+04:37:05 <Jeremy_Rand[m]> I don't have the CryptPad open right now, but IIRC 2 of the milestones that might be good to work on are (1) unit tests / static analysis of ncdns, and (2) NSIS installer support for the libdohj SPV client
+20:01:47 <midnightmagic> Jeremy_Rand[m]: Nothing that is served to the public.
