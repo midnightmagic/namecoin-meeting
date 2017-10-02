@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev: Namecoin Development Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev: Namecoin Development Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand[m] at 19:00:08 UTC
+(<a href="namecoin-dev.2017-10-01-19.00.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">ncdns</b> <span class="details">(<a href='namecoin-dev.2017-10-01-19.00.log.html#l-10'>Jeremy_Rand[m]</a>, 19:04:13)</span>
+<ol type="a">
+  <li><span class="INFO">hl released ncdns v0.0.5 recently, which fixes
+    a TLS bug, adds support for Chrome Canary, adds a bundled SPV
+    client, and has code cleanups</span> <span class="details">(<a
+    href='namecoin-dev.2017-10-01-19.00.log.html#l-11'>Jeremy_Rand[m]</a>,
+    19:05:10)</span></li>
+  <li><span class="INFO">I'm still waiting to hear from samurai321 about
+    whether TLS works for him now</span> <span class="details">(<a
+    href='namecoin-dev.2017-10-01-19.00.log.html#l-12'>Jeremy_Rand[m]</a>,
+    19:06:14)</span></li>
+  <li><span class="INFO">Assuming that no significant bugs are reported
+    in the next few weeks, I think this should qualify for collecting
+    payments on several of the NLnet milestones</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-10-01-19.00.log.html#l-13'>Jeremy_Rand[m]</a>,
+    19:07:07)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Firefox</b> <span class="details">(<a href='namecoin-dev.2017-10-01-19.00.log.html#l-17'>Jeremy_Rand[m]</a>, 19:08:56)</span>
+<ol type="a">
+  <li><span class="INFO">I've been working on a TLS cert API for
+    Firefox.</span> <span class="details">(<a
+    href='namecoin-dev.2017-10-01-19.00.log.html#l-18'>Jeremy_Rand[m]</a>,
+    19:09:33)</span></li>
+  <li><span class="INFO">The Mozilla people (particularly David Keeler
+    and Andrew Swan) have been very helpful when I've had
+    questions</span> <span class="details">(<a
+    href='namecoin-dev.2017-10-01-19.00.log.html#l-19'>Jeremy_Rand[m]</a>,
+    19:10:13)</span></li>
+  <li><span class="INFO">At this point, I have a WebExtension that gets
+    notified whenever a cert fails validation, and replies with a
+    (currently constant) authorization to override the cert
+    failure</span> <span class="details">(<a
+    href='namecoin-dev.2017-10-01-19.00.log.html#l-20'>Jeremy_Rand[m]</a>,
+    19:11:25)</span></li>
+  <li><span class="INFO">Negative overrides (i.e. making a usually-valid
+    cert be recognized as invalid) are going to be slightly harder
+    because of threading issues, but it looks feasible</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-10-01-19.00.log.html#l-21'>Jeremy_Rand[m]</a>,
+    19:12:20)</span></li>
+  <li><span class="INFO">The currently-implemented positive overrides
+    add an overhead of about 1 to 2 milliseconds to validation (which
+    only applies when the cert fails usual validation).</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-10-01-19.00.log.html#l-22'>Jeremy_Rand[m]</a>,
+    19:13:46)</span></li>
+  <li><span class="INFO">This overhead will increase when we actually
+    have to contact ncdns.  Not sure by how much yet.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-10-01-19.00.log.html#l-23'>Jeremy_Rand[m]</a>,
+    19:14:14)</span></li>
+  <li><span class="INFO">It should be noted that this API requires C++
+    patches to Firefox; it's not solely implemented in
+    Javascript.</span> <span class="details">(<a
+    href='namecoin-dev.2017-10-01-19.00.log.html#l-24'>Jeremy_Rand[m]</a>,
+    19:15:06)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Public Relations</b> <span class="details">(<a href='namecoin-dev.2017-10-01-19.00.log.html#l-28'>Jeremy_Rand[m]</a>, 19:17:29)</span>
+<ol type="a">
+  <li><span class="INFO">I've got a ticket to 34C3, and it looks like
+    jonasbits is likely to get a ticket too.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-10-01-19.00.log.html#l-29'>Jeremy_Rand[m]</a>,
+    19:17:59)</span></li>
+  <li><span class="INFO">Currently unsure if I should submit a talk
+    proposal to 34C3.  Looks like the deadline is in about 2
+    weeks.</span> <span class="details">(<a
+    href='namecoin-dev.2017-10-01-19.00.log.html#l-30'>Jeremy_Rand[m]</a>,
+    19:19:05)</span></li>
+  <li><span class="INFO">Namecoin got a bit of publicity due to DNS
+    censorship by Spain of the Catalan independence referendum, which
+    included Spain seizing the entire `.cat` registry.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-10-01-19.00.log.html#l-38'>Jeremy_Rand[m]</a>,
+    19:29:04)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 19:40:48 UTC
+(<a href="namecoin-dev.2017-10-01-19.00.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>(none)</li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand[m] (37)</li>
+  <li>hl (7)</li>
+  <li>qpm` (2)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

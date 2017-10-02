@@ -1,0 +1,46 @@
+19:00:08 <Jeremy_Rand[m]> #startmeeting
+19:00:09 <qpm`> Meeting started Sun Oct  1 19:00:08 2017 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:00:09 <qpm`> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:00:26 <Jeremy_Rand[m]> #meetingtopic Namecoin Development Meeting
+19:00:36 <Jeremy_Rand[m]> Hi everyone, welcome to the meeting
+19:00:41 <hl> Hi.
+19:00:45 <Jeremy_Rand[m]> Can we get a roll call of who's here today?
+19:00:48 <Jeremy_Rand[m]> hl: hello!
+19:04:10 <Jeremy_Rand[m]> ok, so, first topic:
+19:04:13 <Jeremy_Rand[m]> #topic ncdns
+19:05:10 <Jeremy_Rand[m]> #info hl released ncdns v0.0.5 recently, which fixes a TLS bug, adds support for Chrome Canary, adds a bundled SPV client, and has code cleanups
+19:06:14 <Jeremy_Rand[m]> #info I'm still waiting to hear from samurai321 about whether TLS works for him now
+19:07:07 <Jeremy_Rand[m]> #info Assuming that no significant bugs are reported in the next few weeks, I think this should qualify for collecting payments on several of the NLnet milestones
+19:07:50 <Jeremy_Rand[m]> hl: anything you'd like to add on the topic of ncdns?
+19:08:14 <hl> I think that covers it.
+19:08:51 <Jeremy_Rand[m]> ok, so next topic:
+19:08:56 <Jeremy_Rand[m]> #topic Firefox
+19:09:33 <Jeremy_Rand[m]> #info I've been working on a TLS cert API for Firefox.
+19:10:13 <Jeremy_Rand[m]> #info The Mozilla people (particularly David Keeler and Andrew Swan) have been very helpful when I've had questions
+19:11:25 <Jeremy_Rand[m]> #info At this point, I have a WebExtension that gets notified whenever a cert fails validation, and replies with a (currently constant) authorization to override the cert failure
+19:12:20 <Jeremy_Rand[m]> #info Negative overrides (i.e. making a usually-valid cert be recognized as invalid) are going to be slightly harder because of threading issues, but it looks feasible
+19:13:46 <Jeremy_Rand[m]> #info The currently-implemented positive overrides add an overhead of about 1 to 2 milliseconds to validation (which only applies when the cert fails usual validation).
+19:14:14 <Jeremy_Rand[m]> #info This overhead will increase when we actually have to contact ncdns.  Not sure by how much yet.
+19:15:06 <Jeremy_Rand[m]> #info It should be noted that this API requires C++ patches to Firefox; it's not solely implemented in Javascript.
+19:16:06 <Jeremy_Rand[m]> hl: any questions/comments on this subject?
+19:16:54 <hl> Nope.
+19:17:23 <Jeremy_Rand[m]> ok, so next topic:
+19:17:29 <Jeremy_Rand[m]> #topic Public Relations
+19:17:59 <Jeremy_Rand[m]> #info I've got a ticket to 34C3, and it looks like jonasbits is likely to get a ticket too.
+19:19:05 <Jeremy_Rand[m]> #info Currently unsure if I should submit a talk proposal to 34C3.  Looks like the deadline is in about 2 weeks.
+19:19:10 <Jeremy_Rand[m]> Opinions?
+19:22:50 <Jeremy_Rand[m]> hl: ^
+19:24:55 <hl> Hmm, I have no position. Up to you I guess.
+19:25:44 <Jeremy_Rand[m]> hl: ok.  If I submit one, is it okay if I ask you to review it first?
+19:27:27 <hl> Certainly.
+19:27:58 <Jeremy_Rand[m]> thanks
+19:28:27 <Jeremy_Rand[m]> In other public relations news
+19:29:04 <Jeremy_Rand[m]> #info Namecoin got a bit of publicity due to DNS censorship by Spain of the Catalan independence referendum, which included Spain seizing the entire `.cat` registry.
+19:30:09 <Jeremy_Rand[m]> (I'm quite a bit happier with Catalan independence being a reason for Namecoin to exist, compared to American neo-Nazis)
+19:32:18 <Jeremy_Rand[m]> hl: any other public relations stuff you'd like to bring up?
+19:32:38 <hl> Nope.
+19:34:08 <Jeremy_Rand[m]> Okay.  So that's all the topics I wanted to bring up.  hl : Anything else you'd like to mention today before we end the meeting?
+19:34:15 <hl> Nope.
+19:34:54 <Jeremy_Rand[m]> Anyone else lurking here in the channel who would like to bring something up?
+19:40:47 <Jeremy_Rand[m]> ok.  that concludes the meeting
+19:40:48 <Jeremy_Rand[m]> #endmeeting

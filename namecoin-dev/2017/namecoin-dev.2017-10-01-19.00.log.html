@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:00:08</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:00:09</span><span class="nk"> &lt;qpm`&gt;</span> Meeting started Sun Oct  1 19:00:08 2017 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:00:09</span><span class="nk"> &lt;qpm`&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:00:26</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#meetingtopic </span><span class="cmdline">Namecoin Development Meeting</span>
+<a name="l-5"></a><span class="tm">19:00:36</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Hi everyone, welcome to the meeting
+<a name="l-6"></a><span class="tm">19:00:41</span><span class="nk"> &lt;hl&gt;</span> Hi.
+<a name="l-7"></a><span class="tm">19:00:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Can we get a roll call of who's here today?
+<a name="l-8"></a><span class="tm">19:00:48</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> hello!
+<a name="l-9"></a><span class="tm">19:04:10</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok, so, first topic:
+<a name="l-10"></a><span class="tm">19:04:13</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">ncdns</span>
+<a name="l-11"></a><span class="tm">19:05:10</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">hl released ncdns v0.0.5 recently, which fixes a TLS bug, adds support for Chrome Canary, adds a bundled SPV client, and has code cleanups</span>
+<a name="l-12"></a><span class="tm">19:06:14</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I'm still waiting to hear from samurai321 about whether TLS works for him now</span>
+<a name="l-13"></a><span class="tm">19:07:07</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">Assuming that no significant bugs are reported in the next few weeks, I think this should qualify for collecting payments on several of the NLnet milestones</span>
+<a name="l-14"></a><span class="tm">19:07:50</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> anything you'd like to add on the topic of ncdns?
+<a name="l-15"></a><span class="tm">19:08:14</span><span class="nk"> &lt;hl&gt;</span> I think that covers it.
+<a name="l-16"></a><span class="tm">19:08:51</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok, so next topic:
+<a name="l-17"></a><span class="tm">19:08:56</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Firefox</span>
+<a name="l-18"></a><span class="tm">19:09:33</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've been working on a TLS cert API for Firefox.</span>
+<a name="l-19"></a><span class="tm">19:10:13</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">The Mozilla people (particularly David Keeler and Andrew Swan) have been very helpful when I've had questions</span>
+<a name="l-20"></a><span class="tm">19:11:25</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">At this point, I have a WebExtension that gets notified whenever a cert fails validation, and replies with a (currently constant) authorization to override the cert failure</span>
+<a name="l-21"></a><span class="tm">19:12:20</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">Negative overrides (i.e. making a usually-valid cert be recognized as invalid) are going to be slightly harder because of threading issues, but it looks feasible</span>
+<a name="l-22"></a><span class="tm">19:13:46</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">The currently-implemented positive overrides add an overhead of about 1 to 2 milliseconds to validation (which only applies when the cert fails usual validation).</span>
+<a name="l-23"></a><span class="tm">19:14:14</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">This overhead will increase when we actually have to contact ncdns.  Not sure by how much yet.</span>
+<a name="l-24"></a><span class="tm">19:15:06</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">It should be noted that this API requires C++ patches to Firefox; it's not solely implemented in Javascript.</span>
+<a name="l-25"></a><span class="tm">19:16:06</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> any questions/comments on this subject?
+<a name="l-26"></a><span class="tm">19:16:54</span><span class="nk"> &lt;hl&gt;</span> Nope.
+<a name="l-27"></a><span class="tm">19:17:23</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok, so next topic:
+<a name="l-28"></a><span class="tm">19:17:29</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Public Relations</span>
+<a name="l-29"></a><span class="tm">19:17:59</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've got a ticket to 34C3, and it looks like jonasbits is likely to get a ticket too.</span>
+<a name="l-30"></a><span class="tm">19:19:05</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">Currently unsure if I should submit a talk proposal to 34C3.  Looks like the deadline is in about 2 weeks.</span>
+<a name="l-31"></a><span class="tm">19:19:10</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Opinions?
+<a name="l-32"></a><span class="tm">19:22:50</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> ^
+<a name="l-33"></a><span class="tm">19:24:55</span><span class="nk"> &lt;hl&gt;</span> Hmm, I have no position. Up to you I guess.
+<a name="l-34"></a><span class="tm">19:25:44</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> ok.  If I submit one, is it okay if I ask you to review it first?
+<a name="l-35"></a><span class="tm">19:27:27</span><span class="nk"> &lt;hl&gt;</span> Certainly.
+<a name="l-36"></a><span class="tm">19:27:58</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> thanks
+<a name="l-37"></a><span class="tm">19:28:27</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> In other public relations news
+<a name="l-38"></a><span class="tm">19:29:04</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">Namecoin got a bit of publicity due to DNS censorship by Spain of the Catalan independence referendum, which included Spain seizing the entire `.cat` registry.</span>
+<a name="l-39"></a><span class="tm">19:30:09</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (I'm quite a bit happier with Catalan independence being a reason for Namecoin to exist, compared to American neo-Nazis)
+<a name="l-40"></a><span class="tm">19:32:18</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> any other public relations stuff you'd like to bring up?
+<a name="l-41"></a><span class="tm">19:32:38</span><span class="nk"> &lt;hl&gt;</span> Nope.
+<a name="l-42"></a><span class="tm">19:34:08</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Okay.  So that's all the topics I wanted to bring up.  hl : Anything else you'd like to mention today before we end the meeting?
+<a name="l-43"></a><span class="tm">19:34:15</span><span class="nk"> &lt;hl&gt;</span> Nope.
+<a name="l-44"></a><span class="tm">19:34:54</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Anyone else lurking here in the channel who would like to bring something up?
+<a name="l-45"></a><span class="tm">19:40:47</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok.  that concludes the meeting
+<a name="l-46"></a><span class="tm">19:40:48</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>
