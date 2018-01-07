@@ -1,0 +1,45 @@
+19:00:38 <Jeremy_Rand[m]> #startmeeting
+19:00:38 <qpm> Meeting started Sun Nov 19 19:00:38 2017 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:00:38 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:01:07 <Jeremy_Rand[m]> #meetingtopic Namecoin Development Meeting
+19:01:16 <Jeremy_Rand[m]> Hi everyone, welcome to the meeting
+19:01:46 <Jeremy_Rand[m]> Can we get a roll call of who's here today?
+19:06:09 * Jeremy_Rand[m] hopes I'm not the only one here today
+19:07:54 <jonasbits> Im here!
+19:07:56 <Jeremy_Rand[m]> Alright, so I'll go over the stuff I've been working on and maybe other people will arrive while I'm talking
+19:08:08 <Jeremy_Rand[m]> ah hey jonasbits
+19:08:11 <jonasbits> please do!
+19:08:52 <Jeremy_Rand[m]> So I'm nominally on vacation this week and next week.  In practice I tend to work while on vacation, but less efficiently.
+19:09:15 <Jeremy_Rand[m]> Anyways
+19:09:33 <jonasbits> Good
+19:09:58 <Jeremy_Rand[m]> Last weekend I represented Namecoin at the Oklahoma City Peace Festival.  Went reasonably well; seemed to be a good amount of interest.  Circa 2-3 people were there who were already enthusiastic about Bitcoin.
+19:11:10 <Jeremy_Rand[m]> Meanwhile today is the scheduled day for acceptance/rejection notifications for 34C3 talks.  I haven't yet received anything from CCC.  Assuming that they intend to send by end of day German time, it should show up in the next few hours.
+19:11:37 <Jeremy_Rand[m]> (I wouldn't be surprised if CCC sends the notifications late though... not sure what to expect there)
+19:12:48 <Jeremy_Rand[m]> For the last 1-2 weeks I've been talking with George Kadianakis from Tor about Namecoin and onion service naming.  I'm helping George set up a test environment for dns-prop279.
+19:13:40 <Jeremy_Rand[m]> George is somewhat concerned about the horrible non-reproducible build procedure for the SPV client.  (As am I.)
+19:14:14 <Jeremy_Rand[m]> So if anyone wants to step up to write RBM descriptors for the SPV client, it would be most welcome.  (I won't have time to touch that for a while.)
+19:14:43 <jonasbits> Is dns-prop279 easy to setup with ncdns and namecoin-core?
+19:15:30 <Jeremy_Rand[m]> jonasbits: dns-prop279 doesn't care what backend ncdns is using, so Namecoin Core should work fine.  George just didn't want to wait for the blockchain to download.
+19:17:53 <Jeremy_Rand[m]> oh, so meanwhile, last weekend we saw what happens when a hostile hardfork attempt happens to Bitcoin.
+19:18:02 <Jeremy_Rand[m]> Specifically, Namecoin ended up with a higher hashrate than Bitcoin for 2 days
+19:23:20 <Jeremy_Rand[m]> anyways... in terms of actual development... I've done some rebasing work on the SPV client (it's synced against latest bitcoinj-addons now) and I've done some static analysis based fixes to ncdns
+19:23:36 <Jeremy_Rand[m]> nothing particularly noteworthy that end users would notice
+19:23:45 <Jeremy_Rand[m]> but code quality is good, right?  :)
+19:24:10 <Jeremy_Rand[m]> jonasbits: how are things going with Namecoin+YaCy?
+19:24:46 <jonasbits> slow, im sorry to say
+19:25:15 <Jeremy_Rand[m]> ok
+19:26:00 <Jeremy_Rand[m]> jonasbits: depending on what I get from CCC circa later today, it might be useful to have a release of the YaCy stuff ready for 34C3
+19:26:10 <jonasbits> i agree
+19:27:24 <Jeremy_Rand[m]> brand0: looks like you've been making a bunch of progress on the name tab GUI.  How are things going there?
+19:29:02 <jonasbits> i have the domain http://www.nmctest.net but i think its HSTS pegged or something, othervise this could be a good spot for the Yacy search portal site
+19:31:21 <Jeremy_Rand[m]> jonasbits: we should probably figure out whether it's actually even legally safe to operate a public centralized YaCy portal for Namecoin.  I'd be worried about getting takedown notices for it.  I'd lean toward going the safe route and just distributing the code, so people can run their own (and maybe some random 3rd party we haven't heard of can run a public portal if they want)
+19:32:41 <jonasbits> yeah sure, but for demo purposes nmctest.net could work, i plan to run a dnsseed for both testnet and mainnet
+19:32:53 <jonasbits> on subdomains on that
+19:33:09 <Jeremy_Rand[m]> yeah
+19:38:37 <Jeremy_Rand[m]> anyway, that's all I wanted to cover... jonasbits anything else you wanted to bring up?
+19:39:20 <jonasbits> im good, i will continue to work with Yacy, i will try to publish my regex findings to gist.github.com tomorrow
+19:39:34 <Jeremy_Rand[m]> ok
+19:39:43 <jonasbits> Thanks for hosting this meeting Jeremy_Rand[m]
+19:39:53 <Jeremy_Rand[m]> no problem
+19:40:17 <Jeremy_Rand[m]> Hopefully I'll have a lot more stuff to talk about next meeting since I won't be on vacation then
+19:40:20 <Jeremy_Rand[m]> #endmeeting

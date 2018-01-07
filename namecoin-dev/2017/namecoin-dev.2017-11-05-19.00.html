@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev: Namecoin Development Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev: Namecoin Development Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand[m] at 19:00:43 UTC
+(<a href="namecoin-dev.2017-11-05-19.00.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">Namecoin Core</b> <span class="details">(<a href='namecoin-dev.2017-11-05-19.00.log.html#l-9'>Jeremy_Rand[m]</a>, 19:04:45)</span>
+<ol type="a">
+  <li><span class="INFO">brand0 has submitted a PR for the name tab to
+    master branch.  It would be excellent if people can test the heck
+    out of it</span> <span class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-10'>Jeremy_Rand[m]</a>,
+    19:06:12)</span></li>
+  <li><span class="INFO">My macOS rebrand PR is now fixed and working
+    according to a very nice macOS user on Twitter who helped test a few
+    iterations of it until I fixed the errors</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-11'>Jeremy_Rand[m]</a>,
+    19:08:30)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">SPV</b> <span class="details">(<a href='namecoin-dev.2017-11-05-19.00.log.html#l-13'>Jeremy_Rand[m]</a>, 19:12:01)</span>
+<ol type="a">
+  <li><span class="INFO">I've rebased the Namecoin fork of
+    bitcoinj-addons against the latest upstream from Sean
+    Gilligan.</span> <span class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-14'>Jeremy_Rand[m]</a>,
+    19:13:12)</span></li>
+  <li><span class="INFO">I intend to spend some effort on getting the
+    Namecoin fork merged upstream.  This is a nontrivial effort, but
+    Sean is happy to help with stuff on his end.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-15'>Jeremy_Rand[m]</a>,
+    19:16:26)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Tor</b> <span class="details">(<a href='namecoin-dev.2017-11-05-19.00.log.html#l-17'>Jeremy_Rand[m]</a>, 19:20:09)</span>
+<ol type="a">
+  <li><span class="INFO">I've posted documentation to namecoin.org on
+    using Namecoin resolution with Tor via dns-prop279.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-18'>Jeremy_Rand[m]</a>,
+    19:21:02)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">TLS</b> <span class="details">(<a href='namecoin-dev.2017-11-05-19.00.log.html#l-20'>Jeremy_Rand[m]</a>, 19:25:31)</span>
+<ol type="a">
+  <li><span class="INFO">Chromium has announced that they're deprecating
+    PKP.</span> <span class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-21'>Jeremy_Rand[m]</a>,
+    19:25:56)</span></li>
+  <li><span class="INFO">This means that we will probably have to
+    rewrite some TLS code.</span> <span class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-22'>Jeremy_Rand[m]</a>,
+    19:26:30)</span></li>
+  <li><span class="INFO">On Windows, EMET and ECP are promising
+    approaches for this</span> <span class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-23'>Jeremy_Rand[m]</a>,
+    19:28:10)</span></li>
+  <li><span class="INFO">on GNU/Linux, we may need to cancel plans to
+    support Chromium, unless Chromium decides to support better API's
+    for this</span> <span class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-24'>Jeremy_Rand[m]</a>,
+    19:28:41)</span></li>
+  <li><span class="INFO">I've completed latency optimization work on the
+    WebExtensions TLS implementation; up next is hooking it into
+    ncdns</span> <span class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-27'>Jeremy_Rand[m]</a>,
+    19:32:14)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">ncdns</b> <span class="details">(<a href='namecoin-dev.2017-11-05-19.00.log.html#l-28'>Jeremy_Rand[m]</a>, 19:32:59)</span>
+<ol type="a">
+  <li><span class="INFO">I've submitted a temporary kludge PR to build
+    dns-prop279 and q as part of ncdns releases until we replace the
+    build system with RBM</span> <span class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-29'>Jeremy_Rand[m]</a>,
+    19:33:48)</span></li>
+  <li><span class="INFO">I've submitted some fixes for static analysis
+    warnings in ncdns</span> <span class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-33'>Jeremy_Rand[m]</a>,
+    19:35:28)</span></li>
+  <li><span class="INFO">hl has covered the obvious gaps in ncdns test
+    coverage</span> <span class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-38'>Jeremy_Rand[m]</a>,
+    19:39:48)</span></li>
+  <li><span class="INFO">I found a few minor bugs in the ncdns Windows
+    installer that impact a fresh install of Windows 10 32-bit, bugs
+    have been filed accordingly</span> <span class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-39'>Jeremy_Rand[m]</a>,
+    19:41:13)</span></li>
+  <li><span class="INFO">YaCy</span> <span class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-42'>Jeremy_Rand[m]</a>,
+    19:42:45)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">YaCy</b> <span class="details">(<a href='namecoin-dev.2017-11-05-19.00.log.html#l-44'>Jeremy_Rand[m]</a>, 19:43:06)</span>
+<ol type="a">
+  <li><span class="INFO">jonasbits has been tinkering around with using
+    YaCy as a decentralized Namecoin search engine</span> <span
+    class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-45'>Jeremy_Rand[m]</a>,
+    19:43:33)</span></li>
+  <li><span class="INFO">we've finally set up the NMDF Bitcoin address
+    for YaCy-earmarked donations.  Hoping some community members will
+    donate</span> <span class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-50'>Jeremy_Rand[m]</a>,
+    19:51:02)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Public Relations</b> <span class="details">(<a href='namecoin-dev.2017-11-05-19.00.log.html#l-56'>Jeremy_Rand[m]</a>, 20:00:30)</span>
+<ol type="a">
+  <li><a
+    href="https://peacehouseok.org/outreach/fall-peace-festival/">https://peacehouseok.org/outreach/fall-peace-festival/</a>
+    I might have a table at the Peace Festival in Oklahoma City next
+    weekend (they haven't yet contacted the applicants to tell them
+    whether they're accepted) <span class="details">(<a
+    href='namecoin-dev.2017-11-05-19.00.log.html#l-57'>Jeremy_Rand[m]</a>,
+    20:02:14)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 20:23:24 UTC
+(<a href="namecoin-dev.2017-11-05-19.00.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>(none)</li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand[m] (54)</li>
+  <li>jonasbits (9)</li>
+  <li>hl (5)</li>
+  <li>qpm (2)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

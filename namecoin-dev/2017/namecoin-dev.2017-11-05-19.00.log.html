@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:00:43</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:00:44</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Nov  5 19:00:43 2017 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:00:44</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:01:36</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#meetingtopic </span><span class="cmdline">Namecoin Development Meeting</span>
+<a name="l-5"></a><span class="tm">19:02:22</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Hi everyone, welcome to the meeting. Hope daylight savings time didn't throw you off the meeting schedule too much.  Can we get a roll call of who's here today?
+<a name="l-6"></a><span class="tm">19:02:28</span><span class="nk"> &lt;hl&gt;</span> Hi.
+<a name="l-7"></a><span class="tm">19:02:40</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Hi hl
+<a name="l-8"></a><span class="tm">19:04:44</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Okay, so first topic:
+<a name="l-9"></a><span class="tm">19:04:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Namecoin Core</span>
+<a name="l-10"></a><span class="tm">19:06:12</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info  </span><span class="cmdline">brand0 has submitted a PR for the name tab to master branch.  It would be excellent if people can test the heck out of it</span>
+<a name="l-11"></a><span class="tm">19:08:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">My macOS rebrand PR is now fixed and working according to a very nice macOS user on Twitter who helped test a few iterations of it until I fixed the errors</span>
+<a name="l-12"></a><span class="tm">19:09:34</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> anyone have other Namecoin Core stuff to bring up today?
+<a name="l-13"></a><span class="tm">19:12:01</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">SPV</span>
+<a name="l-14"></a><span class="tm">19:13:12</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've rebased the Namecoin fork of bitcoinj-addons against the latest upstream from Sean Gilligan.</span>
+<a name="l-15"></a><span class="tm">19:16:26</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I intend to spend some effort on getting the Namecoin fork merged upstream.  This is a nontrivial effort, but Sean is happy to help with stuff on his end.</span>
+<a name="l-16"></a><span class="tm">19:17:44</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Anyone have other SPV stuff to bring up?
+<a name="l-17"></a><span class="tm">19:20:09</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Tor</span>
+<a name="l-18"></a><span class="tm">19:21:02</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've posted documentation to namecoin.org on using Namecoin resolution with Tor via dns-prop279.</span>
+<a name="l-19"></a><span class="tm">19:22:01</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Any other Tor stuff to bring up?
+<a name="l-20"></a><span class="tm">19:25:31</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">TLS</span>
+<a name="l-21"></a><span class="tm">19:25:56</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">Chromium has announced that they're deprecating PKP.</span>
+<a name="l-22"></a><span class="tm">19:26:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">This means that we will probably have to rewrite some TLS code.</span>
+<a name="l-23"></a><span class="tm">19:28:10</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">On Windows, EMET and ECP are promising approaches for this</span>
+<a name="l-24"></a><span class="tm">19:28:41</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">on GNU/Linux, we may need to cancel plans to support Chromium, unless Chromium decides to support better API's for this</span>
+<a name="l-25"></a><span class="tm">19:29:25</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Any other TLS stuff to bring up?
+<a name="l-26"></a><span class="tm">19:31:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> oh, almost forgot...
+<a name="l-27"></a><span class="tm">19:32:14</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've completed latency optimization work on the WebExtensions TLS implementation; up next is hooking it into ncdns</span>
+<a name="l-28"></a><span class="tm">19:32:59</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">ncdns</span>
+<a name="l-29"></a><span class="tm">19:33:48</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've submitted a temporary kludge PR to build dns-prop279 and q as part of ncdns releases until we replace the build system with RBM</span>
+<a name="l-30"></a><span class="tm">19:34:08</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> any chance you could take a look at that if you haven't already?
+<a name="l-31"></a><span class="tm">19:34:22</span><span class="nk"> &lt;hl&gt;</span> I think I ACKed it earlier.
+<a name="l-32"></a><span class="tm">19:34:56</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok cool.  (Haven't checked GitHub today yet)
+<a name="l-33"></a><span class="tm">19:35:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've submitted some fixes for static analysis warnings in ncdns</span>
+<a name="l-34"></a><span class="tm">19:36:35</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> how's the test coverage stuff for ncdns going?
+<a name="l-35"></a><span class="tm">19:37:03</span><span class="nk"> &lt;hl&gt;</span> The obvious gaps in ncdns have been covered. Oh yeah, did we agree that madns work would be in-scope?
+<a name="l-36"></a><span class="tm">19:38:35</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> yes, as far as I'm concerned, any Go dependency of ncdns (including madns) is within scope
+<a name="l-37"></a><span class="tm">19:39:01</span><span class="nk"> &lt;hl&gt;</span> OK.
+<a name="l-38"></a><span class="tm">19:39:48</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">hl has covered the obvious gaps in ncdns test coverage</span>
+<a name="l-39"></a><span class="tm">19:41:13</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I found a few minor bugs in the ncdns Windows installer that impact a fresh install of Windows 10 32-bit, bugs have been filed accordingly</span>
+<a name="l-40"></a><span class="tm">19:42:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Any other ncdns stuff to bring up?
+<a name="l-41"></a><span class="tm">19:42:25</span><span class="nk"> &lt;hl&gt;</span> I don't think so.
+<a name="l-42"></a><span class="tm">19:42:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">YaCy</span>
+<a name="l-43"></a><span class="tm">19:42:49</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> err
+<a name="l-44"></a><span class="tm">19:43:06</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">YaCy</span>
+<a name="l-45"></a><span class="tm">19:43:33</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">jonasbits has been tinkering around with using YaCy as a decentralized Namecoin search engine</span>
+<a name="l-46"></a><span class="tm">19:43:55</span><span class="nk"> &lt;jonasbits&gt;</span> hi
+<a name="l-47"></a><span class="tm">19:44:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> can you give us a status update on how things are going with YaCy?
+<a name="l-48"></a><span class="tm">19:49:02</span><span class="nk"> &lt;jonasbits&gt;</span> there are 2 very big crawls at cars.bit and taz.bit, i plan to blacklist them in the beginning and then when all is crawled to restart a crawl with taz.bit and cars.bit
+<a name="l-49"></a><span class="tm">19:50:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> ok
+<a name="l-50"></a><span class="tm">19:51:02</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">we've finally set up the NMDF Bitcoin address for YaCy-earmarked donations.  Hoping some community members will donate</span>
+<a name="l-51"></a><span class="tm">19:51:03</span><span class="nk"> &lt;jonasbits&gt;</span> i will document my regex findings in a gist so more people can try it
+<a name="l-52"></a><span class="tm">19:51:34</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> cool
+<a name="l-53"></a><span class="tm">19:52:42</span><span class="nk"> &lt;jonasbits&gt;</span> it would be cool if the low level regex java code could be tested standalone, to find regex that is acceptable programmatically
+<a name="l-54"></a><span class="tm">19:53:40</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> yeah
+<a name="l-55"></a><span class="tm">19:56:12</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> any other YaCy stuff to bring up?
+<a name="l-56"></a><span class="tm">20:00:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Public Relations</span>
+<a name="l-57"></a><span class="tm">20:02:14</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://peacehouseok.org/outreach/fall-peace-festival/ I might have a table at the Peace Festival in Oklahoma City next weekend (they haven't yet contacted the applicants to tell them whether they're accepted)</span>
+<a name="l-58"></a><span class="tm">20:03:24</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> If we're accepted, that means exposure to an expected 3000+ visitors
+<a name="l-59"></a><span class="tm">20:04:16</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> any other public relations stuff to bring up?
+<a name="l-60"></a><span class="tm">20:05:54</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> that's all I've got to report, I think.  hl, anything else from your end?
+<a name="l-61"></a><span class="tm">20:08:56</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> anything else from your end?
+<a name="l-62"></a><span class="tm">20:10:37</span><span class="nk"> &lt;jonasbits&gt;</span> i could start a dns-seeder on nmctest.net domain
+<a name="l-63"></a><span class="tm">20:11:23</span><span class="nk"> &lt;jonasbits&gt;</span> based on this golang code https://github.com/gombadi/dnsseeder
+<a name="l-64"></a><span class="tm">20:12:45</span><span class="nk"> &lt;jonasbits&gt;</span> one seeder for many networks
+<a name="l-65"></a><span class="tm">20:12:47</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> that would definitely be useful
+<a name="l-66"></a><span class="tm">20:12:54</span><span class="nk"> &lt;jonasbits&gt;</span> able to run multiple
+<a name="l-67"></a><span class="tm">20:13:02</span><span class="nk"> &lt;jonasbits&gt;</span> on same ip
+<a name="l-68"></a><span class="tm">20:18:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> anything else before we end the meeting?
+<a name="l-69"></a><span class="tm">20:23:03</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> okay, that's the end of the meeting.  Thanks for attending!
+<a name="l-70"></a><span class="tm">20:23:24</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

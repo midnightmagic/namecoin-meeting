@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:00:43</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:00:43</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Jan  7 19:00:43 2018 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:00:43</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:01:09</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#meetingtopic </span><span class="cmdline">Namecoin Development Meeting</span>
+<a name="l-5"></a><span class="tm">19:01:23</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Hi everyone, welcome to the meeting
+<a name="l-6"></a><span class="tm">19:01:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Can we get a roll call of who's here today?
+<a name="l-7"></a><span class="tm">19:02:14</span><span class="nk"> &lt;jbisch&gt;</span> here
+<a name="l-8"></a><span class="tm">19:02:24</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> hi jbisch
+<a name="l-9"></a><span class="tm">19:04:27</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> okay, so, first topic
+<a name="l-10"></a><span class="tm">19:04:37</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Namecoin Core</span>
+<a name="l-11"></a><span class="tm">19:04:48</span><span class="nk"> &lt;hl&gt;</span> Hi.
+<a name="l-12"></a><span class="tm">19:04:50</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> hi hl
+<a name="l-13"></a><span class="tm">19:05:32</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">We could use some more testers for brand0 's name tab PR.</span>
+<a name="l-14"></a><span class="tm">19:06:00</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I'm planning to make a release tag for that PR, and then do Gitian builds of it</span>
+<a name="l-15"></a><span class="tm">19:06:32</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">Hopefully that will help facilitate more people testing it out</span>
+<a name="l-16"></a><span class="tm">19:08:03</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Any other things to bring up related to Namecoin Core?
+<a name="l-17"></a><span class="tm">19:09:59</span><span class="nk"> &lt;hl&gt;</span> No.
+<a name="l-18"></a><span class="tm">19:11:31</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">GSoC</span>
+<a name="l-19"></a><span class="tm">19:11:57</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">As you may have heard, GSoC applications for mentor organizations are open</span>
+<a name="l-20"></a><span class="tm">19:12:18</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I'd like us to apply if feasible (i.e. if we have enough suggested projects and mentors)</span>
+<a name="l-21"></a><span class="tm">19:12:44</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I'll be revising the suggested project list from last year sometime in the next few days</span>
+<a name="l-22"></a><span class="tm">19:16:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">jbisch informs me that GSoC applications close on Jan 23</span>
+<a name="l-23"></a><span class="tm">19:18:02</span><span class="nk"> &lt;jbisch&gt;</span> 1700 UTC
+<a name="l-24"></a><span class="tm">19:18:15</span><span class="nk"> &lt;jbisch&gt;</span> though i wouldn't wait until the last minute :)
+<a name="l-25"></a><span class="tm">19:18:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> yeah, I don't want to be submitting stuff in the last 24 hours even :)
+<a name="l-26"></a><span class="tm">19:20:55</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> any other things to bring up about GSoC?
+<a name="l-27"></a><span class="tm">19:21:01</span><span class="nk"> &lt;hl&gt;</span> No.
+<a name="l-28"></a><span class="tm">19:21:33</span><span class="nk"> &lt;jbisch&gt;</span> no
+<a name="l-29"></a><span class="tm">19:22:01</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Public Relations</span>
+<a name="l-30"></a><span class="tm">19:22:21</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">As you've heard, jonasbits_  and I attended 34C3</span>
+<a name="l-31"></a><span class="tm">19:23:40</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">Lots of useful discussions happened there, which will hopefully lead somewhere productive.  Also I did 3 talks there; 2 of them are expected to have videos posted (in late January)</span>
+<a name="l-32"></a><span class="tm">19:25:43</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Any other public relations things to bring up?
+<a name="l-33"></a><span class="tm">19:25:55</span><span class="nk"> &lt;hl&gt;</span> No.
+<a name="l-34"></a><span class="tm">19:26:30</span><span class="nk"> &lt;jbisch&gt;</span> no
+<a name="l-35"></a><span class="tm">19:26:59</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok.  Anything else to bring up about any other topic?
+<a name="l-36"></a><span class="tm">19:27:26</span><span class="nk"> &lt;jbisch&gt;</span> no
+<a name="l-37"></a><span class="tm">19:28:47</span><span class="nk"> &lt;hl&gt;</span> Hmmm, well
+<a name="l-38"></a><span class="tm">19:29:44</span><span class="nk"> &lt;hl&gt;</span> I'll have to check, but I believe the work done on improving ncdns test coverage amounted to about five hours. Not sure what more can be done there, so the remainder of that funding should probably be reallocated
+<a name="l-39"></a><span class="tm">19:30:10</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> okay
+<a name="l-40"></a><span class="tm">19:31:26</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> I'll have to check with NLnet whether we can claim a partial payout for that milestone.  If not, I'm probably fine with paying out for that particular milestone via NMDF or Bountysource rather than NLnet (subject to checking on funds availability for those methods, which I don't *think* will be a problem)
+<a name="l-41"></a><span class="tm">19:36:43</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">hl:</span> also I *think* Bountysource fixed their login issue, so I should be able to pay out your NSIS bounty.  Please remind me if I haven't done that in the next few days.
+<a name="l-42"></a><span class="tm">19:36:59</span><span class="nk"> &lt;hl&gt;</span> OK
+<a name="l-43"></a><span class="tm">19:37:32</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> FYI it looks like Bountysource has been bought out by some other company recently.  Only thing I know about this company is that they're currently operating an ICO.
+<a name="l-44"></a><span class="tm">19:37:46</span><span class="nk"> &lt;hl&gt;</span> Ahhhhhhhhhhhhhhhh.
+<a name="l-45"></a><span class="tm">19:38:17</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I'm not expecting any problems to result from this, but worth being aware of
+<a name="l-46"></a><span class="tm">19:39:50</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> anything else to bring up?
+<a name="l-47"></a><span class="tm">19:40:54</span><span class="nk"> &lt;hl&gt;</span> No.
+<a name="l-48"></a><span class="tm">19:43:58</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok then.  Thanks for attending the meeting.
+<a name="l-49"></a><span class="tm">19:44:00</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

@@ -1,0 +1,49 @@
+19:00:43 <Jeremy_Rand[m]> #startmeeting
+19:00:43 <qpm> Meeting started Sun Jan  7 19:00:43 2018 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:00:43 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:01:09 <Jeremy_Rand[m]> #meetingtopic Namecoin Development Meeting
+19:01:23 <Jeremy_Rand[m]> Hi everyone, welcome to the meeting
+19:01:30 <Jeremy_Rand[m]> Can we get a roll call of who's here today?
+19:02:14 <jbisch> here
+19:02:24 <Jeremy_Rand[m]> hi jbisch
+19:04:27 <Jeremy_Rand[m]> okay, so, first topic
+19:04:37 <Jeremy_Rand[m]> #topic Namecoin Core
+19:04:48 <hl> Hi.
+19:04:50 <Jeremy_Rand[m]> hi hl
+19:05:32 <Jeremy_Rand[m]> #info We could use some more testers for brand0 's name tab PR.
+19:06:00 <Jeremy_Rand[m]> #info I'm planning to make a release tag for that PR, and then do Gitian builds of it
+19:06:32 <Jeremy_Rand[m]> #info Hopefully that will help facilitate more people testing it out
+19:08:03 <Jeremy_Rand[m]> Any other things to bring up related to Namecoin Core?
+19:09:59 <hl> No.
+19:11:31 <Jeremy_Rand[m]> #topic GSoC
+19:11:57 <Jeremy_Rand[m]> #info As you may have heard, GSoC applications for mentor organizations are open
+19:12:18 <Jeremy_Rand[m]> #info I'd like us to apply if feasible (i.e. if we have enough suggested projects and mentors)
+19:12:44 <Jeremy_Rand[m]> #info I'll be revising the suggested project list from last year sometime in the next few days
+19:16:30 <Jeremy_Rand[m]> #info jbisch informs me that GSoC applications close on Jan 23
+19:18:02 <jbisch> 1700 UTC
+19:18:15 <jbisch> though i wouldn't wait until the last minute :)
+19:18:45 <Jeremy_Rand[m]> yeah, I don't want to be submitting stuff in the last 24 hours even :)
+19:20:55 <Jeremy_Rand[m]> any other things to bring up about GSoC?
+19:21:01 <hl> No.
+19:21:33 <jbisch> no
+19:22:01 <Jeremy_Rand[m]> #topic Public Relations
+19:22:21 <Jeremy_Rand[m]> #info As you've heard, jonasbits_  and I attended 34C3
+19:23:40 <Jeremy_Rand[m]> #info Lots of useful discussions happened there, which will hopefully lead somewhere productive.  Also I did 3 talks there; 2 of them are expected to have videos posted (in late January)
+19:25:43 <Jeremy_Rand[m]> Any other public relations things to bring up?
+19:25:55 <hl> No.
+19:26:30 <jbisch> no
+19:26:59 <Jeremy_Rand[m]> ok.  Anything else to bring up about any other topic?
+19:27:26 <jbisch> no
+19:28:47 <hl> Hmmm, well
+19:29:44 <hl> I'll have to check, but I believe the work done on improving ncdns test coverage amounted to about five hours. Not sure what more can be done there, so the remainder of that funding should probably be reallocated
+19:30:10 <Jeremy_Rand[m]> hl: okay
+19:31:26 <Jeremy_Rand[m]> hl: I'll have to check with NLnet whether we can claim a partial payout for that milestone.  If not, I'm probably fine with paying out for that particular milestone via NMDF or Bountysource rather than NLnet (subject to checking on funds availability for those methods, which I don't *think* will be a problem)
+19:36:43 <Jeremy_Rand[m]> hl: also I *think* Bountysource fixed their login issue, so I should be able to pay out your NSIS bounty.  Please remind me if I haven't done that in the next few days.
+19:36:59 <hl> OK
+19:37:32 <Jeremy_Rand[m]> FYI it looks like Bountysource has been bought out by some other company recently.  Only thing I know about this company is that they're currently operating an ICO.
+19:37:46 <hl> Ahhhhhhhhhhhhhhhh.
+19:38:17 <Jeremy_Rand[m]> I'm not expecting any problems to result from this, but worth being aware of
+19:39:50 <Jeremy_Rand[m]> anything else to bring up?
+19:40:54 <hl> No.
+19:43:58 <Jeremy_Rand[m]> ok then.  Thanks for attending the meeting.
+19:44:00 <Jeremy_Rand[m]> #endmeeting

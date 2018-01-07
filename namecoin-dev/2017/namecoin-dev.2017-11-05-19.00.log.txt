@@ -1,0 +1,70 @@
+19:00:43 <Jeremy_Rand[m]> #startmeeting
+19:00:44 <qpm> Meeting started Sun Nov  5 19:00:43 2017 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:00:44 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:01:36 <Jeremy_Rand[m]> #meetingtopic Namecoin Development Meeting
+19:02:22 <Jeremy_Rand[m]> Hi everyone, welcome to the meeting. Hope daylight savings time didn't throw you off the meeting schedule too much.  Can we get a roll call of who's here today?
+19:02:28 <hl> Hi.
+19:02:40 <Jeremy_Rand[m]> Hi hl
+19:04:44 <Jeremy_Rand[m]> Okay, so first topic:
+19:04:45 <Jeremy_Rand[m]> #topic Namecoin Core
+19:06:12 <Jeremy_Rand[m]> #info  brand0 has submitted a PR for the name tab to master branch.  It would be excellent if people can test the heck out of it
+19:08:30 <Jeremy_Rand[m]> #info My macOS rebrand PR is now fixed and working according to a very nice macOS user on Twitter who helped test a few iterations of it until I fixed the errors
+19:09:34 <Jeremy_Rand[m]> anyone have other Namecoin Core stuff to bring up today?
+19:12:01 <Jeremy_Rand[m]> #topic SPV
+19:13:12 <Jeremy_Rand[m]> #info I've rebased the Namecoin fork of bitcoinj-addons against the latest upstream from Sean Gilligan.
+19:16:26 <Jeremy_Rand[m]> #info I intend to spend some effort on getting the Namecoin fork merged upstream.  This is a nontrivial effort, but Sean is happy to help with stuff on his end.
+19:17:44 <Jeremy_Rand[m]> Anyone have other SPV stuff to bring up?
+19:20:09 <Jeremy_Rand[m]> #topic Tor
+19:21:02 <Jeremy_Rand[m]> #info I've posted documentation to namecoin.org on using Namecoin resolution with Tor via dns-prop279.
+19:22:01 <Jeremy_Rand[m]> Any other Tor stuff to bring up?
+19:25:31 <Jeremy_Rand[m]> #topic TLS
+19:25:56 <Jeremy_Rand[m]> #info Chromium has announced that they're deprecating PKP.
+19:26:30 <Jeremy_Rand[m]> #info This means that we will probably have to rewrite some TLS code.
+19:28:10 <Jeremy_Rand[m]> #info On Windows, EMET and ECP are promising approaches for this
+19:28:41 <Jeremy_Rand[m]> #info on GNU/Linux, we may need to cancel plans to support Chromium, unless Chromium decides to support better API's for this
+19:29:25 <Jeremy_Rand[m]> Any other TLS stuff to bring up?
+19:31:15 <Jeremy_Rand[m]> oh, almost forgot...
+19:32:14 <Jeremy_Rand[m]> #info I've completed latency optimization work on the WebExtensions TLS implementation; up next is hooking it into ncdns
+19:32:59 <Jeremy_Rand[m]> #topic ncdns
+19:33:48 <Jeremy_Rand[m]> #info I've submitted a temporary kludge PR to build dns-prop279 and q as part of ncdns releases until we replace the build system with RBM
+19:34:08 <Jeremy_Rand[m]> hl: any chance you could take a look at that if you haven't already?
+19:34:22 <hl> I think I ACKed it earlier.
+19:34:56 <Jeremy_Rand[m]> ok cool.  (Haven't checked GitHub today yet)
+19:35:28 <Jeremy_Rand[m]> #info I've submitted some fixes for static analysis warnings in ncdns
+19:36:35 <Jeremy_Rand[m]> hl: how's the test coverage stuff for ncdns going?
+19:37:03 <hl> The obvious gaps in ncdns have been covered. Oh yeah, did we agree that madns work would be in-scope?
+19:38:35 <Jeremy_Rand[m]> hl: yes, as far as I'm concerned, any Go dependency of ncdns (including madns) is within scope
+19:39:01 <hl> OK.
+19:39:48 <Jeremy_Rand[m]> #info hl has covered the obvious gaps in ncdns test coverage
+19:41:13 <Jeremy_Rand[m]> #info I found a few minor bugs in the ncdns Windows installer that impact a fresh install of Windows 10 32-bit, bugs have been filed accordingly
+19:42:15 <Jeremy_Rand[m]> Any other ncdns stuff to bring up?
+19:42:25 <hl> I don't think so.
+19:42:45 <Jeremy_Rand[m]> #info YaCy
+19:42:49 <Jeremy_Rand[m]> err
+19:43:06 <Jeremy_Rand[m]> #topic YaCy
+19:43:33 <Jeremy_Rand[m]> #info jonasbits has been tinkering around with using YaCy as a decentralized Namecoin search engine
+19:43:55 <jonasbits> hi
+19:44:30 <Jeremy_Rand[m]> jonasbits: can you give us a status update on how things are going with YaCy?
+19:49:02 <jonasbits> there are 2 very big crawls at cars.bit and taz.bit, i plan to blacklist them in the beginning and then when all is crawled to restart a crawl with taz.bit and cars.bit
+19:50:15 <Jeremy_Rand[m]> jonasbits: ok
+19:51:02 <Jeremy_Rand[m]> #info we've finally set up the NMDF Bitcoin address for YaCy-earmarked donations.  Hoping some community members will donate
+19:51:03 <jonasbits> i will document my regex findings in a gist so more people can try it
+19:51:34 <Jeremy_Rand[m]> cool
+19:52:42 <jonasbits> it would be cool if the low level regex java code could be tested standalone, to find regex that is acceptable programmatically
+19:53:40 <Jeremy_Rand[m]> yeah
+19:56:12 <Jeremy_Rand[m]> any other YaCy stuff to bring up?
+20:00:30 <Jeremy_Rand[m]> #topic Public Relations
+20:02:14 <Jeremy_Rand[m]> #link https://peacehouseok.org/outreach/fall-peace-festival/ I might have a table at the Peace Festival in Oklahoma City next weekend (they haven't yet contacted the applicants to tell them whether they're accepted)
+20:03:24 <Jeremy_Rand[m]> If we're accepted, that means exposure to an expected 3000+ visitors
+20:04:16 <Jeremy_Rand[m]> any other public relations stuff to bring up?
+20:05:54 <Jeremy_Rand[m]> that's all I've got to report, I think.  hl, anything else from your end?
+20:08:56 <Jeremy_Rand[m]> jonasbits: anything else from your end?
+20:10:37 <jonasbits> i could start a dns-seeder on nmctest.net domain
+20:11:23 <jonasbits> based on this golang code https://github.com/gombadi/dnsseeder
+20:12:45 <jonasbits> one seeder for many networks
+20:12:47 <Jeremy_Rand[m]> jonasbits: that would definitely be useful
+20:12:54 <jonasbits> able to run multiple
+20:13:02 <jonasbits> on same ip
+20:18:28 <Jeremy_Rand[m]> anything else before we end the meeting?
+20:23:03 <Jeremy_Rand[m]> okay, that's the end of the meeting.  Thanks for attending!
+20:23:24 <Jeremy_Rand[m]> #endmeeting

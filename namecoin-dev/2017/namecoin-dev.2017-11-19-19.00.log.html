@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:00:38</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:00:38</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Nov 19 19:00:38 2017 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:00:38</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:01:07</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#meetingtopic </span><span class="cmdline">Namecoin Development Meeting</span>
+<a name="l-5"></a><span class="tm">19:01:16</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Hi everyone, welcome to the meeting
+<a name="l-6"></a><span class="tm">19:01:46</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Can we get a roll call of who's here today?
+<a name="l-7"></a><span class="tm">19:06:09 </span><span class="nka">* Jeremy_Rand[m]</span> <span class="ac">hopes I'm not the only one here today</span>
+<a name="l-8"></a><span class="tm">19:07:54</span><span class="nk"> &lt;jonasbits&gt;</span> Im here!
+<a name="l-9"></a><span class="tm">19:07:56</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Alright, so I'll go over the stuff I've been working on and maybe other people will arrive while I'm talking
+<a name="l-10"></a><span class="tm">19:08:08</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ah hey jonasbits
+<a name="l-11"></a><span class="tm">19:08:11</span><span class="nk"> &lt;jonasbits&gt;</span> please do!
+<a name="l-12"></a><span class="tm">19:08:52</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> So I'm nominally on vacation this week and next week.  In practice I tend to work while on vacation, but less efficiently.
+<a name="l-13"></a><span class="tm">19:09:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Anyways
+<a name="l-14"></a><span class="tm">19:09:33</span><span class="nk"> &lt;jonasbits&gt;</span> Good
+<a name="l-15"></a><span class="tm">19:09:58</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Last weekend I represented Namecoin at the Oklahoma City Peace Festival.  Went reasonably well; seemed to be a good amount of interest.  Circa 2-3 people were there who were already enthusiastic about Bitcoin.
+<a name="l-16"></a><span class="tm">19:11:10</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Meanwhile today is the scheduled day for acceptance/rejection notifications for 34C3 talks.  I haven't yet received anything from CCC.  Assuming that they intend to send by end of day German time, it should show up in the next few hours.
+<a name="l-17"></a><span class="tm">19:11:37</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (I wouldn't be surprised if CCC sends the notifications late though... not sure what to expect there)
+<a name="l-18"></a><span class="tm">19:12:48</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> For the last 1-2 weeks I've been talking with George Kadianakis from Tor about Namecoin and onion service naming.  I'm helping George set up a test environment for dns-prop279.
+<a name="l-19"></a><span class="tm">19:13:40</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> George is somewhat concerned about the horrible non-reproducible build procedure for the SPV client.  (As am I.)
+<a name="l-20"></a><span class="tm">19:14:14</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> So if anyone wants to step up to write RBM descriptors for the SPV client, it would be most welcome.  (I won't have time to touch that for a while.)
+<a name="l-21"></a><span class="tm">19:14:43</span><span class="nk"> &lt;jonasbits&gt;</span> Is dns-prop279 easy to setup with ncdns and namecoin-core?
+<a name="l-22"></a><span class="tm">19:15:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> dns-prop279 doesn't care what backend ncdns is using, so Namecoin Core should work fine.  George just didn't want to wait for the blockchain to download.
+<a name="l-23"></a><span class="tm">19:17:53</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> oh, so meanwhile, last weekend we saw what happens when a hostile hardfork attempt happens to Bitcoin.
+<a name="l-24"></a><span class="tm">19:18:02</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Specifically, Namecoin ended up with a higher hashrate than Bitcoin for 2 days
+<a name="l-25"></a><span class="tm">19:23:20</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> anyways... in terms of actual development... I've done some rebasing work on the SPV client (it's synced against latest bitcoinj-addons now) and I've done some static analysis based fixes to ncdns
+<a name="l-26"></a><span class="tm">19:23:36</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> nothing particularly noteworthy that end users would notice
+<a name="l-27"></a><span class="tm">19:23:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> but code quality is good, right?  :)
+<a name="l-28"></a><span class="tm">19:24:10</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> how are things going with Namecoin+YaCy?
+<a name="l-29"></a><span class="tm">19:24:46</span><span class="nk"> &lt;jonasbits&gt;</span> slow, im sorry to say
+<a name="l-30"></a><span class="tm">19:25:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok
+<a name="l-31"></a><span class="tm">19:26:00</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> depending on what I get from CCC circa later today, it might be useful to have a release of the YaCy stuff ready for 34C3
+<a name="l-32"></a><span class="tm">19:26:10</span><span class="nk"> &lt;jonasbits&gt;</span> i agree
+<a name="l-33"></a><span class="tm">19:27:24</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">brand0:</span> looks like you've been making a bunch of progress on the name tab GUI.  How are things going there?
+<a name="l-34"></a><span class="tm">19:29:02</span><span class="nk"> &lt;jonasbits&gt;</span> i have the domain http://www.nmctest.net but i think its HSTS pegged or something, othervise this could be a good spot for the Yacy search portal site
+<a name="l-35"></a><span class="tm">19:31:21</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> we should probably figure out whether it's actually even legally safe to operate a public centralized YaCy portal for Namecoin.  I'd be worried about getting takedown notices for it.  I'd lean toward going the safe route and just distributing the code, so people can run their own (and maybe some random 3rd party we haven't heard of can run a public portal if they want)
+<a name="l-36"></a><span class="tm">19:32:41</span><span class="nk"> &lt;jonasbits&gt;</span> yeah sure, but for demo purposes nmctest.net could work, i plan to run a dnsseed for both testnet and mainnet
+<a name="l-37"></a><span class="tm">19:32:53</span><span class="nk"> &lt;jonasbits&gt;</span> on subdomains on that
+<a name="l-38"></a><span class="tm">19:33:09</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> yeah
+<a name="l-39"></a><span class="tm">19:38:37</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> anyway, that's all I wanted to cover... jonasbits anything else you wanted to bring up?
+<a name="l-40"></a><span class="tm">19:39:20</span><span class="nk"> &lt;jonasbits&gt;</span> im good, i will continue to work with Yacy, i will try to publish my regex findings to gist.github.com tomorrow
+<a name="l-41"></a><span class="tm">19:39:34</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok
+<a name="l-42"></a><span class="tm">19:39:43</span><span class="nk"> &lt;jonasbits&gt;</span> Thanks for hosting this meeting Jeremy_Rand[m]
+<a name="l-43"></a><span class="tm">19:39:53</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> no problem
+<a name="l-44"></a><span class="tm">19:40:17</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Hopefully I'll have a lot more stuff to talk about next meeting since I won't be on vacation then
+<a name="l-45"></a><span class="tm">19:40:20</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>
