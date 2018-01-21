@@ -1,0 +1,135 @@
+===========================================
+#namecoin-dev: Namecoin Development Meeting
+===========================================
+
+
+Meeting started by Jeremy_Rand[m] at 19:01:19 UTC. The full logs are
+available at
+https://midnightmagic.github.io/namecoin-meeting/namecoin-dev/2018/namecoin-dev.2018-01-21-19.01.log.html
+.
+
+
+
+Meeting summary
+---------------
+* Namecoin Core  (Jeremy_Rand[m], 19:09:01)
+  * LINK: https://github.com/namecoin/namecoin-core/pull/201 Windows
+    Gitian builds of Namecoin Core were broken; I fixed that.
+    nc0.15.99-name-tab-beta2 is expected to have Windows binaries.
+    (Jeremy_Rand[m], 19:09:15)
+  * LINK: https://github.com/namecoin/namecoin-core/pull/202 The
+    Namecoin Core release process for macOS was outdated, I fixed that.
+    nc0.15.99-name-tab-beta2 is expected to have macOS binaries.
+    (Jeremy_Rand[m], 19:11:15)
+  * LINK: https://github.com/namecoin/namecoin-core/pull/204 The
+    Namecoin Core Windows installer now uses the Namecoin logo instead
+    of the Bitcoin logo.  (Jeremy_Rand[m], 19:14:52)
+  * LINK: https://github.com/namecoin/namecoin-core/pull/178 Namecoin
+    Core added a new DNS seed, operated by markasoftware.
+    (Jeremy_Rand[m], 19:18:21)
+  * IDEA: Right now our jurisdictional diversity in DNS seeds isn't very
+    good (one German domain name and one American domain name.)  Should
+    I ask virus_net whether he's interested in setting up a Russian DNS
+    seed?  (Jeremy_Rand[m], 19:20:33)
+  * ACTION: Jeremy_Rand[m] will ask virus_net if he's interested in
+    running a DNS seed  (Jeremy_Rand[m], 19:26:09)
+  * LINK: https://github.com/namecoin/namecoin-core/pull/205 Now that
+    macOS builds of Namecoin Core work, macOS has been re-enabled in the
+    release process.  (Jeremy_Rand[m], 19:28:53)
+  * LINK: https://github.com/namecoin/namecoin-core/pull/206 Namecoin
+    Core's modal overlay (displayed while the blockchain is syncing) now
+    properly says Namecoin instead of Bitcoin, and clarifies that name
+    updates and name lookups are impacted by the not-synced status.
+    (Jeremy_Rand[m], 19:37:58)
+  * (hopefully this will reduce the number of people who are confused by
+    ncdns not working while the blockchain is still syncing)
+    (Jeremy_Rand[m], 19:38:19)
+  * LINK: https://github.com/namecoin/namecoin-core/pull/195 Namecoin
+    Core added an onion seed node, operated by redblade7.
+    (Jeremy_Rand[m], 19:44:32)
+  * LINK: https://github.com/namecoin/namecoin-core/pull/177 Namecoin
+    Core removed broken DNS seeds from Marius and George.  (Thanks to
+    markasoftware for the PR.)  (Jeremy_Rand[m], 19:45:04)
+  * LINK: https://github.com/namecoin/namecoin-core/pull/207 Daniel
+    fixed a Travis CI issue in Namecoin Core that I reported.
+    (Jeremy_Rand[m], 19:47:43)
+  * (Maybe one of these days Travis won't be regularly failing :) )
+    (Jeremy_Rand[m], 19:47:55)
+  * LINK: https://github.com/namecoin/namecoin-core/pull/208 I fixed the
+    macOS binaries to use the Namecoin logo instead of the Bitcoin logo.
+    Thanks to upsuper for testing the fix.  (Jeremy_Rand[m], 19:49:34)
+  * HELP: https://github.com/namecoin/namecoin-core/issues/194 I posted
+    a proposal for modifying the name RPC commands in Namecoin Core;
+    review would be appreciated.  (Jeremy_Rand[m], 19:51:41)
+  * IDEA:
+    https://github.com/namecoin/namecoin-core/issues/108#issuecomment-356084499
+    We might want to consider using `revgrep` instead of `csbuild` for
+    future static analysis work.  (Jeremy_Rand[m], 19:53:23)
+  * HELP:
+    https://github.com/namecoin/namecoin-core/pull/187#issuecomment-356158329
+    brand0's name tab PR needs a rebase due to merge conflicts against
+    current master branch.  (Jeremy_Rand[m], 19:55:40)
+  * LINK:
+    https://github.com/namecoin/namecoin-core/pull/187#issuecomment-357937535
+    I posted some review of brand0's name tab PR based on some testing
+    on regtest.  (Jeremy_Rand[m], 19:56:20)
+  * HELP: I tagged nc0.15.99-name-tab-beta1 and posted GNU/Linux Gitian
+    sigs for it.  midnightmagic has posted sigs as well.  I'd like to
+    see one more person post Gitian sigs before I release binaries.
+    Anyone able to help with this?  (Jeremy_Rand[m], 19:58:53)
+  * HELP: https://github.com/namecoin/namecoin-core/pull/162 Can
+    midnightmagic rebase this PR against current master branch?
+    (Jeremy_Rand[m], 20:00:25)
+
+* Public Relations  (Jeremy_Rand[m], 20:05:39)
+  * HELP: https://github.com/namecoin/namecoin.org/pull/89 We're
+    planning to apply to Google Summer of Code as a mentor organization,
+    we could use some help reviewing our Suggested Project Ideas List.
+    (Jeremy_Rand[m], 20:05:59)
+  * HELP: https://github.com/namecoin/namecoin.org/issues/214 The FAQ
+    has some terminology errors (e.g. "ICANN DNS" and similar), it would
+    be great if someone can fix those.  (Jeremy_Rand[m], 20:13:26)
+  * HELP: https://github.com/namecoin/namecoin.org/issues/215 The FAQ
+    also has some terminology errors about PGP.  (Jeremy_Rand[m],
+    20:13:38)
+  * LINK: https://github.com/namecoin/namecoin.org/pull/211 I added a
+    "Contribute" page to the Namecoin website.  (Jeremy_Rand[m],
+    20:14:12)
+
+Meeting ended at 20:30:28 UTC.
+
+
+
+
+Action Items
+------------
+* Jeremy_Rand[m] will ask virus_net if he's interested in running a DNS
+  seed
+
+
+
+
+Action Items, by person
+-----------------------
+* Jeremy_Rand[m]
+  * Jeremy_Rand[m] will ask virus_net if he's interested in running a
+    DNS seed
+* **UNASSIGNED**
+  * (none)
+
+
+
+
+People Present (lines said)
+---------------------------
+* Jeremy_Rand[m] (62)
+* jbisch (10)
+* jonasbits (3)
+* qpm (2)
+
+
+
+
+Generated by `MeetBot`_ 0.1.4
+
+.. _`MeetBot`: https://wiki.debian.org/MeetBot

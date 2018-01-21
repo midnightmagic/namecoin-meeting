@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:01:19</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:01:20</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Jan 21 19:01:19 2018 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:01:20</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:01:41</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#meetingtopic </span><span class="cmdline">Namecoin Development Meeting</span>
+<a name="l-5"></a><span class="tm">19:01:57</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Hi everyone, welcome to the meeting.  Can we get a roll call of who's here today?
+<a name="l-6"></a><span class="tm">19:05:38</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Um.  Anyone here today?
+<a name="l-7"></a><span class="tm">19:06:31</span><span class="nk"> &lt;jbisch&gt;</span> apparently not
+<a name="l-8"></a><span class="tm">19:06:32</span><span class="nk"> &lt;jbisch&gt;</span> hi
+<a name="l-9"></a><span class="tm">19:06:51</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> hi jbisch
+<a name="l-10"></a><span class="tm">19:08:29</span><span class="nk"> &lt;jbisch&gt;</span> well, if you want to have the meeting with just the two of us, i guess we can get started
+<a name="l-11"></a><span class="tm">19:08:41</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok, so I guess we'll get started and maybe more people will show up during the meeting
+<a name="l-12"></a><span class="tm">19:09:01</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Namecoin Core</span>
+<a name="l-13"></a><span class="tm">19:09:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/201 Windows Gitian builds of Namecoin Core were broken; I fixed that.  nc0.15.99-name-tab-beta2 is expected to have Windows binaries.</span>
+<a name="l-14"></a><span class="tm">19:10:01</span><span class="nk"> &lt;jbisch&gt;</span> that's good
+<a name="l-15"></a><span class="tm">19:10:58</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> indeed
+<a name="l-16"></a><span class="tm">19:11:06</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> on a related note
+<a name="l-17"></a><span class="tm">19:11:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/202 The Namecoin Core release process for macOS was outdated, I fixed that.  nc0.15.99-name-tab-beta2 is expected to have macOS binaries.</span>
+<a name="l-18"></a><span class="tm">19:14:42</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> and, on another related note,
+<a name="l-19"></a><span class="tm">19:14:52</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/204 The Namecoin Core Windows installer now uses the Namecoin logo instead of the Bitcoin logo.</span>
+<a name="l-20"></a><span class="tm">19:15:18</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (this was long overdue, thanks to fsb4000 for his work on that!)
+<a name="l-21"></a><span class="tm">19:18:21</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/178 Namecoin Core added a new DNS seed, operated by markasoftware.</span>
+<a name="l-22"></a><span class="tm">19:20:18</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Speaking of DNS seeds...
+<a name="l-23"></a><span class="tm">19:20:33</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#idea </span><span class="cmdline">Right now our jurisdictional diversity in DNS seeds isn't very good (one German domain name and one American domain name.)  Should I ask virus_net whether he's interested in setting up a Russian DNS seed?</span>
+<a name="l-24"></a><span class="tm">19:22:21</span><span class="nk"> &lt;jbisch&gt;</span> i don't remember offhand who virus_net is (sorry virus_net), but more jurisdictional diversity and just more seeds in general seems good.
+<a name="l-25"></a><span class="tm">19:24:05</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jbisch:</span> virus_net is a member of the Namecoin forum who has been doing some interesting development and research (e.g. he made a Namecoin WhoIs implementation, and he collects stats on which `.bit` domains are listening on port 80)
+<a name="l-26"></a><span class="tm">19:24:31</span><span class="nk"> &lt;jbisch&gt;</span> ah, okay
+<a name="l-27"></a><span class="tm">19:24:34</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Given that he seems to enjoy maintaining useful infrastructure, he seems like a natural fit for running a DNS seed
+<a name="l-28"></a><span class="tm">19:24:54</span><span class="nk"> &lt;jbisch&gt;</span> yeah, does seem like a good fit
+<a name="l-29"></a><span class="tm">19:25:07</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok cool
+<a name="l-30"></a><span class="tm">19:26:09</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#action </span><span class="cmdline">Jeremy_Rand[m] will ask virus_net if he's interested in running a DNS seed</span>
+<a name="l-31"></a><span class="tm">19:28:53</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/205 Now that macOS builds of Namecoin Core work, macOS has been re-enabled in the release process.</span>
+<a name="l-32"></a><span class="tm">19:30:38</span><span class="nk"> &lt;jonasbits&gt;</span> i could test your build if you want
+<a name="l-33"></a><span class="tm">19:32:25</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> I'll probably be tagging nc0.15.99-name-tab-beta2 sometime soon (probably right after brand0 rebases his name tab PR against latest master branch), it'd be great if you could test the macOS Gitian binaries from that tag once they're built
+<a name="l-34"></a><span class="tm">19:32:41</span><span class="nk"> &lt;jonasbits&gt;</span> sure
+<a name="l-35"></a><span class="tm">19:33:34</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> on that note, if you can do a Gitian build of nc0.15.99-name-tab-beta1 for GNU/Linux and post sigs, that'd be awesome (we only need 1 more set of sigs before I can post the binaries)
+<a name="l-36"></a><span class="tm">19:37:49</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> on the subject of GUI updates,
+<a name="l-37"></a><span class="tm">19:37:58</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/206 Namecoin Core's modal overlay (displayed while the blockchain is syncing) now properly says Namecoin instead of Bitcoin, and clarifies that name updates and name lookups are impacted by the not-synced status.</span>
+<a name="l-38"></a><span class="tm">19:38:19</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">(hopefully this will reduce the number of people who are confused by ncdns not working while the blockchain is still syncing)</span>
+<a name="l-39"></a><span class="tm">19:38:46</span><span class="nk"> &lt;jbisch&gt;</span> interesting. does bitcoin core have something like that?
+<a name="l-40"></a><span class="tm">19:39:12</span><span class="nk"> &lt;jbisch&gt;</span> obviously for received funds not showing up, rather than name updates and lookups
+<a name="l-41"></a><span class="tm">19:40:17</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jbisch:</span> Bitcoin Core does show a modal overlay while the blockchain is syncing, which warns that newly received funds might not be visible, and that trying to spend funds that have been affected by blocks that aren't yet downloaded will be rejected by the network
+<a name="l-42"></a><span class="tm">19:40:55</span><span class="nk"> &lt;jbisch&gt;</span> okay, just curious, because i haven't used bitcoin core in a while
+<a name="l-43"></a><span class="tm">19:41:26</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> yeah, we wouldn't be adding something like that to Namecoin Core if Bitcoin Core didn't already have it :)
+<a name="l-44"></a><span class="tm">19:44:09</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Meanwhile, back on the topic of seeds...
+<a name="l-45"></a><span class="tm">19:44:32</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/195 Namecoin Core added an onion seed node, operated by redblade7.</span>
+<a name="l-46"></a><span class="tm">19:44:55</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> also
+<a name="l-47"></a><span class="tm">19:45:04</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/177 Namecoin Core removed broken DNS seeds from Marius and George.  (Thanks to markasoftware for the PR.)</span>
+<a name="l-48"></a><span class="tm">19:47:43</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/207 Daniel fixed a Travis CI issue in Namecoin Core that I reported.</span>
+<a name="l-49"></a><span class="tm">19:47:55</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">(Maybe one of these days Travis won't be regularly failing :) )</span>
+<a name="l-50"></a><span class="tm">19:49:34</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/208 I fixed the macOS binaries to use the Namecoin logo instead of the Bitcoin logo.  Thanks to upsuper for testing the fix.</span>
+<a name="l-51"></a><span class="tm">19:51:41</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#help </span><span class="cmdline">https://github.com/namecoin/namecoin-core/issues/194 I posted a proposal for modifying the name RPC commands in Namecoin Core; review would be appreciated.</span>
+<a name="l-52"></a><span class="tm">19:53:23</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#idea </span><span class="cmdline">https://github.com/namecoin/namecoin-core/issues/108#issuecomment-356084499 We might want to consider using `revgrep` instead of `csbuild` for future static analysis work.</span>
+<a name="l-53"></a><span class="tm">19:55:40</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#help </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/187#issuecomment-356158329 brand0's name tab PR needs a rebase due to merge conflicts against current master branch.</span>
+<a name="l-54"></a><span class="tm">19:56:19</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> relatedly,
+<a name="l-55"></a><span class="tm">19:56:20</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/187#issuecomment-357937535 I posted some review of brand0's name tab PR based on some testing on regtest.</span>
+<a name="l-56"></a><span class="tm">19:58:48</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> already mentioned this in passing, but,
+<a name="l-57"></a><span class="tm">19:58:53</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#help </span><span class="cmdline">I tagged nc0.15.99-name-tab-beta1 and posted GNU/Linux Gitian sigs for it.  midnightmagic has posted sigs as well.  I'd like to see one more person post Gitian sigs before I release binaries.  Anyone able to help with this?</span>
+<a name="l-58"></a><span class="tm">20:00:25</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#help </span><span class="cmdline">https://github.com/namecoin/namecoin-core/pull/162 Can midnightmagic rebase this PR against current master branch?</span>
+<a name="l-59"></a><span class="tm">20:02:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> That's all the Namecoin Core stuff I have to bring up.  Anyone else have Namecoin Core related things to mention here?
+<a name="l-60"></a><span class="tm">20:05:31</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> okay, so moving along
+<a name="l-61"></a><span class="tm">20:05:39</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Public Relations</span>
+<a name="l-62"></a><span class="tm">20:05:59</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#help </span><span class="cmdline">https://github.com/namecoin/namecoin.org/pull/89 We're planning to apply to Google Summer of Code as a mentor organization, we could use some help reviewing our Suggested Project Ideas List.</span>
+<a name="l-63"></a><span class="tm">20:07:42</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Also I've sent a draft of our mentor organization application to most of the devs -- would be great if you can review that too
+<a name="l-64"></a><span class="tm">20:13:16</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> In less important public relations news,
+<a name="l-65"></a><span class="tm">20:13:26</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#help </span><span class="cmdline">https://github.com/namecoin/namecoin.org/issues/214 The FAQ has some terminology errors (e.g. "ICANN DNS" and similar), it would be great if someone can fix those.</span>
+<a name="l-66"></a><span class="tm">20:13:37</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> and relatedly,
+<a name="l-67"></a><span class="tm">20:13:38</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#help </span><span class="cmdline">https://github.com/namecoin/namecoin.org/issues/215 The FAQ also has some terminology errors about PGP.</span>
+<a name="l-68"></a><span class="tm">20:14:09</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Also,
+<a name="l-69"></a><span class="tm">20:14:12</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://github.com/namecoin/namecoin.org/pull/211 I added a "Contribute" page to the Namecoin website.</span>
+<a name="l-70"></a><span class="tm">20:16:38</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> That's all the public relations stuff I have to bring up, anyone else have public relations related stuff to bring up today?
+<a name="l-71"></a><span class="tm">20:20:38</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jbisch:</span> anything else to bring up on any topic?
+<a name="l-72"></a><span class="tm">20:24:18</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> anything to bring up?
+<a name="l-73"></a><span class="tm">20:24:29</span><span class="nk"> &lt;jonasbits&gt;</span> im good
+<a name="l-74"></a><span class="tm">20:25:39</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> anyone else lurking in here have something to bring up before we close the meeting?
+<a name="l-75"></a><span class="tm">20:30:14</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> okay then, that's the end of the meeting
+<a name="l-76"></a><span class="tm">20:30:21</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> thanks for attending :)
+<a name="l-77"></a><span class="tm">20:30:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

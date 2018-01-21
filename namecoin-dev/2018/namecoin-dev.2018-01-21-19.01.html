@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev: Namecoin Development Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev: Namecoin Development Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand[m] at 19:01:19 UTC
+(<a href="namecoin-dev.2018-01-21-19.01.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">Namecoin Core</b> <span class="details">(<a href='namecoin-dev.2018-01-21-19.01.log.html#l-12'>Jeremy_Rand[m]</a>, 19:09:01)</span>
+<ol type="a">
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/201">https://github.com/namecoin/namecoin-core/pull/201</a>
+    Windows Gitian builds of Namecoin Core were broken; I fixed that.
+    nc0.15.99-name-tab-beta2 is expected to have Windows binaries. <span
+    class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-13'>Jeremy_Rand[m]</a>,
+    19:09:15)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/202">https://github.com/namecoin/namecoin-core/pull/202</a>
+    The Namecoin Core release process for macOS was outdated, I fixed
+    that.  nc0.15.99-name-tab-beta2 is expected to have macOS binaries.
+    <span class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-17'>Jeremy_Rand[m]</a>,
+    19:11:15)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/204">https://github.com/namecoin/namecoin-core/pull/204</a>
+    The Namecoin Core Windows installer now uses the Namecoin logo
+    instead of the Bitcoin logo. <span class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-19'>Jeremy_Rand[m]</a>,
+    19:14:52)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/178">https://github.com/namecoin/namecoin-core/pull/178</a>
+    Namecoin Core added a new DNS seed, operated by markasoftware. <span
+    class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-21'>Jeremy_Rand[m]</a>,
+    19:18:21)</span></li>
+  <li><i class="itemtype">IDEA</i>: <span class="IDEA">Right now our
+    jurisdictional diversity in DNS seeds isn't very good (one German
+    domain name and one American domain name.)  Should I ask virus_net
+    whether he's interested in setting up a Russian DNS seed?</span>
+    <span class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-23'>Jeremy_Rand[m]</a>,
+    19:20:33)</span></li>
+  <li><i class="itemtype">ACTION</i>: <span
+    class="ACTION">Jeremy_Rand[m] will ask virus_net if he's interested
+    in running a DNS seed</span> <span class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-30'>Jeremy_Rand[m]</a>,
+    19:26:09)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/205">https://github.com/namecoin/namecoin-core/pull/205</a>
+    Now that macOS builds of Namecoin Core work, macOS has been
+    re-enabled in the release process. <span class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-31'>Jeremy_Rand[m]</a>,
+    19:28:53)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/206">https://github.com/namecoin/namecoin-core/pull/206</a>
+    Namecoin Core's modal overlay (displayed while the blockchain is
+    syncing) now properly says Namecoin instead of Bitcoin, and
+    clarifies that name updates and name lookups are impacted by the
+    not-synced status. <span class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-37'>Jeremy_Rand[m]</a>,
+    19:37:58)</span></li>
+  <li><span class="INFO">(hopefully this will reduce the number of
+    people who are confused by ncdns not working while the blockchain is
+    still syncing)</span> <span class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-38'>Jeremy_Rand[m]</a>,
+    19:38:19)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/195">https://github.com/namecoin/namecoin-core/pull/195</a>
+    Namecoin Core added an onion seed node, operated by redblade7. <span
+    class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-45'>Jeremy_Rand[m]</a>,
+    19:44:32)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/177">https://github.com/namecoin/namecoin-core/pull/177</a>
+    Namecoin Core removed broken DNS seeds from Marius and George.
+    (Thanks to markasoftware for the PR.) <span class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-47'>Jeremy_Rand[m]</a>,
+    19:45:04)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/207">https://github.com/namecoin/namecoin-core/pull/207</a>
+    Daniel fixed a Travis CI issue in Namecoin Core that I reported.
+    <span class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-48'>Jeremy_Rand[m]</a>,
+    19:47:43)</span></li>
+  <li><span class="INFO">(Maybe one of these days Travis won't be
+    regularly failing :) )</span> <span class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-49'>Jeremy_Rand[m]</a>,
+    19:47:55)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/208">https://github.com/namecoin/namecoin-core/pull/208</a>
+    I fixed the macOS binaries to use the Namecoin logo instead of the
+    Bitcoin logo.  Thanks to upsuper for testing the fix. <span
+    class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-50'>Jeremy_Rand[m]</a>,
+    19:49:34)</span></li>
+  <li><i class="itemtype">HELP</i>: <span
+    class="HELP">https://github.com/namecoin/namecoin-core/issues/194 I
+    posted a proposal for modifying the name RPC commands in Namecoin
+    Core; review would be appreciated.</span> <span class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-51'>Jeremy_Rand[m]</a>,
+    19:51:41)</span></li>
+  <li><i class="itemtype">IDEA</i>: <span
+    class="IDEA">https://github.com/namecoin/namecoin-core/issues/108#issuecomment-356084499
+    We might want to consider using `revgrep` instead of `csbuild` for
+    future static analysis work.</span> <span class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-52'>Jeremy_Rand[m]</a>,
+    19:53:23)</span></li>
+  <li><i class="itemtype">HELP</i>: <span
+    class="HELP">https://github.com/namecoin/namecoin-core/pull/187#issuecomment-356158329
+    brand0's name tab PR needs a rebase due to merge conflicts against
+    current master branch.</span> <span class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-53'>Jeremy_Rand[m]</a>,
+    19:55:40)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin-core/pull/187#issuecomment-357937535">https://github.com/namecoin/namecoin-core/pull/187#issuecomment-357937535</a>
+    I posted some review of brand0's name tab PR based on some testing
+    on regtest. <span class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-55'>Jeremy_Rand[m]</a>,
+    19:56:20)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">I tagged
+    nc0.15.99-name-tab-beta1 and posted GNU/Linux Gitian sigs for it.
+    midnightmagic has posted sigs as well.  I'd like to see one more
+    person post Gitian sigs before I release binaries.  Anyone able to
+    help with this?</span> <span class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-57'>Jeremy_Rand[m]</a>,
+    19:58:53)</span></li>
+  <li><i class="itemtype">HELP</i>: <span
+    class="HELP">https://github.com/namecoin/namecoin-core/pull/162 Can
+    midnightmagic rebase this PR against current master branch?</span>
+    <span class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-58'>Jeremy_Rand[m]</a>,
+    20:00:25)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Public Relations</b> <span class="details">(<a href='namecoin-dev.2018-01-21-19.01.log.html#l-61'>Jeremy_Rand[m]</a>, 20:05:39)</span>
+<ol type="a">
+  <li><i class="itemtype">HELP</i>: <span
+    class="HELP">https://github.com/namecoin/namecoin.org/pull/89 We're
+    planning to apply to Google Summer of Code as a mentor organization,
+    we could use some help reviewing our Suggested Project Ideas
+    List.</span> <span class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-62'>Jeremy_Rand[m]</a>,
+    20:05:59)</span></li>
+  <li><i class="itemtype">HELP</i>: <span
+    class="HELP">https://github.com/namecoin/namecoin.org/issues/214 The
+    FAQ has some terminology errors (e.g. "ICANN DNS" and similar), it
+    would be great if someone can fix those.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-65'>Jeremy_Rand[m]</a>,
+    20:13:26)</span></li>
+  <li><i class="itemtype">HELP</i>: <span
+    class="HELP">https://github.com/namecoin/namecoin.org/issues/215 The
+    FAQ also has some terminology errors about PGP.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-67'>Jeremy_Rand[m]</a>,
+    20:13:38)</span></li>
+  <li><a
+    href="https://github.com/namecoin/namecoin.org/pull/211">https://github.com/namecoin/namecoin.org/pull/211</a>
+    I added a "Contribute" page to the Namecoin website. <span
+    class="details">(<a
+    href='namecoin-dev.2018-01-21-19.01.log.html#l-69'>Jeremy_Rand[m]</a>,
+    20:14:12)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 20:30:28 UTC
+(<a href="namecoin-dev.2018-01-21-19.01.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>Jeremy_Rand[m] will ask virus_net if he's interested in running a DNS seed</li>
+</ol>
+<br><br>
+
+
+
+<h3>Action items, by person</h3>
+<ol>
+  <li> Jeremy_Rand[m] <ol>
+    <li>Jeremy_Rand[m] will ask virus_net if he's interested in running a DNS seed</li>
+  </ol></li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand[m] (62)</li>
+  <li>jbisch (10)</li>
+  <li>jonasbits (3)</li>
+  <li>qpm (2)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>
