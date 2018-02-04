@@ -1,0 +1,13 @@
+19:10:35 <Jeremy_Rand[m]> #startmeeting
+19:10:35 <qpm> Meeting started Sun Feb  4 19:10:35 2018 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:10:36 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:10:58 <Jeremy_Rand[m]> hmm, qpm seems to be dead
+19:11:16 <Jeremy_Rand[m]> oh, qpm is back now
+19:11:19 <Jeremy_Rand[m]> ok then
+19:11:39 <Jeremy_Rand[m]> #meetingtopic Namecoin Development Meeting
+19:11:50 <Jeremy_Rand[m]> Hi everyone, welcome to the meeting.  Sorry we're starting a little bit late today.
+19:11:57 <Jeremy_Rand[m]> Can we get a roll call of who's here today?
+19:14:14 <Jeremy_Rand[m]> Hmm, are people here today?
+19:29:48 <Jeremy_Rand[m]> well, I guess no one's here today.  Hopefully everyone's at FOSDEM playing with the Talos II on display there, or something else far more interesting than this meeting
+19:29:51 <Jeremy_Rand[m]> Happy hacking all
+19:29:55 <Jeremy_Rand[m]> #endmeeting
