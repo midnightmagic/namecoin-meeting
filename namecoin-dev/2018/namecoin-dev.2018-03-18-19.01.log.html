@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:01:11</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:01:11</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Mar 18 19:01:11 2018 UTC.  The chair is jonasbits. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:01:11</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:02:47</span><span class="nk"> &lt;jonasbits&gt;</span> Im going to try to get you guys to notice this meeting :-)
+<a name="l-5"></a><span class="tm">19:03:05</span><span class="nk"> &lt;jonasbits&gt;</span> ^ brand0
+<a name="l-6"></a><span class="tm">19:04:07</span><span class="nk"> &lt;jonasbits&gt;</span> Welcome tfreedman, i was just looking at the tx and block you linked in the #namecoin channel before
+<a name="l-7"></a><span class="tm">19:04:53</span><span class="nk"> &lt;jonasbits&gt;</span> ^ jbisch
+<a name="l-8"></a><span class="tm">19:05:08</span><span class="nk"> &lt;tfreedman&gt;</span> so basically, as an explanation of where that's from
+<a name="l-9"></a><span class="tm">19:05:31</span><span class="nk"> &lt;tfreedman&gt;</span> so I'm in the middle of implementing search by address to the block explorer I wrote
+<a name="l-10"></a><span class="tm">19:05:35</span><span class="nk"> &lt;tfreedman&gt;</span> why it's not in bitcoin core, I don't understand, but whatever
+<a name="l-11"></a><span class="tm">19:05:50</span><span class="nk"> &lt;jonasbits&gt;</span> cool
+<a name="l-12"></a><span class="tm">19:05:54</span><span class="nk"> &lt;tfreedman&gt;</span> so I'm writing code to iterate over every block, grab the transactions, and then track their inputs and outputs
+<a name="l-13"></a><span class="tm">19:06:32</span><span class="nk"> &lt;tfreedman&gt;</span> so something like https://namecoin.cyphrs.com/block/142 might be a bug on my end
+<a name="l-14"></a><span class="tm">19:06:42</span><span class="nk"> &lt;jonasbits&gt;</span> is this the code you would want included https://github.com/btcdrak/bitcoin/commit/fe884da57dd2aba53aa75d6196baa99cc1855d2f
+<a name="l-15"></a><span class="tm">19:07:07</span><span class="nk"> &lt;tfreedman&gt;</span> yeah
+<a name="l-16"></a><span class="tm">19:08:24</span><span class="nk"> &lt;tfreedman&gt;</span> I'll probably need to write the address index code anyways for work (unless I can convince every other coin developer to add it), though it'd be nice if I could make it an option for my code (if supported by *coind, use their code instead of my own)
+<a name="l-17"></a><span class="tm">19:08:28</span><span class="nk"> &lt;jonasbits&gt;</span> maybe its a edge case that only explorer software needs, i remember insight using a patch to bitcoind to do something like this
+<a name="l-18"></a><span class="tm">19:08:53</span><span class="nk"> &lt;tfreedman&gt;</span> well, so that's what I can't figure out
+<a name="l-19"></a><span class="tm">19:09:00</span><span class="nk"> &lt;tfreedman&gt;</span> in theory, only explorer software does need it
+<a name="l-20"></a><span class="tm">19:09:12</span><span class="nk"> &lt;tfreedman&gt;</span> but the thing is, there are a bunch of additional indexes you can enable that only explorers would use
+<a name="l-21"></a><span class="tm">19:09:24</span><span class="nk"> &lt;jonasbits&gt;</span> -txindex
+<a name="l-22"></a><span class="tm">19:09:50</span><span class="nk"> &lt;tfreedman&gt;</span> so I can understand not having any bonus features for people writing block explorers
+<a name="l-23"></a><span class="tm">19:09:53</span><span class="nk"> &lt;tfreedman&gt;</span> I can't understand having every bonus feature but one
+<a name="l-24"></a><span class="tm">19:10:23</span><span class="nk"> &lt;jonasbits&gt;</span> yeah your right
+<a name="l-25"></a><span class="tm">19:10:49</span><span class="nk"> &lt;jonasbits&gt;</span> -txindex is needed for Lightning
+<a name="l-26"></a><span class="tm">19:13:24</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#info </span><span class="cmdline">tfreedman are working on a Namecoin Explorer writen in Ruby, something like https://github.com/btcdrak/bitcoin/commit/fe884da57dd2aba53aa75d6196baa99cc1855d2f would have helped a lot</span>
+<a name="l-27"></a><span class="tm">19:14:27</span><span class="nk"> &lt;tfreedman&gt;</span> as far as the explorer goes, I'm also interested if it can be used as the server for an SPV client
+<a name="l-28"></a><span class="tm">19:14:30</span><span class="nk"> &lt;jonasbits&gt;</span> are you hosting a testnet instance also?
+<a name="l-29"></a><span class="tm">19:15:28</span><span class="nk"> &lt;tfreedman&gt;</span> not yet, though I plan to
+<a name="l-30"></a><span class="tm">19:15:41</span><span class="nk"> &lt;jonasbits&gt;</span> i would be up to hosting that
+<a name="l-31"></a><span class="tm">19:16:06</span><span class="nk"> &lt;tfreedman&gt;</span> well, that's part of why I was curious about the addressindex thing
+<a name="l-32"></a><span class="tm">19:16:12</span><span class="nk"> &lt;tfreedman&gt;</span> it's not a big deal for me to install ruby + nginx
+<a name="l-33"></a><span class="tm">19:16:42</span><span class="nk"> &lt;tfreedman&gt;</span> though if the goal is to get other people to run this code, the more dependencies I add means it gets harder and harder for someone to actually run this locally
+<a name="l-34"></a><span class="tm">19:16:53</span><span class="nk"> &lt;jonasbits&gt;</span> yeah
+<a name="l-35"></a><span class="tm">19:17:09</span><span class="nk"> &lt;tfreedman&gt;</span> if an address index requires postgres, now I have to assume someone knows how to set that up
+<a name="l-36"></a><span class="tm">19:17:29</span><span class="nk"> &lt;jonasbits&gt;</span> i love the idea of spinning up your own explorer instans
+<a name="l-37"></a><span class="tm">19:18:22</span><span class="nk"> &lt;tfreedman&gt;</span> if the explorer is only useful for browsing transactions, then sure, not many people are going to run it
+<a name="l-38"></a><span class="tm">19:18:40</span><span class="nk"> &lt;tfreedman&gt;</span> but if it's also an SPV backend, I can see where it would be useful for other people to have their own copies
+<a name="l-39"></a><span class="tm">19:18:45</span><span class="nk"> &lt;tfreedman&gt;</span> ideally with minimal overhead to get it up and running
+<a name="l-40"></a><span class="tm">19:20:25</span><span class="nk"> &lt;tfreedman&gt;</span> my plan is to expose all namecoind RPC commands via /api/
+<a name="l-41"></a><span class="tm">19:20:27</span><span class="nk"> &lt;jonasbits&gt;</span> i think namecoin-core do supply SPV support, i believe SPV clients should use a random peer with that service
+<a name="l-42"></a><span class="tm">19:20:55</span><span class="nk"> &lt;tfreedman&gt;</span> I just need to finish reading over all the documentation about what each command does, because some of them can't be opened to the public.
+<a name="l-43"></a><span class="tm">19:21:18</span><span class="nk"> &lt;tfreedman&gt;</span> letting people randomly re-index the chain would be a bad idea
+<a name="l-44"></a><span class="tm">19:21:24</span><span class="nk"> &lt;jonasbits&gt;</span> yeah
+<a name="l-45"></a><span class="tm">19:22:50</span><span class="nk"> &lt;jonasbits&gt;</span> Anybody else here? First time joiners to this meeting? Make some noice :-)
+<a name="l-46"></a><span class="tm">19:24:06</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#info </span><span class="cmdline">tfreedman is thinking of including some sort of SPV support to the explorer.</span>
+<a name="l-47"></a><span class="tm">19:24:29</span><span class="nk"> &lt;jonasbits&gt;</span> are you talking about public API and private API?
+<a name="l-48"></a><span class="tm">19:25:11</span><span class="nk"> &lt;tfreedman&gt;</span> is there any reason why some API commands would need to be private?
+<a name="l-49"></a><span class="tm">19:26:03</span><span class="nk"> &lt;tfreedman&gt;</span> aside from offering things like separate rate limiting for authenticated users
+<a name="l-50"></a><span class="tm">19:27:32</span><span class="nk"> &lt;jonasbits&gt;</span> i was thinking your SPV support was regarding API usage
+<a name="l-51"></a><span class="tm">19:29:21</span><span class="nk"> &lt;tfreedman&gt;</span> I'll need to see what's involved in supporting SPV
+<a name="l-52"></a><span class="tm">19:29:30</span><span class="nk"> &lt;jonasbits&gt;</span> i know that copay are using special "spv" insight wallet service
+<a name="l-53"></a><span class="tm">19:29:46</span><span class="nk"> &lt;tfreedman&gt;</span> if it's just a matter of exposing some namecoind RPC calls, then I'll definitely add it
+<a name="l-54"></a><span class="tm">19:31:34</span><span class="nk"> &lt;jonasbits&gt;</span> have you considered Tor usage for the explorer?
+<a name="l-55"></a><span class="tm">19:33:43</span><span class="nk"> &lt;tfreedman&gt;</span> I'll need to look into what's required to host one
+<a name="l-56"></a><span class="tm">19:34:59</span><span class="nk"> &lt;tfreedman&gt;</span> I'm not opposed to the idea, it just depends how much work is involved
+<a name="l-57"></a><span class="tm">19:39:54</span><span class="nk"> &lt;jonasbits&gt;</span> yeah, i want to figure out how to run my namecoin-core client in Tor mode
+<a name="l-58"></a><span class="tm">19:45:01</span><span class="nk"> &lt;tfreedman&gt;</span> anyways, back to the address index thing
+<a name="l-59"></a><span class="tm">19:45:02</span><span class="nk"> &lt;tfreedman&gt;</span> so I can totally understand if the code I'm writing right now fails to parse a transaction
+<a name="l-60"></a><span class="tm">19:45:03</span><span class="nk"> &lt;tfreedman&gt;</span> though I can't figure out why namecoind refuses to give me transaction info for something that it knows about
+<a name="l-61"></a><span class="tm">19:45:04</span><span class="nk"> &lt;jonasbits&gt;</span> installing ruby and rails
+<a name="l-62"></a><span class="tm">19:45:19</span><span class="nk"> &lt;tfreedman&gt;</span> and I'm wondering how every other block explorer has managed to solve this
+<a name="l-63"></a><span class="tm">19:45:53</span><span class="nk"> &lt;tfreedman&gt;</span> oh, this isn't even a ruby thing
+<a name="l-64"></a><span class="tm">19:46:02</span><span class="nk"> &lt;tfreedman&gt;</span> just querying namecoind fails
+<a name="l-65"></a><span class="tm">19:49:21</span><span class="nk"> &lt;tfreedman&gt;</span> that's what makes it so bizarre
+<a name="l-66"></a><span class="tm">19:49:40</span><span class="nk"> &lt;jonasbits&gt;</span> do you have -reindex and -namehistory flags?
+<a name="l-67"></a><span class="tm">19:49:47</span><span class="nk"> &lt;jonasbits&gt;</span> sorry -txindex
+<a name="l-68"></a><span class="tm">19:52:46</span><span class="nk"> &lt;tfreedman&gt;</span> yeah
+<a name="l-69"></a><span class="tm">19:52:47</span><span class="nk"> &lt;tfreedman&gt;</span> txindex=1
+<a name="l-70"></a><span class="tm">19:52:47</span><span class="nk"> &lt;tfreedman&gt;</span> daemon=1
+<a name="l-71"></a><span class="tm">19:52:48</span><span class="nk"> &lt;tfreedman&gt;</span> namehistory=1
+<a name="l-72"></a><span class="tm">19:53:44</span><span class="nk"> &lt;tfreedman&gt;</span> what happens if you query that block
+<a name="l-73"></a><span class="tm">19:55:19</span><span class="nk"> &lt;jonasbits&gt;</span> tested with namecoin-cli, used getrawtransaction
+<a name="l-74"></a><span class="tm">19:55:43</span><span class="nk"> &lt;jonasbits&gt;</span> and the one that require that its in your wallet "gettransaction"
+<a name="l-75"></a><span class="tm">19:57:35</span><span class="nk"> &lt;jonasbits&gt;</span> my node is also -txindex and -namehistory
+<a name="l-76"></a><span class="tm">19:58:53</span><span class="nk"> &lt;jonasbits&gt;</span> this tx from block 142 works -  ./namecoin-cli getrawtransaction ab1207bd605af57ed0b5325ac94d19578cff3bce668ebe8dda2f42a00b001f5d
+<a name="l-77"></a><span class="tm">19:59:16</span><span class="nk"> &lt;tfreedman&gt;</span> yeah, block 142 I kinda expect to work
+<a name="l-78"></a><span class="tm">19:59:44</span><span class="nk"> &lt;tfreedman&gt;</span> one sec, just restarting my server
+<a name="l-79"></a><span class="tm">20:02:13</span><span class="nk"> &lt;tfreedman&gt;</span> okay, so
+<a name="l-80"></a><span class="tm">20:02:14</span><span class="nk"> &lt;jonasbits&gt;</span> i think block 0 are special, its not mined, its generated in advanced and all the rest are mined
+<a name="l-81"></a><span class="tm">20:02:31</span><span class="nk"> &lt;tfreedman&gt;</span> block 142 gives me:
+<a name="l-82"></a><span class="tm">20:02:35</span><span class="nk"> &lt;tfreedman&gt;</span> &lt;td&gt;&lt;a href="/address/&lt;%= vout['scriptPubKey']['addresses'][0] %&gt;"&gt;&lt;%= vout["scriptPubKey"]["addresses"][0] %&gt;&lt;/a&gt;&lt;/td&gt;
+<a name="l-83"></a><span class="tm">20:02:39</span><span class="nk"> &lt;tfreedman&gt;</span> undefined method `[]' for nil:NilClass
+<a name="l-84"></a><span class="tm">20:02:43</span><span class="nk"> &lt;tfreedman&gt;</span> I can totally accept that there's a bug in the way I'm walking through that transaction
+<a name="l-85"></a><span class="tm">20:03:07</span><span class="nk"> &lt;tfreedman&gt;</span> it's possible that there's some other format that's permissible there - I'll need to look into it
+<a name="l-86"></a><span class="tm">20:03:17</span><span class="nk"> &lt;tfreedman&gt;</span> and I get that block 0 is special
+<a name="l-87"></a><span class="tm">20:03:27</span><span class="nk"> &lt;tfreedman&gt;</span> what I don't get is how other block explorers are getting an address for that transaction
+<a name="l-88"></a><span class="tm">20:04:24</span><span class="nk"> &lt;tfreedman&gt;</span> if the transaction is special (and unspendable), then everyone else has a bug in their code
+<a name="l-89"></a><span class="tm">20:04:55</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#info </span><span class="cmdline">im planing to post a PR with WIP code to reset testnet using this repo ( https://github.com/lhartikk/GenesisH0 ) to generate the genesis block for testnet2</span>
+<a name="l-90"></a><span class="tm">20:06:01</span><span class="nk"> &lt;tfreedman&gt;</span> which I guess goes back into why I think the idea of having to craft a separate addressindex is kinda weird
+<a name="l-91"></a><span class="tm">20:06:19</span><span class="nk"> &lt;tfreedman&gt;</span> if namecoind is the definitive source, then everyone else has a bug in their code
+<a name="l-92"></a><span class="tm">20:06:23</span><span class="nk"> &lt;jonasbits&gt;</span> i think all explorers have to use some tricks to get the genesis block displayed correctly
+<a name="l-93"></a><span class="tm">20:06:38</span><span class="nk"> &lt;tfreedman&gt;</span> and I'm the only one who found it because I'm not implementing stuff from scratch
+<a name="l-94"></a><span class="tm">20:06:55</span><span class="nk"> &lt;tfreedman&gt;</span> though then the question is, how did everyone else work around this
+<a name="l-95"></a><span class="tm">20:07:48</span><span class="nk"> &lt;jonasbits&gt;</span> https://github.com/bitcoin/bitcoin/issues/3303
+<a name="l-96"></a><span class="tm">20:09:02</span><span class="nk"> &lt;jonasbits&gt;</span> https://github.com/bitpay/insight-api/issues/475
+<a name="l-97"></a><span class="tm">20:09:20</span><span class="nk"> &lt;tfreedman&gt;</span> okay, so amazingly, everyone else is wrong
+<a name="l-98"></a><span class="tm">20:09:21</span><span class="nk"> &lt;tfreedman&gt;</span> good to know
+<a name="l-99"></a><span class="tm">20:09:23</span><span class="nk"> &lt;jonasbits&gt;</span> you have to fake the info
+<a name="l-100"></a><span class="tm">20:09:26</span><span class="nk"> &lt;tfreedman&gt;</span> if it's 100% unspendable, then it isn't a bug to not include it
+<a name="l-101"></a><span class="tm">20:09:37</span><span class="nk"> &lt;jonasbits&gt;</span> because its a block-chain, and there is no -1 block to reference
+<a name="l-102"></a><span class="tm">20:10:11</span><span class="nk"> &lt;tfreedman&gt;</span> yeah, so what's the best solution here
+<a name="l-103"></a><span class="tm">20:10:23</span><span class="nk"> &lt;tfreedman&gt;</span> writing code to specifically detect if someone's querying block 0 in the explorer, and basically say 'no transactions'?
+<a name="l-104"></a><span class="tm">20:10:39</span><span class="nk"> &lt;tfreedman&gt;</span> since I can definitely do that
+<a name="l-105"></a><span class="tm">20:10:45</span><span class="nk"> &lt;jonasbits&gt;</span> try - catch: if we know error, do this instead
+<a name="l-106"></a><span class="tm">20:11:00</span><span class="nk"> &lt;jonasbits&gt;</span> yeah sure
+<a name="l-107"></a><span class="tm">20:11:42</span><span class="nk"> &lt;tfreedman&gt;</span> so I guess now the next question is, how did people come up with this address: N1Gi2mS1VSp1wRj2RU3ZU7t1N1zdsRTuWg
+<a name="l-108"></a><span class="tm">20:11:56</span><span class="nk"> &lt;jonasbits&gt;</span> https://namecoin.webbtc.com/block/000000000062b72c5e2ceb45fbc8587e807c155b0da735e6483dfba2f0a9c770
+<a name="l-109"></a><span class="tm">20:12:41</span><span class="nk"> &lt;tfreedman&gt;</span> I don't mind not including it
+<a name="l-110"></a><span class="tm">20:12:49</span><span class="nk"> &lt;tfreedman&gt;</span> I'm just curious how everyone else managed to get the same solution
+<a name="l-111"></a><span class="tm">20:13:40</span><span class="nk"> &lt;jonasbits&gt;</span> its a good excersice, decoding a tx by hand
+<a name="l-112"></a><span class="tm">20:14:04</span><span class="nk"> &lt;jonasbits&gt;</span> im trying to do it right now, i have made that excersice many times, never gets old :-)
+<a name="l-113"></a><span class="tm">20:19:08</span><span class="nk"> &lt;tfreedman&gt;</span> also, on an unrelated note
+<a name="l-114"></a><span class="tm">20:19:14</span><span class="nk"> &lt;tfreedman&gt;</span> I know this idea was proposed a while ago, though I'm curious if there's been any progress on it
+<a name="l-115"></a><span class="tm">20:19:36</span><span class="nk"> &lt;tfreedman&gt;</span> basically letting domains renew from a different private key
+<a name="l-116"></a><span class="tm">20:19:43</span><span class="nk"> &lt;jonasbits&gt;</span> https://en.bitcoin.it/wiki/Technical_background_of_version_1_Bitcoin_addresses#How_to_create_Bitcoin_Address
+<a name="l-117"></a><span class="tm">20:19:50</span><span class="nk"> &lt;tfreedman&gt;</span> not necessarily changing the JSON, just changing the expiration date
+<a name="l-118"></a><span class="tm">20:20:22</span><span class="nk"> &lt;jonasbits&gt;</span> are you talking about multisig?
+<a name="l-119"></a><span class="tm">20:20:36</span><span class="nk"> &lt;jonasbits&gt;</span> 1-of-2 or something like that?
+<a name="l-120"></a><span class="tm">20:21:14</span><span class="nk"> &lt;tfreedman&gt;</span> nah
+<a name="l-121"></a><span class="tm">20:21:30</span><span class="nk"> &lt;tfreedman&gt;</span> so the specific use case I'm concerned about is:
+<a name="l-122"></a><span class="tm">20:21:35</span><span class="nk"> &lt;tfreedman&gt;</span> imagine you have a paper wallet, with some domains
+<a name="l-123"></a><span class="tm">20:22:02</span><span class="nk"> &lt;tfreedman&gt;</span> there's no way to change the expiration date on those domains without bringing those keys back online
+<a name="l-124"></a><span class="tm">20:22:07</span><span class="nk"> &lt;tfreedman&gt;</span> ideally, it'd be possible to let anyone pay the bill to renew a domain
+<a name="l-125"></a><span class="tm">20:22:18</span><span class="nk"> &lt;tfreedman&gt;</span> even if it isn't their domain to begin with
+<a name="l-126"></a><span class="tm">20:23:00</span><span class="nk"> &lt;jonasbits&gt;</span> ohh
+<a name="l-127"></a><span class="tm">20:23:34</span><span class="nk"> &lt;jonasbits&gt;</span> it may be possible to use a special-coin larger than the amount needed, and prepair tx to send later
+<a name="l-128"></a><span class="tm">20:23:50</span><span class="nk"> &lt;tfreedman&gt;</span> I guess the real world equivalent is how I can pay random people's bills for hydro/credit cards/whatever, even if it isn't my account
+<a name="l-129"></a><span class="tm">20:24:15</span><span class="nk"> &lt;jonasbits&gt;</span> you could prepair a tx and give that away to be sent later
+<a name="l-130"></a><span class="tm">20:24:52</span><span class="nk"> &lt;jonasbits&gt;</span> you may be able to include a locktime so that it can only be included in a new block after a certain time
+<a name="l-131"></a><span class="tm">20:25:08</span><span class="nk"> &lt;tfreedman&gt;</span> kinda
+<a name="l-132"></a><span class="tm">20:25:17</span><span class="nk"> &lt;tfreedman&gt;</span> from my understanding of things, there are a bunch of ways that can be broken
+<a name="l-133"></a><span class="tm">20:25:18</span><span class="nk"> &lt;tfreedman&gt;</span> and the signed transactions invalidated
+<a name="l-134"></a><span class="tm">20:25:50</span><span class="nk"> &lt;jonasbits&gt;</span> but it has a limitation, if you use that UTXO in a other tx, then the tx you gave away is invalid
+<a name="l-135"></a><span class="tm">20:26:32</span><span class="nk"> &lt;jonasbits&gt;</span> you could lock the coins so that its unable to spend until the locktime have expired
+<a name="l-136"></a><span class="tm">20:26:45</span><span class="nk"> &lt;tfreedman&gt;</span> at minimum, if someone changes the actual domain contents, that would presumably invalidate other transactions
+<a name="l-137"></a><span class="tm">20:27:20</span><span class="nk"> &lt;jonasbits&gt;</span> yeah, its a chain in that regard also
+<a name="l-138"></a><span class="tm">20:27:58</span><span class="nk"> &lt;tfreedman&gt;</span> I assume that if I have d/x with value="foo", and then I sign a renewal, updating that domain to have value="bar" would invalidate the payment transaction I made
+<a name="l-139"></a><span class="tm">20:29:07</span><span class="nk"> &lt;jonasbits&gt;</span> you have to think low-level, what happens to the txid, where does the d/x name live now?
+<a name="l-140"></a><span class="tm">20:29:46</span><span class="nk"> &lt;jonasbits&gt;</span> when you do name_update, you use the txid input and output a new txid
+<a name="l-141"></a><span class="tm">20:30:40</span><span class="nk"> &lt;tfreedman&gt;</span> yeah
+<a name="l-142"></a><span class="tm">20:30:56</span><span class="nk"> &lt;jonasbits&gt;</span> (dont trust me completly, research yourself)
+<a name="l-143"></a><span class="tm">20:32:01</span><span class="nk"> &lt;tfreedman&gt;</span> so to me, the only solution to this is basically "let other people craft a type of transaction (name_renew?) that can't change any settings on the domain except for the expiry date
+<a name="l-144"></a><span class="tm">20:33:16</span><span class="nk"> &lt;jonasbits&gt;</span> it would be cool if you could prepair a "anyonecanpay" tx
+<a name="l-145"></a><span class="tm">20:34:05</span><span class="nk"> &lt;jonasbits&gt;</span> the expire date is calculated from the block-height
+<a name="l-146"></a><span class="tm">20:34:43</span><span class="nk"> &lt;jonasbits&gt;</span> https://bitcoin.org/en/glossary/sighash-anyonecanpay
+<a name="l-147"></a><span class="tm">20:35:57</span><span class="nk"> &lt;jonasbits&gt;</span> im not sure if this is working, when i was playing around with this in bitcoin testnet it was fun
+<a name="l-148"></a><span class="tm">20:36:59</span><span class="nk"> &lt;jonasbits&gt;</span> one this that you might want to consider, if the real owner has lost his private keys, and want the d/name to expire, other people can delay that
+<a name="l-149"></a><span class="tm">20:38:30</span><span class="nk"> &lt;tfreedman&gt;</span> sure
+<a name="l-150"></a><span class="tm">20:39:05</span><span class="nk"> &lt;tfreedman&gt;</span> there should definitely be a way to opt-in or opt-out
+<a name="l-151"></a><span class="tm">20:39:32</span><span class="nk"> &lt;tfreedman&gt;</span> debating which should be the default is an argument for another day
+<a name="l-152"></a><span class="tm">20:39:39</span><span class="nk"> &lt;jonasbits&gt;</span> it could be possible with signrawtransaction and sighashtype
+<a name="l-153"></a><span class="tm">20:40:02</span><span class="nk"> &lt;jonasbits&gt;</span> its fun to try, thats why i run a testnet node
+<a name="l-154"></a><span class="tm">20:40:08</span><span class="nk"> &lt;tfreedman&gt;</span> though finding out if this works (or can be made to work) seems important
+<a name="l-155"></a><span class="tm">20:41:18</span><span class="nk"> &lt;jonasbits&gt;</span> you could even have a 1 killswitch satoshi, if that satoshi is spent, the tx become invalid
+<a name="l-156"></a><span class="tm">20:44:54</span><span class="nk"> &lt;tfreedman&gt;</span> I'll look into the actual scripting language later
+<a name="l-157"></a><span class="tm">20:45:07</span><span class="nk"> &lt;tfreedman&gt;</span> haven't done any low(er) level programming in a while
+<a name="l-158"></a><span class="tm">20:46:00</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#action </span><span class="cmdline">jonasbits will try to construct a tx with "anyonecanpay" on testnet, regarding name_update</span>
+<a name="l-159"></a><span class="tm">20:46:10</span><span class="nk"> &lt;jonasbits&gt;</span> allright, this concludes the meeting
+<a name="l-160"></a><span class="tm">20:46:31</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

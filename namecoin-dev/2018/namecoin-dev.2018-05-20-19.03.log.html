@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:03:48</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:03:49</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun May 20 19:03:48 2018 UTC.  The chair is jonasbits. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:03:49</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:06:04</span><span class="nk"> &lt;jonasbits&gt;</span> Anybody here?
+<a name="l-5"></a><span class="tm">19:06:56</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> hi jonasbits
+<a name="l-6"></a><span class="tm">19:07:09</span><span class="nk"> &lt;jonasbits&gt;</span> welcome Jeremy
+<a name="l-7"></a><span class="tm">19:09:13</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> not sure if anyone else is here today
+<a name="l-8"></a><span class="tm">19:11:01</span><span class="nk"> &lt;jonasbits&gt;</span> its nice weather outside :-)
+<a name="l-9"></a><span class="tm">19:11:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> heh
+<a name="l-10"></a><span class="tm">19:11:34</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> should we start, or would you like to wait for more people?
+<a name="l-11"></a><span class="tm">19:11:42</span><span class="nk"> &lt;jonasbits&gt;</span> lets start
+<a name="l-12"></a><span class="tm">19:11:53</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok
+<a name="l-13"></a><span class="tm">19:12:15</span><span class="nk"> &lt;jonasbits&gt;</span> i could start with the status of my YaCy work, im sorry to say that it is halted
+<a name="l-14"></a><span class="tm">19:12:58</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> ok.  Any chance you could post the latest code you have, so that someone else could pick it up?
+<a name="l-15"></a><span class="tm">19:13:04</span><span class="nk"> &lt;jonasbits&gt;</span> but im starting to arrange ncdns running at all my usual connections, so it will be easier to take up the work and not depend on a specific location
+<a name="l-16"></a><span class="tm">19:13:13</span><span class="nk"> &lt;jonasbits&gt;</span> yes sure
+<a name="l-17"></a><span class="tm">19:13:23</span><span class="nk"> &lt;jonasbits&gt;</span> I will start a post at the forum
+<a name="l-18"></a><span class="tm">19:13:52</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> cool
+<a name="l-19"></a><span class="tm">19:13:57</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> awesome
+<a name="l-20"></a><span class="tm">19:14:31</span><span class="nk"> &lt;jonasbits&gt;</span> do you have anything you want to talk about Jeremy?
+<a name="l-21"></a><span class="tm">19:14:37</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> meanwhile, so my "big news of the week" is that I reviewed and rebased ahmed_ 's Electrum-NMC code.
+<a name="l-22"></a><span class="tm">19:14:55</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> https://github.com/namecoin/electrum-nmc
+<a name="l-23"></a><span class="tm">19:15:04</span><span class="nk"> &lt;jonasbits&gt;</span> ohh, i want to test that code
+<a name="l-24"></a><span class="tm">19:15:13</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I successfully sent some NMC from Namecoin Core to Electrum-NMC and back
+<a name="l-25"></a><span class="tm">19:18:45</span><span class="nk"> &lt;jonasbits&gt;</span> testnet coins?
+<a name="l-26"></a><span class="tm">19:19:24</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> nope, I used mainnet.  (NMC are cheap enough that I was willing to risk sacrificing a few namecents to science)
+<a name="l-27"></a><span class="tm">19:20:14</span><span class="nk"> &lt;jonasbits&gt;</span> yeah, i will try running electrum-nmc in testnet mode, maybe a server node for testnet exists or maybe not
+<a name="l-28"></a><span class="tm">19:20:49</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> I'm not aware of any testnet Namecoin ElectrumX server instances.
+<a name="l-29"></a><span class="tm">19:21:33</span><span class="nk"> &lt;jonasbits&gt;</span> ahh
+<a name="l-30"></a><span class="tm">19:28:25</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> In other news,
+<a name="l-31"></a><span class="tm">19:28:36</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I've been making progress on getting tlsrestrict_nss_tool working on Windows and integrated with ncdns
+<a name="l-32"></a><span class="tm">19:28:49</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Several PR's related to this are awaiting review
+<a name="l-33"></a><span class="tm">19:28:51</span><span class="nk"> &lt;jonasbits&gt;</span> cool
+<a name="l-34"></a><span class="tm">19:30:16</span><span class="nk"> &lt;jonasbits&gt;</span> https://forum.namecoin.org/viewtopic.php?f=9&amp;t=2697&amp;p=17464&amp;sid=c849931cd65038bb7411f103e0aaf973#p17464
+<a name="l-35"></a><span class="tm">19:30:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> cool
+<a name="l-36"></a><span class="tm">19:32:01</span><span class="nk"> &lt;jonasbits&gt;</span> is the same tls problem fixed on Linux?
+<a name="l-37"></a><span class="tm">19:33:41</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> which TLS problem are you referring to?
+<a name="l-38"></a><span class="tm">19:34:21</span><span class="nk"> &lt;jonasbits&gt;</span> to inject TSL records from Namecoin
+<a name="l-39"></a><span class="tm">19:35:34</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> tlsrestrict_nss_tool should work fine on GNU/Linux right now, as should certinject for NSS.
+<a name="l-40"></a><span class="tm">19:36:11</span><span class="nk"> &lt;jonasbits&gt;</span> cool
+<a name="l-41"></a><span class="tm">19:36:21</span><span class="nk"> &lt;jonasbits&gt;</span> is there any plans for macOS?
+<a name="l-42"></a><span class="tm">19:38:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> tentatively yes.  I suspect that it should work fine for NSS on macOS right now.  Using macOS's native TLS cert validator should be possible with some effort for positive overrides, but it's not clear to me how easy it'll be to do negative overrides.
+<a name="l-43"></a><span class="tm">19:38:59</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> NLnet doesn't have funding for macOS support, which is why it's lower priority
+<a name="l-44"></a><span class="tm">19:42:27</span><span class="nk"> &lt;jonasbits&gt;</span> ahh, sounds interesting
+<a name="l-45"></a><span class="tm">19:43:20</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#action </span><span class="cmdline">Jonas will add all notes for Crawling .bit domains with Yacy on forum.namecoin.org</span>
+<a name="l-46"></a><span class="tm">19:43:43</span><span class="nk"> &lt;jonasbits&gt;</span> Do you have anything more Jeremy?
+<a name="l-47"></a><span class="tm">19:44:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> yes, one other thing
+<a name="l-48"></a><span class="tm">19:44:44</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> so the Decentralized Web Summit 2018 is happening in San Francisco July 31-Aug 2
+<a name="l-49"></a><span class="tm">19:45:10</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I will probably attend, but I'm curious if there are any other Namecoin devs who want to attend too
+<a name="l-50"></a><span class="tm">19:45:24</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> it was cool having 2 Namecoin devs at 34C3, it would be nice if we can have 2 devs attend this one too
+<a name="l-51"></a><span class="tm">19:46:03</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> In terms of physical proximity, I suspect brand0 is closest?
+<a name="l-52"></a><span class="tm">19:46:14</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> oh hey Grant Eckstein
+<a name="l-53"></a><span class="tm">19:46:43</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Grant Eckstein:  while we're here at the meeting, would you like to talk about your Windows TLS experiments?
+<a name="l-54"></a><span class="tm">19:47:22</span><span class="nk"> &lt;jonasbits&gt;</span> welcome GrantEckstein[m]
+<a name="l-55"></a><span class="tm">19:51:25</span><span class="nk"> &lt;jonasbits&gt;</span> I would be open to attend, if its possible. I will try to make plans
+<a name="l-56"></a><span class="tm">19:52:33</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> ok cool.  Is travel to the US okay for you?  (I know a lot of people don't want to come anywhere near the US lately... and I can't necessarily blame them.)
+<a name="l-57"></a><span class="tm">19:52:49</span><span class="nk"> &lt;GrantEckstein[m]&gt;</span> Hello! There is not much to say, I have not had much time this week due to finals and other school related activities. But I have looked over Jeremy's notes and the Microsoft Docs and done basic tests with Certutil.
+<a name="l-58"></a><span class="tm">19:53:12</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> IIRC there's a form you can fill out at https://decentralizedweb.net/ and they'll email you when more info is available
+<a name="l-59"></a><span class="tm">19:53:56</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#action </span><span class="cmdline">Namecoin devs are planing to attend https://decentralizedweb.net/ -  Decentralized Web Summit 2018</span>
+<a name="l-60"></a><span class="tm">19:54:23</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Grant Eckstein: ok cool.  When are finals at your district this year?  (I've lost track of the schedule since I don't interact with that schedule much anymore.)
+<a name="l-61"></a><span class="tm">19:56:54</span><span class="nk"> &lt;GrantEckstein[m]&gt;</span> I think they are on the 30th and the 31st. But MNTC does their stuff a lot earlier (last week).
+<a name="l-62"></a><span class="tm">19:58:05</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Grant Eckstein: ah, I see.  Do you expect to have time for Namecoin stuff before your finals on 30th/31st, or should we leave you alone until then so that you have time to study?
+<a name="l-63"></a><span class="tm">20:00:40</span><span class="nk"> &lt;GrantEckstein[m]&gt;</span> That seems like a good idea, after the 31st I will have lots of time for Namecoin stuff.
+<a name="l-64"></a><span class="tm">20:01:47</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Grant Eckstein: okay cool.  Good luck on finals!  (Are you doing Botball this summer?)
+<a name="l-65"></a><span class="tm">20:03:14</span><span class="nk"> &lt;jonasbits&gt;</span> I need to go, are there anything you guys want to add to the record? any Action or Idea ?
+<a name="l-66"></a><span class="tm">20:03:39</span><span class="nk"> &lt;GrantEckstein[m]&gt;</span> Thanks! I will be doing Botball this summer.
+<a name="l-67"></a><span class="tm">20:04:31</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> there *might* be a really cool announcement in a week or two (ask me on Ricochet for details), but besides that I think that's all from my end
+<a name="l-68"></a><span class="tm">20:05:01</span><span class="nk"> &lt;jonasbits&gt;</span> will do, thanks for a great meeting
+<a name="l-69"></a><span class="tm">20:05:06</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

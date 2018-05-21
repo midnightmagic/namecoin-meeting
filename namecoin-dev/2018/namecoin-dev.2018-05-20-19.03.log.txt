@@ -1,0 +1,69 @@
+19:03:48 <jonasbits> #startmeeting
+19:03:49 <qpm> Meeting started Sun May 20 19:03:48 2018 UTC.  The chair is jonasbits. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:03:49 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:06:04 <jonasbits> Anybody here?
+19:06:56 <Jeremy_Rand[m]> hi jonasbits
+19:07:09 <jonasbits> welcome Jeremy
+19:09:13 <Jeremy_Rand[m]> not sure if anyone else is here today
+19:11:01 <jonasbits> its nice weather outside :-)
+19:11:15 <Jeremy_Rand[m]> heh
+19:11:34 <Jeremy_Rand[m]> jonasbits: should we start, or would you like to wait for more people?
+19:11:42 <jonasbits> lets start
+19:11:53 <Jeremy_Rand[m]> ok
+19:12:15 <jonasbits> i could start with the status of my YaCy work, im sorry to say that it is halted
+19:12:58 <Jeremy_Rand[m]> jonasbits: ok.  Any chance you could post the latest code you have, so that someone else could pick it up?
+19:13:04 <jonasbits> but im starting to arrange ncdns running at all my usual connections, so it will be easier to take up the work and not depend on a specific location
+19:13:13 <jonasbits> yes sure
+19:13:23 <jonasbits> I will start a post at the forum
+19:13:52 <Jeremy_Rand[m]> cool
+19:13:57 <Jeremy_Rand[m]> awesome
+19:14:31 <jonasbits> do you have anything you want to talk about Jeremy?
+19:14:37 <Jeremy_Rand[m]> meanwhile, so my "big news of the week" is that I reviewed and rebased ahmed_ 's Electrum-NMC code.
+19:14:55 <Jeremy_Rand[m]> https://github.com/namecoin/electrum-nmc
+19:15:04 <jonasbits> ohh, i want to test that code
+19:15:13 <Jeremy_Rand[m]> I successfully sent some NMC from Namecoin Core to Electrum-NMC and back
+19:18:45 <jonasbits> testnet coins?
+19:19:24 <Jeremy_Rand[m]> jonasbits: nope, I used mainnet.  (NMC are cheap enough that I was willing to risk sacrificing a few namecents to science)
+19:20:14 <jonasbits> yeah, i will try running electrum-nmc in testnet mode, maybe a server node for testnet exists or maybe not
+19:20:49 <Jeremy_Rand[m]> jonasbits: I'm not aware of any testnet Namecoin ElectrumX server instances.
+19:21:33 <jonasbits> ahh
+19:28:25 <Jeremy_Rand[m]> In other news,
+19:28:36 <Jeremy_Rand[m]> I've been making progress on getting tlsrestrict_nss_tool working on Windows and integrated with ncdns
+19:28:49 <Jeremy_Rand[m]> Several PR's related to this are awaiting review
+19:28:51 <jonasbits> cool
+19:30:16 <jonasbits> https://forum.namecoin.org/viewtopic.php?f=9&t=2697&p=17464&sid=c849931cd65038bb7411f103e0aaf973#p17464
+19:30:45 <Jeremy_Rand[m]> cool
+19:32:01 <jonasbits> is the same tls problem fixed on Linux?
+19:33:41 <Jeremy_Rand[m]> jonasbits: which TLS problem are you referring to?
+19:34:21 <jonasbits> to inject TSL records from Namecoin
+19:35:34 <Jeremy_Rand[m]> jonasbits: tlsrestrict_nss_tool should work fine on GNU/Linux right now, as should certinject for NSS.
+19:36:11 <jonasbits> cool
+19:36:21 <jonasbits> is there any plans for macOS?
+19:38:30 <Jeremy_Rand[m]> jonasbits: tentatively yes.  I suspect that it should work fine for NSS on macOS right now.  Using macOS's native TLS cert validator should be possible with some effort for positive overrides, but it's not clear to me how easy it'll be to do negative overrides.
+19:38:59 <Jeremy_Rand[m]> NLnet doesn't have funding for macOS support, which is why it's lower priority
+19:42:27 <jonasbits> ahh, sounds interesting
+19:43:20 <jonasbits> #action Jonas will add all notes for Crawling .bit domains with Yacy on forum.namecoin.org
+19:43:43 <jonasbits> Do you have anything more Jeremy?
+19:44:28 <Jeremy_Rand[m]> jonasbits: yes, one other thing
+19:44:44 <Jeremy_Rand[m]> jonasbits: so the Decentralized Web Summit 2018 is happening in San Francisco July 31-Aug 2
+19:45:10 <Jeremy_Rand[m]> I will probably attend, but I'm curious if there are any other Namecoin devs who want to attend too
+19:45:24 <Jeremy_Rand[m]> it was cool having 2 Namecoin devs at 34C3, it would be nice if we can have 2 devs attend this one too
+19:46:03 <Jeremy_Rand[m]> In terms of physical proximity, I suspect brand0 is closest?
+19:46:14 <Jeremy_Rand[m]> oh hey Grant Eckstein
+19:46:43 <Jeremy_Rand[m]> Grant Eckstein:  while we're here at the meeting, would you like to talk about your Windows TLS experiments?
+19:47:22 <jonasbits> welcome GrantEckstein[m]
+19:51:25 <jonasbits> I would be open to attend, if its possible. I will try to make plans
+19:52:33 <Jeremy_Rand[m]> jonasbits: ok cool.  Is travel to the US okay for you?  (I know a lot of people don't want to come anywhere near the US lately... and I can't necessarily blame them.)
+19:52:49 <GrantEckstein[m]> Hello! There is not much to say, I have not had much time this week due to finals and other school related activities. But I have looked over Jeremy's notes and the Microsoft Docs and done basic tests with Certutil.
+19:53:12 <Jeremy_Rand[m]> jonasbits: IIRC there's a form you can fill out at https://decentralizedweb.net/ and they'll email you when more info is available
+19:53:56 <jonasbits> #action Namecoin devs are planing to attend https://decentralizedweb.net/ -  Decentralized Web Summit 2018
+19:54:23 <Jeremy_Rand[m]> Grant Eckstein: ok cool.  When are finals at your district this year?  (I've lost track of the schedule since I don't interact with that schedule much anymore.)
+19:56:54 <GrantEckstein[m]> I think they are on the 30th and the 31st. But MNTC does their stuff a lot earlier (last week).
+19:58:05 <Jeremy_Rand[m]> Grant Eckstein: ah, I see.  Do you expect to have time for Namecoin stuff before your finals on 30th/31st, or should we leave you alone until then so that you have time to study?
+20:00:40 <GrantEckstein[m]> That seems like a good idea, after the 31st I will have lots of time for Namecoin stuff.
+20:01:47 <Jeremy_Rand[m]> Grant Eckstein: okay cool.  Good luck on finals!  (Are you doing Botball this summer?)
+20:03:14 <jonasbits> I need to go, are there anything you guys want to add to the record? any Action or Idea ?
+20:03:39 <GrantEckstein[m]> Thanks! I will be doing Botball this summer.
+20:04:31 <Jeremy_Rand[m]> jonasbits: there *might* be a really cool announcement in a week or two (ask me on Ricochet for details), but besides that I think that's all from my end
+20:05:01 <jonasbits> will do, thanks for a great meeting
+20:05:06 <jonasbits> #endmeeting

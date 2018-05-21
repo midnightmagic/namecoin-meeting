@@ -1,0 +1,160 @@
+19:01:11 <jonasbits> #startmeeting
+19:01:11 <qpm> Meeting started Sun Mar 18 19:01:11 2018 UTC.  The chair is jonasbits. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:01:11 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:02:47 <jonasbits> Im going to try to get you guys to notice this meeting :-)
+19:03:05 <jonasbits> ^ brand0
+19:04:07 <jonasbits> Welcome tfreedman, i was just looking at the tx and block you linked in the #namecoin channel before
+19:04:53 <jonasbits> ^ jbisch
+19:05:08 <tfreedman> so basically, as an explanation of where that's from
+19:05:31 <tfreedman> so I'm in the middle of implementing search by address to the block explorer I wrote
+19:05:35 <tfreedman> why it's not in bitcoin core, I don't understand, but whatever
+19:05:50 <jonasbits> cool
+19:05:54 <tfreedman> so I'm writing code to iterate over every block, grab the transactions, and then track their inputs and outputs
+19:06:32 <tfreedman> so something like https://namecoin.cyphrs.com/block/142 might be a bug on my end
+19:06:42 <jonasbits> is this the code you would want included https://github.com/btcdrak/bitcoin/commit/fe884da57dd2aba53aa75d6196baa99cc1855d2f
+19:07:07 <tfreedman> yeah
+19:08:24 <tfreedman> I'll probably need to write the address index code anyways for work (unless I can convince every other coin developer to add it), though it'd be nice if I could make it an option for my code (if supported by *coind, use their code instead of my own)
+19:08:28 <jonasbits> maybe its a edge case that only explorer software needs, i remember insight using a patch to bitcoind to do something like this
+19:08:53 <tfreedman> well, so that's what I can't figure out
+19:09:00 <tfreedman> in theory, only explorer software does need it
+19:09:12 <tfreedman> but the thing is, there are a bunch of additional indexes you can enable that only explorers would use
+19:09:24 <jonasbits> -txindex
+19:09:50 <tfreedman> so I can understand not having any bonus features for people writing block explorers
+19:09:53 <tfreedman> I can't understand having every bonus feature but one
+19:10:23 <jonasbits> yeah your right
+19:10:49 <jonasbits> -txindex is needed for Lightning
+19:13:24 <jonasbits> #info tfreedman are working on a Namecoin Explorer writen in Ruby, something like https://github.com/btcdrak/bitcoin/commit/fe884da57dd2aba53aa75d6196baa99cc1855d2f would have helped a lot
+19:14:27 <tfreedman> as far as the explorer goes, I'm also interested if it can be used as the server for an SPV client
+19:14:30 <jonasbits> are you hosting a testnet instance also?
+19:15:28 <tfreedman> not yet, though I plan to
+19:15:41 <jonasbits> i would be up to hosting that
+19:16:06 <tfreedman> well, that's part of why I was curious about the addressindex thing
+19:16:12 <tfreedman> it's not a big deal for me to install ruby + nginx
+19:16:42 <tfreedman> though if the goal is to get other people to run this code, the more dependencies I add means it gets harder and harder for someone to actually run this locally
+19:16:53 <jonasbits> yeah
+19:17:09 <tfreedman> if an address index requires postgres, now I have to assume someone knows how to set that up
+19:17:29 <jonasbits> i love the idea of spinning up your own explorer instans
+19:18:22 <tfreedman> if the explorer is only useful for browsing transactions, then sure, not many people are going to run it
+19:18:40 <tfreedman> but if it's also an SPV backend, I can see where it would be useful for other people to have their own copies
+19:18:45 <tfreedman> ideally with minimal overhead to get it up and running
+19:20:25 <tfreedman> my plan is to expose all namecoind RPC commands via /api/
+19:20:27 <jonasbits> i think namecoin-core do supply SPV support, i believe SPV clients should use a random peer with that service
+19:20:55 <tfreedman> I just need to finish reading over all the documentation about what each command does, because some of them can't be opened to the public.
+19:21:18 <tfreedman> letting people randomly re-index the chain would be a bad idea
+19:21:24 <jonasbits> yeah
+19:22:50 <jonasbits> Anybody else here? First time joiners to this meeting? Make some noice :-)
+19:24:06 <jonasbits> #info tfreedman is thinking of including some sort of SPV support to the explorer.
+19:24:29 <jonasbits> are you talking about public API and private API?
+19:25:11 <tfreedman> is there any reason why some API commands would need to be private?
+19:26:03 <tfreedman> aside from offering things like separate rate limiting for authenticated users
+19:27:32 <jonasbits> i was thinking your SPV support was regarding API usage
+19:29:21 <tfreedman> I'll need to see what's involved in supporting SPV
+19:29:30 <jonasbits> i know that copay are using special "spv" insight wallet service
+19:29:46 <tfreedman> if it's just a matter of exposing some namecoind RPC calls, then I'll definitely add it
+19:31:34 <jonasbits> have you considered Tor usage for the explorer?
+19:33:43 <tfreedman> I'll need to look into what's required to host one
+19:34:59 <tfreedman> I'm not opposed to the idea, it just depends how much work is involved
+19:39:54 <jonasbits> yeah, i want to figure out how to run my namecoin-core client in Tor mode
+19:45:01 <tfreedman> anyways, back to the address index thing
+19:45:02 <tfreedman> so I can totally understand if the code I'm writing right now fails to parse a transaction
+19:45:03 <tfreedman> though I can't figure out why namecoind refuses to give me transaction info for something that it knows about
+19:45:04 <jonasbits> installing ruby and rails
+19:45:19 <tfreedman> and I'm wondering how every other block explorer has managed to solve this
+19:45:53 <tfreedman> oh, this isn't even a ruby thing
+19:46:02 <tfreedman> just querying namecoind fails
+19:49:21 <tfreedman> that's what makes it so bizarre
+19:49:40 <jonasbits> do you have -reindex and -namehistory flags?
+19:49:47 <jonasbits> sorry -txindex
+19:52:46 <tfreedman> yeah
+19:52:47 <tfreedman> txindex=1
+19:52:47 <tfreedman> daemon=1
+19:52:48 <tfreedman> namehistory=1
+19:53:44 <tfreedman> what happens if you query that block
+19:55:19 <jonasbits> tested with namecoin-cli, used getrawtransaction
+19:55:43 <jonasbits> and the one that require that its in your wallet "gettransaction"
+19:57:35 <jonasbits> my node is also -txindex and -namehistory
+19:58:53 <jonasbits> this tx from block 142 works -  ./namecoin-cli getrawtransaction ab1207bd605af57ed0b5325ac94d19578cff3bce668ebe8dda2f42a00b001f5d
+19:59:16 <tfreedman> yeah, block 142 I kinda expect to work
+19:59:44 <tfreedman> one sec, just restarting my server
+20:02:13 <tfreedman> okay, so
+20:02:14 <jonasbits> i think block 0 are special, its not mined, its generated in advanced and all the rest are mined
+20:02:31 <tfreedman> block 142 gives me:
+20:02:35 <tfreedman> <td><a href="/address/<%= vout['scriptPubKey']['addresses'][0] %>"><%= vout["scriptPubKey"]["addresses"][0] %></a></td>
+20:02:39 <tfreedman> undefined method `[]' for nil:NilClass
+20:02:43 <tfreedman> I can totally accept that there's a bug in the way I'm walking through that transaction
+20:03:07 <tfreedman> it's possible that there's some other format that's permissible there - I'll need to look into it
+20:03:17 <tfreedman> and I get that block 0 is special
+20:03:27 <tfreedman> what I don't get is how other block explorers are getting an address for that transaction
+20:04:24 <tfreedman> if the transaction is special (and unspendable), then everyone else has a bug in their code
+20:04:55 <jonasbits> #info im planing to post a PR with WIP code to reset testnet using this repo ( https://github.com/lhartikk/GenesisH0 ) to generate the genesis block for testnet2
+20:06:01 <tfreedman> which I guess goes back into why I think the idea of having to craft a separate addressindex is kinda weird
+20:06:19 <tfreedman> if namecoind is the definitive source, then everyone else has a bug in their code
+20:06:23 <jonasbits> i think all explorers have to use some tricks to get the genesis block displayed correctly
+20:06:38 <tfreedman> and I'm the only one who found it because I'm not implementing stuff from scratch
+20:06:55 <tfreedman> though then the question is, how did everyone else work around this
+20:07:48 <jonasbits> https://github.com/bitcoin/bitcoin/issues/3303
+20:09:02 <jonasbits> https://github.com/bitpay/insight-api/issues/475
+20:09:20 <tfreedman> okay, so amazingly, everyone else is wrong
+20:09:21 <tfreedman> good to know
+20:09:23 <jonasbits> you have to fake the info
+20:09:26 <tfreedman> if it's 100% unspendable, then it isn't a bug to not include it
+20:09:37 <jonasbits> because its a block-chain, and there is no -1 block to reference
+20:10:11 <tfreedman> yeah, so what's the best solution here
+20:10:23 <tfreedman> writing code to specifically detect if someone's querying block 0 in the explorer, and basically say 'no transactions'?
+20:10:39 <tfreedman> since I can definitely do that
+20:10:45 <jonasbits> try - catch: if we know error, do this instead
+20:11:00 <jonasbits> yeah sure
+20:11:42 <tfreedman> so I guess now the next question is, how did people come up with this address: N1Gi2mS1VSp1wRj2RU3ZU7t1N1zdsRTuWg
+20:11:56 <jonasbits> https://namecoin.webbtc.com/block/000000000062b72c5e2ceb45fbc8587e807c155b0da735e6483dfba2f0a9c770
+20:12:41 <tfreedman> I don't mind not including it
+20:12:49 <tfreedman> I'm just curious how everyone else managed to get the same solution
+20:13:40 <jonasbits> its a good excersice, decoding a tx by hand
+20:14:04 <jonasbits> im trying to do it right now, i have made that excersice many times, never gets old :-)
+20:19:08 <tfreedman> also, on an unrelated note
+20:19:14 <tfreedman> I know this idea was proposed a while ago, though I'm curious if there's been any progress on it
+20:19:36 <tfreedman> basically letting domains renew from a different private key
+20:19:43 <jonasbits> https://en.bitcoin.it/wiki/Technical_background_of_version_1_Bitcoin_addresses#How_to_create_Bitcoin_Address
+20:19:50 <tfreedman> not necessarily changing the JSON, just changing the expiration date
+20:20:22 <jonasbits> are you talking about multisig?
+20:20:36 <jonasbits> 1-of-2 or something like that?
+20:21:14 <tfreedman> nah
+20:21:30 <tfreedman> so the specific use case I'm concerned about is:
+20:21:35 <tfreedman> imagine you have a paper wallet, with some domains
+20:22:02 <tfreedman> there's no way to change the expiration date on those domains without bringing those keys back online
+20:22:07 <tfreedman> ideally, it'd be possible to let anyone pay the bill to renew a domain
+20:22:18 <tfreedman> even if it isn't their domain to begin with
+20:23:00 <jonasbits> ohh
+20:23:34 <jonasbits> it may be possible to use a special-coin larger than the amount needed, and prepair tx to send later
+20:23:50 <tfreedman> I guess the real world equivalent is how I can pay random people's bills for hydro/credit cards/whatever, even if it isn't my account
+20:24:15 <jonasbits> you could prepair a tx and give that away to be sent later
+20:24:52 <jonasbits> you may be able to include a locktime so that it can only be included in a new block after a certain time
+20:25:08 <tfreedman> kinda
+20:25:17 <tfreedman> from my understanding of things, there are a bunch of ways that can be broken
+20:25:18 <tfreedman> and the signed transactions invalidated
+20:25:50 <jonasbits> but it has a limitation, if you use that UTXO in a other tx, then the tx you gave away is invalid
+20:26:32 <jonasbits> you could lock the coins so that its unable to spend until the locktime have expired
+20:26:45 <tfreedman> at minimum, if someone changes the actual domain contents, that would presumably invalidate other transactions
+20:27:20 <jonasbits> yeah, its a chain in that regard also
+20:27:58 <tfreedman> I assume that if I have d/x with value="foo", and then I sign a renewal, updating that domain to have value="bar" would invalidate the payment transaction I made
+20:29:07 <jonasbits> you have to think low-level, what happens to the txid, where does the d/x name live now?
+20:29:46 <jonasbits> when you do name_update, you use the txid input and output a new txid
+20:30:40 <tfreedman> yeah
+20:30:56 <jonasbits> (dont trust me completly, research yourself)
+20:32:01 <tfreedman> so to me, the only solution to this is basically "let other people craft a type of transaction (name_renew?) that can't change any settings on the domain except for the expiry date
+20:33:16 <jonasbits> it would be cool if you could prepair a "anyonecanpay" tx
+20:34:05 <jonasbits> the expire date is calculated from the block-height
+20:34:43 <jonasbits> https://bitcoin.org/en/glossary/sighash-anyonecanpay
+20:35:57 <jonasbits> im not sure if this is working, when i was playing around with this in bitcoin testnet it was fun
+20:36:59 <jonasbits> one this that you might want to consider, if the real owner has lost his private keys, and want the d/name to expire, other people can delay that
+20:38:30 <tfreedman> sure
+20:39:05 <tfreedman> there should definitely be a way to opt-in or opt-out
+20:39:32 <tfreedman> debating which should be the default is an argument for another day
+20:39:39 <jonasbits> it could be possible with signrawtransaction and sighashtype
+20:40:02 <jonasbits> its fun to try, thats why i run a testnet node
+20:40:08 <tfreedman> though finding out if this works (or can be made to work) seems important
+20:41:18 <jonasbits> you could even have a 1 killswitch satoshi, if that satoshi is spent, the tx become invalid
+20:44:54 <tfreedman> I'll look into the actual scripting language later
+20:45:07 <tfreedman> haven't done any low(er) level programming in a while
+20:46:00 <jonasbits> #action jonasbits will try to construct a tx with "anyonecanpay" on testnet, regarding name_update
+20:46:10 <jonasbits> allright, this concludes the meeting
+20:46:31 <jonasbits> #endmeeting

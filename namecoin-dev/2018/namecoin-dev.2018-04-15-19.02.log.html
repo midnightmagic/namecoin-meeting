@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:02:23</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:02:24</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Apr 15 19:02:23 2018 UTC.  The chair is jonasbits. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:02:24</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:03:27</span><span class="nk"> &lt;jonasbits&gt;</span> Im looking forward to deterministic building of golang/ncdns
+<a name="l-5"></a><span class="tm">19:04:54</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> yeah, definitely.  The weird build issue that hl and I ran into (where my build worked and his didn't, in a really subtle hard-to-notice way) was quite a time sink here
+<a name="l-6"></a><span class="tm">19:05:41</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> And of course it's also a security/trust issue when one dev can say "your build doesn't work for me, how about I do the build instead (and you can't audit what I did differently)"
+<a name="l-7"></a><span class="tm">19:05:46</span><span class="nk"> &lt;jonasbits&gt;</span> it was a 3 letters, the build process you guys are goona use
+<a name="l-8"></a><span class="tm">19:06:17</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> RBM.  Reproducible Build Manager; it's the thing Tor has started using as a replacement for Gitian
+<a name="l-9"></a><span class="tm">19:06:28</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="hi">brand0:</span> are you afk?
+<a name="l-10"></a><span class="tm">19:06:35</span><span class="nk"> &lt;jonasbits&gt;</span> cool
+<a name="l-11"></a><span class="tm">19:08:14</span><span class="nk"> &lt;jonasbits&gt;</span> https://rbm.torproject.org
+<a name="l-12"></a><span class="tm">19:10:19</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="hi">hl:</span> are you afk?
+<a name="l-13"></a><span class="tm">19:10:58</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> yep.  The documentation of RBM is pretty bad at the moment (unless it's improved a lot since I looked at it a few months ago), but it's not like Gitian had excellent documentation either.  The Tor wiki (and the Tor Git repo `tor-browser-build`) seem to be decent info sources.  And I'm sure the Tor folks would be happy to answer questions if the docs aren't clear.
+<a name="l-14"></a><span class="tm">19:11:51</span><span class="nk"> &lt;jonasbits&gt;</span> yeah trying to find info how to do deterministic builds with faketime and such
+<a name="l-15"></a><span class="tm">19:12:51</span><span class="nk"> &lt;jonasbits&gt;</span> this is the conf https://gitweb.torproject.org/builders/tor-browser-build.git/tree/rbm.conf
+<a name="l-16"></a><span class="tm">19:13:47</span><span class="nk"> &lt;jonasbits&gt;</span> yeah fake time is present
+<a name="l-17"></a><span class="tm">19:14:53</span><span class="nk"> &lt;jonasbits&gt;</span> would be cool to get it running "hello world" and then go from there
+<a name="l-18"></a><span class="tm">19:16:10</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">jonasbits:</span> in theory faketime shouldn't be needed if the build scripts for a project are properly written.  Generally `SOURCE_TIME_EPOCH` (I think that's what it's called?  jbisch would know) is preferred over faketime.  But that assumes that upstream project devs are cooperative.
+<a name="l-19"></a><span class="tm">19:16:28</span><span class="nk"> &lt;jonasbits&gt;</span> ahh
+<a name="l-20"></a><span class="tm">19:16:51</span><span class="nk"> &lt;jonasbits&gt;</span> i think we can close this meeting, should we add something before i close?
+<a name="l-21"></a><span class="tm">19:17:05</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> yeah I've got something
+<a name="l-22"></a><span class="tm">19:17:15</span><span class="nk"> &lt;jonasbits&gt;</span> agreed / info / action
+<a name="l-23"></a><span class="tm">19:17:49</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> so we're about ready to release ncdns v0.0.6 (release binaries are uploaded, just waiting on the announcement PR to be merged to namecoin.org)
+<a name="l-24"></a><span class="tm">19:18:37</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> good point, I'll use the info thingy
+<a name="l-25"></a><span class="tm">19:18:38</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#idea </span><span class="cmdline">We could start RBM tests with https://gitweb.torproject.org/builders/tor-browser-build.git/tree/rbm.conf and try to build a easy "hello world" project with that.</span>
+<a name="l-26"></a><span class="tm">19:18:42</span><span class="nk"> &lt;hl&gt;</span> jonasbits (IRC): Hi
+<a name="l-27"></a><span class="tm">19:18:48</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">so we're about ready to release ncdns v0.0.6 (release binaries are uploaded, just waiting on the announcement PR to be merged to namecoin.org)</span>
+<a name="l-28"></a><span class="tm">19:18:50</span><span class="nk"> &lt;jonasbits&gt;</span> hi hl
+<a name="l-29"></a><span class="tm">19:19:08</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">main new things in this release are:</span>
+<a name="l-30"></a><span class="tm">19:19:17</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">1. Firefox positive override support via cert_override.txt</span>
+<a name="l-31"></a><span class="tm">19:19:37</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">2. Chromium/Linux positive override support via NSS certutil</span>
+<a name="l-32"></a><span class="tm">19:20:21</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">3. NSS negative overrides via tlsrestrict_nss_tool (technically not part of ncdns, but will be integrated into a future ncdns installer version)</span>
+<a name="l-33"></a><span class="tm">19:20:34</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">4. Lots of code quality improvements</span>
+<a name="l-34"></a><span class="tm">19:20:49</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> not sure if I'm forgetting anything else we added
+<a name="l-35"></a><span class="tm">19:21:20</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I should also note that there are currently 2 bugs in ncdns-nsis, each of which breaks one of the bundled Namecoin node types
+<a name="l-36"></a><span class="tm">19:21:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> whoops
+<a name="l-37"></a><span class="tm">19:21:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I should also note that there are currently 2 bugs in ncdns-nsis, each of which breaks one of the bundled Namecoin node types</span>
+<a name="l-38"></a><span class="tm">19:22:17</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">1. Namecoin Core installer is executed with elevated privs, which causes the installer to do wacky stuff like try to use C:\ProgramData\ as an AppData folder</span>
+<a name="l-39"></a><span class="tm">19:22:41</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">2. cookie auth is enabled even when ConsensusJ-Namecoin is in use, which causes ncdns to error when it can't find the cookie</span>
+<a name="l-40"></a><span class="tm">19:23:34</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">the first of those issues actually is also a bug in Bitcoin Core.  I've just submitted yesterday a PR to fix it there.  It got 1 ACK this morning, so hopefully it'll pass peer review and then I'll add the fix to ncdns-nsis as well</span>
+<a name="l-41"></a><span class="tm">19:24:48</span><span class="nk"> &lt;jonasbits&gt;</span> ACK https://github.com/namecoin/namecoin.org/pull/240
+<a name="l-42"></a><span class="tm">19:26:35</span><span class="nk"> &lt;jonasbits&gt;</span> allright, that was a short but interesting meeting! anything else?
+<a name="l-43"></a><span class="tm">19:27:01</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> anyway, I think that's all the new stuff I've got.  Things are slow here because my thesis defense is coming up soon
+<a name="l-44"></a><span class="tm">19:33:43</span><span class="nk"> &lt;jonasbits&gt;</span> Thats good, good luck with the thesis, namecoin will be here ... waiting :-)
+<a name="l-45"></a><span class="tm">19:33:50</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#stopmeeting</span><span class="cmdline"></span>
+<a name="l-46"></a><span class="tm">19:34:16</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#closemeeting</span><span class="cmdline"></span>
+<a name="l-47"></a><span class="tm">19:34:53</span><span class="nk"> &lt;jonasbits&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

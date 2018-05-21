@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev Meeting</h1>
+<span class="details">
+Meeting started by jonasbits at 19:02:23 UTC
+(<a href="namecoin-dev.2018-04-15-19.02.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li>
+<ol type="a">
+  <li><a
+    href="https://rbm.torproject.org">https://rbm.torproject.org</a>
+    <span class="details">(<a
+    href='namecoin-dev.2018-04-15-19.02.log.html#l-11'>jonasbits</a>,
+    19:08:14)</span></li>
+  <li><i class="itemtype">IDEA</i>: <span class="IDEA">We could start
+    RBM tests with
+    https://gitweb.torproject.org/builders/tor-browser-build.git/tree/rbm.conf
+    and try to build a easy "hello world" project with that.</span>
+    <span class="details">(<a
+    href='namecoin-dev.2018-04-15-19.02.log.html#l-25'>jonasbits</a>,
+    19:18:38)</span></li>
+  <li><span class="INFO">so we're about ready to release ncdns v0.0.6
+    (release binaries are uploaded, just waiting on the announcement PR
+    to be merged to namecoin.org)</span> <span class="details">(<a
+    href='namecoin-dev.2018-04-15-19.02.log.html#l-27'>Jeremy_Rand[m]</a>,
+    19:18:48)</span></li>
+  <li><span class="INFO">main new things in this release are:</span>
+    <span class="details">(<a
+    href='namecoin-dev.2018-04-15-19.02.log.html#l-29'>Jeremy_Rand[m]</a>,
+    19:19:08)</span></li>
+  <li><span class="INFO">1. Firefox positive override support via
+    cert_override.txt</span> <span class="details">(<a
+    href='namecoin-dev.2018-04-15-19.02.log.html#l-30'>Jeremy_Rand[m]</a>,
+    19:19:17)</span></li>
+  <li><span class="INFO">2. Chromium/Linux positive override support via
+    NSS certutil</span> <span class="details">(<a
+    href='namecoin-dev.2018-04-15-19.02.log.html#l-31'>Jeremy_Rand[m]</a>,
+    19:19:37)</span></li>
+  <li><span class="INFO">3. NSS negative overrides via
+    tlsrestrict_nss_tool (technically not part of ncdns, but will be
+    integrated into a future ncdns installer version)</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-04-15-19.02.log.html#l-32'>Jeremy_Rand[m]</a>,
+    19:20:21)</span></li>
+  <li><span class="INFO">4. Lots of code quality improvements</span>
+    <span class="details">(<a
+    href='namecoin-dev.2018-04-15-19.02.log.html#l-33'>Jeremy_Rand[m]</a>,
+    19:20:34)</span></li>
+  <li><span class="INFO">I should also note that there are currently 2
+    bugs in ncdns-nsis, each of which breaks one of the bundled Namecoin
+    node types</span> <span class="details">(<a
+    href='namecoin-dev.2018-04-15-19.02.log.html#l-37'>Jeremy_Rand[m]</a>,
+    19:21:30)</span></li>
+  <li><span class="INFO">1. Namecoin Core installer is executed with
+    elevated privs, which causes the installer to do wacky stuff like
+    try to use C:\ProgramData\ as an AppData folder</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-04-15-19.02.log.html#l-38'>Jeremy_Rand[m]</a>,
+    19:22:17)</span></li>
+  <li><span class="INFO">2. cookie auth is enabled even when
+    ConsensusJ-Namecoin is in use, which causes ncdns to error when it
+    can't find the cookie</span> <span class="details">(<a
+    href='namecoin-dev.2018-04-15-19.02.log.html#l-39'>Jeremy_Rand[m]</a>,
+    19:22:41)</span></li>
+  <li><span class="INFO">the first of those issues actually is also a
+    bug in Bitcoin Core.  I've just submitted yesterday a PR to fix it
+    there.  It got 1 ACK this morning, so hopefully it'll pass peer
+    review and then I'll add the fix to ncdns-nsis as well</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-04-15-19.02.log.html#l-40'>Jeremy_Rand[m]</a>,
+    19:23:34)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 19:34:53 UTC
+(<a href="namecoin-dev.2018-04-15-19.02.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>(none)</li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand[m] (22)</li>
+  <li>jonasbits (22)</li>
+  <li>qpm (2)</li>
+  <li>hl (1)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

@@ -1,0 +1,47 @@
+19:02:23 <jonasbits> #startmeeting
+19:02:24 <qpm> Meeting started Sun Apr 15 19:02:23 2018 UTC.  The chair is jonasbits. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:02:24 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:03:27 <jonasbits> Im looking forward to deterministic building of golang/ncdns
+19:04:54 <Jeremy_Rand[m]> jonasbits: yeah, definitely.  The weird build issue that hl and I ran into (where my build worked and his didn't, in a really subtle hard-to-notice way) was quite a time sink here
+19:05:41 <Jeremy_Rand[m]> And of course it's also a security/trust issue when one dev can say "your build doesn't work for me, how about I do the build instead (and you can't audit what I did differently)"
+19:05:46 <jonasbits> it was a 3 letters, the build process you guys are goona use
+19:06:17 <Jeremy_Rand[m]> jonasbits: RBM.  Reproducible Build Manager; it's the thing Tor has started using as a replacement for Gitian
+19:06:28 <jonasbits> brand0: are you afk?
+19:06:35 <jonasbits> cool
+19:08:14 <jonasbits> https://rbm.torproject.org
+19:10:19 <jonasbits> hl: are you afk?
+19:10:58 <Jeremy_Rand[m]> jonasbits: yep.  The documentation of RBM is pretty bad at the moment (unless it's improved a lot since I looked at it a few months ago), but it's not like Gitian had excellent documentation either.  The Tor wiki (and the Tor Git repo `tor-browser-build`) seem to be decent info sources.  And I'm sure the Tor folks would be happy to answer questions if the docs aren't clear.
+19:11:51 <jonasbits> yeah trying to find info how to do deterministic builds with faketime and such
+19:12:51 <jonasbits> this is the conf https://gitweb.torproject.org/builders/tor-browser-build.git/tree/rbm.conf
+19:13:47 <jonasbits> yeah fake time is present
+19:14:53 <jonasbits> would be cool to get it running "hello world" and then go from there
+19:16:10 <Jeremy_Rand[m]> jonasbits: in theory faketime shouldn't be needed if the build scripts for a project are properly written.  Generally `SOURCE_TIME_EPOCH` (I think that's what it's called?  jbisch would know) is preferred over faketime.  But that assumes that upstream project devs are cooperative.
+19:16:28 <jonasbits> ahh
+19:16:51 <jonasbits> i think we can close this meeting, should we add something before i close?
+19:17:05 <Jeremy_Rand[m]> yeah I've got something
+19:17:15 <jonasbits> agreed / info / action
+19:17:49 <Jeremy_Rand[m]> so we're about ready to release ncdns v0.0.6 (release binaries are uploaded, just waiting on the announcement PR to be merged to namecoin.org)
+19:18:37 <Jeremy_Rand[m]> good point, I'll use the info thingy
+19:18:38 <jonasbits> #idea We could start RBM tests with https://gitweb.torproject.org/builders/tor-browser-build.git/tree/rbm.conf and try to build a easy "hello world" project with that.
+19:18:42 <hl> jonasbits (IRC): Hi
+19:18:48 <Jeremy_Rand[m]> #info so we're about ready to release ncdns v0.0.6 (release binaries are uploaded, just waiting on the announcement PR to be merged to namecoin.org)
+19:18:50 <jonasbits> hi hl
+19:19:08 <Jeremy_Rand[m]> #info main new things in this release are:
+19:19:17 <Jeremy_Rand[m]> #info 1. Firefox positive override support via cert_override.txt
+19:19:37 <Jeremy_Rand[m]> #info 2. Chromium/Linux positive override support via NSS certutil
+19:20:21 <Jeremy_Rand[m]> #info 3. NSS negative overrides via tlsrestrict_nss_tool (technically not part of ncdns, but will be integrated into a future ncdns installer version)
+19:20:34 <Jeremy_Rand[m]> #info 4. Lots of code quality improvements
+19:20:49 <Jeremy_Rand[m]> not sure if I'm forgetting anything else we added
+19:21:20 <Jeremy_Rand[m]> I should also note that there are currently 2 bugs in ncdns-nsis, each of which breaks one of the bundled Namecoin node types
+19:21:30 <Jeremy_Rand[m]> whoops
+19:21:30 <Jeremy_Rand[m]> #info I should also note that there are currently 2 bugs in ncdns-nsis, each of which breaks one of the bundled Namecoin node types
+19:22:17 <Jeremy_Rand[m]> #info 1. Namecoin Core installer is executed with elevated privs, which causes the installer to do wacky stuff like try to use C:\ProgramData\ as an AppData folder
+19:22:41 <Jeremy_Rand[m]> #info 2. cookie auth is enabled even when ConsensusJ-Namecoin is in use, which causes ncdns to error when it can't find the cookie
+19:23:34 <Jeremy_Rand[m]> #info the first of those issues actually is also a bug in Bitcoin Core.  I've just submitted yesterday a PR to fix it there.  It got 1 ACK this morning, so hopefully it'll pass peer review and then I'll add the fix to ncdns-nsis as well
+19:24:48 <jonasbits> ACK https://github.com/namecoin/namecoin.org/pull/240
+19:26:35 <jonasbits> allright, that was a short but interesting meeting! anything else?
+19:27:01 <Jeremy_Rand[m]> anyway, I think that's all the new stuff I've got.  Things are slow here because my thesis defense is coming up soon
+19:33:43 <jonasbits> Thats good, good luck with the thesis, namecoin will be here ... waiting :-)
+19:33:50 <jonasbits> #stopmeeting
+19:34:16 <jonasbits> #closemeeting
+19:34:53 <jonasbits> #endmeeting
