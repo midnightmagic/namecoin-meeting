@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:03:51</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:03:52</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Sep  2 19:03:52 2018 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:03:52</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:04:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> hey everyone, welcome to the meeting
+<a name="l-5"></a><span class="tm">19:04:42</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> can we get a roll call of who's here today?
+<a name="l-6"></a><span class="tm">19:07:47</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> well, while we're waiting for people to show up, I'll give a brief summary of what I've been working on lately
+<a name="l-7"></a><span class="tm">19:09:14</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">NLnet</span>
+<a name="l-8"></a><span class="tm">19:10:20</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">AFAICT 2 of the NLnet milestones are ready for us to claim: "DNS Tor Browser" and "Bundle SPV and ncdns"</span>
+<a name="l-9"></a><span class="tm">19:11:36</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">"DNS Tor Browser" had mostly been working for months, but was blocked by broken `DNAME` support in `madns` and `dns-prop279`</span>
+<a name="l-10"></a><span class="tm">19:12:25</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">`DNAME` was fixed in `madns` and `dns-prop279` for the ncdns v0.0.8 release, so we can claim the milestone now.</span>
+<a name="l-11"></a><span class="tm">19:14:45</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">"Bundle SPV and ncdns" was also mostly working for months, but was blocked by a couple of bugs that broke the ConsensusJ-Namecoin installation (specifically cookie authentication and Visual C++ runtime detection)</span>
+<a name="l-12"></a><span class="tm">19:15:33</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">both of the "Bundle SPV and ncdns" bugs were also fixed in ncdns v0.0.8, so we can claim that milestone now too</span>
+<a name="l-13"></a><span class="tm">19:16:56</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">the "DNS Tor Browser" and "Bundle SPV and ncdns" milestones are currently undergoing a 1-week public accountability period on Reddit, the forum, and #namecoin.  If anyone reports bugs during that week, then we fix them before filing the claims with NLnet</span>
+<a name="l-14"></a><span class="tm">19:18:11</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">The next milestones that I'm expecting to be claimable are TLS Chrome GNU/Linux, Electrum Currency, and TLS Firefox.</span>
+<a name="l-15"></a><span class="tm">19:19:14</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">TLS Chrome GNU/Linux should be claimable right now AFAICT, but it's currently a backup milestone so I need to make sure there's developer consensus for upgrading it on the roadmap.  I can't think of any reason not to upgrade it.</span>
+<a name="l-16"></a><span class="tm">19:20:39</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Electrum Currency is borderline claimable now.  Arguably blocked by lack of rebranded exchange rate display and broken unit tests in Electrum-NMC v3.2.2 (the current release), both of which are fixed in master branch.</span>
+<a name="l-17"></a><span class="tm">19:21:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Electrum-NMC v3.2.2.2 is tagged as of today, and should fix the exchange rate display and unit tests.</span>
+<a name="l-18"></a><span class="tm">19:21:56</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Once Electrum-NMC v3.2.2.2 binaries are released, I think the Electrum Currency milestone is unambiguously claimable.</span>
+<a name="l-19"></a><span class="tm">19:23:19</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">TLS Firefox is currently claimable except for the fact that `tlsrestrict_nss_tool` is unusable on Windows because of no `certutil` binaries for it.  I'm coordinating with the Tor folks to get `certutil` binaries released.</span>
+<a name="l-20"></a><span class="tm">19:24:36</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> So that's where we stand on NLnet claims.  Any questions and/or comments on that before we move on?
+<a name="l-21"></a><span class="tm">19:25:16</span><span class="nk"> &lt;midnightmagic&gt;</span> Ah, hello.
+<a name="l-22"></a><span class="tm">19:25:23</span><span class="nk"> &lt;midnightmagic&gt;</span> Yay I made it into the meeting minutes!
+<a name="l-23"></a><span class="tm">19:25:52 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">waves hello to midnightmagic</span>
+<a name="l-24"></a><span class="tm">19:26:16</span><span class="nk"> &lt;midnightmagic&gt;</span> It's okay to ping me at the start of the meeting my good man. :-)
+<a name="l-25"></a><span class="tm">19:27:03</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> heh, ok
+<a name="l-26"></a><span class="tm">19:27:08</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> :)
+<a name="l-27"></a><span class="tm">19:29:11</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> alright, moving along...
+<a name="l-28"></a><span class="tm">19:29:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">35C3</span>
+<a name="l-29"></a><span class="tm">19:29:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">35C3 is confirmed to be in Leipzig again; Namecoin intends to have some developers attend.</span>
+<a name="l-30"></a><span class="tm">19:30:13</span><span class="nk"> &lt;midnightmagic&gt;</span> Nice! Who's going?
+<a name="l-31"></a><span class="tm">19:30:45</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">We'd been wondering why the heck it was taking so long to announce the location.  We found out yesterday why it was taking the CCC so long.</span>
+<a name="l-32"></a><span class="tm">19:31:55</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Turns out that the CCC has been fighting with the Leipzig hotel industry.  Apparently the capitalist cartels who run the Leipzig hotels decided that 35C3 would be a great chance to jack up prices for the week by 500%.</span>
+<a name="l-33"></a><span class="tm">19:34:13</span><span class="nk"> &lt;midnightmagic&gt;</span> <span class="cmd">#agreed </span><span class="cmdline">Scummy anti-competitive hotel behaviour is scummy</span>
+<a name="l-34"></a><span class="tm">19:34:57</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Anyway, I do have a hotel room reserved at a sane rate (reserved it many months ago).  AFAIK jonasbits and I will be going to 35C3, and there might be a slot available for a 3rd Namecoiner to room with us.  (There'll also probably be 2 Technoethical people in the room, as with last time.)</span>
+<a name="l-35"></a><span class="tm">19:36:12</span><span class="nk"> &lt;midnightmagic&gt;</span> So the hotel room fits five..?
+<a name="l-36"></a><span class="tm">19:37:05</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">No word yet on when presale vouchers will start getting distributed.  Hopefully very soon.  I'm hoping to get a voucher from Technoethical same as last year, but if anyone has other voucher-obtaining chances, please use them too 🙂</span>
+<a name="l-37"></a><span class="tm">19:38:02</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">midnightmagic:</span> yes, it's a fairly large room.  It's exactly the same room as the one we booked last year in fact.  (AFAIK it's the only 5-person room in the building)
+<a name="l-38"></a><span class="tm">19:38:18</span><span class="nk"> &lt;midnightmagic&gt;</span> �ah nice.
+<a name="l-39"></a><span class="tm">19:39:47</span><span class="nk"> &lt;midnightmagic&gt;</span> Well, as usual I doubt I'll be showing up at pretty much any of these sorts of things but I'll be there in spirit.
+<a name="l-40"></a><span class="tm">19:41:00</span><span class="nk"> &lt;midnightmagic&gt;</span> <span class="cmd">#info </span><span class="cmdline">The Technoethical laptops seem to be fairly inexpensive</span>
+<a name="l-41"></a><span class="tm">19:41:05</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">midnightmagic:</span> one of my friends couldn't make it to a conference, so he asked his friends to carry a sign with his face on it throughout the conference so that he'd be there in spirit.  Should we do that for you?
+<a name="l-42"></a><span class="tm">19:41:16</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> j/k of course
+<a name="l-43"></a><span class="tm">19:42:01</span><span class="nk"> &lt;midnightmagic&gt;</span> Hah. You can put my little cthulhu octopus thingy on a business card and hand it out. How soon do we have before the conference?
+<a name="l-44"></a><span class="tm">19:42:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">midnightmagic:</span> it's December 27-30
+<a name="l-45"></a><span class="tm">19:43:08</span><span class="nk"> &lt;midnightmagic&gt;</span> Plenty of time to have mysterious cardstock printed up.
+<a name="l-46"></a><span class="tm">19:43:33 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">needs moar business cards</span>
+<a name="l-47"></a><span class="tm">19:46:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> anyways.  Those are the topics I wanted to cover today.  Anything else you'd like to cover midnightmagic ?
+<a name="l-48"></a><span class="tm">19:47:41</span><span class="nk"> &lt;midnightmagic&gt;</span> Perhaps..
+<a name="l-49"></a><span class="tm">19:47:51</span><span class="nk"> &lt;midnightmagic&gt;</span> The bot hasn't been recording meetings since May..?
+<a name="l-50"></a><span class="tm">19:48:00</span><span class="nk"> &lt;midnightmagic&gt;</span> Just verifying it didn't miss anything..?
+<a name="l-51"></a><span class="tm">19:49:14</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Not certain.  I think a lot of meetings during the last few months got canceled due to schedule constraints.  Hopefully meetings will actually resume being regular from here on out.
+<a name="l-52"></a><span class="tm">19:51:56</span><span class="nk"> &lt;midnightmagic&gt;</span> Okay, fair enough. Well nothing else from this end.
+<a name="l-53"></a><span class="tm">19:52:30</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> alright.  tfreedman , anything you'd like to bring up today?
+<a name="l-54"></a><span class="tm">19:52:34</span><span class="nk"> &lt;midnightmagic&gt;</span> <span class="cmd">#action </span><span class="cmdline">midnightmagic will be happy to review stuff</span>
+<a name="l-55"></a><span class="tm">19:53:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#agreed </span><span class="cmdline">WELCOME TO THE MACHINE</span>
+<a name="l-56"></a><span class="tm">19:53:47</span><span class="nk"> &lt;tfreedman[m]&gt;</span> <span class="hi">Jeremy_Rand_Talos:</span> nah
+<a name="l-57"></a><span class="tm">19:54:42</span><span class="nk"> &lt;tfreedman[m]&gt;</span> Although if anyone else wants to help review web content over the next couple weeks, that'd be appreciated
+<a name="l-58"></a><span class="tm">19:55:58</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Website</span>
+<a name="l-59"></a><span class="tm">19:56:06</span><span class="nk"> &lt;midnightmagic&gt;</span> <span class="cmd">#action </span><span class="cmdline">midnightmagic can help with web content review</span>
+<a name="l-60"></a><span class="tm">19:56:30</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">tfreedman has been very busy submitting PR's to the namecoin.org repo that need review</span>
+<a name="l-61"></a><span class="tm">19:57:13</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#help </span><span class="cmdline">Moar reviewers for tfreedman 's PR's would be greatly appreciated</span>
+<a name="l-62"></a><span class="tm">19:57:13</span><span class="nk"> &lt;midnightmagic&gt;</span> Okay, well I don't mind reading stuff.
+<a name="l-63"></a><span class="tm">19:58:09</span><span class="nk"> &lt;midnightmagic&gt;</span> <span class="hi">tfreedman[m]:</span> ping me with specific PRs in the PR and it'll pop up as stuff for me to do, or ping me in here.
+<a name="l-64"></a><span class="tm">19:58:24</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">midnightmagic:</span> a lot of this is right up your alley, since you're good at noticing inaccuracies in cryptocurrency technical docs that most people don't notice
+<a name="l-65"></a><span class="tm">19:58:53</span><span class="nk"> &lt;midnightmagic&gt;</span> Cool. Yeah I don't mind reading stuff at all.
+<a name="l-66"></a><span class="tm">20:01:15</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> oh.  Another topic...
+<a name="l-67"></a><span class="tm">20:01:18</span><span class="nk"> &lt;tfreedman[m]&gt;</span> Cool
+<a name="l-68"></a><span class="tm">20:01:30</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Namecoin Core</span>
+<a name="l-69"></a><span class="tm">20:03:13</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#help </span><span class="cmdline">If anyone here is reasonably comfortable in C++ and would like to code and submit a PR to Namecoin Core for storing queued transactions in the wallet, that would help speed things along quite nicely.  Domob and brand0 haven't had enough time to get to that task yet.</span>
+<a name="l-70"></a><span class="tm">20:04:05</span><span class="nk"> &lt;midnightmagic&gt;</span> Is information on that hanging out somewhere I can read about?
+<a name="l-71"></a><span class="tm">20:04:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">midnightmagic:</span> yes, lemme dig up the link, one sec...
+<a name="l-72"></a><span class="tm">20:06:46</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#help </span><span class="cmdline">(specifically, the Namecoin Core issue in question is https://github.com/namecoin/namecoin-core/issues/233 )</span>
+<a name="l-73"></a><span class="tm">20:06:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">midnightmagic:</span> ^
+<a name="l-74"></a><span class="tm">20:06:59</span><span class="nk"> &lt;midnightmagic&gt;</span> Understood, thanks.
+<a name="l-75"></a><span class="tm">20:07:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">midnightmagic:</span> any chance you'd be up for coding some of that?
+<a name="l-76"></a><span class="tm">20:07:52</span><span class="nk"> &lt;midnightmagic&gt;</span> C++ is a little rusty. I was more curious about it what you're talking about. Sorry, don't mean to get your hopes up.
+<a name="l-77"></a><span class="tm">20:08:03</span><span class="nk"> &lt;midnightmagic&gt;</span> :-)
+<a name="l-78"></a><span class="tm">20:08:20</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> no worries
+<a name="l-79"></a><span class="tm">20:10:45</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Alright, I think that's all I was going to bring up.  Anything else before we close the meeting?
+<a name="l-80"></a><span class="tm">20:11:11</span><span class="nk"> &lt;midnightmagic&gt;</span> None here.
+<a name="l-81"></a><span class="tm">20:15:15</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> alright.  Thanks for attending!
+<a name="l-82"></a><span class="tm">20:15:22</span><span class="nk"> &lt;midnightmagic&gt;</span> \o/
+<a name="l-83"></a><span class="tm">20:15:25</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

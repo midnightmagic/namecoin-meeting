@@ -1,0 +1,83 @@
+19:03:51 <Jeremy_Rand_Talo> #startmeeting
+19:03:52 <qpm> Meeting started Sun Sep  2 19:03:52 2018 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:03:52 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:04:28 <Jeremy_Rand_Talo> hey everyone, welcome to the meeting
+19:04:42 <Jeremy_Rand_Talo> can we get a roll call of who's here today?
+19:07:47 <Jeremy_Rand_Talo> well, while we're waiting for people to show up, I'll give a brief summary of what I've been working on lately
+19:09:14 <Jeremy_Rand_Talo> #topic NLnet
+19:10:20 <Jeremy_Rand_Talo> #info AFAICT 2 of the NLnet milestones are ready for us to claim: "DNS Tor Browser" and "Bundle SPV and ncdns"
+19:11:36 <Jeremy_Rand_Talo> #info "DNS Tor Browser" had mostly been working for months, but was blocked by broken `DNAME` support in `madns` and `dns-prop279`
+19:12:25 <Jeremy_Rand_Talo> #info `DNAME` was fixed in `madns` and `dns-prop279` for the ncdns v0.0.8 release, so we can claim the milestone now.
+19:14:45 <Jeremy_Rand_Talo> #info "Bundle SPV and ncdns" was also mostly working for months, but was blocked by a couple of bugs that broke the ConsensusJ-Namecoin installation (specifically cookie authentication and Visual C++ runtime detection)
+19:15:33 <Jeremy_Rand_Talo> #info both of the "Bundle SPV and ncdns" bugs were also fixed in ncdns v0.0.8, so we can claim that milestone now too
+19:16:56 <Jeremy_Rand_Talo> #info the "DNS Tor Browser" and "Bundle SPV and ncdns" milestones are currently undergoing a 1-week public accountability period on Reddit, the forum, and #namecoin.  If anyone reports bugs during that week, then we fix them before filing the claims with NLnet
+19:18:11 <Jeremy_Rand_Talo> #info The next milestones that I'm expecting to be claimable are TLS Chrome GNU/Linux, Electrum Currency, and TLS Firefox.
+19:19:14 <Jeremy_Rand_Talo> #info TLS Chrome GNU/Linux should be claimable right now AFAICT, but it's currently a backup milestone so I need to make sure there's developer consensus for upgrading it on the roadmap.  I can't think of any reason not to upgrade it.
+19:20:39 <Jeremy_Rand_Talo> #info Electrum Currency is borderline claimable now.  Arguably blocked by lack of rebranded exchange rate display and broken unit tests in Electrum-NMC v3.2.2 (the current release), both of which are fixed in master branch.
+19:21:23 <Jeremy_Rand_Talo> #info Electrum-NMC v3.2.2.2 is tagged as of today, and should fix the exchange rate display and unit tests.
+19:21:56 <Jeremy_Rand_Talo> #info Once Electrum-NMC v3.2.2.2 binaries are released, I think the Electrum Currency milestone is unambiguously claimable.
+19:23:19 <Jeremy_Rand_Talo> #info TLS Firefox is currently claimable except for the fact that `tlsrestrict_nss_tool` is unusable on Windows because of no `certutil` binaries for it.  I'm coordinating with the Tor folks to get `certutil` binaries released.
+19:24:36 <Jeremy_Rand_Talo> So that's where we stand on NLnet claims.  Any questions and/or comments on that before we move on?
+19:25:16 <midnightmagic> Ah, hello.
+19:25:23 <midnightmagic> Yay I made it into the meeting minutes!
+19:25:52 * Jeremy_Rand_Talo waves hello to midnightmagic
+19:26:16 <midnightmagic> It's okay to ping me at the start of the meeting my good man. :-)
+19:27:03 <Jeremy_Rand_Talo> heh, ok
+19:27:08 <Jeremy_Rand_Talo> :)
+19:29:11 <Jeremy_Rand_Talo> alright, moving along...
+19:29:23 <Jeremy_Rand_Talo> #topic 35C3
+19:29:59 <Jeremy_Rand_Talo> #info 35C3 is confirmed to be in Leipzig again; Namecoin intends to have some developers attend.
+19:30:13 <midnightmagic> Nice! Who's going?
+19:30:45 <Jeremy_Rand_Talo> #info We'd been wondering why the heck it was taking so long to announce the location.  We found out yesterday why it was taking the CCC so long.
+19:31:55 <Jeremy_Rand_Talo> #info Turns out that the CCC has been fighting with the Leipzig hotel industry.  Apparently the capitalist cartels who run the Leipzig hotels decided that 35C3 would be a great chance to jack up prices for the week by 500%.
+19:34:13 <midnightmagic> #agreed Scummy anti-competitive hotel behaviour is scummy
+19:34:57 <Jeremy_Rand_Talo> #info Anyway, I do have a hotel room reserved at a sane rate (reserved it many months ago).  AFAIK jonasbits and I will be going to 35C3, and there might be a slot available for a 3rd Namecoiner to room with us.  (There'll also probably be 2 Technoethical people in the room, as with last time.)
+19:36:12 <midnightmagic> So the hotel room fits five..?
+19:37:05 <Jeremy_Rand_Talo> #info No word yet on when presale vouchers will start getting distributed.  Hopefully very soon.  I'm hoping to get a voucher from Technoethical same as last year, but if anyone has other voucher-obtaining chances, please use them too 🙂
+19:38:02 <Jeremy_Rand_Talo> midnightmagic: yes, it's a fairly large room.  It's exactly the same room as the one we booked last year in fact.  (AFAIK it's the only 5-person room in the building)
+19:38:18 <midnightmagic> �ah nice.
+19:39:47 <midnightmagic> Well, as usual I doubt I'll be showing up at pretty much any of these sorts of things but I'll be there in spirit.
+19:41:00 <midnightmagic> #info The Technoethical laptops seem to be fairly inexpensive
+19:41:05 <Jeremy_Rand_Talo> midnightmagic: one of my friends couldn't make it to a conference, so he asked his friends to carry a sign with his face on it throughout the conference so that he'd be there in spirit.  Should we do that for you?
+19:41:16 <Jeremy_Rand_Talo> j/k of course
+19:42:01 <midnightmagic> Hah. You can put my little cthulhu octopus thingy on a business card and hand it out. How soon do we have before the conference?
+19:42:37 <Jeremy_Rand_Talo> midnightmagic: it's December 27-30
+19:43:08 <midnightmagic> Plenty of time to have mysterious cardstock printed up.
+19:43:33 * Jeremy_Rand_Talo needs moar business cards
+19:46:37 <Jeremy_Rand_Talo> anyways.  Those are the topics I wanted to cover today.  Anything else you'd like to cover midnightmagic ?
+19:47:41 <midnightmagic> Perhaps..
+19:47:51 <midnightmagic> The bot hasn't been recording meetings since May..?
+19:48:00 <midnightmagic> Just verifying it didn't miss anything..?
+19:49:14 <Jeremy_Rand_Talo> Not certain.  I think a lot of meetings during the last few months got canceled due to schedule constraints.  Hopefully meetings will actually resume being regular from here on out.
+19:51:56 <midnightmagic> Okay, fair enough. Well nothing else from this end.
+19:52:30 <Jeremy_Rand_Talo> alright.  tfreedman , anything you'd like to bring up today?
+19:52:34 <midnightmagic> #action midnightmagic will be happy to review stuff
+19:53:23 <Jeremy_Rand_Talo> #agreed WELCOME TO THE MACHINE
+19:53:47 <tfreedman[m]> Jeremy_Rand_Talos: nah
+19:54:42 <tfreedman[m]> Although if anyone else wants to help review web content over the next couple weeks, that'd be appreciated
+19:55:58 <Jeremy_Rand_Talo> #topic Website
+19:56:06 <midnightmagic> #action midnightmagic can help with web content review
+19:56:30 <Jeremy_Rand_Talo> #info tfreedman has been very busy submitting PR's to the namecoin.org repo that need review
+19:57:13 <Jeremy_Rand_Talo> #help Moar reviewers for tfreedman 's PR's would be greatly appreciated
+19:57:13 <midnightmagic> Okay, well I don't mind reading stuff.
+19:58:09 <midnightmagic> tfreedman[m]: ping me with specific PRs in the PR and it'll pop up as stuff for me to do, or ping me in here.
+19:58:24 <Jeremy_Rand_Talo> midnightmagic: a lot of this is right up your alley, since you're good at noticing inaccuracies in cryptocurrency technical docs that most people don't notice
+19:58:53 <midnightmagic> Cool. Yeah I don't mind reading stuff at all.
+20:01:15 <Jeremy_Rand_Talo> oh.  Another topic...
+20:01:18 <tfreedman[m]> Cool
+20:01:30 <Jeremy_Rand_Talo> #topic Namecoin Core
+20:03:13 <Jeremy_Rand_Talo> #help If anyone here is reasonably comfortable in C++ and would like to code and submit a PR to Namecoin Core for storing queued transactions in the wallet, that would help speed things along quite nicely.  Domob and brand0 haven't had enough time to get to that task yet.
+20:04:05 <midnightmagic> Is information on that hanging out somewhere I can read about?
+20:04:23 <Jeremy_Rand_Talo> midnightmagic: yes, lemme dig up the link, one sec...
+20:06:46 <Jeremy_Rand_Talo> #help (specifically, the Namecoin Core issue in question is https://github.com/namecoin/namecoin-core/issues/233 )
+20:06:54 <Jeremy_Rand_Talo> midnightmagic: ^
+20:06:59 <midnightmagic> Understood, thanks.
+20:07:28 <Jeremy_Rand_Talo> midnightmagic: any chance you'd be up for coding some of that?
+20:07:52 <midnightmagic> C++ is a little rusty. I was more curious about it what you're talking about. Sorry, don't mean to get your hopes up.
+20:08:03 <midnightmagic> :-)
+20:08:20 <Jeremy_Rand_Talo> no worries
+20:10:45 <Jeremy_Rand_Talo> Alright, I think that's all I was going to bring up.  Anything else before we close the meeting?
+20:11:11 <midnightmagic> None here.
+20:15:15 <Jeremy_Rand_Talo> alright.  Thanks for attending!
+20:15:22 <midnightmagic> \o/
+20:15:25 <Jeremy_Rand_Talo> #endmeeting

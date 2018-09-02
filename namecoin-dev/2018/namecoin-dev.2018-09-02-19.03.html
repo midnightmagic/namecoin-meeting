@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand_Talo at 19:03:52 UTC
+(<a href="namecoin-dev.2018-09-02-19.03.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">NLnet</b> <span class="details">(<a href='namecoin-dev.2018-09-02-19.03.log.html#l-7'>Jeremy_Rand_Talo</a>, 19:09:14)</span>
+<ol type="a">
+  <li><span class="INFO">AFAICT 2 of the NLnet milestones are ready for
+    us to claim: "DNS Tor Browser" and "Bundle SPV and ncdns"</span>
+    <span class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-8'>Jeremy_Rand_Talo</a>,
+    19:10:20)</span></li>
+  <li><span class="INFO">"DNS Tor Browser" had mostly been working for
+    months, but was blocked by broken `DNAME` support in `madns` and
+    `dns-prop279`</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-9'>Jeremy_Rand_Talo</a>,
+    19:11:36)</span></li>
+  <li><span class="INFO">`DNAME` was fixed in `madns` and `dns-prop279`
+    for the ncdns v0.0.8 release, so we can claim the milestone
+    now.</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-10'>Jeremy_Rand_Talo</a>,
+    19:12:25)</span></li>
+  <li><span class="INFO">"Bundle SPV and ncdns" was also mostly working
+    for months, but was blocked by a couple of bugs that broke the
+    ConsensusJ-Namecoin installation (specifically cookie authentication
+    and Visual C++ runtime detection)</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-11'>Jeremy_Rand_Talo</a>,
+    19:14:45)</span></li>
+  <li><span class="INFO">both of the "Bundle SPV and ncdns" bugs were
+    also fixed in ncdns v0.0.8, so we can claim that milestone now
+    too</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-12'>Jeremy_Rand_Talo</a>,
+    19:15:33)</span></li>
+  <li><span class="INFO">the "DNS Tor Browser" and "Bundle SPV and
+    ncdns" milestones are currently undergoing a 1-week public
+    accountability period on Reddit, the forum, and #namecoin.  If
+    anyone reports bugs during that week, then we fix them before filing
+    the claims with NLnet</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-13'>Jeremy_Rand_Talo</a>,
+    19:16:56)</span></li>
+  <li><span class="INFO">The next milestones that I'm expecting to be
+    claimable are TLS Chrome GNU/Linux, Electrum Currency, and TLS
+    Firefox.</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-14'>Jeremy_Rand_Talo</a>,
+    19:18:11)</span></li>
+  <li><span class="INFO">TLS Chrome GNU/Linux should be claimable right
+    now AFAICT, but it's currently a backup milestone so I need to make
+    sure there's developer consensus for upgrading it on the roadmap.  I
+    can't think of any reason not to upgrade it.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-15'>Jeremy_Rand_Talo</a>,
+    19:19:14)</span></li>
+  <li><span class="INFO">Electrum Currency is borderline claimable now.
+    Arguably blocked by lack of rebranded exchange rate display and
+    broken unit tests in Electrum-NMC v3.2.2 (the current release), both
+    of which are fixed in master branch.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-16'>Jeremy_Rand_Talo</a>,
+    19:20:39)</span></li>
+  <li><span class="INFO">Electrum-NMC v3.2.2.2 is tagged as of today,
+    and should fix the exchange rate display and unit tests.</span>
+    <span class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-17'>Jeremy_Rand_Talo</a>,
+    19:21:23)</span></li>
+  <li><span class="INFO">Once Electrum-NMC v3.2.2.2 binaries are
+    released, I think the Electrum Currency milestone is unambiguously
+    claimable.</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-18'>Jeremy_Rand_Talo</a>,
+    19:21:56)</span></li>
+  <li><span class="INFO">TLS Firefox is currently claimable except for
+    the fact that `tlsrestrict_nss_tool` is unusable on Windows because
+    of no `certutil` binaries for it.  I'm coordinating with the Tor
+    folks to get `certutil` binaries released.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-19'>Jeremy_Rand_Talo</a>,
+    19:23:19)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">35C3</b> <span class="details">(<a href='namecoin-dev.2018-09-02-19.03.log.html#l-28'>Jeremy_Rand_Talo</a>, 19:29:23)</span>
+<ol type="a">
+  <li><span class="INFO">35C3 is confirmed to be in Leipzig again;
+    Namecoin intends to have some developers attend.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-29'>Jeremy_Rand_Talo</a>,
+    19:29:59)</span></li>
+  <li><span class="INFO">We'd been wondering why the heck it was taking
+    so long to announce the location.  We found out yesterday why it was
+    taking the CCC so long.</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-31'>Jeremy_Rand_Talo</a>,
+    19:30:45)</span></li>
+  <li><span class="INFO">Turns out that the CCC has been fighting with
+    the Leipzig hotel industry.  Apparently the capitalist cartels who
+    run the Leipzig hotels decided that 35C3 would be a great chance to
+    jack up prices for the week by 500%.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-32'>Jeremy_Rand_Talo</a>,
+    19:31:55)</span></li>
+  <li><span class="INFO">Anyway, I do have a hotel room reserved at a
+    sane rate (reserved it many months ago).  AFAIK jonasbits and I will
+    be going to 35C3, and there might be a slot available for a 3rd
+    Namecoiner to room with us.  (There'll also probably be 2
+    Technoethical people in the room, as with last time.)</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-34'>Jeremy_Rand_Talo</a>,
+    19:34:57)</span></li>
+  <li><span class="INFO">No word yet on when presale vouchers will start
+    getting distributed.  Hopefully very soon.  I'm hoping to get a
+    voucher from Technoethical same as last year, but if anyone has
+    other voucher-obtaining chances, please use them too 🙂</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-36'>Jeremy_Rand_Talo</a>,
+    19:37:05)</span></li>
+  <li><span class="INFO">The Technoethical laptops seem to be fairly
+    inexpensive</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-40'>midnightmagic</a>,
+    19:41:00)</span></li>
+  <li><i class="itemtype">ACTION</i>: <span class="ACTION">midnightmagic
+    will be happy to review stuff</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-54'>midnightmagic</a>,
+    19:52:34)</span></li>
+  <li><i class="itemtype">AGREED</i>: <span class="AGREED">WELCOME TO
+    THE MACHINE</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-55'>Jeremy_Rand_Talo</a>,
+    19:53:23)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Website</b> <span class="details">(<a href='namecoin-dev.2018-09-02-19.03.log.html#l-58'>Jeremy_Rand_Talo</a>, 19:55:58)</span>
+<ol type="a">
+  <li><i class="itemtype">ACTION</i>: <span class="ACTION">midnightmagic
+    can help with web content review</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-59'>midnightmagic</a>,
+    19:56:06)</span></li>
+  <li><span class="INFO">tfreedman has been very busy submitting PR's to
+    the namecoin.org repo that need review</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-60'>Jeremy_Rand_Talo</a>,
+    19:56:30)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">Moar reviewers
+    for tfreedman 's PR's would be greatly appreciated</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-61'>Jeremy_Rand_Talo</a>,
+    19:57:13)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Namecoin Core</b> <span class="details">(<a href='namecoin-dev.2018-09-02-19.03.log.html#l-68'>Jeremy_Rand_Talo</a>, 20:01:30)</span>
+<ol type="a">
+  <li><i class="itemtype">HELP</i>: <span class="HELP">If anyone here is
+    reasonably comfortable in C++ and would like to code and submit a PR
+    to Namecoin Core for storing queued transactions in the wallet, that
+    would help speed things along quite nicely.  Domob and brand0
+    haven't had enough time to get to that task yet.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-69'>Jeremy_Rand_Talo</a>,
+    20:03:13)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">(specifically,
+    the Namecoin Core issue in question is
+    https://github.com/namecoin/namecoin-core/issues/233 )</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-09-02-19.03.log.html#l-72'>Jeremy_Rand_Talo</a>,
+    20:06:46)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 20:15:25 UTC
+(<a href="namecoin-dev.2018-09-02-19.03.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>midnightmagic will be happy to review stuff</li>
+  <li>midnightmagic can help with web content review</li>
+</ol>
+<br><br>
+
+
+
+<h3>Action items, by person</h3>
+<ol>
+  <li> midnightmagic <ol>
+    <li>midnightmagic will be happy to review stuff</li>
+    <li>midnightmagic can help with web content review</li>
+  </ol></li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand_Talo (52)</li>
+  <li>midnightmagic (26)</li>
+  <li>tfreedman[m] (3)</li>
+  <li>qpm (2)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>
