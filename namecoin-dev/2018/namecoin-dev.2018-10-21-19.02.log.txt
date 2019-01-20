@@ -1,0 +1,29 @@
+19:02:57 <Jeremy_Rand_Talo> #startmeeting
+19:02:57 <qpm> Meeting started Sun Oct 21 19:02:57 2018 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:02:57 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:03:37 <Jeremy_Rand_Talo> Hi everyone, welcome to the Namecoin development meeting
+19:03:49 <Jeremy_Rand_Talo> Can we get a roll call of who's here today?
+19:08:08 <Jeremy_Rand_Talo> midnightmagic (IRC) / aerth / hl / jonasbits (IRC) / skace (IRC) / tfreedman : are you here?
+19:08:26 <tfreedman[m]> Ohi
+19:10:47 <Jeremy_Rand_Talo> ok, so, first topic:
+19:10:54 <Jeremy_Rand_Talo> #topic Electrum-NMC
+19:11:59 <Jeremy_Rand_Talo> #info Lots of progress on Electrum-NMC lately.  Among other things, GUI support (and of course console support) for registering and updating names now works.
+19:14:20 <Jeremy_Rand_Talo> #info Also, Neil Booth merged my PR for name script support into upstream ElectrumX.
+19:14:38 <Jeremy_Rand_Talo> skace (IRC): does your ElectrumX server typically run master branch or a stable tag of ElectrumX?
+19:17:42 <Jeremy_Rand_Talo> okay, so moving along...
+19:18:02 <Jeremy_Rand_Talo> #topic pkcs11
+19:18:34 <Jeremy_Rand_Talo> #info aerth has been doing some awesome work on a pkcs11 module for Namecoin TLS
+19:19:14 <Jeremy_Rand_Talo> aerth: if you're here at the moment, would you like to give a status update on that work?
+19:24:23 <Jeremy_Rand_Talo> hmm, seems not a lot of people here today :/
+19:24:50 <Jeremy_Rand_Talo> tfreedman: any topics you wanted to bring up today?
+19:36:53 <Jeremy_Rand_Talo> okay, so one more topic
+19:37:08 <Jeremy_Rand_Talo> #topic State Sponsored Actors
+19:38:52 <Jeremy_Rand_Talo> #link https://www.nytimes.com/2018/10/20/us/politics/saudi-image-campaign-twitter.html  As you might have heard, the New York Times yesterday accused Saudi intelligence of being behind the "State Sponsored Actor" Twitter attack of 2015 (which targeted my account, along with circa 40 other Twitter users, most of whom were privacy tech activists of some kind)
+19:40:25 <Jeremy_Rand_Talo> #info I was wondering why exactly Saudi Arabia would be so interested in me, seeing as the most high-profile stuff I worked on in the 2013-2015 period discussed in the article was Namecoin TLS stuff, and I wasn't previously aware of Saudi Arabia compromising CA's or otherwise doing MITM attacks
+19:41:52 <Jeremy_Rand_Talo> #link https://moxie.org/blog/saudi-surveillance/  And lookie what I found today.  Saudi Arabia contacted Moxie Marlinspike in 2013 looking for help in doing MITM attacks against Twitter, and they specifically mentioned the idea of compromising a CA
+19:42:48 <Jeremy_Rand_Talo> #info So... this fits remarkably well
+19:44:44 <tfreedman[m]> Nope
+19:46:05 <Jeremy_Rand_Talo> ok
+19:46:31 <Jeremy_Rand_Talo> so I'll wait a few more minutes to see if anyone arriving late to the meeting has anything to say, but I think that's all I wanted to bring up
+19:56:43 <Jeremy_Rand_Talo> ok, so I infer that no one else has stuff to bring up today.
+19:56:48 <Jeremy_Rand_Talo> #endmeeting

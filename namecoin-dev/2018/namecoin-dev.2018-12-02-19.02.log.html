@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:02:10</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:02:10</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Dec  2 19:02:10 2018 UTC.  The chair is Jeremy_Rand[m]. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:02:10</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:02:29</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Hi everyone, welcome to the meeting
+<a name="l-5"></a><span class="tm">19:02:40</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Can we get a roll call of who's here today?
+<a name="l-6"></a><span class="tm">19:03:38</span><span class="nk"> &lt;aerth&gt;</span> hi everyone
+<a name="l-7"></a><span class="tm">19:03:48</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> hi aerth
+<a name="l-8"></a><span class="tm">19:04:54</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> anyone else here today?
+<a name="l-9"></a><span class="tm">19:05:14</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Hi hi Jeremy_Rand !
+<a name="l-10"></a><span class="tm">19:05:25</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> hi JollyRoger
+<a name="l-11"></a><span class="tm">19:05:37</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Arr, Cap'n!
+<a name="l-12"></a><span class="tm">19:06:59</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Okay, so let's get started with our first topic...
+<a name="l-13"></a><span class="tm">19:07:00</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">Electrum-NMC</span>
+<a name="l-14"></a><span class="tm">19:07:46</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">Electrum-NMC's name wallet support is pretty much fully working.  At this point we're just waiting for upstream Electrum to tag a release, at which point we can tag a release ourselves and collect some funds from NLnet.</span>
+<a name="l-15"></a><span class="tm">19:09:10</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">There are, however, some issues with Electrum-NMC and RBF.  At this point it looks like Namecoin Core has a bug that breaks RBF for name transactions, which means of course that Electrum-NMC can't replace name transactions (because ElectrumX can't get Namecoin Core to accept those replacements)</span>
+<a name="l-16"></a><span class="tm">19:09:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I reported that bug to Daniel, he'll look at it when he has some free time but it's not super high priority</span>
+<a name="l-17"></a><span class="tm">19:10:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#help </span><span class="cmdline">if anyone here enjoys C++ coding and has (or wants to get) familiarity with the Bitcoin Core and/or Namecoin Core codebase, I suspect Daniel would be happy to accept a patch that fixes RBF for name transactions</span>
+<a name="l-18"></a><span class="tm">19:11:24</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">For anyone wondering, the main benefit of RBF for name transactions is that, if you fuck up a name update (e.g. using invalid JSON), RBF will let you correct the mistake without waiting for the erroneous transaction to be mined first</span>
+<a name="l-19"></a><span class="tm">19:13:07</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">In other Electrum-NMC news, I do intend to get Trezor supported for name transactions, but that's currently on the back burner due to the ncp11 stuff (which will be covered later in this meeting)</span>
+<a name="l-20"></a><span class="tm">19:13:39</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> Anything else Electrum-NMC-related that anyone would like to bring up today?
+<a name="l-21"></a><span class="tm">19:13:49</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> oh, almost forgot to say
+<a name="l-22"></a><span class="tm">19:13:55</span><span class="nk"> &lt;JollyRoger`&gt;</span> Yeah?
+<a name="l-23"></a><span class="tm">19:15:11</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">RBF in Electrum-NMC isn't mission-critical at the moment, because none of the features in Electrum-NMC that use RBF are enabled by default.  So, the fact that Namecoin Core's RBF is broken is basically just a nuisance and shouldn't be a blocker to claiming the name wallet NLnet funds</span>
+<a name="l-24"></a><span class="tm">19:15:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">(but we'd still like to get that fixed)</span>
+<a name="l-25"></a><span class="tm">19:15:47</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> ok, anything Electrum-NMC-related that anyone else would like to bring up?
+<a name="l-26"></a><span class="tm">19:15:53</span><span class="nk"> &lt;aerth&gt;</span> it does seem like the most recent electrum release was early september, so it could be soon
+<a name="l-27"></a><span class="tm">19:16:19</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">aerth:</span> yeah, usually Electrum releases tend to be every 2 months or so, so we seem to be a bit overdue for one
+<a name="l-28"></a><span class="tm">19:17:00</span><span class="nk"> &lt;aerth&gt;</span> and one more thing: we could disable the RBF UI on the electrum side until the Namecoin Core side has RBF support
+<a name="l-29"></a><span class="tm">19:17:01</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">aerth points out that the most recent Electrum upstream release was in early September, so there's a good chance that a new upstream release could be happening soon</span>
+<a name="l-30"></a><span class="tm">19:19:53</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">aerth:</span> yeah, so for now what happens is that if you try to use any of the RBF features in Electrum-NMC, you just get a message that the server rejected your transaction.  None of those features are enabled by default (at least, if they are I've never run across them).  The main way that people would start noticing issues is if they enable the "RBF Batching" feature (disabled by default in the config dialog),
+<a name="l-31"></a><span class="tm">19:19:54</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> which will cause "transaction rejected" errors if they try to issue any currency transactions while they have an unconfirmed name transaction that they've already issued.
+<a name="l-32"></a><span class="tm">19:21:23</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I tend to think that putting an entry in the "Known Issues" section of the download page (telling people that RBF Batching is buggy right now) is sufficient, and will take less effort than trying to mess with the Electrum-NMC UI
+<a name="l-33"></a><span class="tm">19:21:46</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> FWIW RBF Batching isn't even in the current Electrum-NMC release, it was added to master branch after the most recent release
+<a name="l-34"></a><span class="tm">19:22:23</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> I only noticed that RBF was broken because I noticed that upstream had added the batching feature and I had to modify it to take into account some Namecoin-specific consensus rules
+<a name="l-35"></a><span class="tm">19:25:45</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">aerth:</span> thoughts on that?  Is trying to disable Electrum UI features worth our dev time in your opinion?
+<a name="l-36"></a><span class="tm">19:27:34</span><span class="nk"> &lt;aerth&gt;</span> it may be trivial to may the checkbox greyed out in the preferences
+<a name="l-37"></a><span class="tm">19:28:50</span><span class="nk"> &lt;aerth&gt;</span> i think its worth it to either grey it out or comment out the line that brings in that checkbox
+<a name="l-38"></a><span class="tm">19:29:21</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">aerth:</span> yeah, that might be fairly easy.  Just means that then we'd have to revert that commit once Namecoin Core fixes the bug on their end, and also means users who are using only currency transactions won't be able to use that feature (even though the feature works fine for such users)
+<a name="l-39"></a><span class="tm">19:30:11</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> actually yeah, that's probably a good reason not to disable RBF completely -- it works fine for users who are only doing currency transactions, and I suspect we have a decent number of such users due to Electrum-NMC being the go-to method for storing NMC in a Trezor
+<a name="l-40"></a><span class="tm">19:30:38</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> maybe we could insert a warning into the label of that checkbox instead?
+<a name="l-41"></a><span class="tm">19:32:39</span><span class="nk"> &lt;aerth&gt;</span> yes a popup in that case
+<a name="l-42"></a><span class="tm">19:33:03</span><span class="nk"> &lt;aerth&gt;</span> known issues sounds better now that you mention that currency transactions are able to use RBF
+<a name="l-43"></a><span class="tm">19:33:39</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">aerth:</span> ok.  Adding it to the "known issues" list sounds good to me.
+<a name="l-44"></a><span class="tm">19:36:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#agreed </span><span class="cmdline">The RBF bug should be added to the "known issues" list in the next Electrum-NMC release</span>
+<a name="l-45"></a><span class="tm">19:36:58</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> any other Electrum-NMC-related stuff that anyone would like to bring up today?
+<a name="l-46"></a><span class="tm">19:41:54</span><span class="nk"> &lt;JollyRoger`&gt;</span> I'm just listening in at this moment, actually ^_^.
+<a name="l-47"></a><span class="tm">19:42:28</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> alright, so let's move onto the next topic...
+<a name="l-48"></a><span class="tm">19:42:50</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="topic">#topic </span><span class="topicline">ncp11 (formerly known as nctls.so)</span>
+<a name="l-49"></a><span class="tm">19:43:57</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">ncp11 has successfully gotten Chromium on GNU/Linux to accept a (currently hardcoded) self-signed Namecoin TLS cert (specifically the cert that's on nf.bit)</span>
+<a name="l-50"></a><span class="tm">19:44:19</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">I need to clean up the rampant debug output in my code for that, then I'll get that pushed to GitHub</span>
+<a name="l-51"></a><span class="tm">19:46:36</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">Firefox support will be a little bit harder because `mozilla::pkix` (the cert validation library in Firefox) doesn't accept end-entity trust anchors, so we'll need to create name-constrained CA certs instead of end-entity certs.  This isn't exactly difficult, but I haven't implemented it yet.</span>
+<a name="l-52"></a><span class="tm">19:46:41</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> (maybe aerth would like to try that?)
+<a name="l-53"></a><span class="tm">19:54:56</span><span class="nk"> &lt;jonasbits&gt;</span> hi all
+<a name="l-54"></a><span class="tm">19:55:03</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#info </span><span class="cmdline">current intention is to get ncp11 released in a usable-beta state by the time of 35C3</span>
+<a name="l-55"></a><span class="tm">19:55:08</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> hi jonasbits
+<a name="l-56"></a><span class="tm">19:57:15</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> any other ncp11-related stuff that anyone would like to bring up today?
+<a name="l-57"></a><span class="tm">19:57:34</span><span class="nk"> &lt;aerth&gt;</span> im not sure about the name-constrained vs end-entity but i will research it
+<a name="l-58"></a><span class="tm">19:59:25</span><span class="nk"> &lt;aerth&gt;</span> <span class="hi">Jeremy_Rand[m]:</span> the ncp11 module, installed in firefox, validates the nf.bit cert successfully?
+<a name="l-59"></a><span class="tm">20:00:17</span><span class="nk"> &lt;aerth&gt;</span> (with the public part that *would* be retrieved from the ncdns daemon)
+<a name="l-60"></a><span class="tm">20:00:21</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">aerth:</span> ok cool.  There's some example code for creating name-constrained CA certificate at https://github.com/namecoin/crosssignnameconstraint , the main difference here is that we'd be using a "permitted dns names" whitelist rather than an "excluded dns names" blacklist, and that we'd be using a public key sourced from Namecoin rather than a public/private keypair that's locally generated in Go code
+<a name="l-61"></a><span class="tm">20:00:47</span><span class="nk"> &lt;aerth&gt;</span> is there a go package for rpc client
+<a name="l-62"></a><span class="tm">20:01:06</span><span class="nk"> &lt;aerth&gt;</span> btcd client fork maybe
+<a name="l-63"></a><span class="tm">20:02:04</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">aerth:</span> I haven't yet tried it in Firefox, so I'm not sure what exactly Firefox does.  Firefox definitely won't accept the nf.bit cert because it's an end-entity cert.  (See above :) )  It's possible that Firefox will produce pkcs11 queries that ncp11 doesn't yet know how to handle; if that's the case it'll need fixing
+<a name="l-64"></a><span class="tm">20:02:59</span><span class="nk"> &lt;aerth&gt;</span> chromium* though?
+<a name="l-65"></a><span class="tm">20:05:01</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">aerth:</span> so what I'm currently doing is that the pkcs11 module generates an HTTP query to an HTTP server that currently returns the hardcoded cert.  Right now that HTTP connection is over TCP to localhost, but I'd prefer to replace TCP with a Unix domain socket for security reasons.  The HTTP server will presumably issue a DNS TLSA request to ncdns and return whatever cert it gets back (subject to safety checks,
+<a name="l-66"></a><span class="tm">20:05:02</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> e.g. making sure that the TLSA record is either a public key or a dehydration-compatible certificate)
+<a name="l-67"></a><span class="tm">20:05:57</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">aerth:</span> and yeah, the nf.bit cert passes validation in Chromium when ncp11 is loaded.
+<a name="l-68"></a><span class="tm">20:06:17</span><span class="nk"> &lt;jonasbits&gt;</span> cool
+<a name="l-69"></a><span class="tm">20:06:23</span><span class="nk"> &lt;aerth&gt;</span> amazing
+<a name="l-70"></a><span class="tm">20:08:33</span><span class="nk"> &lt;aerth&gt;</span> would it be a unix socket (or equivilent IPC on windows), getting the certs directly from ncdns? (or in the case of a remote ncdns, using http(s)?
+<a name="l-71"></a><span class="tm">20:11:30</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">aerth:</span> right now ncdns listens on a TCP and UDP socket via the DNS protocol.  I'd definitely like to make it listen on a Unix domain socket instead (or equivalently a named pipe on Windows) since that's substantially better for security.  However, we might prefer to make the DNS TLSA request to Unbound rather than directly to ncdns, because that way we get 2 side benefits for free: (1) .bit domains can securely
+<a name="l-72"></a><span class="tm">20:11:31</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> delegate their TLSA records to a nameserver via DS records; (2) non-.bit domains can also use ncp11 (using the ICANN root key as their trust anchor) as long as they've constructed their certs the same way that Namecoin does
+<a name="l-73"></a><span class="tm">20:12:33</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">aerth:</span> on the other hand, for Tor Browser usage we'll definitely want to not use Unbound, because Unbound will leak requests outside of Tor.  And the Tor people are big fans of Unix domain sockets
+<a name="l-74"></a><span class="tm">20:12:54</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> So, both approaches make sense for different use cases, I guess
+<a name="l-75"></a><span class="tm">20:14:19</span><span class="nk"> &lt;aerth&gt;</span> does everything the module needs currently exist in the TCP/UDP socket of ncdns server? and the module would fetch this? or do we also need to make it possible from the ncdns side
+<a name="l-76"></a><span class="tm">20:15:27</span><span class="nk"> &lt;aerth&gt;</span> the unix socket will be a great addition to ncdns
+<a name="l-77"></a><span class="tm">20:17:54</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">aerth:</span> my inclination is to have the pkcs11 module contact an HTTP-over-Unix-domain-socket server to retrieve the certs, and to have that server contact either Unbound or ncdns via either DNS-over-TCP/UDP or DNS-over Unix-domain-socket.  Separating out the processes makes sandboxing a bit easier, and also avoids having the complexity of the DNS wire protocol as part of the pkcs11 module.  (One major reason I want
+<a name="l-78"></a><span class="tm">20:17:55</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> to keep the pkcs11 module very simple is because if the pkcs11 module ever freezes or panics, the web browser will probably also freeze or crash.  Web browsers aren't really designed in practice to robustly handle a frozen pkcs11 module.)
+<a name="l-79"></a><span class="tm">20:19:10</span><span class="nk"> &lt;aerth&gt;</span> but to migrate from hardcoding to interacting with the ncdns daemon, is there a golang rpc client package yet
+<a name="l-80"></a><span class="tm">20:20:25</span><span class="nk"> &lt;aerth&gt;</span> (assuming the pkcs11 module will include a ncdns rpc client)
+<a name="l-81"></a><span class="tm">20:22:22</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">aerth:</span> there probably is a Golang RPC client package (I think ncdns actually uses it to talk to namecoind), but I don't think we actually need an RPC client here -- the HTTP and DNS wire protocols should be sufficient here I think.  (So, it would look like: `(pkcs11 module) ---HTTP---&gt; (daemon that does safety checks of certs) ---DNS---&gt; (ncdns or Unbound) `)
+<a name="l-82"></a><span class="tm">20:23:38</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> the HTTP connection would be over a Unix domain socket; the DNS connection would be over either TCP/UDP or a Unix domain socket depending on user preference
+<a name="l-83"></a><span class="tm">20:32:05</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="hi">aerth:</span> anything else regarding ncp11 that you'd like to cover at this meeting?
+<a name="l-84"></a><span class="tm">20:32:40</span><span class="nk"> &lt;aerth&gt;</span> not in particular, thanks for clarifying above
+<a name="l-85"></a><span class="tm">20:33:12</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> alright cool
+<a name="l-86"></a><span class="tm">20:33:29</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> any other topics anyone would like to bring up today?
+<a name="l-87"></a><span class="tm">20:38:11</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> alright then, good meeting, thanks for being here everyone!
+<a name="l-88"></a><span class="tm">20:38:26</span><span class="nk"> &lt;Jeremy_Rand[m]&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

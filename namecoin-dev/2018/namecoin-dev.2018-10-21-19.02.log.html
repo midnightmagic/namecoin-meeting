@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:02:57</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:02:57</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Oct 21 19:02:57 2018 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:02:57</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:03:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi everyone, welcome to the Namecoin development meeting
+<a name="l-5"></a><span class="tm">19:03:49</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Can we get a roll call of who's here today?
+<a name="l-6"></a><span class="tm">19:08:08</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> midnightmagic (IRC) / aerth / hl / jonasbits (IRC) / skace (IRC) / tfreedman : are you here?
+<a name="l-7"></a><span class="tm">19:08:26</span><span class="nk"> &lt;tfreedman[m]&gt;</span> Ohi
+<a name="l-8"></a><span class="tm">19:10:47</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok, so, first topic:
+<a name="l-9"></a><span class="tm">19:10:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Electrum-NMC</span>
+<a name="l-10"></a><span class="tm">19:11:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Lots of progress on Electrum-NMC lately.  Among other things, GUI support (and of course console support) for registering and updating names now works.</span>
+<a name="l-11"></a><span class="tm">19:14:20</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Also, Neil Booth merged my PR for name script support into upstream ElectrumX.</span>
+<a name="l-12"></a><span class="tm">19:14:38</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> skace (IRC): does your ElectrumX server typically run master branch or a stable tag of ElectrumX?
+<a name="l-13"></a><span class="tm">19:17:42</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> okay, so moving along...
+<a name="l-14"></a><span class="tm">19:18:02</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">pkcs11</span>
+<a name="l-15"></a><span class="tm">19:18:34</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">aerth has been doing some awesome work on a pkcs11 module for Namecoin TLS</span>
+<a name="l-16"></a><span class="tm">19:19:14</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">aerth:</span> if you're here at the moment, would you like to give a status update on that work?
+<a name="l-17"></a><span class="tm">19:24:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> hmm, seems not a lot of people here today :/
+<a name="l-18"></a><span class="tm">19:24:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">tfreedman:</span> any topics you wanted to bring up today?
+<a name="l-19"></a><span class="tm">19:36:53</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> okay, so one more topic
+<a name="l-20"></a><span class="tm">19:37:08</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">State Sponsored Actors</span>
+<a name="l-21"></a><span class="tm">19:38:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://www.nytimes.com/2018/10/20/us/politics/saudi-image-campaign-twitter.html  As you might have heard, the New York Times yesterday accused Saudi intelligence of being behind the "State Sponsored Actor" Twitter attack of 2015 (which targeted my account, along with circa 40 other Twitter users, most of whom were privacy tech activists of some kind)</span>
+<a name="l-22"></a><span class="tm">19:40:25</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I was wondering why exactly Saudi Arabia would be so interested in me, seeing as the most high-profile stuff I worked on in the 2013-2015 period discussed in the article was Namecoin TLS stuff, and I wasn't previously aware of Saudi Arabia compromising CA's or otherwise doing MITM attacks</span>
+<a name="l-23"></a><span class="tm">19:41:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#link </span><span class="cmdline">https://moxie.org/blog/saudi-surveillance/  And lookie what I found today.  Saudi Arabia contacted Moxie Marlinspike in 2013 looking for help in doing MITM attacks against Twitter, and they specifically mentioned the idea of compromising a CA</span>
+<a name="l-24"></a><span class="tm">19:42:48</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">So... this fits remarkably well</span>
+<a name="l-25"></a><span class="tm">19:44:44</span><span class="nk"> &lt;tfreedman[m]&gt;</span> Nope
+<a name="l-26"></a><span class="tm">19:46:05</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok
+<a name="l-27"></a><span class="tm">19:46:31</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> so I'll wait a few more minutes to see if anyone arriving late to the meeting has anything to say, but I think that's all I wanted to bring up
+<a name="l-28"></a><span class="tm">19:56:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok, so I infer that no one else has stuff to bring up today.
+<a name="l-29"></a><span class="tm">19:56:48</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand[m] at 19:02:10 UTC
+(<a href="namecoin-dev.2018-12-02-19.02.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">Electrum-NMC</b> <span class="details">(<a href='namecoin-dev.2018-12-02-19.02.log.html#l-13'>Jeremy_Rand[m]</a>, 19:07:00)</span>
+<ol type="a">
+  <li><span class="INFO">Electrum-NMC's name wallet support is pretty
+    much fully working.  At this point we're just waiting for upstream
+    Electrum to tag a release, at which point we can tag a release
+    ourselves and collect some funds from NLnet.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-12-02-19.02.log.html#l-14'>Jeremy_Rand[m]</a>,
+    19:07:46)</span></li>
+  <li><span class="INFO">There are, however, some issues with
+    Electrum-NMC and RBF.  At this point it looks like Namecoin Core has
+    a bug that breaks RBF for name transactions, which means of course
+    that Electrum-NMC can't replace name transactions (because ElectrumX
+    can't get Namecoin Core to accept those replacements)</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-12-02-19.02.log.html#l-15'>Jeremy_Rand[m]</a>,
+    19:09:10)</span></li>
+  <li><span class="INFO">I reported that bug to Daniel, he'll look at it
+    when he has some free time but it's not super high priority</span>
+    <span class="details">(<a
+    href='namecoin-dev.2018-12-02-19.02.log.html#l-16'>Jeremy_Rand[m]</a>,
+    19:09:30)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">if anyone here
+    enjoys C++ coding and has (or wants to get) familiarity with the
+    Bitcoin Core and/or Namecoin Core codebase, I suspect Daniel would
+    be happy to accept a patch that fixes RBF for name
+    transactions</span> <span class="details">(<a
+    href='namecoin-dev.2018-12-02-19.02.log.html#l-17'>Jeremy_Rand[m]</a>,
+    19:10:15)</span></li>
+  <li><span class="INFO">For anyone wondering, the main benefit of RBF
+    for name transactions is that, if you fuck up a name update (e.g.
+    using invalid JSON), RBF will let you correct the mistake without
+    waiting for the erroneous transaction to be mined first</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-12-02-19.02.log.html#l-18'>Jeremy_Rand[m]</a>,
+    19:11:24)</span></li>
+  <li><span class="INFO">In other Electrum-NMC news, I do intend to get
+    Trezor supported for name transactions, but that's currently on the
+    back burner due to the ncp11 stuff (which will be covered later in
+    this meeting)</span> <span class="details">(<a
+    href='namecoin-dev.2018-12-02-19.02.log.html#l-19'>Jeremy_Rand[m]</a>,
+    19:13:07)</span></li>
+  <li><span class="INFO">RBF in Electrum-NMC isn't mission-critical at
+    the moment, because none of the features in Electrum-NMC that use
+    RBF are enabled by default.  So, the fact that Namecoin Core's RBF
+    is broken is basically just a nuisance and shouldn't be a blocker to
+    claiming the name wallet NLnet funds</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-12-02-19.02.log.html#l-23'>Jeremy_Rand[m]</a>,
+    19:15:11)</span></li>
+  <li><span class="INFO">(but we'd still like to get that fixed)</span>
+    <span class="details">(<a
+    href='namecoin-dev.2018-12-02-19.02.log.html#l-24'>Jeremy_Rand[m]</a>,
+    19:15:28)</span></li>
+  <li><span class="INFO">aerth points out that the most recent Electrum
+    upstream release was in early September, so there's a good chance
+    that a new upstream release could be happening soon</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-12-02-19.02.log.html#l-29'>Jeremy_Rand[m]</a>,
+    19:17:01)</span></li>
+  <li><i class="itemtype">AGREED</i>: <span class="AGREED">The RBF bug
+    should be added to the "known issues" list in the next Electrum-NMC
+    release</span> <span class="details">(<a
+    href='namecoin-dev.2018-12-02-19.02.log.html#l-44'>Jeremy_Rand[m]</a>,
+    19:36:28)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">ncp11 (formerly known as nctls.so)</b> <span class="details">(<a href='namecoin-dev.2018-12-02-19.02.log.html#l-48'>Jeremy_Rand[m]</a>, 19:42:50)</span>
+<ol type="a">
+  <li><span class="INFO">ncp11 has successfully gotten Chromium on
+    GNU/Linux to accept a (currently hardcoded) self-signed Namecoin TLS
+    cert (specifically the cert that's on nf.bit)</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-12-02-19.02.log.html#l-49'>Jeremy_Rand[m]</a>,
+    19:43:57)</span></li>
+  <li><span class="INFO">I need to clean up the rampant debug output in
+    my code for that, then I'll get that pushed to GitHub</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-12-02-19.02.log.html#l-50'>Jeremy_Rand[m]</a>,
+    19:44:19)</span></li>
+  <li><span class="INFO">Firefox support will be a little bit harder
+    because `mozilla::pkix` (the cert validation library in Firefox)
+    doesn't accept end-entity trust anchors, so we'll need to create
+    name-constrained CA certs instead of end-entity certs.  This isn't
+    exactly difficult, but I haven't implemented it yet.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-12-02-19.02.log.html#l-51'>Jeremy_Rand[m]</a>,
+    19:46:36)</span></li>
+  <li><span class="INFO">current intention is to get ncp11 released in a
+    usable-beta state by the time of 35C3</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-12-02-19.02.log.html#l-54'>Jeremy_Rand[m]</a>,
+    19:55:03)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 20:38:26 UTC
+(<a href="namecoin-dev.2018-12-02-19.02.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>(none)</li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand[m] (60)</li>
+  <li>aerth (20)</li>
+  <li>TheJollyRoger (2)</li>
+  <li>qpm (2)</li>
+  <li>JollyRoger` (2)</li>
+  <li>jonasbits (2)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

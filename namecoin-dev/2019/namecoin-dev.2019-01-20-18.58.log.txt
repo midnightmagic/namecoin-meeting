@@ -1,0 +1,22 @@
+18:58:51 <Jeremy_Rand_Talo> #startmeeting
+18:58:51 <qpm> Meeting started Sun Jan 20 18:58:51 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+18:58:51 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+18:59:21 <Jeremy_Rand_Talo> Hi everyone!  Welcome to the meeting.  Can we get a roll call of who's here today?
+19:03:14 <Jeremy_Rand_Talo> btw apologies for not advertising this meeting yesterday in the Matrix channels; there were some AFK things distracting me yesterday
+19:04:47 <Jeremy_Rand_Talo> Okay, so this will be a short meeting in terms of stuff that's new on my end, due to the fact that I had to take about 1.5 weeks off due to illness
+19:05:05 <Jeremy_Rand_Talo> (looks like I'm recovered now, yay)
+19:05:07 <Jeremy_Rand_Talo> first topic:
+19:05:16 <Jeremy_Rand_Talo> #topic Electrum-NMC
+19:05:47 <Jeremy_Rand_Talo> #info there's a lot of upstream stuff from Electrum that needs to be merged into Electrum-NMC
+19:06:15 <Jeremy_Rand_Talo> #info I've started merging it yesterday, and have made some progress, but might not actually be caught up before tomorrow
+19:07:39 <Jeremy_Rand_Talo> #info I'm also spending a bit of time trying to get some refactors merged upstream by Electrum, so that Namecoin can more easily merge upstream changes in the future.
+19:08:39 <Jeremy_Rand_Talo> #info Specifically, I'm starting with some refactors to make `UTXOList` easier to subclass (we have a subclass called `UNOList` which currently needs to duplicate a lot of `UTXOList` code)
+19:10:09 <Jeremy_Rand_Talo> That's everything for Electrum-NMC, now moving onto the next topic
+19:10:27 <Jeremy_Rand_Talo> #topic GSoC
+19:11:48 <Jeremy_Rand_Talo> #info Unfortunately, it's pretty clear that I'm already overextended in terms of both dev and logistics right now.  As a result, I'm not going to be able to handle being a GSoC admin or mentor this year without half-assing it, and that wouldn't be ethical to the students.
+19:12:17 <Jeremy_Rand_Talo> #info So, looks like we won't apply to GSoC this year.  2020 is likely to be a lot better.
+19:14:10 <Jeremy_Rand_Talo> #info On the bright side, it does look like some new developers may be in the process of coming on board, via non-GSoC recruiting mechanisms.  (35C3 was very helpful in this regard.)
+19:14:59 <Jeremy_Rand_Talo> That's everything for GSoC
+19:15:21 <Jeremy_Rand_Talo> And those are the only topics that I wanted to bring up today; does anyone else here want to bring up anything today?
+19:21:44 <Jeremy_Rand_Talo> okay then, I guess that's the end of the meeting.  Hopefully next time I'll do a better job of announcing it ahead of time.  Happy hacking everyone!
+19:21:51 <Jeremy_Rand_Talo> #endmeeting

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:03:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:03:53</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Jan  6 19:03:52 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:03:53</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:04:32</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi everyone, welcome to the dev meeting.  Can we get a roll call of who's here today?
+<a name="l-5"></a><span class="tm">19:08:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok, well, while we wait for any latecomers to arrive, I'll start things off
+<a name="l-6"></a><span class="tm">19:08:31</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">35C3</span>
+<a name="l-7"></a><span class="tm">19:09:08</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> So, jonasbits , Cassini, and I represented Namecoin at 35C3.
+<a name="l-8"></a><span class="tm">19:10:26</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Generally I'd say it was a good success.  Probably fewer interesting conversations happened this year than at 34C3, but it was still totally worthwhile and lots of useful discussions were had.
+<a name="l-9"></a><span class="tm">19:12:03</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> As with last year, we were hosted by the Monero Assembly.  This year, Monero and RIAT organized a dedicated cluster and stage, called the Critical Decentralization Cluster.  (We weren't on the Chaos West Stage this year.)
+<a name="l-10"></a><span class="tm">19:14:03</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> I gave 3 talks on the Critical Decentralization Cluster Stage.  The first was a totally-improvised talk introducing Namecoin for people who didn't know anything about us (this was in a session at the beginning of the Congress where each of the Assemblies introduced themselves; RIAT and Monero very nicely gave Namecoin our own talk in this session even though we technically weren't our own Assembly).
+<a name="l-11"></a><span class="tm">19:14:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Based on feedback we got from audience members afterward, that talk was successful; audience members who didn't understand how Namecoin worked or what it could be used for had a good understanding after the talk
+<a name="l-12"></a><span class="tm">19:17:09</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> The 2nd talk I gave was on next-gen Namecoin TLS; among other things, this talk covered the various cool stuff we've been doing with name constraints + cross-signing for negative overrides, as well as name constrained Namecoin trust anchors for positive overrides.  It also included the big announcement of ncp11 (kudos to aerth for his work on that!)
+<a name="l-13"></a><span class="tm">19:17:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Right after the 2nd talk was a workshop where I demoed ncp11 in the real-world.  Only 2 people attended that workshop, but I think that actually worked out pretty well since they were able to ask lots of questions that way
+<a name="l-14"></a><span class="tm">19:18:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> The workshop was a success in both of the standard C3 ways: the code worked well enough that everyone could tell it was legit, and the attendees managed to find a couple of cool new bugs in the code that we get to have fun fixing now that 35C3 is over 🙂
+<a name="l-15"></a><span class="tm">19:19:24</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> (the 2nd talk and the associated workshop were on the 2nd day)
+<a name="l-16"></a><span class="tm">19:20:47</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> finally, on the 4th day, I gave a repeat talk of my 2nd talk, for a different audience (and also so that the AV team could have 2 copies of the video to pick from for the official recording).  I tend to think that the repeat of the talk went better than the first time I gave it
+<a name="l-17"></a><span class="tm">19:22:46</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> It was awesome to see the Monero and RIAT guys from last year again, as well as the new Monero people who weren't there last year (rehrar from Monero is a really cool guy, he did an awesome job MC'ing the stage)
+<a name="l-18"></a><span class="tm">19:23:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> As usual, I'm not going to publicly disclose whatever private conversations may have taken place there
+<a name="l-19"></a><span class="tm">19:26:02</span><span class="nk"> &lt;jonasbits&gt;</span> great
+<a name="l-20"></a><span class="tm">19:26:51</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> I have to admit that I'm quite happy that the mad dash to have a working demo of ncp11 both was successful (the code worked for the first time 3 days before 35C3, and the documentation was mostly written in the hour prior to my talk that preceded the workshop), and is now over (so I can focus on some other things that have piled up on my desk during December)
+<a name="l-21"></a><span class="tm">19:27:47</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Based on what we've heard from the Monero guys, the CCC liked having the Critical Decentralization Cluster there and they want us back next year
+<a name="l-22"></a><span class="tm">19:28:20</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> On that note, there are rumors circulating that 36C3 will be in Frankfurt (not Leipzig as it was for this year and last year)
+<a name="l-23"></a><span class="tm">19:28:38</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> We haven't been able to confirm those rumors, so take with a giant bucket of salt
+<a name="l-24"></a><span class="tm">19:29:12</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> But the rumor seems consistent with what we've heard about political issues involving Leipzig and antitrust issues
+<a name="l-25"></a><span class="tm">19:30:32</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Also, I should note that I had initialy planned to give a talk on YaCy/metrics for Namecoin, but I decided to push it back to 36C3 because the work simply wasn't mature enough
+<a name="l-26"></a><span class="tm">19:31:06</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> So hopefully that'll be one of several highly awesome talks we'll submit next year
+<a name="l-27"></a><span class="tm">19:32:17</span><span class="nk"> &lt;jonasbits&gt;</span> cool
+<a name="l-28"></a><span class="tm">19:32:41</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> interestingly, when I was flying back to the US, DHS stopped me in Frankfurt for what was described as a random security screening.  AFAICT they decided that I was going to get a security screening when they asked me how long I had been out of the US and I said it was about a week
+<a name="l-29"></a><span class="tm">19:33:33</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> luckily, the security screening didn't take long (they basically just swabbed my laptop and carry-on bag and clothes for explosives) and it didn't impact my ability to catch my flight
+<a name="l-30"></a><span class="tm">19:34:26</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> I'm not certain which DHS agency they were from (they just identified themselves as DHS), I assume they would be from CBP but hard to be sure
+<a name="l-31"></a><span class="tm">19:36:14</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> anyways, I think that's the full extent of what I was going to say aboutr 35C3... jonasbits is there anything you wanted to add?
+<a name="l-32"></a><span class="tm">19:47:34</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> okay, so meanwhile...
+<a name="l-33"></a><span class="tm">19:47:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> did you have an update for us on rbm stuff?
+<a name="l-34"></a><span class="tm">19:53:35</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> guess he isn't here at the moment.  Feel free to update us after the meeting
+<a name="l-35"></a><span class="tm">19:53:56</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Are there any things that anyone else wants to bring up before we close today's meeting?
+<a name="l-36"></a><span class="tm">19:57:45</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok, so I think we'll end the meeting here
+<a name="l-37"></a><span class="tm">19:57:49</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

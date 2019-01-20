@@ -1,0 +1,69 @@
+19:12:08 <Jeremy_Rand_Talo> #startmeeting
+19:12:09 <qpm> Meeting started Sun Sep 16 19:12:08 2018 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:12:09 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:12:37 <Jeremy_Rand_Talo> Hi everyone, sorry for the late start to the meeting.
+19:12:45 <Jeremy_Rand_Talo> Can we get a roll call of who's here today?
+19:14:10 <Jeremy_Rand_Talo> midnightmagic / brand0 / hl / jonasbits / tfreedman : hello!
+19:17:24 <jcarpenter2> hello
+19:17:48 <Jeremy_Rand_Talo> hello jcarpenter2 !
+19:18:06 <hl> Hi.
+19:18:36 <Jeremy_Rand_Talo> hi hl
+19:18:37 <Jeremy_Rand_Talo> So, first topic (for some definition of first)...
+19:18:56 <Jeremy_Rand_Talo> #topic TLS for Firefox
+19:19:50 <Jeremy_Rand_Talo> #info Right now, tlsrestrict_nss_tool uses certutil to talk to NSS... and Mozilla doesn't distribute certutil binaries for Windows
+19:20:10 <jcarpenter2> i don't really have much to say, i'm just here to express my support and gratitude for your development work on this decentralized blockchain-powered object naming system
+19:20:41 <Jeremy_Rand_Talo> jcarpenter2: thanks, always appreciated 🙂
+19:21:38 <Jeremy_Rand_Talo> #info I've finally gotten Tor's rbm descriptors to build certutil for Windows.  Turned out to be relatively straightforward; certutil is already built, they were just discarding it from the zip archive that's outputted
+19:22:28 <Jeremy_Rand_Talo> #info the Tor guys have given a Concept ACK on a patch that adds certutil binaries to their official zip archives.  I've sent them a patch for review, hopefully they'll be able to review it soon.
+19:23:15 <Jeremy_Rand_Talo> #info This means that, asuming they accept the patch, part of Namecoin's releases will be reproducibly built by the Tor community.  Yay!
+19:24:45 <Jeremy_Rand_Talo> #info Meanwhile, I might start experimenting with pkcs11 stuff soon.  Hoping to have something in that department ready for a talk at 35C3.
+19:25:16 <Jeremy_Rand_Talo> Any other TLS Firefox stuff we should discuss?
+19:32:25 <Jeremy_Rand_Talo> okay, so moving along...
+19:32:56 <Jeremy_Rand_Talo> #topic TLS for CryptoAPI
+19:33:30 <Jeremy_Rand_Talo> #info I tried out ECP (Enterprise Certificate Pinning).
+19:34:24 <Jeremy_Rand_Talo> #info ECP definitely appears to work as advertised when I tried it with Edge.  Was surprisingly easy to set up.
+19:35:33 <Jeremy_Rand_Talo> #info I haven't tried EMET yet.  Looks like EMET went EOL in July 2018, so I'm a bit skeptical that supporting EMET is a good idea.  On the other hand, EMET is supposed to work with older Windows releases, while ECP is Windows 10 only.
+19:35:50 <Jeremy_Rand_Talo> #info Interestingly, the EMET installer seems to be blacklisted by Windows 10.
+19:37:25 <Jeremy_Rand_Talo> #info I'm probably going to put EMET and ECP on the back burner for a few weeks so I can focus on other areas of dev.  If anyone wants to play with either of them, I'm happy to post my notes.
+19:38:43 <Jeremy_Rand_Talo> Anything else related to TLS for CryptoAPI that we should discuss?
+19:44:12 <Jeremy_Rand_Talo> alright, moving along...
+19:44:20 <Jeremy_Rand_Talo> #topic Funding
+19:45:47 <Jeremy_Rand_Talo> hl: last I heard, the NLnet milestone that you were working on (ncdns-nsis support for SPV) is completed and a claim is filed with NLnet.  So I guess we might want to figure out what the next NLnet milestone you'll be working on is?
+19:45:57 <hl> Jeremy_Rand_Talo: sure
+19:47:11 <Jeremy_Rand_Talo> hl: I don't actually have a copy of the NLnet MoU on my Talos... do you want me to walk over to my ThinkPad and check to see which milestones are assigned to you, or do you have a copy handy that you can look at?
+19:48:17 <Jeremy_Rand_Talo> hl: IIRC some of the milestones assigned to you relate to GNU/Linux packaging of various Namecoin components?  Can't remember off the top of my head which other milestones are assigned to you
+19:49:28 <hl> gimme a sec while I find it
+19:49:34 <Jeremy_Rand_Talo> ok
+19:53:52 <Jeremy_Rand_Talo> Relatedly, I think there are some reproducible builds related milestones that are assigned to Joseph; given that Joseph hasn't been available to work on Namecoin for quite a while, I'd be totally fine with re-assigning Joseph's milestones.  Seems like the reproducible builds of ncdns might mesh well with the GNU/Linux packaging milestones, especially since rbm can allegedly create deb and rpm packages
+19:53:52 <Jeremy_Rand_Talo> automatically
+20:03:26 <hl> Yeah, there's Linux packages here, though I recall you mentioning they were backups
+20:05:17 <Jeremy_Rand_Talo> hl: yeah, so the GNU/Linux package milestones are nominally backups.  I don't think I have any objection to upgrading them.  We can downgrade some other milestones accordingly.  (Not 100% sure which milestones we would downgrade, but yeah, shouldn't be a problem)
+20:05:40 <hl> Alright
+20:05:56 <hl> So basically, I'll look into Linux packaging or reproducible build milestones.
+20:07:35 <Jeremy_Rand_Talo> hl: cool.  From what I've gathered by playing with Tor's rbm stuff, it looks like reproducible builds of ncdns should be pretty easy.  Probably the best approach would be to import Tor's `tor-browser-build` repo as a Git submodule, and just add some project folders for the extra Go packages that we use
+20:07:50 <Jeremy_Rand_Talo> Or something similar
+20:09:17 <Jeremy_Rand_Talo> The Golang release would need to be updated, I think Tor is still using 1.8.3, while we require at least 1.10.0.  But I think that's just a matter of changing the tag name in the rbm config for Tor's go project.
+20:09:49 <Jeremy_Rand_Talo> (Maybe it would be a good idea to contribute a patch back to the Tor guys that upgrades Go for them too?)
+20:12:28 <hl> Yeah.
+20:15:01 <Jeremy_Rand_Talo> hl: regarding packaging, it would be awesome if we could actually get ncdns packaged in Debian officially.  Someone at 34C3 (who might be from a project starting with W) said that was a major feature he'd like to see in order to do Namecoin integration.  Ditto for ConsensusJ in Debian (although that's blocked by getting Namecoin's fork of ConsensusJ upstreamed, hopefully I'll get that upstreamed soon)
+20:15:53 <Jeremy_Rand_Talo> hl: NLnet doesn't care whether the packages are in Debian's repos, but would still be good to aim to get the Linux packages in a state where Debian repos would accept them
+20:16:05 <hl> Yeah. I'll keep that in mind.
+20:17:30 <Jeremy_Rand_Talo> okay, so summarizing for the minutes...
+20:18:37 <Jeremy_Rand_Talo> #action Now that hl's SPV ncdns bundling milestone is finished, hl will look into working on Linux packaging and reproducible build milestones for NLnet
+20:18:50 <Jeremy_Rand_Talo> okay cool.  Anything else we should talk about at the meeting today?
+20:19:33 <tfreedman[m]> uhhh
+20:20:03 <tfreedman[m]> not sure
+20:20:31 <tfreedman[m]> the only other thing I'd like to mention is that if you have time to work on stuff and are a developer, let me know
+20:20:55 <tfreedman[m]> there might be additional funding for some stuff, though I think Jeremy_Rand_Talos doesn't have time to do all of it
+20:21:31 <tfreedman[m]> though I don't have a complete list of 'things worth funding' at the moment
+20:21:48 <Jeremy_Rand_Talo> tfreedman: indeed.  (Feel free to use the # commands so that that ends up in the minutes 🙂 )
+20:25:32 <Jeremy_Rand_Talo> Eh, actually I'll do it, one sec
+20:26:21 <Jeremy_Rand_Talo> #help If you're a developer and have some time to work on Namecoin stuff, talk to tfreedman  -- there might be some funding available
+20:26:25 <Jeremy_Rand_Talo> there we go
+20:26:45 <Jeremy_Rand_Talo> anything else we should discuss today?
+20:29:01 <Jeremy_Rand_Talo> Actually, I should also note that...
+20:30:02 <Jeremy_Rand_Talo> #help Similarly, if you're a developer and have some time to work on Namecoin stuff, talk to Jeremy_Rand too.  We have some funding items from NLnet that would benefit from another developer.
+20:30:55 <Jeremy_Rand_Talo> Anyway... anything else we should discuss today?
+20:34:17 <midnightmagic> nothing here.
+20:35:15 <Jeremy_Rand_Talo> alright then.  Thanks for attending the meeting everyone!
+20:35:24 <Jeremy_Rand_Talo> #endmeeting

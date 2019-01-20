@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:12:08</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:12:09</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Sep 16 19:12:08 2018 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:12:09</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:12:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi everyone, sorry for the late start to the meeting.
+<a name="l-5"></a><span class="tm">19:12:45</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Can we get a roll call of who's here today?
+<a name="l-6"></a><span class="tm">19:14:10</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> midnightmagic / brand0 / hl / jonasbits / tfreedman : hello!
+<a name="l-7"></a><span class="tm">19:17:24</span><span class="nk"> &lt;jcarpenter2&gt;</span> hello
+<a name="l-8"></a><span class="tm">19:17:48</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> hello jcarpenter2 !
+<a name="l-9"></a><span class="tm">19:18:06</span><span class="nk"> &lt;hl&gt;</span> Hi.
+<a name="l-10"></a><span class="tm">19:18:36</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> hi hl
+<a name="l-11"></a><span class="tm">19:18:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> So, first topic (for some definition of first)...
+<a name="l-12"></a><span class="tm">19:18:56</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">TLS for Firefox</span>
+<a name="l-13"></a><span class="tm">19:19:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Right now, tlsrestrict_nss_tool uses certutil to talk to NSS... and Mozilla doesn't distribute certutil binaries for Windows</span>
+<a name="l-14"></a><span class="tm">19:20:10</span><span class="nk"> &lt;jcarpenter2&gt;</span> i don't really have much to say, i'm just here to express my support and gratitude for your development work on this decentralized blockchain-powered object naming system
+<a name="l-15"></a><span class="tm">19:20:41</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">jcarpenter2:</span> thanks, always appreciated 🙂
+<a name="l-16"></a><span class="tm">19:21:38</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've finally gotten Tor's rbm descriptors to build certutil for Windows.  Turned out to be relatively straightforward; certutil is already built, they were just discarding it from the zip archive that's outputted</span>
+<a name="l-17"></a><span class="tm">19:22:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">the Tor guys have given a Concept ACK on a patch that adds certutil binaries to their official zip archives.  I've sent them a patch for review, hopefully they'll be able to review it soon.</span>
+<a name="l-18"></a><span class="tm">19:23:15</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">This means that, asuming they accept the patch, part of Namecoin's releases will be reproducibly built by the Tor community.  Yay!</span>
+<a name="l-19"></a><span class="tm">19:24:45</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Meanwhile, I might start experimenting with pkcs11 stuff soon.  Hoping to have something in that department ready for a talk at 35C3.</span>
+<a name="l-20"></a><span class="tm">19:25:16</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Any other TLS Firefox stuff we should discuss?
+<a name="l-21"></a><span class="tm">19:32:25</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> okay, so moving along...
+<a name="l-22"></a><span class="tm">19:32:56</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">TLS for CryptoAPI</span>
+<a name="l-23"></a><span class="tm">19:33:30</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I tried out ECP (Enterprise Certificate Pinning).</span>
+<a name="l-24"></a><span class="tm">19:34:24</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">ECP definitely appears to work as advertised when I tried it with Edge.  Was surprisingly easy to set up.</span>
+<a name="l-25"></a><span class="tm">19:35:33</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I haven't tried EMET yet.  Looks like EMET went EOL in July 2018, so I'm a bit skeptical that supporting EMET is a good idea.  On the other hand, EMET is supposed to work with older Windows releases, while ECP is Windows 10 only.</span>
+<a name="l-26"></a><span class="tm">19:35:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Interestingly, the EMET installer seems to be blacklisted by Windows 10.</span>
+<a name="l-27"></a><span class="tm">19:37:25</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I'm probably going to put EMET and ECP on the back burner for a few weeks so I can focus on other areas of dev.  If anyone wants to play with either of them, I'm happy to post my notes.</span>
+<a name="l-28"></a><span class="tm">19:38:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anything else related to TLS for CryptoAPI that we should discuss?
+<a name="l-29"></a><span class="tm">19:44:12</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> alright, moving along...
+<a name="l-30"></a><span class="tm">19:44:20</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Funding</span>
+<a name="l-31"></a><span class="tm">19:45:47</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> last I heard, the NLnet milestone that you were working on (ncdns-nsis support for SPV) is completed and a claim is filed with NLnet.  So I guess we might want to figure out what the next NLnet milestone you'll be working on is?
+<a name="l-32"></a><span class="tm">19:45:57</span><span class="nk"> &lt;hl&gt;</span> <span class="hi">Jeremy_Rand_Talo:</span> sure
+<a name="l-33"></a><span class="tm">19:47:11</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> I don't actually have a copy of the NLnet MoU on my Talos... do you want me to walk over to my ThinkPad and check to see which milestones are assigned to you, or do you have a copy handy that you can look at?
+<a name="l-34"></a><span class="tm">19:48:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> IIRC some of the milestones assigned to you relate to GNU/Linux packaging of various Namecoin components?  Can't remember off the top of my head which other milestones are assigned to you
+<a name="l-35"></a><span class="tm">19:49:28</span><span class="nk"> &lt;hl&gt;</span> gimme a sec while I find it
+<a name="l-36"></a><span class="tm">19:49:34</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok
+<a name="l-37"></a><span class="tm">19:53:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Relatedly, I think there are some reproducible builds related milestones that are assigned to Joseph; given that Joseph hasn't been available to work on Namecoin for quite a while, I'd be totally fine with re-assigning Joseph's milestones.  Seems like the reproducible builds of ncdns might mesh well with the GNU/Linux packaging milestones, especially since rbm can allegedly create deb and rpm packages
+<a name="l-38"></a><span class="tm">19:53:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> automatically
+<a name="l-39"></a><span class="tm">20:03:26</span><span class="nk"> &lt;hl&gt;</span> Yeah, there's Linux packages here, though I recall you mentioning they were backups
+<a name="l-40"></a><span class="tm">20:05:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> yeah, so the GNU/Linux package milestones are nominally backups.  I don't think I have any objection to upgrading them.  We can downgrade some other milestones accordingly.  (Not 100% sure which milestones we would downgrade, but yeah, shouldn't be a problem)
+<a name="l-41"></a><span class="tm">20:05:40</span><span class="nk"> &lt;hl&gt;</span> Alright
+<a name="l-42"></a><span class="tm">20:05:56</span><span class="nk"> &lt;hl&gt;</span> So basically, I'll look into Linux packaging or reproducible build milestones.
+<a name="l-43"></a><span class="tm">20:07:35</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> cool.  From what I've gathered by playing with Tor's rbm stuff, it looks like reproducible builds of ncdns should be pretty easy.  Probably the best approach would be to import Tor's `tor-browser-build` repo as a Git submodule, and just add some project folders for the extra Go packages that we use
+<a name="l-44"></a><span class="tm">20:07:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Or something similar
+<a name="l-45"></a><span class="tm">20:09:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> The Golang release would need to be updated, I think Tor is still using 1.8.3, while we require at least 1.10.0.  But I think that's just a matter of changing the tag name in the rbm config for Tor's go project.
+<a name="l-46"></a><span class="tm">20:09:49</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> (Maybe it would be a good idea to contribute a patch back to the Tor guys that upgrades Go for them too?)
+<a name="l-47"></a><span class="tm">20:12:28</span><span class="nk"> &lt;hl&gt;</span> Yeah.
+<a name="l-48"></a><span class="tm">20:15:01</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> regarding packaging, it would be awesome if we could actually get ncdns packaged in Debian officially.  Someone at 34C3 (who might be from a project starting with W) said that was a major feature he'd like to see in order to do Namecoin integration.  Ditto for ConsensusJ in Debian (although that's blocked by getting Namecoin's fork of ConsensusJ upstreamed, hopefully I'll get that upstreamed soon)
+<a name="l-49"></a><span class="tm">20:15:53</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> NLnet doesn't care whether the packages are in Debian's repos, but would still be good to aim to get the Linux packages in a state where Debian repos would accept them
+<a name="l-50"></a><span class="tm">20:16:05</span><span class="nk"> &lt;hl&gt;</span> Yeah. I'll keep that in mind.
+<a name="l-51"></a><span class="tm">20:17:30</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> okay, so summarizing for the minutes...
+<a name="l-52"></a><span class="tm">20:18:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#action </span><span class="cmdline">Now that hl's SPV ncdns bundling milestone is finished, hl will look into working on Linux packaging and reproducible build milestones for NLnet</span>
+<a name="l-53"></a><span class="tm">20:18:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> okay cool.  Anything else we should talk about at the meeting today?
+<a name="l-54"></a><span class="tm">20:19:33</span><span class="nk"> &lt;tfreedman[m]&gt;</span> uhhh
+<a name="l-55"></a><span class="tm">20:20:03</span><span class="nk"> &lt;tfreedman[m]&gt;</span> not sure
+<a name="l-56"></a><span class="tm">20:20:31</span><span class="nk"> &lt;tfreedman[m]&gt;</span> the only other thing I'd like to mention is that if you have time to work on stuff and are a developer, let me know
+<a name="l-57"></a><span class="tm">20:20:55</span><span class="nk"> &lt;tfreedman[m]&gt;</span> there might be additional funding for some stuff, though I think Jeremy_Rand_Talos doesn't have time to do all of it
+<a name="l-58"></a><span class="tm">20:21:31</span><span class="nk"> &lt;tfreedman[m]&gt;</span> though I don't have a complete list of 'things worth funding' at the moment
+<a name="l-59"></a><span class="tm">20:21:48</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">tfreedman:</span> indeed.  (Feel free to use the # commands so that that ends up in the minutes 🙂 )
+<a name="l-60"></a><span class="tm">20:25:32</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Eh, actually I'll do it, one sec
+<a name="l-61"></a><span class="tm">20:26:21</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#help </span><span class="cmdline">If you're a developer and have some time to work on Namecoin stuff, talk to tfreedman  -- there might be some funding available</span>
+<a name="l-62"></a><span class="tm">20:26:25</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> there we go
+<a name="l-63"></a><span class="tm">20:26:45</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> anything else we should discuss today?
+<a name="l-64"></a><span class="tm">20:29:01</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Actually, I should also note that...
+<a name="l-65"></a><span class="tm">20:30:02</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#help </span><span class="cmdline">Similarly, if you're a developer and have some time to work on Namecoin stuff, talk to Jeremy_Rand too.  We have some funding items from NLnet that would benefit from another developer.</span>
+<a name="l-66"></a><span class="tm">20:30:55</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyway... anything else we should discuss today?
+<a name="l-67"></a><span class="tm">20:34:17</span><span class="nk"> &lt;midnightmagic&gt;</span> nothing here.
+<a name="l-68"></a><span class="tm">20:35:15</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> alright then.  Thanks for attending the meeting everyone!
+<a name="l-69"></a><span class="tm">20:35:24</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

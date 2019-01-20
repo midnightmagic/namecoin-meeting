@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand_Talo at 19:12:08 UTC
+(<a href="namecoin-dev.2018-09-16-19.12.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">TLS for Firefox</b> <span class="details">(<a href='namecoin-dev.2018-09-16-19.12.log.html#l-12'>Jeremy_Rand_Talo</a>, 19:18:56)</span>
+<ol type="a">
+  <li><span class="INFO">Right now, tlsrestrict_nss_tool uses certutil
+    to talk to NSS... and Mozilla doesn't distribute certutil binaries
+    for Windows</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-16-19.12.log.html#l-13'>Jeremy_Rand_Talo</a>,
+    19:19:50)</span></li>
+  <li><span class="INFO">I've finally gotten Tor's rbm descriptors to
+    build certutil for Windows.  Turned out to be relatively
+    straightforward; certutil is already built, they were just
+    discarding it from the zip archive that's outputted</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-09-16-19.12.log.html#l-16'>Jeremy_Rand_Talo</a>,
+    19:21:38)</span></li>
+  <li><span class="INFO">the Tor guys have given a Concept ACK on a
+    patch that adds certutil binaries to their official zip archives.
+    I've sent them a patch for review, hopefully they'll be able to
+    review it soon.</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-16-19.12.log.html#l-17'>Jeremy_Rand_Talo</a>,
+    19:22:28)</span></li>
+  <li><span class="INFO">This means that, asuming they accept the patch,
+    part of Namecoin's releases will be reproducibly built by the Tor
+    community.  Yay!</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-16-19.12.log.html#l-18'>Jeremy_Rand_Talo</a>,
+    19:23:15)</span></li>
+  <li><span class="INFO">Meanwhile, I might start experimenting with
+    pkcs11 stuff soon.  Hoping to have something in that department
+    ready for a talk at 35C3.</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-16-19.12.log.html#l-19'>Jeremy_Rand_Talo</a>,
+    19:24:45)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">TLS for CryptoAPI</b> <span class="details">(<a href='namecoin-dev.2018-09-16-19.12.log.html#l-22'>Jeremy_Rand_Talo</a>, 19:32:56)</span>
+<ol type="a">
+  <li><span class="INFO">I tried out ECP (Enterprise Certificate
+    Pinning).</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-16-19.12.log.html#l-23'>Jeremy_Rand_Talo</a>,
+    19:33:30)</span></li>
+  <li><span class="INFO">ECP definitely appears to work as advertised
+    when I tried it with Edge.  Was surprisingly easy to set up.</span>
+    <span class="details">(<a
+    href='namecoin-dev.2018-09-16-19.12.log.html#l-24'>Jeremy_Rand_Talo</a>,
+    19:34:24)</span></li>
+  <li><span class="INFO">I haven't tried EMET yet.  Looks like EMET went
+    EOL in July 2018, so I'm a bit skeptical that supporting EMET is a
+    good idea.  On the other hand, EMET is supposed to work with older
+    Windows releases, while ECP is Windows 10 only.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-09-16-19.12.log.html#l-25'>Jeremy_Rand_Talo</a>,
+    19:35:33)</span></li>
+  <li><span class="INFO">Interestingly, the EMET installer seems to be
+    blacklisted by Windows 10.</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-16-19.12.log.html#l-26'>Jeremy_Rand_Talo</a>,
+    19:35:50)</span></li>
+  <li><span class="INFO">I'm probably going to put EMET and ECP on the
+    back burner for a few weeks so I can focus on other areas of dev.
+    If anyone wants to play with either of them, I'm happy to post my
+    notes.</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-16-19.12.log.html#l-27'>Jeremy_Rand_Talo</a>,
+    19:37:25)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Funding</b> <span class="details">(<a href='namecoin-dev.2018-09-16-19.12.log.html#l-30'>Jeremy_Rand_Talo</a>, 19:44:20)</span>
+<ol type="a">
+  <li><i class="itemtype">ACTION</i>: <span class="ACTION">Now that hl's
+    SPV ncdns bundling milestone is finished, hl will look into working
+    on Linux packaging and reproducible build milestones for
+    NLnet</span> <span class="details">(<a
+    href='namecoin-dev.2018-09-16-19.12.log.html#l-52'>Jeremy_Rand_Talo</a>,
+    20:18:37)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">If you're a
+    developer and have some time to work on Namecoin stuff, talk to
+    tfreedman  -- there might be some funding available</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-09-16-19.12.log.html#l-61'>Jeremy_Rand_Talo</a>,
+    20:26:21)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">Similarly, if
+    you're a developer and have some time to work on Namecoin stuff,
+    talk to Jeremy_Rand too.  We have some funding items from NLnet that
+    would benefit from another developer.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2018-09-16-19.12.log.html#l-65'>Jeremy_Rand_Talo</a>,
+    20:30:02)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 20:35:24 UTC
+(<a href="namecoin-dev.2018-09-16-19.12.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>Now that hl's SPV ncdns bundling milestone is finished, hl will look into working on Linux packaging and reproducible build milestones for NLnet</li>
+</ol>
+<br><br>
+
+
+
+<h3>Action items, by person</h3>
+<ol>
+  <li> hl <ol>
+    <li>Now that hl's SPV ncdns bundling milestone is finished, hl will look into working on Linux packaging and reproducible build milestones for NLnet</li>
+  </ol></li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand_Talo (51)</li>
+  <li>hl (8)</li>
+  <li>tfreedman[m] (5)</li>
+  <li>qpm (2)</li>
+  <li>jcarpenter2 (2)</li>
+  <li>midnightmagic (1)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

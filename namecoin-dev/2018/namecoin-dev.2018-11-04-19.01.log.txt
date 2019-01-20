@@ -1,0 +1,13 @@
+19:01:18 <jonasbits> #startmeeting
+19:01:18 <qpm> Meeting started Sun Nov  4 19:01:18 2018 UTC.  The chair is jonasbits. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:01:18 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:02:11 <jonasbits> Hi everybody, who are attending?
+19:11:37 <jonasbits> dont be shy, im not a developer, so there is no need to have any specific skills to be involved in namecoin
+19:18:20 <jonasbits> #topic Electrum-NMC
+19:20:35 <jonasbits> I have been lurking in both channels and Electrum-NMC is looking real good, im not sure if the guy that runs a ElectrumX server have updated to include the new upstream features Jeremy worked on
+19:24:03 <jonasbits> Please feel free to add anything on this subject
+19:34:24 <jonasbits> moving on
+19:36:57 <jonasbits> #topic TLS and Namecoin
+19:40:33 <jonasbits> #info Jonasbits is reviewing the instructions to get NSS sqlite database (that firefox uses) to exclude .bit domains from the trust zone. I have some idea for clearer instructions, will leave them in PR 338
+19:50:22 <jonasbits> im thinking no one is here right now, so... closing in a bit
+20:00:24 <jonasbits> #endmeeting

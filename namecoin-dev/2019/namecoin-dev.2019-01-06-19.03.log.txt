@@ -1,0 +1,37 @@
+19:03:52 <Jeremy_Rand_Talo> #startmeeting
+19:03:53 <qpm> Meeting started Sun Jan  6 19:03:52 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:03:53 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:04:32 <Jeremy_Rand_Talo> Hi everyone, welcome to the dev meeting.  Can we get a roll call of who's here today?
+19:08:28 <Jeremy_Rand_Talo> ok, well, while we wait for any latecomers to arrive, I'll start things off
+19:08:31 <Jeremy_Rand_Talo> #topic 35C3
+19:09:08 <Jeremy_Rand_Talo> So, jonasbits , Cassini, and I represented Namecoin at 35C3.
+19:10:26 <Jeremy_Rand_Talo> Generally I'd say it was a good success.  Probably fewer interesting conversations happened this year than at 34C3, but it was still totally worthwhile and lots of useful discussions were had.
+19:12:03 <Jeremy_Rand_Talo> As with last year, we were hosted by the Monero Assembly.  This year, Monero and RIAT organized a dedicated cluster and stage, called the Critical Decentralization Cluster.  (We weren't on the Chaos West Stage this year.)
+19:14:03 <Jeremy_Rand_Talo> I gave 3 talks on the Critical Decentralization Cluster Stage.  The first was a totally-improvised talk introducing Namecoin for people who didn't know anything about us (this was in a session at the beginning of the Congress where each of the Assemblies introduced themselves; RIAT and Monero very nicely gave Namecoin our own talk in this session even though we technically weren't our own Assembly).
+19:14:50 <Jeremy_Rand_Talo> Based on feedback we got from audience members afterward, that talk was successful; audience members who didn't understand how Namecoin worked or what it could be used for had a good understanding after the talk
+19:17:09 <Jeremy_Rand_Talo> The 2nd talk I gave was on next-gen Namecoin TLS; among other things, this talk covered the various cool stuff we've been doing with name constraints + cross-signing for negative overrides, as well as name constrained Namecoin trust anchors for positive overrides.  It also included the big announcement of ncp11 (kudos to aerth for his work on that!)
+19:17:54 <Jeremy_Rand_Talo> Right after the 2nd talk was a workshop where I demoed ncp11 in the real-world.  Only 2 people attended that workshop, but I think that actually worked out pretty well since they were able to ask lots of questions that way
+19:18:52 <Jeremy_Rand_Talo> The workshop was a success in both of the standard C3 ways: the code worked well enough that everyone could tell it was legit, and the attendees managed to find a couple of cool new bugs in the code that we get to have fun fixing now that 35C3 is over 🙂
+19:19:24 <Jeremy_Rand_Talo> (the 2nd talk and the associated workshop were on the 2nd day)
+19:20:47 <Jeremy_Rand_Talo> finally, on the 4th day, I gave a repeat talk of my 2nd talk, for a different audience (and also so that the AV team could have 2 copies of the video to pick from for the official recording).  I tend to think that the repeat of the talk went better than the first time I gave it
+19:22:46 <Jeremy_Rand_Talo> It was awesome to see the Monero and RIAT guys from last year again, as well as the new Monero people who weren't there last year (rehrar from Monero is a really cool guy, he did an awesome job MC'ing the stage)
+19:23:43 <Jeremy_Rand_Talo> As usual, I'm not going to publicly disclose whatever private conversations may have taken place there
+19:26:02 <jonasbits> great
+19:26:51 <Jeremy_Rand_Talo> I have to admit that I'm quite happy that the mad dash to have a working demo of ncp11 both was successful (the code worked for the first time 3 days before 35C3, and the documentation was mostly written in the hour prior to my talk that preceded the workshop), and is now over (so I can focus on some other things that have piled up on my desk during December)
+19:27:47 <Jeremy_Rand_Talo> Based on what we've heard from the Monero guys, the CCC liked having the Critical Decentralization Cluster there and they want us back next year
+19:28:20 <Jeremy_Rand_Talo> On that note, there are rumors circulating that 36C3 will be in Frankfurt (not Leipzig as it was for this year and last year)
+19:28:38 <Jeremy_Rand_Talo> We haven't been able to confirm those rumors, so take with a giant bucket of salt
+19:29:12 <Jeremy_Rand_Talo> But the rumor seems consistent with what we've heard about political issues involving Leipzig and antitrust issues
+19:30:32 <Jeremy_Rand_Talo> Also, I should note that I had initialy planned to give a talk on YaCy/metrics for Namecoin, but I decided to push it back to 36C3 because the work simply wasn't mature enough
+19:31:06 <Jeremy_Rand_Talo> So hopefully that'll be one of several highly awesome talks we'll submit next year
+19:32:17 <jonasbits> cool
+19:32:41 <Jeremy_Rand_Talo> interestingly, when I was flying back to the US, DHS stopped me in Frankfurt for what was described as a random security screening.  AFAICT they decided that I was going to get a security screening when they asked me how long I had been out of the US and I said it was about a week
+19:33:33 <Jeremy_Rand_Talo> luckily, the security screening didn't take long (they basically just swabbed my laptop and carry-on bag and clothes for explosives) and it didn't impact my ability to catch my flight
+19:34:26 <Jeremy_Rand_Talo> I'm not certain which DHS agency they were from (they just identified themselves as DHS), I assume they would be from CBP but hard to be sure
+19:36:14 <Jeremy_Rand_Talo> anyways, I think that's the full extent of what I was going to say aboutr 35C3... jonasbits is there anything you wanted to add?
+19:47:34 <Jeremy_Rand_Talo> okay, so meanwhile...
+19:47:50 <Jeremy_Rand_Talo> hl: did you have an update for us on rbm stuff?
+19:53:35 <Jeremy_Rand_Talo> guess he isn't here at the moment.  Feel free to update us after the meeting
+19:53:56 <Jeremy_Rand_Talo> Are there any things that anyone else wants to bring up before we close today's meeting?
+19:57:45 <Jeremy_Rand_Talo> ok, so I think we'll end the meeting here
+19:57:49 <Jeremy_Rand_Talo> #endmeeting
