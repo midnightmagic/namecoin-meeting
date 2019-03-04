@@ -1,0 +1,393 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand_Talo at 19:00:37 UTC
+(<a href="namecoin-dev.2019-03-03-19.00.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li>
+<ol type="a">
+  <li><span class="INFO">This is the first Namecoin meeting that was
+    announced in advance via the Namecoin Meeting Reminder bot.  It
+    looks like it was successful, as we have more people here today than
+    at the previous few meetings.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-11'>Jeremy_Rand_Talo</a>,
+    19:03:36)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Electrum-NMC</b> <span class="details">(<a href='namecoin-dev.2019-03-03-19.00.log.html#l-15'>Jeremy_Rand_Talo</a>, 19:07:02)</span>
+<ol type="a">
+  <li><span class="INFO">As you may recall, I've been spending a lot of
+    time lately optimizing Electrum-NMC's usage of bandwidth.</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-16'>Jeremy_Rand_Talo</a>,
+    19:08:18)</span></li>
+  <li><span class="INFO">I'm happy to report that checkpointed AuxPoW
+    truncation is now supported by at least 2/3 of the public ElectrumX
+    Namecoin servers.  (This feature reduces the bandwidth usage for
+    block headers that are covered by a checkpoint, by around
+    90%.)</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-17'>Jeremy_Rand_Talo</a>,
+    19:09:55)</span></li>
+  <li><span class="INFO">The only public server that might not support
+    it at the moment is Richard Ulrich's server -- I can't verify
+    whether it supports it because his TLS cert expired.  I've emailed
+    him about it, hopefully he'll renew it soon.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-18'>Jeremy_Rand_Talo</a>,
+    19:10:44)</span></li>
+  <li><span class="INFO">Now that support for checkpointed AuxPoW
+    truncation is present on most of the servers, I've merged its
+    client-side code to Electrum-NMC master branch.  The next release of
+    Electrum-NMC will require support for it from any server it connects
+    to.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-19'>Jeremy_Rand_Talo</a>,
+    19:12:17)</span></li>
+  <li><span class="INFO">Meanwhile, the next major optimization is
+    cp_height support.  This feature uses Merkle proofs to allow
+    downloading a single checkpoint-covered header without needing any
+    of the surrounding headers.  It should eliminate nearly all of the
+    bandwidth usage for headers covered by a checkpoint.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-20'>Jeremy_Rand_Talo</a>,
+    19:14:32)</span></li>
+  <li><span class="INFO">cp_height is already supported in ElectrumX
+    (it's Neil's code); I've been working on adding it to upstream
+    Electrum, with the intent to merge it to Electrum-NMC after upstream
+    merges it.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-21'>Jeremy_Rand_Talo</a>,
+    19:15:30)</span></li>
+  <li><span class="INFO">Interestingly, Electron-Cash (an altcoin fork
+    of Electrum) already has cp_height support, so most of the work I'm
+    doing consists of porting Electron-Cash's support to
+    Electrum.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-22'>Jeremy_Rand_Talo</a>,
+    19:16:17)</span></li>
+  <li><span class="INFO">A cp_height PR was sent to upstream Electrum
+    for review, and I'm working my way through the review process.  I'm
+    hoping it'll be merged within a week.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-23'>Jeremy_Rand_Talo</a>,
+    19:17:11)</span></li>
+  <li><span class="INFO">After cp_height is merged, there are a few
+    other optimizations.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-24'>Jeremy_Rand_Talo</a>,
+    19:18:19)</span></li>
+  <li><span class="INFO">It turns out that Bitcoin and Namecoin block
+    headers have some redundant data.  Specifically, the `prev_hash`,
+    `bits`, and `parent_block_hash` fields can be inferred from nearby
+    data, so we can strip them from headers on the ElectrumX side and
+    reconstruct them on the Electrum-NMC side.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-25'>Jeremy_Rand_Talo</a>,
+    19:19:59)</span></li>
+  <li><span class="INFO">This saves 32 + 4 + 32 = 68 bytes per header,
+    which isn't an enormous savings but it's still useful.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-26'>Jeremy_Rand_Talo</a>,
+    19:21:00)</span></li>
+  <li><span class="INFO">I've implemented initial support for this
+    compression in ElectrumX; I still need to implement it for Electrum
+    and Electrum-NMC.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-27'>Jeremy_Rand_Talo</a>,
+    19:22:12)</span></li>
+  <li><span class="INFO">Neil is also playing around with making
+    Electrum's protocol use CBOR and/or DEFLATE rather than JSON with
+    hex-encoded binary data.  This should yield very nice
+    compression.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-28'>Jeremy_Rand_Talo</a>,
+    19:23:35)</span></li>
+  <li><span class="INFO">Finally, on the latency side of things rather
+    than bandwidth, there are a lot of round trips in Electrum-NMC's
+    name lookups, and this is kind of annoying.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-29'>Jeremy_Rand_Talo</a>,
+    19:25:42)</span></li>
+  <li><span class="INFO">It's bad enough that when accessed over Tor,
+    name lookups for names that use the `"import"` field actually end up
+    timing out with default DNS timeout settings.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-30'>Jeremy_Rand_Talo</a>,
+    19:25:53)</span></li>
+  <li><span class="INFO">I'm intending to add some protocol extensions
+    that allow us to decrease the number of round trips.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-31'>Jeremy_Rand_Talo</a>,
+    19:26:00)</span></li>
+  <li><span class="INFO">This seems to have come up on the Mozilla
+    Mailing List. It looks like Mozilla too is starting to make the move
+    to take out Public Key Pinning.
+    https://bugzilla.mozilla.org/show_bug.cgi?format=default&amp;id=1412438</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-47'>JollyRoger`</a>,
+    19:36:31)</span></li>
+  <li><span class="INFO">AFAIK that bug has been there for a while (I'm
+    on the CC list), and to my knowledge it won't (yet) remove preloaded
+    pins, it'll only remove the HTTP mechanism of setting pins.</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-49'>Jeremy_Rand_Talo</a>,
+    19:39:29)</span></li>
+  <li><span class="INFO">Assuming that they don't get rid of preloaded
+    pins, it's likely that this won't adversely impact our plans for
+    Firefox support for Namecoin TLS, since we're intending to set pins
+    via pkcs11, which presumably would be used for preloaded pins, not
+    just HTTP-set pins.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-50'>Jeremy_Rand_Talo</a>,
+    19:40:26)</span></li>
+  <li><span class="INFO">That said, it's definitely a good idea to keep
+    an eye on that bug.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-51'>Jeremy_Rand_Talo</a>,
+    19:41:14)</span></li>
+  <li><span class="INFO">If, for some reason, Mozilla indicates that
+    they want to get rid of preloaded pins, then we'll probably want to
+    start complaining loudly.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-52'>Jeremy_Rand_Talo</a>,
+    19:41:53)</span></li>
+  <li><span class="INFO">It should be noted that we have several
+    contacts at Mozilla, including both decentralized web people and a
+    privacy/security person, who may be able to escalate any relevant
+    issues that we bring up, should it be necessary.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-54'>Jeremy_Rand_Talo</a>,
+    19:43:48)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Debian packages</b> <span class="details">(<a href='namecoin-dev.2019-03-03-19.00.log.html#l-62'>Jeremy_Rand_Talo</a>, 19:51:14)</span>
+<ol type="a">
+  <li><span class="INFO">mhatta has submitted a Namecoin Core package to
+    Debian.
+    https://ftp-master.debian.org/new/namecoin_0.17.0~dfsg-1.html</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-63'>Jeremy_Rand_Talo</a>,
+    19:52:04)</span></li>
+  <li><span class="INFO">My understanding is that an ncdns package will
+    be coming shortly from him as well.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-65'>Jeremy_Rand_Talo</a>,
+    19:52:47)</span></li>
+  <li><span class="INFO">This raises questions about what other Namecoin
+    software we want to have packaged in Debian.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-66'>Jeremy_Rand_Talo</a>,
+    19:53:53)</span></li>
+  <li><span class="INFO">Anything based on Bitcoin Core is not likely to
+    migrate from Sid to Testing, because of the consensus safety
+    concerns that the Bitcoin Core devs have raised about most GNU/Linux
+    distros' packaging policies (including those of Debian).</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-67'>Jeremy_Rand_Talo</a>,
+    19:55:17)</span></li>
+  <li><span class="INFO">If ncdns's package has a Namecoin lookup client
+    as a dependency, then that means that ncdns can't migrate to Testing
+    either unless either ConsensusJ-Namecoin or Electrum-NMC gets
+    packaged.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-68'>Jeremy_Rand_Talo</a>,
+    19:56:04)</span></li>
+  <li><span class="INFO">Of the two, Electrum-NMC seems like the logical
+    priority, because Electrum is already packaged in Debian, and
+    Electrum-NMC's relationship with upstream is a lot more mature than
+    that of ConsensusJ-Namecoin.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-69'>Jeremy_Rand_Talo</a>,
+    19:57:16)</span></li>
+  <li><span class="INFO">NLnet has funding for up to 2 Namecoin
+    GNU/Linux packages.  My inclination is to award that funding to
+    mhatta for ncdns, and also for Electrum-NMC if mhatta is interested
+    in packaging it.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-70'>Jeremy_Rand_Talo</a>,
+    19:59:29)</span></li>
+  <li><span class="INFO">If additional funding is available from NMDF (I
+    need to check with Phelix and Daniel), I'd be in favor of funding
+    the packaging of various other Namecoin ecosystem software.</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-71'>Jeremy_Rand_Talo</a>,
+    20:01:13)</span></li>
+  <li><i class="itemtype">AGREED</i>: <span class="AGREED">Use NLnet
+    funds to cover ncdns and Electrum-NMC packages for Debian</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-83'>Jeremy_Rand_Talo</a>,
+    20:06:03)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Reproducible builds of ncdns</b> <span class="details">(<a href='namecoin-dev.2019-03-03-19.00.log.html#l-87'>Jeremy_Rand_Talo</a>, 20:11:35)</span>
+<ol type="a">
+  <li><i class="itemtype">AGREED</i>: <span class="AGREED">JollyRoger`
+    will try out hl's ncdns-repro repo</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-104'>Jeremy_Rand_Talo</a>,
+    20:30:31)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Namecoin T-Shirts</b> <span class="details">(<a href='namecoin-dev.2019-03-03-19.00.log.html#l-109'>Jeremy_Rand_Talo</a>, 20:32:30)</span>
+<ol type="a">
+  <li><span class="INFO">When I've been at conferences recently, people
+    seem to keep asking me if they can buy a Namecoin t-shirt like the
+    one I custom-printed for myself</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-110'>Jeremy_Rand_Talo</a>,
+    20:33:05)</span></li>
+  <li><span class="INFO">Which brings up the question of what vendor we
+    might want to use.  I used SpreadShirt to print mine, but they don't
+    accept Bitcoin and their website is generally hostile to Tor
+    Browser, so I'm hesitant to use them for official Namecoin
+    promotional purposes.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-111'>Jeremy_Rand_Talo</a>,
+    20:34:11)</span></li>
+  <li><span class="INFO">Coincidentally, when I was at 35C3 I met Diego
+    from Monero (he MC'ed the stage at our Cluster), and learned that he
+    runs a side business that sells t-shirts.
+    https://cyphermarket.com/</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-113'>Jeremy_Rand_Talo</a>,
+    20:35:23)</span></li>
+  <li><span class="INFO">My understanding is that they accept Bitcoin,
+    Monero, and credit cards, which pretty much covers all of our
+    potential audience.  Their website works fine for me over Tor,
+    though I haven't checked whether it needs JS for anything.</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-114'>Jeremy_Rand_Talo</a>,
+    20:36:43)</span></li>
+  <li><span class="INFO">Should we ask Diego about selling Namecoin
+    merchandise on Cypher Market?</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-115'>Jeremy_Rand_Talo</a>,
+    20:37:36)</span></li>
+  <li><i class="itemtype">AGREED</i>: <span class="AGREED">Jeremy will
+    talk to Diego about selling Namecoin merchandise on Cypher
+    Market</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-123'>Jeremy_Rand_Talo</a>,
+    20:50:51)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">YaCy</b> <span class="details">(<a href='namecoin-dev.2019-03-03-19.00.log.html#l-133'>Jeremy_Rand_Talo</a>, 21:08:06)</span>
+<ol type="a">
+  <li><span class="INFO">As you know, I presented a very rough
+    proof-of-concept of a Namecoin search engine (based on YaCy) at DWS
+    2018.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-134'>Jeremy_Rand_Talo</a>,
+    21:08:48)</span></li>
+  <li><span class="INFO">Since then, the topic has become more relevant,
+    because some clowns on Wikipedia have messed with Namecoin's page,
+    inserting false claims that Namecoin is only used by circa 20-30
+    websites.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-135'>Jeremy_Rand_Talo</a>,
+    21:09:57)</span></li>
+  <li><span class="INFO">The easiest way to counter that misinformation
+    is to get the search engine properly released</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-136'>Jeremy_Rand_Talo</a>,
+    21:10:18)</span></li>
+  <li><span class="INFO">So, I've started to get my YaCy-related ncdns
+    patches submitted as PR's, and I've also started improving the
+    documentation on how to set up a Namecoin search engine with
+    YaCy.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-138'>Jeremy_Rand_Talo</a>,
+    21:11:44)</span></li>
+  <li><span class="INFO">My Talos is currently running a YaCy node that
+    (I think) is seeding a non-darknet Namecoin index to the YaCy P2P
+    network.  In theory that means that anyone running YaCy on a
+    Namecoin-enabled system will be able to search for .bit
+    websites.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-139'>Jeremy_Rand_Talo</a>,
+    21:12:52)</span></li>
+  <li><span class="INFO">I've also asked anoa to write some helper
+    scripts to automate setting up such a node.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-140'>Jeremy_Rand_Talo</a>,
+    21:13:24)</span></li>
+  <li><span class="INFO">In the foreseeable future I'll also hopefully
+    get back to work on the darknet Namecoin indexes, specifically
+    ZeroNet</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-141'>Jeremy_Rand_Talo</a>,
+    21:13:57)</span></li>
+  <li><span class="INFO">Chromium should work on the Talos now, so the
+    ZeroNet indexing scripts I had on my ThinkPad should hopefully run
+    nearly unmodified on my Talos</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-142'>Jeremy_Rand_Talo</a>,
+    21:14:35)</span></li>
+  <li><span class="INFO">I'm aware that NMDF has some funding that's
+    earmarked for the YaCy work; I'd suggest awarding some of it to anoa
+    for whatever work he ends up doing in this department</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-03-19.00.log.html#l-143'>Jeremy_Rand_Talo</a>,
+    21:16:29)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 21:23:12 UTC
+(<a href="namecoin-dev.2019-03-03-19.00.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>(none)</li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand_Talo (93)</li>
+  <li>JollyRoger` (42)</li>
+  <li>somewhat[m] (10)</li>
+  <li>hl (7)</li>
+  <li>qpm (2)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand_Talo at 19:08:02 UTC
+(<a href="namecoin-dev.2019-02-03-19.08.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">Electrum-NMC</b> <span class="details">(<a href='namecoin-dev.2019-02-03-19.08.log.html#l-8'>Jeremy_Rand_Talo</a>, 19:15:22)</span>
+<ol type="a">
+  <li><span class="INFO">I've been spending most of my dev time in the
+    last week or so trying to optimize the bandwidth usage of
+    Electrum-NMC</span> <span class="details">(<a
+    href='namecoin-dev.2019-02-03-19.08.log.html#l-9'>Jeremy_Rand_Talo</a>,
+    19:15:58)</span></li>
+  <li><span class="INFO">AuxPoW truncation for block heights that are
+    covered by a checkpoint is merged to ElectrumX master branch; I'm
+    waiting for ElectrumX to tag a release, and then I'll pester the
+    server operators to upgrade and then I'll merge the change to
+    Electrum-NMC</span> <span class="details">(<a
+    href='namecoin-dev.2019-02-03-19.08.log.html#l-10'>Jeremy_Rand_Talo</a>,
+    19:17:19)</span></li>
+  <li><span class="INFO">I've also been talking with Neil from ElectrumX
+    about switching the Electrum protocol to CBOR rather than the
+    current JSON; he's interested in the possibility and he's already
+    started coding it.</span> <span class="details">(<a
+    href='namecoin-dev.2019-02-03-19.08.log.html#l-11'>Jeremy_Rand_Talo</a>,
+    19:18:11)</span></li>
+  <li><span class="INFO">One of the Electrum devs also pointed out that
+    Bitcoin block headers can be compressed (e.g. stripping out the
+    previous hash and bits fields); I might try to implement that
+    too</span> <span class="details">(<a
+    href='namecoin-dev.2019-02-03-19.08.log.html#l-12'>Jeremy_Rand_Talo</a>,
+    19:18:59)</span></li>
+  <li><span class="INFO">And I'm also halfway through porting
+    Electron-Cash's checkpoint code to Electrum; once that's finished,
+    looking up a name in a checkpointed height should use almost no
+    bandwidth</span> <span class="details">(<a
+    href='namecoin-dev.2019-02-03-19.08.log.html#l-13'>Jeremy_Rand_Talo</a>,
+    19:20:03)</span></li>
+  <li><span class="INFO">Also a new release of Electrum-NMC (v3.3.3.1)
+    is ready; binaries are uploaded and the release commit for
+    namecoin.org should be going live later today.  This release is the
+    first Windows-compatible release that supports name
+    operations.</span> <span class="details">(<a
+    href='namecoin-dev.2019-02-03-19.08.log.html#l-16'>Jeremy_Rand_Talo</a>,
+    19:22:43)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Public Relations</b> <span class="details">(<a href='namecoin-dev.2019-02-03-19.08.log.html#l-18'>Jeremy_Rand_Talo</a>, 19:23:19)</span>
+<ol type="a">
+  <li><span class="INFO">I posted the video/transcript/report/slides
+    from IGF 2018 on Namecoin.org</span> <span class="details">(<a
+    href='namecoin-dev.2019-02-03-19.08.log.html#l-19'>Jeremy_Rand_Talo</a>,
+    19:23:56)</span></li>
+  <li><span class="INFO">I also made an initial attempt to contact one
+    of the contributors to the Wikipedia article on Namecoin, to report
+    a misreporting of the results of the crappy Princeton study.  No
+    answer yet.</span> <span class="details">(<a
+    href='namecoin-dev.2019-02-03-19.08.log.html#l-20'>Jeremy_Rand_Talo</a>,
+    19:25:27)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Meetings</b> <span class="details">(<a href='namecoin-dev.2019-02-03-19.08.log.html#l-27'>Jeremy_Rand_Talo</a>, 19:55:28)</span>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 20:02:36 UTC
+(<a href="namecoin-dev.2019-02-03-19.08.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>(none)</li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand_Talo (28)</li>
+  <li>JollyRoger` (5)</li>
+  <li>qpm (2)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

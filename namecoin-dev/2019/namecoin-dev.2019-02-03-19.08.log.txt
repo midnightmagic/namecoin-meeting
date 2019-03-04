@@ -1,0 +1,35 @@
+19:08:02 <Jeremy_Rand_Talo> #startmeeting
+19:08:02 <qpm> Meeting started Sun Feb  3 19:08:02 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:08:02 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:08:32 <Jeremy_Rand_Talo> Hey everyone, sorry for the late start today, welcome to the meeting.
+19:08:44 <Jeremy_Rand_Talo> Can we get a roll call of who's here today?
+19:14:37 <Jeremy_Rand_Talo> hmm, maybe just me here today
+19:14:55 <Jeremy_Rand_Talo> well, let's get started and we'll see if anyone joins the meeting
+19:15:22 <Jeremy_Rand_Talo> #topic Electrum-NMC
+19:15:58 <Jeremy_Rand_Talo> #info I've been spending most of my dev time in the last week or so trying to optimize the bandwidth usage of Electrum-NMC
+19:17:19 <Jeremy_Rand_Talo> #info AuxPoW truncation for block heights that are covered by a checkpoint is merged to ElectrumX master branch; I'm waiting for ElectrumX to tag a release, and then I'll pester the server operators to upgrade and then I'll merge the change to Electrum-NMC
+19:18:11 <Jeremy_Rand_Talo> #info I've also been talking with Neil from ElectrumX about switching the Electrum protocol to CBOR rather than the current JSON; he's interested in the possibility and he's already started coding it.
+19:18:59 <Jeremy_Rand_Talo> #info One of the Electrum devs also pointed out that Bitcoin block headers can be compressed (e.g. stripping out the previous hash and bits fields); I might try to implement that too
+19:20:03 <Jeremy_Rand_Talo> #info And I'm also halfway through porting Electron-Cash's checkpoint code to Electrum; once that's finished, looking up a name in a checkpointed height should use almost no bandwidth
+19:21:28 <Jeremy_Rand_Talo> Moving on...
+19:21:37 <Jeremy_Rand_Talo> oh wait
+19:22:43 <Jeremy_Rand_Talo> #info Also a new release of Electrum-NMC (v3.3.3.1) is ready; binaries are uploaded and the release commit for namecoin.org should be going live later today.  This release is the first Windows-compatible release that supports name operations.
+19:23:12 <Jeremy_Rand_Talo> okay, now moving on...
+19:23:19 <Jeremy_Rand_Talo> #topic Public Relations
+19:23:56 <Jeremy_Rand_Talo> #info I posted the video/transcript/report/slides from IGF 2018 on Namecoin.org
+19:25:27 <Jeremy_Rand_Talo> #info I also made an initial attempt to contact one of the contributors to the Wikipedia article on Namecoin, to report a misreporting of the results of the crappy Princeton study.  No answer yet.
+19:26:07 <Jeremy_Rand_Talo> That's all I was going to cover I think... anyone else here and want to cover anything?
+19:43:02 <JollyRoger`> Ahoy Jeremy_Rand_Talo!
+19:43:15 <Jeremy_Rand_Talo> oh hey JollyRoger`
+19:43:35 <JollyRoger`> I don't think I had anything to contribute but... I wanted to listen in.
+19:43:46 <Jeremy_Rand_Talo> ok
+19:55:05 <Jeremy_Rand_Talo> well, one other thing
+19:55:28 <Jeremy_Rand_Talo> #topic Meetings
+19:56:20 <Jeremy_Rand_Talo> I'm thinking I'm going to try to set up a Matrix bot that automatically notifies the channel when meetings are coming up.  Because it seems I'm really bad at remembering to notify everyone ahead of time, and then most people don't show up
+19:57:04 <Jeremy_Rand_Talo> Looks like it should be easy to do via a combination of KAlarm and https://gitlab.com/meutraa/mm/tree/master (just make KAlarm run a terminal command that echos the notification to a pipe)
+19:57:13 <JollyRoger`> Oh hey that's a great idea.
+19:58:02 <JollyRoger`> I keep forgetting when one is going on and then sometimes I don't realize that the computer is calling me, I really like the idea of a meeting bot that sends out notifications ahead of time.
+19:58:40 <Jeremy_Rand_Talo> yeah
+20:01:10 <JollyRoger`> Yarr harr!
+20:02:34 <Jeremy_Rand_Talo> Anyway, with that, I guess we'll close today's meeting.  Cheers!
+20:02:36 <Jeremy_Rand_Talo> #endmeeting

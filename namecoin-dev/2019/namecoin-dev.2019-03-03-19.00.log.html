@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:00:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:00:37</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Mar  3 19:00:37 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:00:37</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:00:48</span><span class="nk"> &lt;JollyRoger`&gt;</span> Ahoy! Present and Accounted for, Cap'n!
+<a name="l-5"></a><span class="tm">19:01:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hey everyone, welcome to the meeting
+<a name="l-6"></a><span class="tm">19:01:53</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Can we get a roll call of who's here today?
+<a name="l-7"></a><span class="tm">19:02:01 </span><span class="nka">* JollyRoger`</span> <span class="ac">salutes.</span>
+<a name="l-8"></a><span class="tm">19:02:02</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi JollyRoger` !
+<a name="l-9"></a><span class="tm">19:02:02</span><span class="nk"> &lt;hl&gt;</span> Hi.
+<a name="l-10"></a><span class="tm">19:02:12</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi hl
+<a name="l-11"></a><span class="tm">19:03:36</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">This is the first Namecoin meeting that was announced in advance via the Namecoin Meeting Reminder bot.  It looks like it was successful, as we have more people here today than at the previous few meetings.</span>
+<a name="l-12"></a><span class="tm">19:04:58</span><span class="nk"> &lt;JollyRoger`&gt;</span> Yarr, I vote we keep it up!
+<a name="l-13"></a><span class="tm">19:06:01</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> I concur.  Also it's a really fun usage of a Talos II VM -- since I have a Talos II, might as well use it for as much stuff as possible.
+<a name="l-14"></a><span class="tm">19:06:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Okay, so, first topic is...
+<a name="l-15"></a><span class="tm">19:07:02</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Electrum-NMC</span>
+<a name="l-16"></a><span class="tm">19:08:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">As you may recall, I've been spending a lot of time lately optimizing Electrum-NMC's usage of bandwidth.</span>
+<a name="l-17"></a><span class="tm">19:09:55</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I'm happy to report that checkpointed AuxPoW truncation is now supported by at least 2/3 of the public ElectrumX Namecoin servers.  (This feature reduces the bandwidth usage for block headers that are covered by a checkpoint, by around 90%.)</span>
+<a name="l-18"></a><span class="tm">19:10:44</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">The only public server that might not support it at the moment is Richard Ulrich's server -- I can't verify whether it supports it because his TLS cert expired.  I've emailed him about it, hopefully he'll renew it soon.</span>
+<a name="l-19"></a><span class="tm">19:12:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Now that support for checkpointed AuxPoW truncation is present on most of the servers, I've merged its client-side code to Electrum-NMC master branch.  The next release of Electrum-NMC will require support for it from any server it connects to.</span>
+<a name="l-20"></a><span class="tm">19:14:32</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Meanwhile, the next major optimization is cp_height support.  This feature uses Merkle proofs to allow downloading a single checkpoint-covered header without needing any of the surrounding headers.  It should eliminate nearly all of the bandwidth usage for headers covered by a checkpoint.</span>
+<a name="l-21"></a><span class="tm">19:15:30</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">cp_height is already supported in ElectrumX (it's Neil's code); I've been working on adding it to upstream Electrum, with the intent to merge it to Electrum-NMC after upstream merges it.</span>
+<a name="l-22"></a><span class="tm">19:16:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Interestingly, Electron-Cash (an altcoin fork of Electrum) already has cp_height support, so most of the work I'm doing consists of porting Electron-Cash's support to Electrum.</span>
+<a name="l-23"></a><span class="tm">19:17:11</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">A cp_height PR was sent to upstream Electrum for review, and I'm working my way through the review process.  I'm hoping it'll be merged within a week.</span>
+<a name="l-24"></a><span class="tm">19:18:19</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">After cp_height is merged, there are a few other optimizations.</span>
+<a name="l-25"></a><span class="tm">19:19:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">It turns out that Bitcoin and Namecoin block headers have some redundant data.  Specifically, the `prev_hash`, `bits`, and `parent_block_hash` fields can be inferred from nearby data, so we can strip them from headers on the ElectrumX side and reconstruct them on the Electrum-NMC side.</span>
+<a name="l-26"></a><span class="tm">19:21:00</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">This saves 32 + 4 + 32 = 68 bytes per header, which isn't an enormous savings but it's still useful.</span>
+<a name="l-27"></a><span class="tm">19:22:12</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've implemented initial support for this compression in ElectrumX; I still need to implement it for Electrum and Electrum-NMC.</span>
+<a name="l-28"></a><span class="tm">19:23:35</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Neil is also playing around with making Electrum's protocol use CBOR and/or DEFLATE rather than JSON with hex-encoded binary data.  This should yield very nice compression.</span>
+<a name="l-29"></a><span class="tm">19:25:42</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Finally, on the latency side of things rather than bandwidth, there are a lot of round trips in Electrum-NMC's name lookups, and this is kind of annoying.</span>
+<a name="l-30"></a><span class="tm">19:25:53</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">It's bad enough that when accessed over Tor, name lookups for names that use the `"import"` field actually end up timing out with default DNS timeout settings.</span>
+<a name="l-31"></a><span class="tm">19:26:00</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I'm intending to add some protocol extensions that allow us to decrease the number of round trips.</span>
+<a name="l-32"></a><span class="tm">19:27:09</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> So, that's what's been happening lately in Electrum-NMC land.  Anyone have comments / questions about this or any other Electrum-NMC related things?
+<a name="l-33"></a><span class="tm">19:28:09</span><span class="nk"> &lt;JollyRoger`&gt;</span> Not I, not at this moment!
+<a name="l-34"></a><span class="tm">19:28:33</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">JollyRoger`:</span> feel free to make your comments in this channel rather than in #namecoin 🙂
+<a name="l-35"></a><span class="tm">19:28:41</span><span class="nk"> &lt;JollyRoger`&gt;</span> Oh ah! Thanks :)
+<a name="l-36"></a><span class="tm">19:29:46</span><span class="nk"> &lt;JollyRoger`&gt;</span> I don't have anything for Electrum-NMC at this moment yet, but I do have something for next unless you've got something more pressing...?
+<a name="l-37"></a><span class="tm">19:29:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">JollyRoger`:</span> regarding the "Electron-Cash" name, it's not related to the Chromium thingy.  It's just an altcoin fork of Electrum.  I'm not sure why they changed the name.
+<a name="l-38"></a><span class="tm">19:30:00</span><span class="nk"> &lt;JollyRoger`&gt;</span> Whew!
+<a name="l-39"></a><span class="tm">19:31:04</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">JollyRoger`:</span> sure, feel free to bring something up.  Use the #topic command to let the meeting bot know that the topic has changed from Electrum-NMC to something else.
+<a name="l-40"></a><span class="tm">19:31:33</span><span class="nk"> &lt;JollyRoger`&gt;</span> Okay!
+<a name="l-41"></a><span class="tm">19:32:00</span><span class="nk"> &lt;JollyRoger`&gt;</span> Uh... have we got a topic for the status of HTTP Public Key Pinning?
+<a name="l-42"></a><span class="tm">19:33:03</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">JollyRoger`:</span> just make one up.  The meeting bot considers topics to be arbitrary strings, they don't have to be used consistently from meeting to meeting
+<a name="l-43"></a><span class="tm">19:33:25</span><span class="nk"> &lt;JollyRoger`&gt;</span> <span class="topic">#topic </span><span class="topicline">HTTP Public Key Pinning</span>
+<a name="l-44"></a><span class="tm">19:34:25</span><span class="nk"> &lt;JollyRoger`&gt;</span> # info This seems to have come up on the Mozilla Mailing List. It looks like Mozilla too is starting to make the move to take out Public Key Pinning. https://bugzilla.mozilla.org/show_bug.cgi?format=default&amp;id=1412438
+<a name="l-45"></a><span class="tm">19:36:19</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">JollyRoger`:</span> I think the "#" and the "info" are supposed to be next to each other, without a space, can you repost that message without the space so that the meeting bot notices it?
+<a name="l-46"></a><span class="tm">19:36:25</span><span class="nk"> &lt;JollyRoger`&gt;</span> Whoops!
+<a name="l-47"></a><span class="tm">19:36:31</span><span class="nk"> &lt;JollyRoger`&gt;</span> <span class="cmd">#info </span><span class="cmdline">This seems to have come up on the Mozilla Mailing List. It looks like Mozilla too is starting to make the move to take out Public Key Pinning. https://bugzilla.mozilla.org/show_bug.cgi?format=default&amp;id=1412438</span>
+<a name="l-48"></a><span class="tm">19:37:00</span><span class="nk"> &lt;JollyRoger`&gt;</span> This came up a lot faster than I thought it would, almost hot off the heels of Chrome doing it.
+<a name="l-49"></a><span class="tm">19:39:29</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">AFAIK that bug has been there for a while (I'm on the CC list), and to my knowledge it won't (yet) remove preloaded pins, it'll only remove the HTTP mechanism of setting pins.</span>
+<a name="l-50"></a><span class="tm">19:40:26</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Assuming that they don't get rid of preloaded pins, it's likely that this won't adversely impact our plans for Firefox support for Namecoin TLS, since we're intending to set pins via pkcs11, which presumably would be used for preloaded pins, not just HTTP-set pins.</span>
+<a name="l-51"></a><span class="tm">19:41:14</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">That said, it's definitely a good idea to keep an eye on that bug.</span>
+<a name="l-52"></a><span class="tm">19:41:53</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">If, for some reason, Mozilla indicates that they want to get rid of preloaded pins, then we'll probably want to start complaining loudly.</span>
+<a name="l-53"></a><span class="tm">19:43:03</span><span class="nk"> &lt;JollyRoger`&gt;</span> Okay!
+<a name="l-54"></a><span class="tm">19:43:48</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">It should be noted that we have several contacts at Mozilla, including both decentralized web people and a privacy/security person, who may be able to escalate any relevant issues that we bring up, should it be necessary.</span>
+<a name="l-55"></a><span class="tm">19:44:35</span><span class="nk"> &lt;JollyRoger`&gt;</span> Whew. What should we do about the depreciation of pinning? Start writing in, reach out to the developers...?
+<a name="l-56"></a><span class="tm">19:46:38</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">JollyRoger`:</span> I mean, if they're just removing HPKP but preloaded pins are staying in place (which sounds like what's most likely right now), then I don't think any action is necessary from Namecoin's end.  HPKP is a cool feature for power users but the Chromium devs are probably right that it's a substantial footgun that's too risky for mainstream usage.
+<a name="l-57"></a><span class="tm">19:47:49</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> The Chromium devs are, of course, full of crap when they claim that CT is an adequate replacement for preloaded pins, but I'm not aware of any similar claims from Mozilla
+<a name="l-58"></a><span class="tm">19:48:35</span><span class="nk"> &lt;JollyRoger`&gt;</span> Whew.
+<a name="l-59"></a><span class="tm">19:50:01</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">JollyRoger`:</span> are we ready to switch topics, or was there something else related to HPKP that you wanted to say?
+<a name="l-60"></a><span class="tm">19:50:24</span><span class="nk"> &lt;JollyRoger`&gt;</span> I think that's it. I was just wondering what to do -- as a fan and supporter -- in the event this does come to pass.
+<a name="l-61"></a><span class="tm">19:50:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> cool
+<a name="l-62"></a><span class="tm">19:51:14</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Debian packages</span>
+<a name="l-63"></a><span class="tm">19:52:04</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">mhatta has submitted a Namecoin Core package to Debian.  https://ftp-master.debian.org/new/namecoin_0.17.0~dfsg-1.html</span>
+<a name="l-64"></a><span class="tm">19:52:21</span><span class="nk"> &lt;JollyRoger`&gt;</span> \o/ Wow!
+<a name="l-65"></a><span class="tm">19:52:47</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">My understanding is that an ncdns package will be coming shortly from him as well.</span>
+<a name="l-66"></a><span class="tm">19:53:53</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">This raises questions about what other Namecoin software we want to have packaged in Debian.</span>
+<a name="l-67"></a><span class="tm">19:55:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Anything based on Bitcoin Core is not likely to migrate from Sid to Testing, because of the consensus safety concerns that the Bitcoin Core devs have raised about most GNU/Linux distros' packaging policies (including those of Debian).</span>
+<a name="l-68"></a><span class="tm">19:56:04</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">If ncdns's package has a Namecoin lookup client as a dependency, then that means that ncdns can't migrate to Testing either unless either ConsensusJ-Namecoin or Electrum-NMC gets packaged.</span>
+<a name="l-69"></a><span class="tm">19:57:16</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Of the two, Electrum-NMC seems like the logical priority, because Electrum is already packaged in Debian, and Electrum-NMC's relationship with upstream is a lot more mature than that of ConsensusJ-Namecoin.</span>
+<a name="l-70"></a><span class="tm">19:59:29</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">NLnet has funding for up to 2 Namecoin GNU/Linux packages.  My inclination is to award that funding to mhatta for ncdns, and also for Electrum-NMC if mhatta is interested in packaging it.</span>
+<a name="l-71"></a><span class="tm">20:01:13</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">If additional funding is available from NMDF (I need to check with Phelix and Daniel), I'd be in favor of funding the packaging of various other Namecoin ecosystem software.</span>
+<a name="l-72"></a><span class="tm">20:02:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> what's your take?  Is it reasonable to pick ncdns and Electrum-NMC as the 2 Namecoin Debian packages to fund via NLnet?
+<a name="l-73"></a><span class="tm">20:02:32</span><span class="nk"> &lt;hl&gt;</span> <span class="hi">Jeremy_Rand_Talo:</span> Sounds reasonable to me.
+<a name="l-74"></a><span class="tm">20:02:48</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyone else have opinions on this?
+<a name="l-75"></a><span class="tm">20:02:57</span><span class="nk"> &lt;JollyRoger`&gt;</span> Not I, not yet.
+<a name="l-76"></a><span class="tm">20:03:10</span><span class="nk"> &lt;somewhat[m]&gt;</span> what is nmdf?
+<a name="l-77"></a><span class="tm">20:03:14</span><span class="nk"> &lt;JollyRoger`&gt;</span> I'm really glad to see that this is making it into Debian packages though!
+<a name="l-78"></a><span class="tm">20:03:19</span><span class="nk"> &lt;somewhat[m]&gt;</span> and hello!
+<a name="l-79"></a><span class="tm">20:03:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">somewhat:</span> Namecoin Marketing and Development Fund; it's the fund where BTC and NMC donations on https://www.namecoin.org go
+<a name="l-80"></a><span class="tm">20:04:05</span><span class="nk"> &lt;somewhat[m]&gt;</span> noted and apologies
+<a name="l-81"></a><span class="tm">20:04:06</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">somewhat:</span> hi, welcome to the meeting!  🙂
+<a name="l-82"></a><span class="tm">20:05:39</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Okay, sounds like we're in agreement...
+<a name="l-83"></a><span class="tm">20:06:03</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#agreed </span><span class="cmdline">Use NLnet funds to cover ncdns and Electrum-NMC packages for Debian</span>
+<a name="l-84"></a><span class="tm">20:06:45</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> anyone have any other comments about Debian packages before we move onto the next topic?
+<a name="l-85"></a><span class="tm">20:07:09</span><span class="nk"> &lt;JollyRoger`&gt;</span> Not I!
+<a name="l-86"></a><span class="tm">20:11:21</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok, next topic...
+<a name="l-87"></a><span class="tm">20:11:35</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Reproducible builds of ncdns</span>
+<a name="l-88"></a><span class="tm">20:12:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> I understand that you've been working on some rbm-related stuff for ncdns?  Can you let us know what the status is, and what we can do to help?
+<a name="l-89"></a><span class="tm">20:12:58</span><span class="nk"> &lt;hl&gt;</span> <span class="hi">Jeremy_Rand_Talo:</span> First draft is still awaiting your review
+<a name="l-90"></a><span class="tm">20:16:08</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> ok, that's what I thought.  I unfortunately haven't yet had time to review it... is there anything anyone else here can do to test/review while we're waiting for me to look at it?
+<a name="l-91"></a><span class="tm">20:17:03</span><span class="nk"> &lt;hl&gt;</span> <span class="hi">Jeremy_Rand_Talo:</span> I've made the repository public: https://github.com/hlandau/ncdns-repro  if anyone wants to try using it.
+<a name="l-92"></a><span class="tm">20:18:26</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">JollyRoger`:</span> since you were planning to try building Tor Browser, maybe you'd also like to try hl's repo once you get your Tor Browser build setup working?
+<a name="l-93"></a><span class="tm">20:27:29</span><span class="nk"> &lt;JollyRoger`&gt;</span> Definitely!
+<a name="l-94"></a><span class="tm">20:27:34</span><span class="nk"> &lt;JollyRoger`&gt;</span> Well...
+<a name="l-95"></a><span class="tm">20:27:43</span><span class="nk"> &lt;JollyRoger`&gt;</span> Not on the Talos, sadly.
+<a name="l-96"></a><span class="tm">20:27:51</span><span class="nk"> &lt;JollyRoger`&gt;</span> I've only got it for my crummy old x86 machine.
+<a name="l-97"></a><span class="tm">20:28:12</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">JollyRoger`:</span> yeah, I wouldn't expect this to run on ppc64 yet.
+<a name="l-98"></a><span class="tm">20:28:26</span><span class="nk"> &lt;JollyRoger`&gt;</span> (Sorry about that, had to step out for a sec)
+<a name="l-99"></a><span class="tm">20:28:34</span><span class="nk"> &lt;JollyRoger`&gt;</span> Sure. I can try it now if you like.
+<a name="l-100"></a><span class="tm">20:29:34</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> (hopefully we'll get ppc64 build machine support added to upstream Tor sometime, at which point ncdns-repro should be able to merge it as well... but that's not happening immediately)
+<a name="l-101"></a><span class="tm">20:29:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">JollyRoger`:</span> yeah sure, feel free to try it out and let us know how it goes
+<a name="l-102"></a><span class="tm">20:29:59</span><span class="nk"> &lt;JollyRoger`&gt;</span> Got it. Fingers crossed!
+<a name="l-103"></a><span class="tm">20:30:23</span><span class="nk"> &lt;JollyRoger`&gt;</span> Okay! I might need some help getting it to work, but I can set aside time next weekend.
+<a name="l-104"></a><span class="tm">20:30:31</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#agreed </span><span class="cmdline">JollyRoger` will try out hl's ncdns-repro repo</span>
+<a name="l-105"></a><span class="tm">20:30:45</span><span class="nk"> &lt;JollyRoger`&gt;</span> \o/ arr!
+<a name="l-106"></a><span class="tm">20:30:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> anything else about ncdns-repro we should discuss before we move onto the next topic?
+<a name="l-107"></a><span class="tm">20:31:44</span><span class="nk"> &lt;hl&gt;</span> I don't think so.
+<a name="l-108"></a><span class="tm">20:32:11</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok then, next topic...
+<a name="l-109"></a><span class="tm">20:32:30</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Namecoin T-Shirts</span>
+<a name="l-110"></a><span class="tm">20:33:05</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">When I've been at conferences recently, people seem to keep asking me if they can buy a Namecoin t-shirt like the one I custom-printed for myself</span>
+<a name="l-111"></a><span class="tm">20:34:11</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Which brings up the question of what vendor we might want to use.  I used SpreadShirt to print mine, but they don't accept Bitcoin and their website is generally hostile to Tor Browser, so I'm hesitant to use them for official Namecoin promotional purposes.</span>
+<a name="l-112"></a><span class="tm">20:34:18</span><span class="nk"> &lt;JollyRoger`&gt;</span> Oh :(.
+<a name="l-113"></a><span class="tm">20:35:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Coincidentally, when I was at 35C3 I met Diego from Monero (he MC'ed the stage at our Cluster), and learned that he runs a side business that sells t-shirts.  https://cyphermarket.com/</span>
+<a name="l-114"></a><span class="tm">20:36:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">My understanding is that they accept Bitcoin, Monero, and credit cards, which pretty much covers all of our potential audience.  Their website works fine for me over Tor, though I haven't checked whether it needs JS for anything.</span>
+<a name="l-115"></a><span class="tm">20:37:36</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Should we ask Diego about selling Namecoin merchandise on Cypher Market?</span>
+<a name="l-116"></a><span class="tm">20:45:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> / JollyRoger`  / somewhat : opinions?  ^
+<a name="l-117"></a><span class="tm">20:46:56</span><span class="nk"> &lt;hl&gt;</span> Sounds good to me.
+<a name="l-118"></a><span class="tm">20:47:58</span><span class="nk"> &lt;somewhat[m]&gt;</span> I would love an nmc shirt and the a-gnome-ymous range are delightful
+<a name="l-119"></a><span class="tm">20:49:46</span><span class="nk"> &lt;somewhat[m]&gt;</span> it could be a really simple way to have money flow into the nmdf as well with the 50-50 split
+<a name="l-120"></a><span class="tm">20:49:57</span><span class="nk"> &lt;somewhat[m]&gt;</span> of profits
+<a name="l-121"></a><span class="tm">20:49:59</span><span class="nk"> &lt;JollyRoger`&gt;</span> I would love it!
+<a name="l-122"></a><span class="tm">20:50:09</span><span class="nk"> &lt;JollyRoger`&gt;</span> I'd love a Namecoin shirt like yours X).
+<a name="l-123"></a><span class="tm">20:50:51</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#agreed </span><span class="cmdline">Jeremy will talk to Diego about selling Namecoin merchandise on Cypher Market</span>
+<a name="l-124"></a><span class="tm">20:52:14</span><span class="nk"> &lt;somewhat[m]&gt;</span> could  he be asked to have the site run as a .bit as well?
+<a name="l-125"></a><span class="tm">20:54:11</span><span class="nk"> &lt;JollyRoger`&gt;</span> \o/
+<a name="l-126"></a><span class="tm">20:58:38</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">somewhat:</span> I can definitely ask him about it, sure.  I don't know if credit card contracts will pose a problem; it's plausible that he'd only be able to accept cryptocurrency via a .bit site due to contractual issues
+<a name="l-127"></a><span class="tm">21:00:36</span><span class="nk"> &lt;somewhat[m]&gt;</span> Even better if the .bit is unable to process cards
+<a name="l-128"></a><span class="tm">21:00:50</span><span class="nk"> &lt;somewhat[m]&gt;</span> *somewhat is afk
+<a name="l-129"></a><span class="tm">21:01:02</span><span class="nk"> &lt;JollyRoger`&gt;</span> Ha, I'm going to have to buy some monero, then.
+<a name="l-130"></a><span class="tm">21:06:20</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> thanks for the feedback guys... any other comments about merchandise or should we move onto the next topic?
+<a name="l-131"></a><span class="tm">21:06:51</span><span class="nk"> &lt;JollyRoger`&gt;</span> I think that's all I've got to say about merch!
+<a name="l-132"></a><span class="tm">21:07:19</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> okay, next topic then...
+<a name="l-133"></a><span class="tm">21:08:06</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">YaCy</span>
+<a name="l-134"></a><span class="tm">21:08:48</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">As you know, I presented a very rough proof-of-concept of a Namecoin search engine (based on YaCy) at DWS 2018.</span>
+<a name="l-135"></a><span class="tm">21:09:57</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Since then, the topic has become more relevant, because some clowns on Wikipedia have messed with Namecoin's page, inserting false claims that Namecoin is only used by circa 20-30 websites.</span>
+<a name="l-136"></a><span class="tm">21:10:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">The easiest way to counter that misinformation is to get the search engine properly released</span>
+<a name="l-137"></a><span class="tm">21:10:27</span><span class="nk"> &lt;JollyRoger`&gt;</span> Oh yowch.
+<a name="l-138"></a><span class="tm">21:11:44</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">So, I've started to get my YaCy-related ncdns patches submitted as PR's, and I've also started improving the documentation on how to set up a Namecoin search engine with YaCy.</span>
+<a name="l-139"></a><span class="tm">21:12:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">My Talos is currently running a YaCy node that (I think) is seeding a non-darknet Namecoin index to the YaCy P2P network.  In theory that means that anyone running YaCy on a Namecoin-enabled system will be able to search for .bit websites.</span>
+<a name="l-140"></a><span class="tm">21:13:24</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've also asked anoa to write some helper scripts to automate setting up such a node.</span>
+<a name="l-141"></a><span class="tm">21:13:57</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">In the foreseeable future I'll also hopefully get back to work on the darknet Namecoin indexes, specifically ZeroNet</span>
+<a name="l-142"></a><span class="tm">21:14:35</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Chromium should work on the Talos now, so the ZeroNet indexing scripts I had on my ThinkPad should hopefully run nearly unmodified on my Talos</span>
+<a name="l-143"></a><span class="tm">21:16:29</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I'm aware that NMDF has some funding that's earmarked for the YaCy work; I'd suggest awarding some of it to anoa for whatever work he ends up doing in this department</span>
+<a name="l-144"></a><span class="tm">21:18:12</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyone have thoughts on this topic?
+<a name="l-145"></a><span class="tm">21:18:26</span><span class="nk"> &lt;JollyRoger`&gt;</span> I don't think so, not yet.
+<a name="l-146"></a><span class="tm">21:18:38</span><span class="nk"> &lt;JollyRoger`&gt;</span> Er, for myself, I don't think I have any, not yet.
+<a name="l-147"></a><span class="tm">21:20:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> alright
+<a name="l-148"></a><span class="tm">21:21:08</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Those are all the topics I wanted to bring up today.  hl / JollyRoger` / somewhat : do any of you have other topics you'd like to discuss here?
+<a name="l-149"></a><span class="tm">21:21:12</span><span class="nk"> &lt;hl&gt;</span> Nope.
+<a name="l-150"></a><span class="tm">21:21:19</span><span class="nk"> &lt;JollyRoger`&gt;</span> I don't think I do!
+<a name="l-151"></a><span class="tm">21:21:43</span><span class="nk"> &lt;JollyRoger`&gt;</span> Really glad for our reminder bot \o/!
+<a name="l-152"></a><span class="tm">21:22:14</span><span class="nk"> &lt;somewhat[m]&gt;</span> I don't think so. Have a good night!
+<a name="l-153"></a><span class="tm">21:22:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> alright, great.  Excellent to see that Namecoin Meeting Reminder bot worked so well.  Thanks for attending everyone!
+<a name="l-154"></a><span class="tm">21:23:12</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

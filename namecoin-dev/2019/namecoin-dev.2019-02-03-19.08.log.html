@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:08:02</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:08:02</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Feb  3 19:08:02 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:08:02</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:08:32</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hey everyone, sorry for the late start today, welcome to the meeting.
+<a name="l-5"></a><span class="tm">19:08:44</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Can we get a roll call of who's here today?
+<a name="l-6"></a><span class="tm">19:14:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> hmm, maybe just me here today
+<a name="l-7"></a><span class="tm">19:14:55</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> well, let's get started and we'll see if anyone joins the meeting
+<a name="l-8"></a><span class="tm">19:15:22</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Electrum-NMC</span>
+<a name="l-9"></a><span class="tm">19:15:58</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've been spending most of my dev time in the last week or so trying to optimize the bandwidth usage of Electrum-NMC</span>
+<a name="l-10"></a><span class="tm">19:17:19</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">AuxPoW truncation for block heights that are covered by a checkpoint is merged to ElectrumX master branch; I'm waiting for ElectrumX to tag a release, and then I'll pester the server operators to upgrade and then I'll merge the change to Electrum-NMC</span>
+<a name="l-11"></a><span class="tm">19:18:11</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've also been talking with Neil from ElectrumX about switching the Electrum protocol to CBOR rather than the current JSON; he's interested in the possibility and he's already started coding it.</span>
+<a name="l-12"></a><span class="tm">19:18:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">One of the Electrum devs also pointed out that Bitcoin block headers can be compressed (e.g. stripping out the previous hash and bits fields); I might try to implement that too</span>
+<a name="l-13"></a><span class="tm">19:20:03</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">And I'm also halfway through porting Electron-Cash's checkpoint code to Electrum; once that's finished, looking up a name in a checkpointed height should use almost no bandwidth</span>
+<a name="l-14"></a><span class="tm">19:21:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Moving on...
+<a name="l-15"></a><span class="tm">19:21:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> oh wait
+<a name="l-16"></a><span class="tm">19:22:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Also a new release of Electrum-NMC (v3.3.3.1) is ready; binaries are uploaded and the release commit for namecoin.org should be going live later today.  This release is the first Windows-compatible release that supports name operations.</span>
+<a name="l-17"></a><span class="tm">19:23:12</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> okay, now moving on...
+<a name="l-18"></a><span class="tm">19:23:19</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Public Relations</span>
+<a name="l-19"></a><span class="tm">19:23:56</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I posted the video/transcript/report/slides from IGF 2018 on Namecoin.org</span>
+<a name="l-20"></a><span class="tm">19:25:27</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I also made an initial attempt to contact one of the contributors to the Wikipedia article on Namecoin, to report a misreporting of the results of the crappy Princeton study.  No answer yet.</span>
+<a name="l-21"></a><span class="tm">19:26:07</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> That's all I was going to cover I think... anyone else here and want to cover anything?
+<a name="l-22"></a><span class="tm">19:43:02</span><span class="nk"> &lt;JollyRoger`&gt;</span> Ahoy Jeremy_Rand_Talo!
+<a name="l-23"></a><span class="tm">19:43:15</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> oh hey JollyRoger`
+<a name="l-24"></a><span class="tm">19:43:35</span><span class="nk"> &lt;JollyRoger`&gt;</span> I don't think I had anything to contribute but... I wanted to listen in.
+<a name="l-25"></a><span class="tm">19:43:46</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok
+<a name="l-26"></a><span class="tm">19:55:05</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> well, one other thing
+<a name="l-27"></a><span class="tm">19:55:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Meetings</span>
+<a name="l-28"></a><span class="tm">19:56:20</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> I'm thinking I'm going to try to set up a Matrix bot that automatically notifies the channel when meetings are coming up.  Because it seems I'm really bad at remembering to notify everyone ahead of time, and then most people don't show up
+<a name="l-29"></a><span class="tm">19:57:04</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Looks like it should be easy to do via a combination of KAlarm and https://gitlab.com/meutraa/mm/tree/master (just make KAlarm run a terminal command that echos the notification to a pipe)
+<a name="l-30"></a><span class="tm">19:57:13</span><span class="nk"> &lt;JollyRoger`&gt;</span> Oh hey that's a great idea.
+<a name="l-31"></a><span class="tm">19:58:02</span><span class="nk"> &lt;JollyRoger`&gt;</span> I keep forgetting when one is going on and then sometimes I don't realize that the computer is calling me, I really like the idea of a meeting bot that sends out notifications ahead of time.
+<a name="l-32"></a><span class="tm">19:58:40</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> yeah
+<a name="l-33"></a><span class="tm">20:01:10</span><span class="nk"> &lt;JollyRoger`&gt;</span> Yarr harr!
+<a name="l-34"></a><span class="tm">20:02:34</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyway, with that, I guess we'll close today's meeting.  Cheers!
+<a name="l-35"></a><span class="tm">20:02:36</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

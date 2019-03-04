@@ -1,0 +1,222 @@
+=====================
+#namecoin-dev Meeting
+=====================
+
+
+Meeting started by Jeremy_Rand_Talo at 19:00:37 UTC. The full logs are
+available at
+https://midnightmagic.github.io/namecoin-meeting/namecoin-dev/2019/namecoin-dev.2019-03-03-19.00.log.html
+.
+
+
+
+Meeting summary
+---------------
+* This is the first Namecoin meeting that was announced in advance via
+  the Namecoin Meeting Reminder bot.  It looks like it was successful,
+  as we have more people here today than at the previous few meetings.
+  (Jeremy_Rand_Talo, 19:03:36)
+* Electrum-NMC  (Jeremy_Rand_Talo, 19:07:02)
+  * As you may recall, I've been spending a lot of time lately
+    optimizing Electrum-NMC's usage of bandwidth.  (Jeremy_Rand_Talo,
+    19:08:18)
+  * I'm happy to report that checkpointed AuxPoW truncation is now
+    supported by at least 2/3 of the public ElectrumX Namecoin servers.
+    (This feature reduces the bandwidth usage for block headers that are
+    covered by a checkpoint, by around 90%.)  (Jeremy_Rand_Talo,
+    19:09:55)
+  * The only public server that might not support it at the moment is
+    Richard Ulrich's server -- I can't verify whether it supports it
+    because his TLS cert expired.  I've emailed him about it, hopefully
+    he'll renew it soon.  (Jeremy_Rand_Talo, 19:10:44)
+  * Now that support for checkpointed AuxPoW truncation is present on
+    most of the servers, I've merged its client-side code to
+    Electrum-NMC master branch.  The next release of Electrum-NMC will
+    require support for it from any server it connects to.
+    (Jeremy_Rand_Talo, 19:12:17)
+  * Meanwhile, the next major optimization is cp_height support.  This
+    feature uses Merkle proofs to allow downloading a single
+    checkpoint-covered header without needing any of the surrounding
+    headers.  It should eliminate nearly all of the bandwidth usage for
+    headers covered by a checkpoint.  (Jeremy_Rand_Talo, 19:14:32)
+  * cp_height is already supported in ElectrumX (it's Neil's code); I've
+    been working on adding it to upstream Electrum, with the intent to
+    merge it to Electrum-NMC after upstream merges it.
+    (Jeremy_Rand_Talo, 19:15:30)
+  * Interestingly, Electron-Cash (an altcoin fork of Electrum) already
+    has cp_height support, so most of the work I'm doing consists of
+    porting Electron-Cash's support to Electrum.  (Jeremy_Rand_Talo,
+    19:16:17)
+  * A cp_height PR was sent to upstream Electrum for review, and I'm
+    working my way through the review process.  I'm hoping it'll be
+    merged within a week.  (Jeremy_Rand_Talo, 19:17:11)
+  * After cp_height is merged, there are a few other optimizations.
+    (Jeremy_Rand_Talo, 19:18:19)
+  * It turns out that Bitcoin and Namecoin block headers have some
+    redundant data.  Specifically, the `prev_hash`, `bits`, and
+    `parent_block_hash` fields can be inferred from nearby data, so we
+    can strip them from headers on the ElectrumX side and reconstruct
+    them on the Electrum-NMC side.  (Jeremy_Rand_Talo, 19:19:59)
+  * This saves 32 + 4 + 32 = 68 bytes per header, which isn't an
+    enormous savings but it's still useful.  (Jeremy_Rand_Talo,
+    19:21:00)
+  * I've implemented initial support for this compression in ElectrumX;
+    I still need to implement it for Electrum and Electrum-NMC.
+    (Jeremy_Rand_Talo, 19:22:12)
+  * Neil is also playing around with making Electrum's protocol use CBOR
+    and/or DEFLATE rather than JSON with hex-encoded binary data.  This
+    should yield very nice compression.  (Jeremy_Rand_Talo, 19:23:35)
+  * Finally, on the latency side of things rather than bandwidth, there
+    are a lot of round trips in Electrum-NMC's name lookups, and this is
+    kind of annoying.  (Jeremy_Rand_Talo, 19:25:42)
+  * It's bad enough that when accessed over Tor, name lookups for names
+    that use the `"import"` field actually end up timing out with
+    default DNS timeout settings.  (Jeremy_Rand_Talo, 19:25:53)
+  * I'm intending to add some protocol extensions that allow us to
+    decrease the number of round trips.  (Jeremy_Rand_Talo, 19:26:00)
+  * This seems to have come up on the Mozilla Mailing List. It looks
+    like Mozilla too is starting to make the move to take out Public Key
+    Pinning.
+    https://bugzilla.mozilla.org/show_bug.cgi?format=default&id=1412438
+    (JollyRoger`, 19:36:31)
+  * AFAIK that bug has been there for a while (I'm on the CC list), and
+    to my knowledge it won't (yet) remove preloaded pins, it'll only
+    remove the HTTP mechanism of setting pins.  (Jeremy_Rand_Talo,
+    19:39:29)
+  * Assuming that they don't get rid of preloaded pins, it's likely that
+    this won't adversely impact our plans for Firefox support for
+    Namecoin TLS, since we're intending to set pins via pkcs11, which
+    presumably would be used for preloaded pins, not just HTTP-set pins.
+    (Jeremy_Rand_Talo, 19:40:26)
+  * That said, it's definitely a good idea to keep an eye on that bug.
+    (Jeremy_Rand_Talo, 19:41:14)
+  * If, for some reason, Mozilla indicates that they want to get rid of
+    preloaded pins, then we'll probably want to start complaining
+    loudly.  (Jeremy_Rand_Talo, 19:41:53)
+  * It should be noted that we have several contacts at Mozilla,
+    including both decentralized web people and a privacy/security
+    person, who may be able to escalate any relevant issues that we
+    bring up, should it be necessary.  (Jeremy_Rand_Talo, 19:43:48)
+
+* Debian packages  (Jeremy_Rand_Talo, 19:51:14)
+  * mhatta has submitted a Namecoin Core package to Debian.
+    https://ftp-master.debian.org/new/namecoin_0.17.0~dfsg-1.html
+    (Jeremy_Rand_Talo, 19:52:04)
+  * My understanding is that an ncdns package will be coming shortly
+    from him as well.  (Jeremy_Rand_Talo, 19:52:47)
+  * This raises questions about what other Namecoin software we want to
+    have packaged in Debian.  (Jeremy_Rand_Talo, 19:53:53)
+  * Anything based on Bitcoin Core is not likely to migrate from Sid to
+    Testing, because of the consensus safety concerns that the Bitcoin
+    Core devs have raised about most GNU/Linux distros' packaging
+    policies (including those of Debian).  (Jeremy_Rand_Talo, 19:55:17)
+  * If ncdns's package has a Namecoin lookup client as a dependency,
+    then that means that ncdns can't migrate to Testing either unless
+    either ConsensusJ-Namecoin or Electrum-NMC gets packaged.
+    (Jeremy_Rand_Talo, 19:56:04)
+  * Of the two, Electrum-NMC seems like the logical priority, because
+    Electrum is already packaged in Debian, and Electrum-NMC's
+    relationship with upstream is a lot more mature than that of
+    ConsensusJ-Namecoin.  (Jeremy_Rand_Talo, 19:57:16)
+  * NLnet has funding for up to 2 Namecoin GNU/Linux packages.  My
+    inclination is to award that funding to mhatta for ncdns, and also
+    for Electrum-NMC if mhatta is interested in packaging it.
+    (Jeremy_Rand_Talo, 19:59:29)
+  * If additional funding is available from NMDF (I need to check with
+    Phelix and Daniel), I'd be in favor of funding the packaging of
+    various other Namecoin ecosystem software.  (Jeremy_Rand_Talo,
+    20:01:13)
+  * AGREED: Use NLnet funds to cover ncdns and Electrum-NMC packages for
+    Debian  (Jeremy_Rand_Talo, 20:06:03)
+
+* Reproducible builds of ncdns  (Jeremy_Rand_Talo, 20:11:35)
+  * AGREED: JollyRoger` will try out hl's ncdns-repro repo
+    (Jeremy_Rand_Talo, 20:30:31)
+
+* Namecoin T-Shirts  (Jeremy_Rand_Talo, 20:32:30)
+  * When I've been at conferences recently, people seem to keep asking
+    me if they can buy a Namecoin t-shirt like the one I custom-printed
+    for myself  (Jeremy_Rand_Talo, 20:33:05)
+  * Which brings up the question of what vendor we might want to use.  I
+    used SpreadShirt to print mine, but they don't accept Bitcoin and
+    their website is generally hostile to Tor Browser, so I'm hesitant
+    to use them for official Namecoin promotional purposes.
+    (Jeremy_Rand_Talo, 20:34:11)
+  * Coincidentally, when I was at 35C3 I met Diego from Monero (he MC'ed
+    the stage at our Cluster), and learned that he runs a side business
+    that sells t-shirts.  https://cyphermarket.com/  (Jeremy_Rand_Talo,
+    20:35:23)
+  * My understanding is that they accept Bitcoin, Monero, and credit
+    cards, which pretty much covers all of our potential audience.
+    Their website works fine for me over Tor, though I haven't checked
+    whether it needs JS for anything.  (Jeremy_Rand_Talo, 20:36:43)
+  * Should we ask Diego about selling Namecoin merchandise on Cypher
+    Market?  (Jeremy_Rand_Talo, 20:37:36)
+  * AGREED: Jeremy will talk to Diego about selling Namecoin merchandise
+    on Cypher Market  (Jeremy_Rand_Talo, 20:50:51)
+
+* YaCy  (Jeremy_Rand_Talo, 21:08:06)
+  * As you know, I presented a very rough proof-of-concept of a Namecoin
+    search engine (based on YaCy) at DWS 2018.  (Jeremy_Rand_Talo,
+    21:08:48)
+  * Since then, the topic has become more relevant, because some clowns
+    on Wikipedia have messed with Namecoin's page, inserting false
+    claims that Namecoin is only used by circa 20-30 websites.
+    (Jeremy_Rand_Talo, 21:09:57)
+  * The easiest way to counter that misinformation is to get the search
+    engine properly released  (Jeremy_Rand_Talo, 21:10:18)
+  * So, I've started to get my YaCy-related ncdns patches submitted as
+    PR's, and I've also started improving the documentation on how to
+    set up a Namecoin search engine with YaCy.  (Jeremy_Rand_Talo,
+    21:11:44)
+  * My Talos is currently running a YaCy node that (I think) is seeding
+    a non-darknet Namecoin index to the YaCy P2P network.  In theory
+    that means that anyone running YaCy on a Namecoin-enabled system
+    will be able to search for .bit websites.  (Jeremy_Rand_Talo,
+    21:12:52)
+  * I've also asked anoa to write some helper scripts to automate
+    setting up such a node.  (Jeremy_Rand_Talo, 21:13:24)
+  * In the foreseeable future I'll also hopefully get back to work on
+    the darknet Namecoin indexes, specifically ZeroNet
+    (Jeremy_Rand_Talo, 21:13:57)
+  * Chromium should work on the Talos now, so the ZeroNet indexing
+    scripts I had on my ThinkPad should hopefully run nearly unmodified
+    on my Talos  (Jeremy_Rand_Talo, 21:14:35)
+  * I'm aware that NMDF has some funding that's earmarked for the YaCy
+    work; I'd suggest awarding some of it to anoa for whatever work he
+    ends up doing in this department  (Jeremy_Rand_Talo, 21:16:29)
+
+Meeting ended at 21:23:12 UTC.
+
+
+
+
+Action Items
+------------
+
+
+
+
+
+Action Items, by person
+-----------------------
+* **UNASSIGNED**
+  * (none)
+
+
+
+
+People Present (lines said)
+---------------------------
+* Jeremy_Rand_Talo (93)
+* JollyRoger` (42)
+* somewhat[m] (10)
+* hl (7)
+* qpm (2)
+
+
+
+
+Generated by `MeetBot`_ 0.1.4
+
+.. _`MeetBot`: https://wiki.debian.org/MeetBot
