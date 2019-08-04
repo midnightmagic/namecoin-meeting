@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:00:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:00:17</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun May 19 19:00:17 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:00:17</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:00:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hello everyone!  Welcome to the Namecoin development meeting.  Can we get a roll call of who's here today?
+<a name="l-5"></a><span class="tm">19:03:27 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">hopes he's not the only one who's here today...</span>
+<a name="l-6"></a><span class="tm">19:03:40</span><span class="nk"> &lt;grringo[m]&gt;</span> :)
+<a name="l-7"></a><span class="tm">19:03:48</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi grringo !
+<a name="l-8"></a><span class="tm">19:04:13</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> since you're new here, would you like to briefly introduce yourself?
+<a name="l-9"></a><span class="tm">19:05:35</span><span class="nk"> &lt;grringo[m]&gt;</span> I'm JS developer and I have some time to help if there is such demand.
+<a name="l-10"></a><span class="tm">19:05:53</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> cool
+<a name="l-11"></a><span class="tm">19:07:04</span><span class="nk"> &lt;grringo[m]&gt;</span> I'm curious how far is the project form act as regular DNS server + .bit resolver?
+<a name="l-12"></a><span class="tm">19:07:35</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Ahoy Cap'n!
+<a name="l-13"></a><span class="tm">19:07:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Well, looks like only 2 people are here at the moment.  Not super surprising, as we're around the start of summer and probably a lot of people are out and about.  Not a problem, we can still cover things and everyone else will be able to read the minutes
+<a name="l-14"></a><span class="tm">19:07:46</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ah, make that 3 people
+<a name="l-15"></a><span class="tm">19:07:50</span><span class="nk"> &lt;TheJollyRoger&gt;</span> o7
+<a name="l-16"></a><span class="tm">19:08:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> can you define your question a bit more precisely?  What functionality are you wondering about?
+<a name="l-17"></a><span class="tm">19:08:34</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Ahoy grringo[m] !
+<a name="l-18"></a><span class="tm">19:09:19 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">keeps picturing a Mexican version of Tony the Tiger when he sees grringo 's username 🙂</span>
+<a name="l-19"></a><span class="tm">19:10:11</span><span class="nk"> &lt;TheJollyRoger&gt;</span> XD
+<a name="l-20"></a><span class="tm">19:11:29</span><span class="nk"> &lt;grringo[m]&gt;</span> I wan't to get DNS server on my localhost to speed up normal DNS resolving and also want to be able to use .bit domains work as well - without hassle.
+<a name="l-21"></a><span class="tm">19:11:29 </span><span class="nka">* TheJollyRoger1</span> <span class="ac">uploaded an image: nice-to-meet-you.gif (1727KB) &lt; https://matrix.org/_matrix/media/v1/download/matrix.org/dAzGJptSdZGosJjEVWQoZBKU &gt;</span>
+<a name="l-22"></a><span class="tm">19:13:36</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> that's already a thing for Windows (ncdns-nsis).  I think there's some ongoing work relating to deb/rpm packages for similar functionality on GNU/Linux (ncdns-repro should help a lot there).
+<a name="l-23"></a><span class="tm">19:13:59</span><span class="nk"> &lt;jonasbits&gt;</span> one more
+<a name="l-24"></a><span class="tm">19:14:06</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> hi jonasbits !
+<a name="l-25"></a><span class="tm">19:14:19</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Ahoy! o7
+<a name="l-26"></a><span class="tm">19:16:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> is there anything that ncdns-nsis doesn't do that you think it should?
+<a name="l-27"></a><span class="tm">19:17:32</span><span class="nk"> &lt;grringo[m]&gt;</span> I'm mac user :(
+<a name="l-28"></a><span class="tm">19:18:21</span><span class="nk"> &lt;jonasbits&gt;</span> me to
+<a name="l-29"></a><span class="tm">19:18:29</span><span class="nk"> &lt;grringo[m]&gt;</span> Maybe I will try to make docker package or something
+<a name="l-30"></a><span class="tm">19:19:41</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> ah, ok.  So, right now we don't have funding for creating a macOS installer (funds available were limited, and GNU/Linux and Windows were higher priority when we applied for NLnet funding).  But that might change next time we apply for funding.  We'd certainly welcome any volunteer who wants to develop one
+<a name="l-31"></a><span class="tm">19:19:46</span><span class="nk"> &lt;grringo[m]&gt;</span> ncdns-nsis resolves standard domains as well? or users have to switch between DNS servers?
+<a name="l-32"></a><span class="tm">19:20:26 </span><span class="nka">* TheJollyRoger1</span> <span class="ac">starts looking up how to create a hackintosh...</span>
+<a name="l-33"></a><span class="tm">19:20:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> I'm not particularly familiar with how macOS installers usually are created, but Bitcoin Core is able to create them from a GNU/Linux build machine, so maybe Bitcoin's code would be useful there.  I think using a macOS build machine would be a dealbreaker here due to security/freedom concerns.
+<a name="l-34"></a><span class="tm">19:21:34</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> ncdns-nsis installs DNSSEC-Trigger, which handles DNS domain names
+<a name="l-35"></a><span class="tm">19:21:56</span><span class="nk"> &lt;TheJollyRoger1&gt;</span> Makes sense 😓
+<a name="l-36"></a><span class="tm">19:22:16</span><span class="nk"> &lt;grringo[m]&gt;</span> ok, I will try with Docker
+<a name="l-37"></a><span class="tm">19:22:37</span><span class="nk"> &lt;grringo[m]&gt;</span> also, I noticed that work on UI is progressing quite slow - how about use WebView as UI + namecoind RPC API?
+<a name="l-38"></a><span class="tm">19:22:38</span><span class="nk"> &lt;grringo[m]&gt;</span> Usually is the easiest way to get a nice, cross-platform interface.
+<a name="l-39"></a><span class="tm">19:23:16</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> generally speaking I don't trust Docker's security very much.  Some Namecoin software (particularly Electrum-NMC) uses Docker for its build procedure, but we're trying to get that fixed, not add more Docker dependencies
+<a name="l-40"></a><span class="tm">19:24:25 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">has a bad enough time as-is trying to explain to the Tor guys that we're trying to get rid of the Docker dependency 😞</span>
+<a name="l-41"></a><span class="tm">19:24:55</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> UI for what in particular?  The wallet?
+<a name="l-42"></a><span class="tm">19:25:48</span><span class="nk"> &lt;TheJollyRoger1&gt;</span> 😢
+<a name="l-43"></a><span class="tm">19:27:13</span><span class="nk"> &lt;grringo[m]&gt;</span> ok, but most users are not as much paranoic or rather the just want to check/experiment/test how namecoin works. Simple Docker container that works as DNS + .bit resolver can by nice entry point.
+<a name="l-44"></a><span class="tm">19:27:46</span><span class="nk"> &lt;grringo[m]&gt;</span> yes. UI for wallet + doman register + id register + notary(?)
+<a name="l-45"></a><span class="tm">19:28:22</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> the fact that some users don't understand how bad Docker is doesn't mean we should encourage them.  Why not just do what Bitcoin Core does?  UX is fine there, and doesn't adversely impact security
+<a name="l-46"></a><span class="tm">19:30:15</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> to the extent that wallet UI dev has been slow, it's mainly because of things that have nothing to do with the framework choice.  In Namecoin Core's case, it's because the RPC interface needs additional methods added, and no one has had time to finish adding them.  In Electrum-NMC's case, it's just a matter of me being the only current Electrum-NMC developer and me being busy with things besides UI.
+<a name="l-47"></a><span class="tm">19:30:16</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> That said, check out the UI in 3.3.5, it's noticeably improved.
+<a name="l-48"></a><span class="tm">19:31:48</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> if you're suggesting using either Firefox's or Chromium's rendering engine as a dependency of a wallet UI, I don't think that's going to be doable due to the attack surface it introduces (and it's not clear to me what the benefits would be anyway)
+<a name="l-49"></a><span class="tm">19:32:14</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> (Qt and PyQt are already cross-platform)
+<a name="l-50"></a><span class="tm">19:34:21</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> (as an aside, I think it's questionable whether Docker is actually good UX for typical macOS users anyway)
+<a name="l-51"></a><span class="tm">19:36:19</span><span class="nk"> &lt;grringo[m]&gt;</span> could be easier to use than trying to build everything manually
+<a name="l-52"></a><span class="tm">19:36:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> no one is proposing that macOS users build everything from source though
+<a name="l-53"></a><span class="tm">19:40:58</span><span class="nk"> &lt;grringo[m]&gt;</span> Is there something like roadmap for Namecoin project?
+<a name="l-54"></a><span class="tm">19:42:49</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> yes, but unfortunately it's not public, because at some point I need to go through it and cleanly segregate the work items (can be made public) from the discussion points (which include a lot of off-the-cuff comments that the authors didn't authorize to be made public).  If there's a particular topic you're interested in, I can expedite the public release of stuff from the roadmap that's related to that
+<a name="l-55"></a><span class="tm">19:42:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> topic
+<a name="l-56"></a><span class="tm">19:43:27</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> e.g. I already did so for the consensus fork wishlist
+<a name="l-57"></a><span class="tm">19:44:21</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> I suppose the GSoC project ideas page has some resemblance to a roadmap too, though it hasn't been updated for about a year since we didn't apply to GSoC this year
+<a name="l-58"></a><span class="tm">19:44:47</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> we'll probably apply to GSoC in 2020 though.  I wasn't very happy about us not applying this year.
+<a name="l-59"></a><span class="tm">19:47:44</span><span class="nk"> &lt;TheJollyRoger1&gt;</span> Hopefully by then I will be able to get better hours and more time to start on documentation.
+<a name="l-60"></a><span class="tm">19:48:51</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">JollyRoger:</span> indeed, we'll also consider applying to GSoD (assuming that they run the program in 2020; this is the first year they're doing it, so if it goes badly they might decide to abandon it)
+<a name="l-61"></a><span class="tm">19:50:21</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">JollyRoger:</span> FYI I have a contact at an org that participates in GSoC regularly; I might look into whether their org could include Namecoin if we don't get accepted to GSoC in 2020
+<a name="l-62"></a><span class="tm">19:50:51</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> This is, of course, heavily dependent on a lot of uncertainties between now and 2020
+<a name="l-63"></a><span class="tm">19:50:52</span><span class="nk"> &lt;TheJollyRoger1&gt;</span> Woah, okay!
+<a name="l-64"></a><span class="tm">19:51:01</span><span class="nk"> &lt;TheJollyRoger1&gt;</span> Yeah...
+<a name="l-65"></a><span class="tm">19:51:47</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> anyways...
+<a name="l-66"></a><span class="tm">19:52:45</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> I understand browser extensions are something you're comfortable with?  Have you had a chance to glance at the DNSSEC-HSTS codebase?  (I know it's messy, most of it was written as a PoC for 35C3 and was done on a very tight schedule)
+<a name="l-67"></a><span class="tm">19:53:46</span><span class="nk"> &lt;grringo[m]&gt;</span> Tomorrow I will try to setup components again
+<a name="l-68"></a><span class="tm">19:53:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok
+<a name="l-69"></a><span class="tm">19:54:41</span><span class="nk"> &lt;grringo[m]&gt;</span> Is there a way to persist on Namecoin blockchain key-value that never expires?
+<a name="l-70"></a><span class="tm">19:55:39</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> kind of (specifically the "name epochs" approach works fine for that), but there's not much tooling for it
+<a name="l-71"></a><span class="tm">19:56:10</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Also note that once SegVal is a thing, name epochs would require some 3rd party to store the relevant value preimage for you
+<a name="l-72"></a><span class="tm">20:01:36</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> meanwhile, before I forget
+<a name="l-73"></a><span class="tm">20:01:40</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Electrum-NMC</span>
+<a name="l-74"></a><span class="tm">20:01:51</span><span class="nk"> &lt;grringo[m]&gt;</span> Is someone developing idea of using Namecoin for identities?
+<a name="l-75"></a><span class="tm">20:02:13</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Electrum-NMC 3.3.5 binaries are built: https://github.com/namecoin/namecoin.org/pull/429</span>
+<a name="l-76"></a><span class="tm">20:02:51</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#help </span><span class="cmdline">It would be useful if someone could test the Android and AppImage binaries of Electrum-NMC.  This is the first time we've published them, I have no idea if they work.</span>
+<a name="l-77"></a><span class="tm">20:04:10</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> to my knowledge there aren't any identity use cases being actively developed, but there has been some discussion about trying to revive that, for use cases like Ricochet/Cwtch.
+<a name="l-78"></a><span class="tm">20:04:49</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> I think there was some discussion about maybe using Namecoin for OpenAlias-style stuff as well
+<a name="l-79"></a><span class="tm">20:05:38</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Technically I'd expect that Namecoin already should work with OpenAlias, as long as the OpenAlias client is properly handling Namecoin's DNSSEC keys
+<a name="l-80"></a><span class="tm">20:05:49</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Never tested it though
+<a name="l-81"></a><span class="tm">20:06:57</span><span class="nk"> &lt;somewhat[m]&gt;</span> *somewhat smiles thinking about what could be on roadmap
+<a name="l-82"></a><span class="tm">20:09:30</span><span class="nk"> &lt;TheJollyRoger1&gt;</span> Human readable and secure and distributed Onion URLs!
+<a name="l-83"></a><span class="tm">20:09:40 </span><span class="nka">* TheJollyRoger1</span> <span class="ac">goes starry-eyed thinking about it!</span>
+<a name="l-84"></a><span class="tm">20:10:20 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">declines to comment about that subject</span>
+<a name="l-85"></a><span class="tm">20:11:35</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Electrum-NMC adds a name inventory count to the status bar (next to the NMC balance)</span>
+<a name="l-86"></a><span class="tm">20:12:10</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Electrum-NMC 3.3.5 also adds a date estimate for name expiration to the Manage Names tab</span>
+<a name="l-87"></a><span class="tm">20:12:32</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Electrum-NMC 3.3.5 also fixes Manage Names display of names that are pending registration</span>
+<a name="l-88"></a><span class="tm">20:13:09</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> any other Electrum-NMC things anyone wants to bring up?
+<a name="l-89"></a><span class="tm">20:13:15</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> (or should we move to the next topic?)
+<a name="l-90"></a><span class="tm">20:17:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok, moving on
+<a name="l-91"></a><span class="tm">20:18:04</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Namecoin Core</span>
+<a name="l-92"></a><span class="tm">20:18:22</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Namecoin Core 0.18.0 is tagged.</span>
+<a name="l-93"></a><span class="tm">20:18:53</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Namecoin Core 0.18.0 schedules a softfork (P2SH+CSV+SegWit), which will activate in around 5.5 months.</span>
+<a name="l-94"></a><span class="tm">20:19:44</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#action </span><span class="cmdline">Jeremy_Rand_Talos will look into building Gitian binaries of Core 0.18.0 and notifying service providers that they need to upgrade</span>
+<a name="l-95"></a><span class="tm">20:23:22</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> and moving along...
+<a name="l-96"></a><span class="tm">20:23:27</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Packaging</span>
+<a name="l-97"></a><span class="tm">20:23:41</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> This is actually somewhat related to grringo 's inquiry...
+<a name="l-98"></a><span class="tm">20:24:03</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Upstream Electrum has a PR pending from Lola regarding adding deb packages.</span>
+<a name="l-99"></a><span class="tm">20:24:35</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">If anyone here is an expert on creating deb packages, particularly from Python software, you may wish to comment in Lola's PR</span>
+<a name="l-100"></a><span class="tm">20:28:07</span><span class="nk"> &lt;TheJollyRoger1&gt;</span> Prebuilt deb packages sound awesome!
+<a name="l-101"></a><span class="tm">20:28:18 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">concurs</span>
+<a name="l-102"></a><span class="tm">20:29:35</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Exchanges</span>
+<a name="l-103"></a><span class="tm">20:30:34</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">As many of you heard, Poloniex and Bitsane are delisting NMC.  Reasons are unclear; Poloniex seems to be giving very weird justifications for this (including allegedly claiming it was due to regulatory pressure)</span>
+<a name="l-104"></a><span class="tm">20:30:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Obviously Bisq is still working fine, and is what we're recommending</span>
+<a name="l-105"></a><span class="tm">20:31:44</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#help </span><span class="cmdline">It would be useful if people could ACK/NACK some issues/PR's relating to cleaning up the Exchanges list on Namecoin.org.  List of relevant issues/PR's is at https://github.com/namecoin/namecoin.org/labels/exchanges</span>
+<a name="l-106"></a><span class="tm">20:35:07</span><span class="nk"> &lt;TheJollyRoger1&gt;</span> Crap. I don't trade cryptocurrency, but shoot, that's awful to hear the exchanges aren't wanting to play ball anymore.
+<a name="l-107"></a><span class="tm">20:35:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">JollyRoger:</span> I've never used Poloniex, but I've heard a lot of stories about their sketchiness.  I'm not exactly sad to see them exiting our ecosystem.
+<a name="l-108"></a><span class="tm">20:36:34</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Besides, decentralized exchanges are a lot more secure/private, so if a couple of centralized exchanges exiting incentivizes people to move to Bisq, then I think that's a net benefit
+<a name="l-109"></a><span class="tm">20:38:05</span><span class="nk"> &lt;TheJollyRoger1&gt;</span> Whew. Okay great!
+<a name="l-110"></a><span class="tm">20:38:14</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyways.  Those are all the topics I wanted to bring up.  Anyone else have other questions/comments about anything?  Maybe anything from grringo ?
+<a name="l-111"></a><span class="tm">20:42:25 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">has some AFK stuff he needs to deal with today, so will probably head out soon if no one has any additional things to bring up</span>
+<a name="l-112"></a><span class="tm">20:42:54</span><span class="nk"> &lt;TheJollyRoger1&gt;</span> Hmm...
+<a name="l-113"></a><span class="tm">20:43:03</span><span class="nk"> &lt;TheJollyRoger1&gt;</span> I don't think so, not yet.
+<a name="l-114"></a><span class="tm">20:43:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok then.
+<a name="l-115"></a><span class="tm">20:43:42</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

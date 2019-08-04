@@ -1,0 +1,7 @@
+19:00:13 <Jeremy_Rand_Talo> #startmeeting
+19:00:13 <qpm> Meeting started Sun Apr  7 19:00:13 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:00:13 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:01:13 <Jeremy_Rand_Talo> Hi everyone!  Welcome to the meeting.  Can we get a roll call of who's here today?
+19:15:14 <Jeremy_Rand_Talo> There's gotta be people here today, right?
+19:23:36 <Jeremy_Rand_Talo> ... okay then.  I guess everyone's busy with other things.  Guess we'll close the meeting.
+19:23:42 <Jeremy_Rand_Talo> #endmeeting

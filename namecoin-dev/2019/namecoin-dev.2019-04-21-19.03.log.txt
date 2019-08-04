@@ -1,0 +1,70 @@
+19:03:00 <Jeremy_Rand_Talo> #startmeeting
+19:03:00 <qpm> Meeting started Sun Apr 21 19:03:00 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:03:00 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:03:55 <Jeremy_Rand_Talo> Hi everyone, welcome to the meeting!
+19:04:07 <Jeremy_Rand_Talo> Can we get a roll call of who's here today?
+19:13:00 * Jeremy_Rand_Talo hopes there are people here today
+19:20:43 <Jeremy_Rand_Talo> Anyone here...?
+19:21:37 <TheJollyRoger> Ahoy!
+19:21:42 <TheJollyRoger> Ahoy Jeremy_Rand_Talo!
+19:21:53 <TheJollyRoger> Sorry about that. Woah, almost missed it X(.
+19:21:58 <Jeremy_Rand_Talo> Hi TheJollyRoger
+19:22:17 <TheJollyRoger> My uh... I broke my Ricochet again, so I'll try to get that fixed soon, sorry >_<.
+19:25:29 <Jeremy_Rand_Talo> Anyway, this is likely to be a short meeting, unless anyone else has news that I'm not aware of
+19:25:41 <hl> hi
+19:25:42 * TheJollyRoger shakes his head.
+19:26:07 <Jeremy_Rand_Talo> #topic ncdns-repro
+19:26:54 <Jeremy_Rand_Talo> #info I've slowly been reviewing hl 's ncdns-repro repo
+19:27:59 <Jeremy_Rand_Talo> hl: as mentioned on GitHub, it's not clear to me why all of ncdns's subpackages are bundled into one rbm project.  Usually tor-browser-build seems to build each Go executable binary in a separate project.
+19:32:17 <Jeremy_Rand_Talo> hl: was the motive there just "easiest to prototype since it's most similar to our pre-rbm build scripts"?  Or was there another reason?
+19:32:32 <hl> Jeremy_Rand_Talo: I don't think it makes any difference...
+19:33:36 <Jeremy_Rand_Talo> hl: well, it makes some difference if a user only wants to build a subset of the binaries.  Also staying closer to tor-browser-build decreases the cognitive load required to audit it
+19:34:23 <hl> not sure how it's any harder to audit, and it would just increase the maintenance burden
+19:39:22 <Jeremy_Rand_Talo> hl: basically, any non-zero diff between our Go projects and tor-browser-build's means that a human needs to determine whether that diff matters.  Even minor diffs that don't matter can accumulate into something that requires more cognitive load than I enjoy spending on auditing things.  That said, it occurs to me that upstream Tor seems to have a built-in build script (in the go project) for Go libraries, but
+19:39:22 <Jeremy_Rand_Talo> they don't seem to have one for Go executables.  Maybe it would be productive to get a Go executable built-in build script merged upstream, so that we don't need a build script at all for ncdns?  (Seems like that would benefit upstream too.)
+19:42:02 <TheJollyRoger> Hmm...
+19:42:09 <hl> hm
+19:42:21 <hl> the ncdns package isn't upstream anyway, so its entire contents is a diff
+19:43:29 <Jeremy_Rand_Talo> hl: yeah, but the ncdns build script can be diffed against obfs4's or meek's build script to determine what we changed compared to upstream
+19:43:57 <Jeremy_Rand_Talo> Since they're both Go projects, the build scripts are relatively similar
+19:45:04 <Jeremy_Rand_Talo> (This would shrink to a zero diff if we got a patch merged upstream that moves that build script to the go project)
+19:45:18 <Jeremy_Rand_Talo> Which I suspect is easily achievable
+19:51:01 <Jeremy_Rand_Talo> hl: I can possibly look into submitting that upstream, though I'm mostly booked this week so it'll probably have to wait till circa Monday of next week
+19:53:58 <Jeremy_Rand_Talo> (That's all I had about ncdns-repro, should we move onto the next topic?)
+19:54:04 <hl> ok
+19:54:06 <TheJollyRoger> Okay!
+19:54:56 <Jeremy_Rand_Talo> #topic SPV Name Lookups
+19:55:54 <Jeremy_Rand_Talo> #info So, a large fraction of the Electrum-NMC network is currently down due to being hosted on machines that also host Bitcoin ElectrumX servers, which are currently under a large DDoS attack
+19:57:23 <Jeremy_Rand_Talo> #info This leads to questions about exactly why we need ElectrumX servers to do name lookups, and whether there are preferable ways to handle it
+19:57:55 <Jeremy_Rand_Talo> #info Usually, the role of ElectrumX servers is to maintain indexes (e.g. mapping addresses to transactions)
+19:58:17 <Jeremy_Rand_Talo> #info This is, theoretically, superfluous for Namecoin, because Namecoin Core already maintains such an index.
+19:58:44 <Jeremy_Rand_Talo> #info (Specifically, Namecoin Core has an index mapping names to transactions)
+20:00:05 <Jeremy_Rand_Talo> #info The main reason we're not using Namecoin Core's name index in ElectrumX is that we don't want nonexistent names to be directly revealed to the network (because that produces a squatting vulnerability)
+20:01:00 <Jeremy_Rand_Talo> #info Instead, ElectrumX indexes by a hash of the name, so you can request a nonexistent name from an ElectrumX server without revealing the name
+20:01:47 <Jeremy_Rand_Talo> #info This should be fixable in Namecoin Core.  It would be nice if Namecoin Core indexed names by their hash, so that we could do lookups by name hash.
+20:02:28 <Jeremy_Rand_Talo> #info We could then do useful things like removing the name index from ElectrumX and instead just pass through name lookups from ElectrumX directly to Namecoin Core, which would decrease resource usage considerably.
+20:03:23 <Jeremy_Rand_Talo> #info This would also probably enable things like Electrum Personal Server, which by its nature doesn't keep indexes.  (I haven't checked that in detail though.)
+20:04:12 <Jeremy_Rand_Talo> #info Allowing Namecoin Core's name index to be directly used for this purpose would also allow interesting things like adding a Namecoin wire protocol command for name lookups.
+20:06:05 <hl> ;q
+20:06:05 <Jeremy_Rand_Talo> #info Upon chatting with luke-jr about this, I think it's reasonable to add a Namecoin wire protocol command that does a name lookup by name hash, and returns the relevant transaction along with a Merkle proof.
+20:07:39 <Jeremy_Rand_Talo> #info We could also rig Namecoin Core to automatically issue that wire protocol command if the headers are synced but the full chain isn't yet.  Which would basically mean that Namecoin Core is usable for name lookups quite quickly after launch (though at SPV security) before the chain is synced.
+20:08:45 <Jeremy_Rand_Talo> #info This approach would probably be a lot more resistant to DDoS attacks, simply because there are a lot more Namecoin Core nodes than Namecoin ElectrumX servers (due to ElectrumX needing a lot more resources to run), and therefore a DDoS attack would need to take out a lot more nodes
+20:11:26 <Jeremy_Rand_Talo> #info There are also probably some cool enhancements we could do do that wire protocol command, e.g. utilizing Ryan's "unconfirmed transaction chains" idea so that if the chain is verified within 36 kiloblocks of the tip, the command could return a chain of transactions (starting with the last verified one), and we would just verify signatures of the tx chain so that we could be relatively confident that the
+20:11:27 <Jeremy_Rand_Talo> miners didn't invent a name tx out of thin air
+20:14:06 <Jeremy_Rand_Talo> hl: any opinions on the above?
+20:15:07 <TheJollyRoger> Wow.
+20:16:10 <hl> hmm, sounds good
+20:21:16 <Jeremy_Rand_Talo> alright then.  Any C++ coders want to volunteer for the relevant Core changes, or should I just dump this on Daniel's desk?  🙂
+20:23:26 <Jeremy_Rand_Talo> (Hypothetically, we might be able to apply for funding for this kind of work if we wait a bit, and I think all of us have other things we're currently busy with, so it's not really a problem if no one wants to code this up immediately)
+20:24:42 <TheJollyRoger> Er, sorry, I'm not a coder... :(.
+20:32:31 <Jeremy_Rand_Talo> alright
+20:34:24 <Jeremy_Rand_Talo> #action Jeremy will add "Make Core index names by hash" and "Add getname to wire protocol" to Roadmap and bring to Daniel's attention
+20:35:19 <Jeremy_Rand_Talo> I *think* those are the only things I was going to bring up today.  hl , anything you'd like to bring up?
+20:35:29 <hl> hmm, no
+20:35:45 <Jeremy_Rand_Talo> ok.  TheJollyRoger , anything you'd like to bring up?
+20:36:31 <TheJollyRoger> I don't think so, sorry.
+20:36:39 <TheJollyRoger> I haven't been able to try out that reproducible build harness yet >_<.
+20:36:50 <TheJollyRoger> Been pretty swamped :(. It's peak season for me.
+20:38:41 <Jeremy_Rand_Talo> TheJollyRoger: ok, no worries
+20:39:28 <Jeremy_Rand_Talo> And, with that, that's the end of the meeting.  Thanks for attending, see you next time.
+20:39:33 <Jeremy_Rand_Talo> #endmeeting

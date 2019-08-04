@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:01:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:01:24</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Jul 21 19:01:23 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:01:24</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:02:08</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi everyone, welcome to the Namecoin development meeting!
+<a name="l-5"></a><span class="tm">19:02:16</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Can we get a roll call of who's here today?
+<a name="l-6"></a><span class="tm">19:02:49</span><span class="nk"> &lt;somewhat[m]&gt;</span> *somewhat waves
+<a name="l-7"></a><span class="tm">19:03:31</span><span class="nk"> &lt;cannon-c[m]&gt;</span> Aye
+<a name="l-8"></a><span class="tm">19:05:06</span><span class="nk"> &lt;grringo[m]&gt;</span> hi
+<a name="l-9"></a><span class="tm">19:06:08</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi somewhat
+<a name="l-10"></a><span class="tm">19:06:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi cannon-c
+<a name="l-11"></a><span class="tm">19:06:21</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi grringo
+<a name="l-12"></a><span class="tm">19:07:07</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Lots of people here today, that's cool
+<a name="l-13"></a><span class="tm">19:09:14</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Okay, so first topic:
+<a name="l-14"></a><span class="tm">19:09:20</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">SegWit Softfork</span>
+<a name="l-15"></a><span class="tm">19:10:31</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've started contacting mining pools to make sure they know about the upcoming softfork, which is projected to activate in 83 days</span>
+<a name="l-16"></a><span class="tm">19:11:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Pools I've contacted so far are Antpool, F2Pool, and Slush, who collectively make up 38.7% of hashrate.</span>
+<a name="l-17"></a><span class="tm">19:12:16</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Slush's support team has gotten back to me already and says they've passed on my message to the developer team who handles the merged mining infrastructure.</span>
+<a name="l-18"></a><span class="tm">19:15:22</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Pools that I have contact info for but whom I haven't contacted yet are BTC.com, Poolin, BTC.TOP, ViaBTC, OK Pool, BitMinter, and ProHashing</span>
+<a name="l-19"></a><span class="tm">19:15:55</span><span class="nk"> &lt;jonasbits&gt;</span> cool
+<a name="l-20"></a><span class="tm">19:17:40</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">In order to figure out which pools currently mine NMC, I forked Cassini's `mm-blockstats` repo and fixed it to handle more pools and properly handle SegWit coinbase outputs.  The new repo is at https://github.com/namecoin/mm-blockstats</span>
+<a name="l-21"></a><span class="tm">19:18:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Currently it can identify all but 0.3% of NMC hashrate.  0.2% of which is an unknown BSV pool, and the remaining 0.1% I have no idea what it is.</span>
+<a name="l-22"></a><span class="tm">19:21:29</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I'll hopefully have more info on miner upgrade status at our next meeting.</span>
+<a name="l-23"></a><span class="tm">19:22:13</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">7918070_:</span> did you have some topics you wanted to cover from a couple weeks ago?
+<a name="l-24"></a><span class="tm">19:25:56</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyways, next topic
+<a name="l-25"></a><span class="tm">19:26:14</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Tor Development Meeting</span>
+<a name="l-26"></a><span class="tm">19:26:29</span><span class="nk"> &lt;somewhat[m]&gt;</span> *somewhat cheers
+<a name="l-27"></a><span class="tm">19:27:53</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Meeting went very well.  As usual, I'm not going to go into lots of detail about the discussions, since I want people to be able to talk to me at conferences without worrying that off-the-cuff comments will get broadcast publicly.  That said, things are moving forward, and there don't appear to be any surprise blockers.</span>
+<a name="l-28"></a><span class="tm">19:29:44</span><span class="nk"> &lt;jonasbits&gt;</span> great!
+<a name="l-29"></a><span class="tm">19:29:59</span><span class="nk"> &lt;cannon-c[m]&gt;</span> wow lots of big things coming up for nmc!
+<a name="l-30"></a><span class="tm">19:33:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> yep, cool stuff.
+<a name="l-31"></a><span class="tm">19:34:24 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">notes that he doesn't really have many topics for today, because he was away at the Tor meeting since circa the previous Matrix meeting 2 weeks ago, so not much has happened in the dev department in the last 2 weeks on my end</span>
+<a name="l-32"></a><span class="tm">19:35:31</span><span class="nk"> &lt;cannon-c[m]&gt;</span> Were you representing NMC on some show if I understand properly?
+<a name="l-33"></a><span class="tm">19:36:45</span><span class="nk"> &lt;somewhat[m]&gt;</span> give it 6 months cannon-c
+<a name="l-34"></a><span class="tm">19:36:47</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">cannon-c:</span> nah, I was just in the studio audience of *Redacted Tonight*.  Wasn't an interview or anything like that, but I did chat with Lee about Namecoin after the show.
+<a name="l-35"></a><span class="tm">19:38:54</span><span class="nk"> &lt;TheJollyRoger&gt;</span> ((Whoops, sorry about that. Display locked up and I didn't even realize it)
+<a name="l-36"></a><span class="tm">19:39:36</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Woah, that's awesome news to hear about Tor! \o/
+<a name="l-37"></a><span class="tm">19:40:05</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> btw, if anyone can dig up contact info for Huobi Pool, which seems to have 6.0% of NMC hashrate, that would be useful.  AFAICT their website seems to be Chinese-only and doesn't list anything that I can easily recognize as contact info, and their website seems to misbehave when accessed over Tor as well.
+<a name="l-38"></a><span class="tm">19:41:27</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Ack.
+<a name="l-39"></a><span class="tm">19:44:33</span><span class="nk"> &lt;cannon-c[m]&gt;</span> On it also.
+<a name="l-40"></a><span class="tm">19:45:22</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Looks like @EOS_huobipool on Twitter might be a potential contact method.  Not sure if that account covers their BTC mining operations or if it's EOS-specific.
+<a name="l-41"></a><span class="tm">19:46:16 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">didn't even know until today that a Dan Larimer shitcoin company mines 6% of NMC hashrate.</span>
+<a name="l-42"></a><span class="tm">19:47:12</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> Well, at the very least they're still really far away from a majority share...
+<a name="l-43"></a><span class="tm">19:47:58</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> I mean, it's not that I'm worried about their hashrate being a threat, I'm just mildly surprised that a company like that is investing so much into BTC mining.
+<a name="l-44"></a><span class="tm">19:48:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> They're certainly more than welcome to do so.
+<a name="l-45"></a><span class="tm">19:52:06</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyways.  Anyone have additional topics to bring up?
+<a name="l-46"></a><span class="tm">19:53:48</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> I don't have anything, I don't think.
+<a name="l-47"></a><span class="tm">19:53:58</span><span class="nk"> &lt;grringo[m]&gt;</span> what will happen if someone will store parts/link to porn image or personal data? will all full nodes had to host that content or there is a way to omit that data or something? has someone check for that issue?
+<a name="l-48"></a><span class="tm">19:55:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> I mean, there's not really any reason for anyone to use a blockchain for that use case (modulo the nutjobs over in Bitcoin Bernie Madoff Land), seeing as such usage doesn't scale and will very quickly hit the block weight limit and become prohibitively expensive for whoever's creating the transactions
+<a name="l-49"></a><span class="tm">19:55:35</span><span class="nk"> &lt;cannon-c[m]&gt;</span> I guess one could choose to just not follow those links. Just like with bitcoin some people polluted blockchain with bad stuff, I choose to not encode that stuff into interpretable data
+<a name="l-50"></a><span class="tm">19:56:04</span><span class="nk"> &lt;cannon-c[m]&gt;</span> with any censorship restistant platform you will always have bad stuff.
+<a name="l-51"></a><span class="tm">19:56:24</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> If anyone does start doing shit like that, I will definitely take it as an invitation to decrease the block weight limit significantly
+<a name="l-52"></a><span class="tm">19:56:29</span><span class="nk"> &lt;cannon-c[m]&gt;</span> Could just ignore it right and choose to not follow such links or encode such data?
+<a name="l-53"></a><span class="tm">19:57:10</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">cannon-c:</span> well, you can ignore it, but you still have to download/store it, which is a scalability issue, hence why using the block weight limit to deter that kind of spam is a good idea
+<a name="l-54"></a><span class="tm">19:58:00</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Similarly there's some asshole who's currently using the NMC chain as a Twitter alternative to post rants about Freemasons; if that kind of usage became common it would similarly be a good reason to decrease the block weight limit heavily
+<a name="l-55"></a><span class="tm">19:58:43</span><span class="nk"> &lt;cannon-c[m]&gt;</span> Using a blockchain for instant messaging or something like twitter would create alot of spam. Which is best mitigated with higher cost right?
+<a name="l-56"></a><span class="tm">19:59:33</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> If people want a censorship-resistant data publishing system, there are lots of good projects out there (onion services, ZeroNet, I2P, Freenet, etc) that are actually designed for that use case.  Namecoin clearly isn't designed for that, and the block weight limit is a good mechanism for enforcing that such usage be prohibitively expensive for the spammer
+<a name="l-57"></a><span class="tm">19:59:54</span><span class="nk"> &lt;cannon-c[m]&gt;</span> or hidden services, with human readable domain names?
+<a name="l-58"></a><span class="tm">20:00:27</span><span class="nk"> &lt;cannon-c[m]&gt;</span> that can be re-pointed to other hidden services address if the server comes under seige
+<a name="l-59"></a><span class="tm">20:00:53</span><span class="nk"> &lt;cannon-c[m]&gt;</span> but yes other projects better suited for decentralized hosting, of which NMC can compliment, but in a different way
+<a name="l-60"></a><span class="tm">20:00:54</span><span class="nk"> &lt;somewhat[m]&gt;</span> &lt;Jeremy_Rand_Talo "grringo: I mean, there's not rea"&gt; currently if someone were to begin doing this how would it be prohibitively expensive?
+<a name="l-61"></a><span class="tm">20:01:47</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">cannon-c:</span> sure.  Posting content to a website that has a .bit domain scales just fine.  It's just the concept of putting the website itself into the blockchain that's a brain-damaged idea (and seems to be actively being pursued by the Bitcoin Bernie Madoff idiots, for Satan-knows-what-reason)
+<a name="l-62"></a><span class="tm">20:02:10</span><span class="nk"> &lt;somewhat[m]&gt;</span> anyone with substantial holdings of btc could keep it going for a non-trivial amount of time
+<a name="l-63"></a><span class="tm">20:02:26</span><span class="nk"> &lt;cannon-c[m]&gt;</span> well said Jeremy
+<a name="l-64"></a><span class="tm">20:03:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">somewhat:</span> if they run into the block weight limit, the fees will skyrocket without bound until they decide it's no longer worth their money.  Given that there are other systems out there that provide similar functionality gratis (e.g. onion services and ZeroNet), I'd be surprised if anyone is dumb enough to decide it's worth their money for very long
+<a name="l-65"></a><span class="tm">20:04:30</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Whew.
+<a name="l-66"></a><span class="tm">20:04:31</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">somewhat:</span> but on the bright side, if they do attempt it, it'll have the side effect of making squatting more expensive (for a little while)
+<a name="l-67"></a><span class="tm">20:04:42</span><span class="nk"> &lt;TheJollyRoger&gt;</span> So we do have a means to control spam?
+<a name="l-68"></a><span class="tm">20:04:46</span><span class="nk"> &lt;cannon-c[m]&gt;</span> no different than if someone could just afford to fill blocks to DOS the network right?
+<a name="l-69"></a><span class="tm">20:04:47</span><span class="nk"> &lt;somewhat[m]&gt;</span> i was thinking as an example someone who promotes ens who has btc spamming
+<a name="l-70"></a><span class="tm">20:05:15</span><span class="nk"> &lt;cannon-c[m]&gt;</span> to prevent everyone elses transactions. this has always been a possibility even with bitcoin right?
+<a name="l-71"></a><span class="tm">20:05:57</span><span class="nk"> &lt;cannon-c[m]&gt;</span> just be careful to not let the means of "controlling spam" become a means to enable censorship.
+<a name="l-72"></a><span class="tm">20:06:27</span><span class="nk"> &lt;grringo[m]&gt;</span> do namecoin blockchain contain such data already?
+<a name="l-73"></a><span class="tm">20:06:44</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">cannon-c:</span> sure, you can theoretically spam the Bitcoin network in order to fill up blocks with junk.  The Bcash proponents actually did this a couple years ago for a while.  But that kind of attack doesn't scale long-term, and they burned vast amounts of money doing the attack despite not jacking up fees for legit users to a level that would be problematic for a naming system
+<a name="l-74"></a><span class="tm">20:06:53</span><span class="nk"> &lt;cannon-c[m]&gt;</span> even if created with good intent, means of censorship could be abused later on
+<a name="l-75"></a><span class="tm">20:07:35</span><span class="nk"> &lt;cannon-c[m]&gt;</span> filtering should be client side I think
+<a name="l-76"></a><span class="tm">20:07:38</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">cannon-c:</span> actually the Blockstack devs also spammed the Bitcoin network heavily.  Something like 20-30% of Bitcoin blocks during the scaling crisis were spam from Blockstack.  Which is one more reason I don't like the Blockstack devs.
+<a name="l-77"></a><span class="tm">20:08:37</span><span class="nk"> &lt;cannon-c[m]&gt;</span> "despite not jacking up fees for legit users to a level that would be problematic for a naming system"  you mean because in naming systems you would be doing much less transactions, maybe couple times a year?
+<a name="l-78"></a><span class="tm">20:08:58</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">cannon-c:</span> usually "censorship" implies something that targets specific categories of content, as opposed to what we're talking about here which is just making sure that the fees per transaction byte are high enough to keep the system from being DoSed
+<a name="l-79"></a><span class="tm">20:09:00</span><span class="nk"> &lt;cannon-c[m]&gt;</span> What!? blockstack spamming bitcoin network? first I heard of this
+<a name="l-80"></a><span class="tm">20:09:38</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">cannon-c:</span> I don't think anyone is interested in censoring Namecoin transactions for specific data, except for Zach Lym, and we kicked him out (good riddance)
+<a name="l-81"></a><span class="tm">20:10:39</span><span class="nk"> &lt;somewhat[m]&gt;</span> <span class="hi">Jeremy_Rand_Talos:</span> in terms of long-term price what thoughts are there on where price "should" stabilise
+<a name="l-82"></a><span class="tm">20:10:47</span><span class="nk"> &lt;somewhat[m]&gt;</span> to make squatting expensive etc.
+<a name="l-83"></a><span class="tm">20:11:12</span><span class="nk"> &lt;somewhat[m]&gt;</span> too high is just as bad in terms of per nmc in somewhat's opinion
+<a name="l-84"></a><span class="tm">20:11:47</span><span class="nk"> &lt;somewhat[m]&gt;</span> the 3rd world need domains too :)
+<a name="l-85"></a><span class="tm">20:12:13</span><span class="nk"> &lt;cannon-c[m]&gt;</span> it does make it hard when the price of name and renewals are baked into protocol, whereas the price of NMC to fiat can be volatile or drastically move in any direction. Too low of a cost is as bad as too high a cost
+<a name="l-86"></a><span class="tm">20:12:50</span><span class="nk"> &lt;cannon-c[m]&gt;</span> maybe variable of cost of renewal should be dynamic rather than static, frequently adjusted to reflect current value of NMC?
+<a name="l-87"></a><span class="tm">20:12:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> the Namecoin chain has a mild amount of spam, but the number of spammers and the volume of their activity is low enough AFAIK that trying to counter them is not the highest thing on my priority list.  (I seem to recall that someone was splitting incest-related textual fiction into 520-byte chunks and trying to stuff it into the chain a few years ago, no idea if they're still around or if they gave up on
+<a name="l-88"></a><span class="tm">20:13:00</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> that stupidity.)
+<a name="l-89"></a><span class="tm">20:13:04</span><span class="nk"> &lt;somewhat[m]&gt;</span> too low is obviously the only issue short-term but 10 years from now
+<a name="l-90"></a><span class="tm">20:13:38</span><span class="nk"> &lt;cannon-c[m]&gt;</span> or maybe different cost rather than financial, like a high PoW cost of domain or something like that?
+<a name="l-91"></a><span class="tm">20:13:54</span><span class="nk"> &lt;cannon-c[m]&gt;</span> I dont know the solution for preventing squatting
+<a name="l-92"></a><span class="tm">20:14:34</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">cannon-c:</span> yeah, Blockstack's spamming of the Bitcoin chain pissed off a lot of people.  Happily, their scam imploded just like we predicted it would.  Now they're apparently doing an ICO shitcoin scam to try to raise money for some kind of successor that they admit they don't even know yet how to build, which I'm okay with because it's making their scammery a lot more obvious even to clueless people
+<a name="l-93"></a><span class="tm">20:17:19</span><span class="nk"> &lt;grringo[m]&gt;</span> is there a way to remove such known data from own copy of blockchain and still be secure?
+<a name="l-94"></a><span class="tm">20:17:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">somewhat:</span> DNS seems to be doing okay with a price ranging from 1 to 10 USD or so for mainstream TLD's.  If NMC is within that range, I don't think it'll be prohibitive for most users.  Name pricing doesn't fully eliminate squatting no matter what price you set (as the FAQ explains).  There are other approaches to solve squatting (e.g. the centralized anti-Sybil mechanism that I briefly discussed with the Monero
+<a name="l-95"></a><span class="tm">20:17:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> guys), but that kind of thing can't be added to Namecoin, it would have to be its own chain due to very different security properties.
+<a name="l-96"></a><span class="tm">20:18:42</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">cannon-c:</span> in practice, any kind of PoW-based squatting control will end up being commoditized, just like Bitcoin mining, so it'll end up being a financial cost
+<a name="l-97"></a><span class="tm">20:19:18</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Huh. It's game theory.
+<a name="l-98"></a><span class="tm">20:19:34</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> not right now.  But once SegVal is activated (anyone want to help implement that?), spam data like that will be automatically deleted by the network after the transactions expire
+<a name="l-99"></a><span class="tm">20:19:43</span><span class="nk"> &lt;somewhat[m]&gt;</span> *somewhat's head hurts thinking about how things play out
+<a name="l-100"></a><span class="tm">20:23:06</span><span class="nk"> &lt;grringo[m]&gt;</span> if someone is using electrum-nmc then he need to do download whole blockchain?
+<a name="l-101"></a><span class="tm">20:24:04</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> no, Electrum-NMC is a headers-only client; the only time it downloads transactions is when they're relevant to a wallet or to a name lookup
+<a name="l-102"></a><span class="tm">20:25:43</span><span class="nk"> &lt;somewhat[m]&gt;</span> *somewhat bids everyone well and goes for food
+<a name="l-103"></a><span class="tm">20:26:46</span><span class="nk"> &lt;cannon-c[m]&gt;</span> Need to take off. Reading rest of this later on from the log. Great discussions.
+<a name="l-104"></a><span class="tm">20:27:23 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">is basically out of things to discuss, so if no one else has topics to bring up, we'll close the meeting shortly</span>
+<a name="l-105"></a><span class="tm">20:27:47</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I don't think I have anything!
+<a name="l-106"></a><span class="tm">20:27:57</span><span class="nk"> &lt;TheJollyRoger&gt;</span> But I'll definitely be reading through this! \o/
+<a name="l-107"></a><span class="tm">20:28:25</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Possibly repeatedly, it definitely is great to know that we have mitigations ready in case someone starts trying to use the blockchain for other stuff besides names.
+<a name="l-108"></a><span class="tm">20:28:55</span><span class="nk"> &lt;somewhat[m]&gt;</span> \o/
+<a name="l-109"></a><span class="tm">20:31:15</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Yarr-harr!
+<a name="l-110"></a><span class="tm">20:31:21</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> alright then.  Thanks for attending everyone!
+<a name="l-111"></a><span class="tm">20:31:35</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

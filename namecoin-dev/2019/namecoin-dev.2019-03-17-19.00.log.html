@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:00:36</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:00:36</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Mar 17 19:00:36 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:00:36</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:01:39</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi everyone, welcome to the meeting
+<a name="l-5"></a><span class="tm">19:01:41</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Can we get a roll call of who's here today?
+<a name="l-6"></a><span class="tm">19:05:47</span><span class="nk"> &lt;hl&gt;</span> hi
+<a name="l-7"></a><span class="tm">19:06:09</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi hl
+<a name="l-8"></a><span class="tm">19:06:33</span><span class="nk"> &lt;JollyRoger`&gt;</span> Ahoy, cap'n!
+<a name="l-9"></a><span class="tm">19:06:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi JollyRoger`
+<a name="l-10"></a><span class="tm">19:07:58</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Okay, so, first topic:
+<a name="l-11"></a><span class="tm">19:08:19</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Electrum-NMC optimizations</span>
+<a name="l-12"></a><span class="tm">19:08:47</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">The cp_height PR is still working its way through upstream review.</span>
+<a name="l-13"></a><span class="tm">19:09:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">There was some minor disagreement about a couple of the optimizations I made in that PR, which is still in the process of being discussed</span>
+<a name="l-14"></a><span class="tm">19:09:31</span><span class="nk"> &lt;jonasbits&gt;</span> hi
+<a name="l-15"></a><span class="tm">19:10:05</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Neil has requested that I submit a protocol and code PR for the CBOR+DEFLATE transport; I intend to do that when I have some time</span>
+<a name="l-16"></a><span class="tm">19:10:11</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi jonasbits
+<a name="l-17"></a><span class="tm">19:11:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I noticed an optimization that can be made to Namecoin Core's AuxPoW serialization that will save 36 bytes per AuxPoW header, which is around 4% of Electrum-NMC's bandwidth usage.  Daniel is looking into implementing it.</span>
+<a name="l-18"></a><span class="tm">19:12:45</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">(The optimization is that Namecoin Core currently serializes the parent block hash and the parent coinbase transaction's Merkle index.  The former is redundant because its preimage also is present in AuxPoW headers, and the latter is redundant because the coinbase transaction is always the first transaction, so its Merkle index is always 0.)</span>
+<a name="l-19"></a><span class="tm">19:13:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> That's what I've been doing with Electrum-NMC optimizations; anyone have questions/comments about that subject?
+<a name="l-20"></a><span class="tm">19:14:18</span><span class="nk"> &lt;JollyRoger`&gt;</span> Er, not me.
+<a name="l-21"></a><span class="tm">19:18:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Okay, moving along...
+<a name="l-22"></a><span class="tm">19:19:09</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Electrum-NMC rebranding static analyzer</span>
+<a name="l-23"></a><span class="tm">19:19:48</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I got tired of randomly stumbling across bugs in Electrum-NMC that were caused by me failing to change Bitcoin-related strings to Namecoin equivalents when merging stuff from upstream</span>
+<a name="l-24"></a><span class="tm">19:20:10</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">So I made a static analyzer to check for that stuff for me</span>
+<a name="l-25"></a><span class="tm">19:20:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">It found quite a lot of bugs.  Most of them were fairly harmless (e.g. GUI display bugs), but it did find a few important ones</span>
+<a name="l-26"></a><span class="tm">19:21:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Among other things, it found that the message signing code was broken, and that the KeepKey hardware wallet code was broken.</span>
+<a name="l-27"></a><span class="tm">19:22:26</span><span class="nk"> &lt;JollyRoger`&gt;</span> Yikes, I'm really glad I didn't buy a KeepKey then.
+<a name="l-28"></a><span class="tm">19:22:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#help </span><span class="cmdline">I think I've fixed those bugs, but I don't have a KeepKey wallet to test with.  Do we know anyone with a KeepKey device who can test the fix?</span>
+<a name="l-29"></a><span class="tm">19:23:25</span><span class="nk"> &lt;JollyRoger`&gt;</span> Sorry, I don't :(
+<a name="l-30"></a><span class="tm">19:24:05</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">If all else fails, I'll just ask on Reddit and Twitter if someone can test it for us.</span>
+<a name="l-31"></a><span class="tm">19:26:01</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Also the static analyzer indicates that the localization code in Electrum-NMC is likely to be horribly broken.  Not surprising since I've never tested it with non-English locales.</span>
+<a name="l-32"></a><span class="tm">19:27:22</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">At some point we'll probably need to just set up a Transifex account for Electrum-NMC as well as Namecoin Core.  I haven't had the time to do it yet, but at some point it'll be necessary for UX reasons.</span>
+<a name="l-33"></a><span class="tm">19:28:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyone have comments/questions about that stuff?  (I don't suppose anyone here has experience with Transifex?)
+<a name="l-34"></a><span class="tm">19:31:33</span><span class="nk"> &lt;JollyRoger`&gt;</span> I don't, sorry.
+<a name="l-35"></a><span class="tm">19:34:49</span><span class="nk"> &lt;somewhat[m]&gt;</span> Hi and no questions!
+<a name="l-36"></a><span class="tm">19:35:33</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi somewhat
+<a name="l-37"></a><span class="tm">19:35:47</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Okay, moving along...
+<a name="l-38"></a><span class="tm">19:37:48</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">JollyRoger`:</span> / hl : is there anything new regarding reproducible builds for ncdns?  (If so, set the topic prior to giving details so that the minutes bot doesn't get confused)
+<a name="l-39"></a><span class="tm">19:38:30</span><span class="nk"> &lt;JollyRoger`&gt;</span> No news, sorry. I'm still struggling on with it. Last weekend I had both computers break down, and I've been rushing to fix them. That put me behind a lot.
+<a name="l-40"></a><span class="tm">19:40:03</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok, no worries
+<a name="l-41"></a><span class="tm">19:40:18</span><span class="nk"> &lt;JollyRoger`&gt;</span> (A botched kernel upgrade crippled the Morgan's Revenge, forcing me to use an incomplete dual boot as a lifeboat, and an unrelated misconfiguration on Spirit of Adventure had left it dead in the water until I could resolve what was going on)
+<a name="l-42"></a><span class="tm">19:40:34</span><span class="nk"> &lt;JollyRoger`&gt;</span> Sorry about that :(.
+<a name="l-43"></a><span class="tm">19:43:01</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> I'll move along to the next topic then...
+<a name="l-44"></a><span class="tm">19:43:34</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Merchandise</span>
+<a name="l-45"></a><span class="tm">19:45:08</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've reached out to Diego from Cypher Market.  It looks like it's feasible to list Namecoin merchandise there.  However, there's a small issue on their website right now that breaks some stuff when accessing it over Tor with JavaScript disabled.  Diego and I think it's feasible to fix; we'll continue discussing listing Namecoin merchandise there once that issue is fixed.</span>
+<a name="l-46"></a><span class="tm">19:48:55</span><span class="nk"> &lt;JollyRoger`&gt;</span> Fantastic!
+<a name="l-47"></a><span class="tm">19:50:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> okay, moving along again...
+<a name="l-48"></a><span class="tm">19:50:58</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">YaCy search engine for Namecoin</span>
+<a name="l-49"></a><span class="tm">19:51:55</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've written a tool (in Go) that automatically prepares a YaCy installation for use as a Namecoin search engine (i.e. setting the Use Case settings appropriately).</span>
+<a name="l-50"></a><span class="tm">19:52:23</span><span class="nk"> &lt;somewhat[m]&gt;</span> congratulations!
+<a name="l-51"></a><span class="tm">19:52:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Next I plan to write another Go tool that automatically triggers a YaCy crawl based on the Namecoin blockchain</span>
+<a name="l-52"></a><span class="tm">19:53:15</span><span class="nk"> &lt;JollyRoger`&gt;</span> Wow!
+<a name="l-53"></a><span class="tm">19:53:20</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Also, happily, chromium-driver Debian/ppc64le packages are now available from Raptor, so I should be able to make some progress on a ZeroNet search engine too</span>
+<a name="l-54"></a><span class="tm">20:03:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> are there any other topics you'd like to bring up today?
+<a name="l-55"></a><span class="tm">20:03:30</span><span class="nk"> &lt;somewhat[m]&gt;</span> While there is a gap, the nmc search engine will handle "zeronet" in nmc JSON and the zeronet search engine will handle all zeronet sites?
+<a name="l-56"></a><span class="tm">20:03:39</span><span class="nk"> &lt;hl&gt;</span> no
+<a name="l-57"></a><span class="tm">20:03:56</span><span class="nk"> &lt;somewhat[m]&gt;</span> Is that what you are describing?
+<a name="l-58"></a><span class="tm">20:09:34</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">somewhat:</span> so there are actually 5 modes for a search engine.  (1) Use ncdns to dump a site list, crawl them in YaCy; this is useful for a P2P search engine.  (2) Same as 1 except use ncdns with a modification to add trailing periods to "ns" field; this is useful for research purposes in figuring out what users are using broken software.  (3) Same as 1 except use ncdns with a modification to output domains that
+<a name="l-59"></a><span class="tm">20:09:34</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> have a Tor onion service or an I2P eepsite; this is useful for indexing darknet sites.  (4) Same as 1 except use ncdns to output domains that use ZeroNet; because ZeroNet requires JS, doing this requires some witchcraft involving mitmproxy and selenium.  (5) Same as 4, but also follow links to non-.bit domains that look like ZeroNet sites.  This might be useful for research purposes involving investigating
+<a name="l-60"></a><span class="tm">20:09:35</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> whether ZeroNet sites on Namecoin versus non-Namecoin ZeroNet sites have different usage.
+<a name="l-61"></a><span class="tm">20:10:01</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Maybe there are some other modes I haven't considered.
+<a name="l-62"></a><span class="tm">20:10:48</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> At the moment, (1) is my top priority, followed by (4).  The other three modes seem interesting but aren't likely to happen anytime soon from me (though the code I wrote for (1) and (4) should make the other there modes easy to implement if someone wants to try)
+<a name="l-63"></a><span class="tm">20:13:40</span><span class="nk"> &lt;somewhat[m]&gt;</span> Thanks for the detail :)
+<a name="l-64"></a><span class="tm">20:14:26</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> By the way, there are a crapton of ZeroNet sites that have misconfigured hyperlinks, so that all their links are broken when you access them via a transproxy.  I suppose mode (6) might be to try to automatically correct that issue via mitmproxy, which would be useful for research purposes similar to (2)
+<a name="l-65"></a><span class="tm">20:16:42</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> (It's not super surprising that so many sites are broken in that way, since transproxy support in ZeroNet isn't very widely used, so I doubt most site owners are testing against it.  Hopefully that'll correct itself after some things I discussed with Tamas last summer end up happening....)
+<a name="l-66"></a><span class="tm">20:20:04</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">JollyRoger`:</span> anything else you'd like to bring up today?
+<a name="l-67"></a><span class="tm">20:20:13</span><span class="nk"> &lt;JollyRoger`&gt;</span> Er, not at this moment, sorry.
+<a name="l-68"></a><span class="tm">20:20:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">jonasbits:</span> anything you'd like to bring up today?
+<a name="l-69"></a><span class="tm">20:24:40</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">somewhat:</span> how about you?
+<a name="l-70"></a><span class="tm">20:25:05</span><span class="nk"> &lt;somewhat[m]&gt;</span> nope
+<a name="l-71"></a><span class="tm">20:26:01</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> cool.  Okay, one last quick informal question: how do people like the Namecoin Meeting Reminder bot?  I get the impression that it's helping a lot, is that an accurate impression?
+<a name="l-72"></a><span class="tm">20:27:09</span><span class="nk"> &lt;somewhat[m]&gt;</span> it's great!
+<a name="l-73"></a><span class="tm">20:27:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> excellent
+<a name="l-74"></a><span class="tm">20:30:44</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> okay then.  Thanks for attending everyone!
+<a name="l-75"></a><span class="tm">20:30:51</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

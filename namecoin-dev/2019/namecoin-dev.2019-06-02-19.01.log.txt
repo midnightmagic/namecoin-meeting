@@ -1,0 +1,57 @@
+19:01:57 <Jeremy_Rand_Talo> #startmeeting
+19:01:57 <qpm> Meeting started Sun Jun  2 19:01:57 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:01:57 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:03:03 <Jeremy_Rand_Talo> Hi everyone, welcome to the meeting!  Can we get a roll call of who's here today?
+19:03:27 <grringo[m]> hi
+19:04:15 <Jeremy_Rand_Talo> Hi grringo
+19:07:20 <Jeremy_Rand_Talo> ok, so first topic:
+19:07:31 <Jeremy_Rand_Talo> #topic Namecoin Core
+19:08:36 <Jeremy_Rand_Talo> #info Gitian binaries of Namecoin Core 0.18.0 are being built as I write this
+19:09:37 <Jeremy_Rand_Talo> #info GNU/Linux binaries are already built; it's doing Windows binaries now; macOS binaries will be done after Windows finishes
+19:11:43 <Jeremy_Rand_Talo> #help It would be great if other people volunteered to build Gitian binaries of Namecoin Core 0.18.0 as well.
+19:13:31 <Jeremy_Rand_Talo> Other Namecoin Core thing:
+19:15:55 <Jeremy_Rand_Talo> #info It occurred to me that while the name registration GUI (what Electrum-NMC calls the Buy Names tab) is blocked by adding new wallet RPC commands, I'm pretty sure that the other name GUI components (what Electrum-NMC calls the Manage Names tab) isn't blocked by anything right now.
+19:17:05 <Jeremy_Rand_Talo> #info So, it might be productive to add the Manage Names tab to Namecoin Core master branch, without worrying about the Buy Names tab for now.  This would help a lot of users.
+19:17:56 <Jeremy_Rand_Talo> Anyone have thoughts on either of the above 2 things?
+19:23:27 <Jeremy_Rand_Talo> ok, moving along...
+19:23:37 <Jeremy_Rand_Talo> #topic TLS
+19:24:16 <Jeremy_Rand_Talo> #info You might have noticed that Tor Browser 8.5 exited alpha and is now stable.
+19:25:11 <Jeremy_Rand_Talo> #info This is cool for us, since Tor Browser 8.5 includes Namecoin's certutil Windows/macOS patch
+19:32:54 <Jeremy_Rand_Talo> meanwhile, also in the TLS department...
+19:36:02 <somewhat[m]> *somewhat waves
+19:36:05 <Jeremy_Rand_Talo> #info I'm in the process of refactoring `tor-browser-build`'s Go build scripts.  The intent is to make it more straightforward to build Go executables in the same way that Go libraries can be built.  I intend to submit this upstream to Tor; `ncdns-repro` will then be altered to use that code, which should make ncdns-repro's code a lot cleaner.
+19:36:15 <Jeremy_Rand_Talo> hi somewhat !
+19:42:55 <Jeremy_Rand_Talo> grringo: would you like to talk about the DNSSEC-HSTS stuff you've been working on lately?
+19:44:25 <grringo[m]> I made some code refactor/cleanoups and also managed to find way to use async callback in webRequest api in chrome
+19:45:34 <grringo[m]> now I'm waiting for final code review
+19:45:55 <grringo[m]> thats all
+19:47:22 <Jeremy_Rand_Talo> #info grringo has been working on code refactoring/cleanup for DNSSEC-HSTS; those changes are now awaiting review
+19:47:37 <Jeremy_Rand_Talo> cool, thanks grringo
+19:48:23 <Jeremy_Rand_Talo> I think those are the main things I wanted to cover today.  grringo and somewhat , do either of you want to cover anything else today?
+19:50:48 <somewhat[m]> not atm
+19:51:12 <grringo[m]> nothing
+19:52:43 <Jeremy_Rand_Talo> grringo: oh, forgot to say: can you submit a PR to Namecoin's DNSSEC-HSTS repo with your changes?  Would make reviewing it somewhat more organized.
+19:53:53 <grringo[m]> ok
+19:56:19 <grringo[m]> Please confirm what to do with that `sleep` after sync request then I will reorganize commit and do PR.
+19:59:30 <Jeremy_Rand_Talo> grringo: My inclination is to leave the sleep there, but if you want to tag Tagide in your PR and ask him for details about the sleep so that we can better evaluate the situation, then feel free to do so.
+20:00:56 <Jeremy_Rand_Talo> By the way, Windows Gitian binaries of Namecoin Core 0.18.0 are now built; macOS binaries are building now.
+20:01:24 <grringo[m]> ok then, I will leave that `sleep` as is and if the situation will clarify then we can eventually remove it later - for sure it's not harmful
+20:02:04 <Jeremy_Rand_Talo> grringo: sounds good
+20:04:45 <somewhat[m]> *somewhat wonders if softfork ticker will be added to namecoin.org with core binaries
+20:04:50 <somewhat[m]> **somewhat is naff
+20:06:21 <Jeremy_Rand_Talo> somewhat: what kind of info would you suggest to include?  I'd have no objection to an announcement bar at the top of the page or something like that
+20:07:33 <somewhat[m]> approx. days until soft fork.
+20:08:35 <somewhat[m]> or block countdown I guess
+20:09:48 <Jeremy_Rand_Talo> somewhat: hmm, that would be a bit tricky since it would require that the website integrate with a Namecoin node or something in order to figure out the current block height
+20:10:31 <somewhat[m]> maybe just an approximate date in that case
+20:10:57 <somewhat[m]> shitcoins do such things really well
+20:11:07 <somewhat[m]> so maybe not doing something similar is nice as well
+20:14:03 <Jeremy_Rand_Talo> somewhat: well, I mean, it would be theoretically possible to rig a bot on my Talos to watch the block height and periodically commit the results to a Git repo that gets pulled into the Jekyll build process.  I'm already intending to do that for a different feature (showing the Namecoin hashrate distribution on the website).  But it's a lot of bother to do, and isn't incredibly high priority to set up the needed
+20:14:03 <Jeremy_Rand_Talo> infrastructure.
+20:14:31 <Jeremy_Rand_Talo> somewhat: I suspect the shitcoins are doing something insecure like scraping BitInfoCharts
+20:14:48 <somewhat[m]> *somewhat laughs
+20:16:52 <somewhat[m]> **somewhat likes the idea of hashrate visibility
+20:22:16 <Jeremy_Rand_Talo> alright cool, anything else to cover today before we close the meeting?
+20:24:21 <somewhat[m]> nope
+20:29:35 <Jeremy_Rand_Talo> cool, thanks for attending everyone
+20:29:45 <Jeremy_Rand_Talo> #endmeeting

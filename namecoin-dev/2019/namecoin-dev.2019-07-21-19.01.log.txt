@@ -1,0 +1,111 @@
+19:01:23 <Jeremy_Rand_Talo> #startmeeting
+19:01:24 <qpm> Meeting started Sun Jul 21 19:01:23 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:01:24 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:02:08 <Jeremy_Rand_Talo> Hi everyone, welcome to the Namecoin development meeting!
+19:02:16 <Jeremy_Rand_Talo> Can we get a roll call of who's here today?
+19:02:49 <somewhat[m]> *somewhat waves
+19:03:31 <cannon-c[m]> Aye
+19:05:06 <grringo[m]> hi
+19:06:08 <Jeremy_Rand_Talo> Hi somewhat
+19:06:17 <Jeremy_Rand_Talo> Hi cannon-c
+19:06:21 <Jeremy_Rand_Talo> Hi grringo
+19:07:07 <Jeremy_Rand_Talo> Lots of people here today, that's cool
+19:09:14 <Jeremy_Rand_Talo> Okay, so first topic:
+19:09:20 <Jeremy_Rand_Talo> #topic SegWit Softfork
+19:10:31 <Jeremy_Rand_Talo> #info I've started contacting mining pools to make sure they know about the upcoming softfork, which is projected to activate in 83 days
+19:11:28 <Jeremy_Rand_Talo> #info Pools I've contacted so far are Antpool, F2Pool, and Slush, who collectively make up 38.7% of hashrate.
+19:12:16 <Jeremy_Rand_Talo> #info Slush's support team has gotten back to me already and says they've passed on my message to the developer team who handles the merged mining infrastructure.
+19:15:22 <Jeremy_Rand_Talo> #info Pools that I have contact info for but whom I haven't contacted yet are BTC.com, Poolin, BTC.TOP, ViaBTC, OK Pool, BitMinter, and ProHashing
+19:15:55 <jonasbits> cool
+19:17:40 <Jeremy_Rand_Talo> #info In order to figure out which pools currently mine NMC, I forked Cassini's `mm-blockstats` repo and fixed it to handle more pools and properly handle SegWit coinbase outputs.  The new repo is at https://github.com/namecoin/mm-blockstats
+19:18:43 <Jeremy_Rand_Talo> #info Currently it can identify all but 0.3% of NMC hashrate.  0.2% of which is an unknown BSV pool, and the remaining 0.1% I have no idea what it is.
+19:21:29 <Jeremy_Rand_Talo> #info I'll hopefully have more info on miner upgrade status at our next meeting.
+19:22:13 <Jeremy_Rand_Talo> 7918070_: did you have some topics you wanted to cover from a couple weeks ago?
+19:25:56 <Jeremy_Rand_Talo> Anyways, next topic
+19:26:14 <Jeremy_Rand_Talo> #topic Tor Development Meeting
+19:26:29 <somewhat[m]> *somewhat cheers
+19:27:53 <Jeremy_Rand_Talo> #info Meeting went very well.  As usual, I'm not going to go into lots of detail about the discussions, since I want people to be able to talk to me at conferences without worrying that off-the-cuff comments will get broadcast publicly.  That said, things are moving forward, and there don't appear to be any surprise blockers.
+19:29:44 <jonasbits> great!
+19:29:59 <cannon-c[m]> wow lots of big things coming up for nmc!
+19:33:18 <Jeremy_Rand_Talo> yep, cool stuff.
+19:34:24 * Jeremy_Rand_Talo notes that he doesn't really have many topics for today, because he was away at the Tor meeting since circa the previous Matrix meeting 2 weeks ago, so not much has happened in the dev department in the last 2 weeks on my end
+19:35:31 <cannon-c[m]> Were you representing NMC on some show if I understand properly?
+19:36:45 <somewhat[m]> give it 6 months cannon-c
+19:36:47 <Jeremy_Rand_Talo> cannon-c: nah, I was just in the studio audience of *Redacted Tonight*.  Wasn't an interview or anything like that, but I did chat with Lee about Namecoin after the show.
+19:38:54 <TheJollyRoger> ((Whoops, sorry about that. Display locked up and I didn't even realize it)
+19:39:36 <TheJollyRoger> Woah, that's awesome news to hear about Tor! \o/
+19:40:05 <Jeremy_Rand_Talo> btw, if anyone can dig up contact info for Huobi Pool, which seems to have 6.0% of NMC hashrate, that would be useful.  AFAICT their website seems to be Chinese-only and doesn't list anything that I can easily recognize as contact info, and their website seems to misbehave when accessed over Tor as well.
+19:41:27 <TheJollyRoger> Ack.
+19:44:33 <cannon-c[m]> On it also.
+19:45:22 <Jeremy_Rand_Talo> Looks like @EOS_huobipool on Twitter might be a potential contact method.  Not sure if that account covers their BTC mining operations or if it's EOS-specific.
+19:46:16 * Jeremy_Rand_Talo didn't even know until today that a Dan Larimer shitcoin company mines 6% of NMC hashrate.
+19:47:12 <TheJollyRoger-M> Well, at the very least they're still really far away from a majority share...
+19:47:58 <Jeremy_Rand_Talo> I mean, it's not that I'm worried about their hashrate being a threat, I'm just mildly surprised that a company like that is investing so much into BTC mining.
+19:48:28 <Jeremy_Rand_Talo> They're certainly more than welcome to do so.
+19:52:06 <Jeremy_Rand_Talo> Anyways.  Anyone have additional topics to bring up?
+19:53:48 <TheJollyRoger-M> I don't have anything, I don't think.
+19:53:58 <grringo[m]> what will happen if someone will store parts/link to porn image or personal data? will all full nodes had to host that content or there is a way to omit that data or something? has someone check for that issue?
+19:55:28 <Jeremy_Rand_Talo> grringo: I mean, there's not really any reason for anyone to use a blockchain for that use case (modulo the nutjobs over in Bitcoin Bernie Madoff Land), seeing as such usage doesn't scale and will very quickly hit the block weight limit and become prohibitively expensive for whoever's creating the transactions
+19:55:35 <cannon-c[m]> I guess one could choose to just not follow those links. Just like with bitcoin some people polluted blockchain with bad stuff, I choose to not encode that stuff into interpretable data
+19:56:04 <cannon-c[m]> with any censorship restistant platform you will always have bad stuff.
+19:56:24 <Jeremy_Rand_Talo> If anyone does start doing shit like that, I will definitely take it as an invitation to decrease the block weight limit significantly
+19:56:29 <cannon-c[m]> Could just ignore it right and choose to not follow such links or encode such data?
+19:57:10 <Jeremy_Rand_Talo> cannon-c: well, you can ignore it, but you still have to download/store it, which is a scalability issue, hence why using the block weight limit to deter that kind of spam is a good idea
+19:58:00 <Jeremy_Rand_Talo> Similarly there's some asshole who's currently using the NMC chain as a Twitter alternative to post rants about Freemasons; if that kind of usage became common it would similarly be a good reason to decrease the block weight limit heavily
+19:58:43 <cannon-c[m]> Using a blockchain for instant messaging or something like twitter would create alot of spam. Which is best mitigated with higher cost right?
+19:59:33 <Jeremy_Rand_Talo> If people want a censorship-resistant data publishing system, there are lots of good projects out there (onion services, ZeroNet, I2P, Freenet, etc) that are actually designed for that use case.  Namecoin clearly isn't designed for that, and the block weight limit is a good mechanism for enforcing that such usage be prohibitively expensive for the spammer
+19:59:54 <cannon-c[m]> or hidden services, with human readable domain names?
+20:00:27 <cannon-c[m]> that can be re-pointed to other hidden services address if the server comes under seige
+20:00:53 <cannon-c[m]> but yes other projects better suited for decentralized hosting, of which NMC can compliment, but in a different way
+20:00:54 <somewhat[m]> <Jeremy_Rand_Talo "grringo: I mean, there's not rea"> currently if someone were to begin doing this how would it be prohibitively expensive?
+20:01:47 <Jeremy_Rand_Talo> cannon-c: sure.  Posting content to a website that has a .bit domain scales just fine.  It's just the concept of putting the website itself into the blockchain that's a brain-damaged idea (and seems to be actively being pursued by the Bitcoin Bernie Madoff idiots, for Satan-knows-what-reason)
+20:02:10 <somewhat[m]> anyone with substantial holdings of btc could keep it going for a non-trivial amount of time
+20:02:26 <cannon-c[m]> well said Jeremy
+20:03:43 <Jeremy_Rand_Talo> somewhat: if they run into the block weight limit, the fees will skyrocket without bound until they decide it's no longer worth their money.  Given that there are other systems out there that provide similar functionality gratis (e.g. onion services and ZeroNet), I'd be surprised if anyone is dumb enough to decide it's worth their money for very long
+20:04:30 <TheJollyRoger> Whew.
+20:04:31 <Jeremy_Rand_Talo> somewhat: but on the bright side, if they do attempt it, it'll have the side effect of making squatting more expensive (for a little while)
+20:04:42 <TheJollyRoger> So we do have a means to control spam?
+20:04:46 <cannon-c[m]> no different than if someone could just afford to fill blocks to DOS the network right?
+20:04:47 <somewhat[m]> i was thinking as an example someone who promotes ens who has btc spamming
+20:05:15 <cannon-c[m]> to prevent everyone elses transactions. this has always been a possibility even with bitcoin right?
+20:05:57 <cannon-c[m]> just be careful to not let the means of "controlling spam" become a means to enable censorship.
+20:06:27 <grringo[m]> do namecoin blockchain contain such data already?
+20:06:44 <Jeremy_Rand_Talo> cannon-c: sure, you can theoretically spam the Bitcoin network in order to fill up blocks with junk.  The Bcash proponents actually did this a couple years ago for a while.  But that kind of attack doesn't scale long-term, and they burned vast amounts of money doing the attack despite not jacking up fees for legit users to a level that would be problematic for a naming system
+20:06:53 <cannon-c[m]> even if created with good intent, means of censorship could be abused later on
+20:07:35 <cannon-c[m]> filtering should be client side I think
+20:07:38 <Jeremy_Rand_Talo> cannon-c: actually the Blockstack devs also spammed the Bitcoin network heavily.  Something like 20-30% of Bitcoin blocks during the scaling crisis were spam from Blockstack.  Which is one more reason I don't like the Blockstack devs.
+20:08:37 <cannon-c[m]> "despite not jacking up fees for legit users to a level that would be problematic for a naming system"  you mean because in naming systems you would be doing much less transactions, maybe couple times a year?
+20:08:58 <Jeremy_Rand_Talo> cannon-c: usually "censorship" implies something that targets specific categories of content, as opposed to what we're talking about here which is just making sure that the fees per transaction byte are high enough to keep the system from being DoSed
+20:09:00 <cannon-c[m]> What!? blockstack spamming bitcoin network? first I heard of this
+20:09:38 <Jeremy_Rand_Talo> cannon-c: I don't think anyone is interested in censoring Namecoin transactions for specific data, except for Zach Lym, and we kicked him out (good riddance)
+20:10:39 <somewhat[m]> Jeremy_Rand_Talos: in terms of long-term price what thoughts are there on where price "should" stabilise
+20:10:47 <somewhat[m]> to make squatting expensive etc.
+20:11:12 <somewhat[m]> too high is just as bad in terms of per nmc in somewhat's opinion
+20:11:47 <somewhat[m]> the 3rd world need domains too :)
+20:12:13 <cannon-c[m]> it does make it hard when the price of name and renewals are baked into protocol, whereas the price of NMC to fiat can be volatile or drastically move in any direction. Too low of a cost is as bad as too high a cost
+20:12:50 <cannon-c[m]> maybe variable of cost of renewal should be dynamic rather than static, frequently adjusted to reflect current value of NMC?
+20:12:59 <Jeremy_Rand_Talo> grringo: the Namecoin chain has a mild amount of spam, but the number of spammers and the volume of their activity is low enough AFAIK that trying to counter them is not the highest thing on my priority list.  (I seem to recall that someone was splitting incest-related textual fiction into 520-byte chunks and trying to stuff it into the chain a few years ago, no idea if they're still around or if they gave up on
+20:13:00 <Jeremy_Rand_Talo> that stupidity.)
+20:13:04 <somewhat[m]> too low is obviously the only issue short-term but 10 years from now
+20:13:38 <cannon-c[m]> or maybe different cost rather than financial, like a high PoW cost of domain or something like that?
+20:13:54 <cannon-c[m]> I dont know the solution for preventing squatting
+20:14:34 <Jeremy_Rand_Talo> cannon-c: yeah, Blockstack's spamming of the Bitcoin chain pissed off a lot of people.  Happily, their scam imploded just like we predicted it would.  Now they're apparently doing an ICO shitcoin scam to try to raise money for some kind of successor that they admit they don't even know yet how to build, which I'm okay with because it's making their scammery a lot more obvious even to clueless people
+20:17:19 <grringo[m]> is there a way to remove such known data from own copy of blockchain and still be secure?
+20:17:43 <Jeremy_Rand_Talo> somewhat: DNS seems to be doing okay with a price ranging from 1 to 10 USD or so for mainstream TLD's.  If NMC is within that range, I don't think it'll be prohibitive for most users.  Name pricing doesn't fully eliminate squatting no matter what price you set (as the FAQ explains).  There are other approaches to solve squatting (e.g. the centralized anti-Sybil mechanism that I briefly discussed with the Monero
+20:17:43 <Jeremy_Rand_Talo> guys), but that kind of thing can't be added to Namecoin, it would have to be its own chain due to very different security properties.
+20:18:42 <Jeremy_Rand_Talo> cannon-c: in practice, any kind of PoW-based squatting control will end up being commoditized, just like Bitcoin mining, so it'll end up being a financial cost
+20:19:18 <TheJollyRoger> Huh. It's game theory.
+20:19:34 <Jeremy_Rand_Talo> grringo: not right now.  But once SegVal is activated (anyone want to help implement that?), spam data like that will be automatically deleted by the network after the transactions expire
+20:19:43 <somewhat[m]> *somewhat's head hurts thinking about how things play out
+20:23:06 <grringo[m]> if someone is using electrum-nmc then he need to do download whole blockchain?
+20:24:04 <Jeremy_Rand_Talo> grringo: no, Electrum-NMC is a headers-only client; the only time it downloads transactions is when they're relevant to a wallet or to a name lookup
+20:25:43 <somewhat[m]> *somewhat bids everyone well and goes for food
+20:26:46 <cannon-c[m]> Need to take off. Reading rest of this later on from the log. Great discussions.
+20:27:23 * Jeremy_Rand_Talo is basically out of things to discuss, so if no one else has topics to bring up, we'll close the meeting shortly
+20:27:47 <TheJollyRoger> I don't think I have anything!
+20:27:57 <TheJollyRoger> But I'll definitely be reading through this! \o/
+20:28:25 <TheJollyRoger> Possibly repeatedly, it definitely is great to know that we have mitigations ready in case someone starts trying to use the blockchain for other stuff besides names.
+20:28:55 <somewhat[m]> \o/
+20:31:15 <TheJollyRoger> Yarr-harr!
+20:31:21 <Jeremy_Rand_Talo> alright then.  Thanks for attending everyone!
+20:31:35 <Jeremy_Rand_Talo> #endmeeting

@@ -1,0 +1,162 @@
+=====================
+#namecoin-dev Meeting
+=====================
+
+
+Meeting started by Jeremy_Rand_Talo at 19:02:08 UTC. The full logs are
+available at
+https://midnightmagic.github.io/namecoin-meeting/namecoin-dev/2019/namecoin-dev.2019-08-04-19.02.log.html
+.
+
+
+
+Meeting summary
+---------------
+* Softfork Schedule  (Jeremy_Rand_Talo, 19:08:28)
+  * We've notified 86.2% of hashrate about the upcoming softfork.  14.5%
+    has already confirmed that they've upgraded; I expect that number to
+    climb quickly.  (Jeremy_Rand_Talo, 19:10:25)
+  * The mining pools that we haven't talked to yet are Poolin, Bixin,
+    Prohashing, and BitMinter.  None of those pools have a public email
+    address, so contacting them is less fun.  There are also a small
+    number of mining pools that we can't identify from coinbase parsing,
+    but IIRC they're less than 1% hashrate combined, so I'm not going to
+    bother trying to track that 1% down.  (Jeremy_Rand_Talo, 19:11:44)
+  * For reference, the softfork activates P2SH, CSV, and SegWit.
+    (Jeremy_Rand_Talo, 19:13:06)
+  * The softfork is expected to activate in a little bit over 2 months
+    from now.  (Jeremy_Rand_Talo, 19:13:06)
+  * Note that because P2SH and SegWit repurpose the semantics of
+    scriptPubKeys that were previously considered "anyone can spend",
+    there is an incentive for miners to try to get away with mischief if
+    a lot of users haven't upgraded their full nodes  (Jeremy_Rand_Talo,
+    19:20:03)
+  * So, I strongly recommend that anyone running Namecoin Core who
+    doesn't need the name management GUI should upgrade to 0.18.0 as
+    soon as possible.  (Jeremy_Rand_Talo, 19:20:42)
+
+* Miscellaneous Golang Project Updates  (Jeremy_Rand_Talo, 19:23:55)
+  * I've successfully split out Namecoin's fork of `crypto/x509` into
+    its own repo.  This allows ncdns's repo to be revised independently
+    of the Golang compiler version.  (Jeremy_Rand_Talo, 19:25:37)
+  * This is a critical step towards integrating with Tor's build system.
+    I haven't yet configured ncdns-repro or tor-browser-build to use
+    this, but it should be pretty easy.  (Jeremy_Rand_Talo, 19:26:40)
+  * I've also successfully gotten ncdns to work with a current release
+    of Conformal's btcd RPC client library, instead of the stupid
+    4-year-old heavily-patched fork that we weren't maintaining.
+    (Jeremy_Rand_Talo, 19:27:46)
+  * One of the patches we were carrying wasn't relevant anymore (only
+    mattered for ancient Core versions); another was fixed upstream long
+    ago (ConsensusJ and Electrum support); the last one I've submitted
+    upstream for review (cookie authentication support)
+    (Jeremy_Rand_Talo, 19:29:08)
+  * I did need to submit a patch upstream to Conformal that changes 3
+    API symbols from private to exported, so that we can add
+    Namecoin-specific RPC calls.  It's submitted, hopefully they'll look
+    at it soon.  If they don't get to it soon, we can probably maintain
+    our own fork for a while (it's a trivial patch).  (Jeremy_Rand_Talo,
+    19:30:59)
+  * Currently the new Namecoin RPC client package exposes `NameShow`,
+    `NameScan`, and `NameQuery`, the last one of which is like
+    `NameShow` but only returns the value without the metadata.
+    (Jeremy_Rand_Talo, 19:32:06)
+  * As a side effect of this refactor, `ncdt` and `ncdumpzone` now
+    support cookie authentication.  (Jeremy_Rand_Talo, 19:32:56)
+  * Meanwhile, I started doing reproducibility testing on ncdns.  It
+    turns out that we're not reproducible right now.  I traced the bug
+    via Diffoscope, and found that there's a bug in upstream rbm.
+    (Jeremy_Rand_Talo, 19:34:31)
+  * Specifically, upstream rbm contaminates tar.gz files with timestamps
+    as part of the gzip header  (Jeremy_Rand_Talo, 19:34:58)
+  * I tried switching to tar.xz and that was reproducible, so that's a
+    short-term fix.  I chatted with Nicolas from Tor about the issue,
+    and he helped me code up a patch that fixes tar.gz; I've submitted
+    that and it's awaiting review.  (Jeremy_Rand_Talo, 19:36:04)
+  * I also addressed Nicolas's feedback on the Golang build script
+    refactor patch; it's now awaiting review as well.
+    (Jeremy_Rand_Talo, 19:37:08)
+  * One more thing: documentation is now written for using ncp11 with
+    Tor Browser.  So we're very very close to a release of ncp11.
+    (Jeremy_Rand_Talo, 19:40:56)
+
+* Electrum-NMC  (Jeremy_Rand_Talo, 20:07:18)
+  * The primary blocker from Tor's perspective at this point is stream
+    isolation for name lookups in Electrum-NMC, along with the plumbing
+    to get Tor to pass its stream isolation data through to
+    Electrum-NMC.  (Jeremy_Rand_Talo, 20:10:07)
+  * I've started discussing with the upstream Electrum devs about how
+    they want this to be done.  I'm hoping to have a patch submitted
+    upstream within a couple weeks, along with a Namecoin-specific patch
+    for the parts that aren't applicable to Bitcoin.  (Jeremy_Rand_Talo,
+    20:10:14)
+  * The initial patch will probably have performance issues, because it
+    will do a TCP handshake + TLS handshake + Electrum handshake
+    on-demand each time a new stream ID is opened.  The "right way" to
+    handle this is to preemptively open connections for use by
+    stream-isolated RPC commands, but doing this safely without side
+    channel leaks is complicated, and I'm probably not going to bother
+    with that until after  (Jeremy_Rand_Talo, 20:12:07)
+  * Meanwhile, I'm happy to report that I'm no longer the only active
+    Electrum-NMC developer.  Xaya is funding Daniel to do Electrum-NMC
+    development now; he's already sent in some PR's.  (Jeremy_Rand_Talo,
+    20:14:52)
+  * It also looks like there's a chance we can get Xaya to sponsor the
+    SegVal scalability work for Namecoin.  Daniel informs me that SegVal
+    is similar enough to some stuff that Xaya wants, that it's likely
+    that SegVal can share a lot of implementation code with Xaya.  No
+    confirmation on this yet though.  (Jeremy_Rand_Talo, 20:16:22)
+
+* Public Relations  (Jeremy_Rand_Talo, 20:26:14)
+  * You've probably by now seen the media circus about OpenNIC following
+    the recommendation from me and PRISM Break lead maintainer Yegor
+    Timoshenko to remove .bit from their root zone.  (Jeremy_Rand_Talo,
+    20:27:05)
+  * A journalist from ZDNet.fr (who's interviewed me before) asked me
+    for a comment on the subject; I replied with a quite
+    extensive/detailed statement including a timeline of relevant events
+    and various other analysis.  I'm very glad I did, because his
+    article on the subject turned out great IMO.
+    https://www.zdnet.fr/actualites/namecoin-l-integrite-mais-a-quel-prix-39888667.htm
+    (Jeremy_Rand_Talo, 20:29:19)
+
+* Testnet  (Jeremy_Rand_Talo, 20:41:41)
+  * Testnet is missing a dnsseed to bootstrap new clients joining... its
+    possible to re-join by using an IP adress of a Testnet node.. but i
+    currently dont know of any  (jonasbits, 20:43:16)
+
+Meeting ended at 21:11:57 UTC.
+
+
+
+
+Action Items
+------------
+
+
+
+
+
+Action Items, by person
+-----------------------
+* **UNASSIGNED**
+  * (none)
+
+
+
+
+People Present (lines said)
+---------------------------
+* Jeremy_Rand_Talo (65)
+* jonasbits (18)
+* somewhat[m] (15)
+* sdgathman (13)
+* jonasbits_ (2)
+* qpm (2)
+
+
+
+
+Generated by `MeetBot`_ 0.1.4
+
+.. _`MeetBot`: https://wiki.debian.org/MeetBot

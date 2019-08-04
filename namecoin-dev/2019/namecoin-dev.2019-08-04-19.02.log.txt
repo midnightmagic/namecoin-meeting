@@ -1,0 +1,115 @@
+19:02:08 <Jeremy_Rand_Talo> #startmeeting
+19:02:09 <qpm> Meeting started Sun Aug  4 19:02:08 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:02:09 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:02:42 <Jeremy_Rand_Talo> Hi everyone!  Welcome to the meeting
+19:02:54 <Jeremy_Rand_Talo> Can we get a roll call of who's here today?
+19:03:06 <sdgathman> here
+19:03:08 <sdgathman> sdgathman
+19:03:15 <Jeremy_Rand_Talo> Hi sdgathman
+19:03:36 <somewhat[m]> *somewhat waves
+19:04:30 <Jeremy_Rand_Talo> Hi somewhat
+19:08:27 <Jeremy_Rand_Talo> Okay, so, first topic
+19:08:28 <Jeremy_Rand_Talo> #topic Softfork Schedule
+19:10:25 <Jeremy_Rand_Talo> #info We've notified 86.2% of hashrate about the upcoming softfork.  14.5% has already confirmed that they've upgraded; I expect that number to climb quickly.
+19:10:33 <sdgathman> Quick statement of what feature the softfork adds?  (For those of us on the periphery)
+19:11:44 <Jeremy_Rand_Talo> #info The mining pools that we haven't talked to yet are Poolin, Bixin, Prohashing, and BitMinter.  None of those pools have a public email address, so contacting them is less fun.  There are also a small number of mining pools that we can't identify from coinbase parsing, but IIRC they're less than 1% hashrate combined, so I'm not going to bother trying to track that 1% down.
+19:13:06 <Jeremy_Rand_Talo> #info For reference, the softfork activates P2SH, CSV, and SegWit.
+19:13:06 <Jeremy_Rand_Talo> #info The softfork is expected to activate in a little bit over 2 months from now.
+19:14:43 <Jeremy_Rand_Talo> That's all the news on softfork activation; any questions/comments about that topic?
+19:15:36 <somewhat[m]> no
+19:16:39 <sdgathman> Any non-mining node obsoleted?
+19:18:55 <Jeremy_Rand_Talo> sdgathman: as with all softforks, SPV clients are unaffected; full node clients that don't upgrade will end up on semi-SPV security but otherwise are unaffected as well
+19:19:13 <Jeremy_Rand_Talo> however
+19:20:03 <Jeremy_Rand_Talo> #info Note that because P2SH and SegWit repurpose the semantics of scriptPubKeys that were previously considered "anyone can spend", there is an incentive for miners to try to get away with mischief if a lot of users haven't upgraded their full nodes
+19:20:42 <Jeremy_Rand_Talo> #info So, I strongly recommend that anyone running Namecoin Core who doesn't need the name management GUI should upgrade to 0.18.0 as soon as possible.
+19:20:58 * sdgathman noted
+19:23:27 <Jeremy_Rand_Talo> Meanwhile, next topic...
+19:23:55 <Jeremy_Rand_Talo> #topic Miscellaneous Golang Project Updates
+19:24:12 <Jeremy_Rand_Talo> (weird topic name, yes, but there's no other common thread to these)
+19:25:37 <Jeremy_Rand_Talo> #info I've successfully split out Namecoin's fork of `crypto/x509` into its own repo.  This allows ncdns's repo to be revised independently of the Golang compiler version.
+19:26:40 <Jeremy_Rand_Talo> #info This is a critical step towards integrating with Tor's build system.  I haven't yet configured ncdns-repro or tor-browser-build to use this, but it should be pretty easy.
+19:27:46 <Jeremy_Rand_Talo> #info I've also successfully gotten ncdns to work with a current release of Conformal's btcd RPC client library, instead of the stupid 4-year-old heavily-patched fork that we weren't maintaining.
+19:29:08 <Jeremy_Rand_Talo> #info One of the patches we were carrying wasn't relevant anymore (only mattered for ancient Core versions); another was fixed upstream long ago (ConsensusJ and Electrum support); the last one I've submitted upstream for review (cookie authentication support)
+19:29:17 <jonasbits_> cool!
+19:30:59 <Jeremy_Rand_Talo> #info I did need to submit a patch upstream to Conformal that changes 3 API symbols from private to exported, so that we can add Namecoin-specific RPC calls.  It's submitted, hopefully they'll look at it soon.  If they don't get to it soon, we can probably maintain our own fork for a while (it's a trivial patch).
+19:32:06 <Jeremy_Rand_Talo> #info Currently the new Namecoin RPC client package exposes `NameShow`, `NameScan`, and `NameQuery`, the last one of which is like `NameShow` but only returns the value without the metadata.
+19:32:56 <Jeremy_Rand_Talo> #info As a side effect of this refactor, `ncdt` and `ncdumpzone` now support cookie authentication.
+19:34:31 <Jeremy_Rand_Talo> #info Meanwhile, I started doing reproducibility testing on ncdns.  It turns out that we're not reproducible right now.  I traced the bug via Diffoscope, and found that there's a bug in upstream rbm.
+19:34:58 <Jeremy_Rand_Talo> #info Specifically, upstream rbm contaminates tar.gz files with timestamps as part of the gzip header
+19:36:04 <Jeremy_Rand_Talo> #info I tried switching to tar.xz and that was reproducible, so that's a short-term fix.  I chatted with Nicolas from Tor about the issue, and he helped me code up a patch that fixes tar.gz; I've submitted that and it's awaiting review.
+19:37:08 <Jeremy_Rand_Talo> #info I also addressed Nicolas's feedback on the Golang build script refactor patch; it's now awaiting review as well.
+19:40:56 <Jeremy_Rand_Talo> #info One more thing: documentation is now written for using ncp11 with Tor Browser.  So we're very very close to a release of ncp11.
+19:41:22 <somewhat[m]> woah!
+19:44:53 <Jeremy_Rand_Talo> I mean, it only took, what, 2 or 3 from-scratch rewrites to get TLS in Tor Browser working properly?  Massively over budget, but we'll take the hit, and I'm super happy that it's finally working.
+19:46:20 <Jeremy_Rand_Talo> so, any questions/comments about any of the above misc. Golang Namecoin ecosystem things?
+19:47:50 <sdgathman> would tor users be concerned about a namecoin name changing owners - i.e. expiring and a different pubkey now controls it?
+19:48:52 <sdgathman> Do they get any indication now?  Maybe an age in the security popup.
+19:51:50 <Jeremy_Rand_Talo> sdgathman: The Tor developers never raised that as a concern with me AFAIK.  I can ask them whether they want any kind of special handling for that case, but I'm almost certain they won't want any kind of functionality that keeps track of whether a name has been reregistered since it was last accessed (since Tor Browser is designed to be amnesic).
+19:52:42 <somewhat[m]> does ncp11 being ready affect plans for initial integration with tor browser?
+19:52:42 <sdgathman> that
+19:52:46 <sdgathman> That
+19:52:59 <sdgathman> That is why I suggested age - that doesn
+19:53:07 <sdgathman> t require any memory in the browser.
+19:53:38 * sdgathman stupid keyboard puts quotes on an Fn key ...
+19:54:58 <Jeremy_Rand_Talo> somewhat: I don't think the Tor devs will want any kind of non-onion-service resolution in the initial Tor Browser nightlies that have Namecoin support, but AFAIK there's no problem with doing it later.  ncp11 being released is unlikely to affect that.
+19:55:54 <somewhat[m]> sure
+19:57:09 * jonasbits_ also thinks age would be a nice feature
+19:57:41 <Jeremy_Rand_Talo> sdgathman: I can definitely picture the name age being useful in the security display (or maybe the circuit display).  I'll make a note to run that idea by the Tor UX team and see if they see any issues there
+20:02:07 <Jeremy_Rand_Talo> okay, so any other questions/comments about the Go ecosystem stuff I covered above?
+20:07:11 <Jeremy_Rand_Talo> ok, next topic
+20:07:18 <Jeremy_Rand_Talo> #topic Electrum-NMC
+20:08:19 <jonasbits> ( i have been running golang dnsseeder for a long time, it crawls continuosly and we have 180 nodes at all times )
+20:10:07 <Jeremy_Rand_Talo> #info The primary blocker from Tor's perspective at this point is stream isolation for name lookups in Electrum-NMC, along with the plumbing to get Tor to pass its stream isolation data through to Electrum-NMC.
+20:10:14 <Jeremy_Rand_Talo> #info I've started discussing with the upstream Electrum devs about how they want this to be done.  I'm hoping to have a patch submitted upstream within a couple weeks, along with a Namecoin-specific patch for the parts that aren't applicable to Bitcoin.
+20:12:07 <Jeremy_Rand_Talo> #info The initial patch will probably have performance issues, because it will do a TCP handshake + TLS handshake + Electrum handshake on-demand each time a new stream ID is opened.  The "right way" to handle this is to preemptively open connections for use by stream-isolated RPC commands, but doing this safely without side channel leaks is complicated, and I'm probably not going to bother with that until after
+20:12:08 <Jeremy_Rand_Talo> we're in Tor's nightlies.
+20:14:52 <Jeremy_Rand_Talo> #info Meanwhile, I'm happy to report that I'm no longer the only active Electrum-NMC developer.  Xaya is funding Daniel to do Electrum-NMC development now; he's already sent in some PR's.
+20:16:22 <Jeremy_Rand_Talo> #info It also looks like there's a chance we can get Xaya to sponsor the SegVal scalability work for Namecoin.  Daniel informs me that SegVal is similar enough to some stuff that Xaya wants, that it's likely that SegVal can share a lot of implementation code with Xaya.  No confirmation on this yet though.
+20:22:21 <Jeremy_Rand_Talo> any questions/comments about those things?
+20:22:41 <somewhat[m]> *not from somewhat
+20:26:13 <Jeremy_Rand_Talo> Okay, final topic from me:
+20:26:14 <Jeremy_Rand_Talo> #topic Public Relations
+20:27:05 <Jeremy_Rand_Talo> #info You've probably by now seen the media circus about OpenNIC following the recommendation from me and PRISM Break lead maintainer Yegor Timoshenko to remove .bit from their root zone.
+20:29:19 <Jeremy_Rand_Talo> #info A journalist from ZDNet.fr (who's interviewed me before) asked me for a comment on the subject; I replied with a quite extensive/detailed statement including a timeline of relevant events and various other analysis.  I'm very glad I did, because his article on the subject turned out great IMO.  https://www.zdnet.fr/actualites/namecoin-l-integrite-mais-a-quel-prix-39888667.htm
+20:31:35 <Jeremy_Rand_Talo> (For non-French-speakers, running it through Bing Translator yields something that's quite easy to understand)
+20:33:30 * sdgathman proxies .bit on my own nameservers, but understands that having it in a public dns root may mislead the naive
+20:36:27 <somewhat[m]> *somewhat goes to catch bus
+20:38:06 <Jeremy_Rand_Talo> Anyone have other topics you'd like to bring up today?  (Those are all the topics I had.)
+20:39:56 <jonasbits> Testnet maybe
+20:40:23 <jonasbits> Is it a good time to reset that?
+20:41:41 <Jeremy_Rand_Talo> #topic Testnet
+20:41:41 <Jeremy_Rand_Talo> jonasbits: go ahead
+20:43:16 <jonasbits> #info Testnet is missing a dnsseed to bootstrap new clients joining... its possible to re-join by using an IP adress of a Testnet node.. but i currently dont know of any
+20:44:54 <Jeremy_Rand_Talo> jonasbits: I'd like to see a testnet reset, preferably with a new AuxPoW chain ID.  DNS seeds + updated IP seeds + ElectrumX servers would be great too.  Unfortunately I'm not going to have time to touch that topic in the next month at least, but if you'd like to submit a PR to Namecoin Core, my guess is that Daniel would be fine with merging it.  (And I might even be able to review it.)
+20:44:59 <jonasbits> i have a VPS were im running https://github.com/gombadi/dnsseeder for main-net, I can start running it for Testnet
+20:45:30 <jonasbits> sure, will try
+20:47:33 <jonasbits> #topic Mobile wallet
+20:48:37 * Jeremy_Rand_Talo likes this topic
+20:48:51 <jonasbits> I would like to bring up Coinomi - https://www.coinomi.com/downloads/ - its not a Name wallet, but its something
+20:49:12 <jonasbits> i have been using it for a long time
+20:50:20 <Jeremy_Rand_Talo> jonasbits: AFAIK Coinomi isn't actually open-source, as of last time I looked (maybe a year ago).  Has that changed?
+20:50:21 <jonasbits> but its not open source
+20:50:30 <jonasbits> yea thats a problem
+20:51:00 <Jeremy_Rand_Talo> jonasbits: Electrum-NMC should work on Android now; I believe somewhat tested it.  It doesn't have GUI support for name operations, but that should be fixable if someone wants to work on it.  The GUI is in Kivy, which looks pretty simple.
+20:51:42 <jonasbits> i will try it out
+20:54:14 <Jeremy_Rand_Talo> jonasbits: also note that since Tor Browser supports Android as a first-class platform, getting Namecoin into Tor Browser stable releases will require Electrum-NMC name lookups to work on Android.  If you'd like to work on that by any chance, there's a chance that Cyphrs could be persuaded to fund some of that.
+20:54:15 <Jeremy_Rand_Talo> (I'm happy to ask them about it if you, or anyone else, would like to work on that)
+20:55:05 <jonasbits> will remember that
+20:58:21 <Jeremy_Rand_Talo> any other topics?
+21:01:16 <jonasbits> Im done!
+21:02:00 <jonasbits> Thanks for moderation Jeremy_Rand_Talo
+21:02:10 <somewhat[m]> just one last thing
+21:02:11 <jonasbits> *moderating
+21:02:18 <somewhat[m]> in the tor notes
+21:02:38 <somewhat[m]> it mentioned they do not need android to work
+21:03:15 <somewhat[m]> any comments son this Jeremy_Rand_Talos
+21:03:25 <somewhat[m]> *on this
+21:04:39 <Jeremy_Rand_Talo> somewhat: yes, so the funded deliverable being discussed in that session only requires getting into the Alpha builds, not the Stable builds.  Alpha does not need to have feature parity for Android; Stable does.  Or at least, that's my understanding of it.
+21:04:40 <somewhat[m]> also yes jonasbits electrum-nmc works on android
+21:05:09 <somewhat[m]> Jeremy_Rand_Talos: ok
+21:05:39 <jonasbits> thanks somewhat[m]
+21:07:10 <Jeremy_Rand_Talo> anything else before we close?
+21:07:24 <somewhat[m]> *somewhat is done
+21:11:36 <Jeremy_Rand_Talo> excellent.  Thanks for attending everyone!
+21:11:43 <jonasbits> Thanks Jeremy
+21:11:57 <Jeremy_Rand_Talo> #endmeeting

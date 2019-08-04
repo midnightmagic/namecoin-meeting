@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:03:00</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:03:00</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Apr 21 19:03:00 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:03:00</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:03:55</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi everyone, welcome to the meeting!
+<a name="l-5"></a><span class="tm">19:04:07</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Can we get a roll call of who's here today?
+<a name="l-6"></a><span class="tm">19:13:00 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">hopes there are people here today</span>
+<a name="l-7"></a><span class="tm">19:20:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyone here...?
+<a name="l-8"></a><span class="tm">19:21:37</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Ahoy!
+<a name="l-9"></a><span class="tm">19:21:42</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Ahoy Jeremy_Rand_Talo!
+<a name="l-10"></a><span class="tm">19:21:53</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Sorry about that. Woah, almost missed it X(.
+<a name="l-11"></a><span class="tm">19:21:58</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi TheJollyRoger
+<a name="l-12"></a><span class="tm">19:22:17</span><span class="nk"> &lt;TheJollyRoger&gt;</span> My uh... I broke my Ricochet again, so I'll try to get that fixed soon, sorry &gt;_&lt;.
+<a name="l-13"></a><span class="tm">19:25:29</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyway, this is likely to be a short meeting, unless anyone else has news that I'm not aware of
+<a name="l-14"></a><span class="tm">19:25:41</span><span class="nk"> &lt;hl&gt;</span> hi
+<a name="l-15"></a><span class="tm">19:25:42 </span><span class="nka">* TheJollyRoger</span> <span class="ac">shakes his head.</span>
+<a name="l-16"></a><span class="tm">19:26:07</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">ncdns-repro</span>
+<a name="l-17"></a><span class="tm">19:26:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've slowly been reviewing hl 's ncdns-repro repo</span>
+<a name="l-18"></a><span class="tm">19:27:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> as mentioned on GitHub, it's not clear to me why all of ncdns's subpackages are bundled into one rbm project.  Usually tor-browser-build seems to build each Go executable binary in a separate project.
+<a name="l-19"></a><span class="tm">19:32:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> was the motive there just "easiest to prototype since it's most similar to our pre-rbm build scripts"?  Or was there another reason?
+<a name="l-20"></a><span class="tm">19:32:32</span><span class="nk"> &lt;hl&gt;</span> <span class="hi">Jeremy_Rand_Talo:</span> I don't think it makes any difference...
+<a name="l-21"></a><span class="tm">19:33:36</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> well, it makes some difference if a user only wants to build a subset of the binaries.  Also staying closer to tor-browser-build decreases the cognitive load required to audit it
+<a name="l-22"></a><span class="tm">19:34:23</span><span class="nk"> &lt;hl&gt;</span> not sure how it's any harder to audit, and it would just increase the maintenance burden
+<a name="l-23"></a><span class="tm">19:39:22</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> basically, any non-zero diff between our Go projects and tor-browser-build's means that a human needs to determine whether that diff matters.  Even minor diffs that don't matter can accumulate into something that requires more cognitive load than I enjoy spending on auditing things.  That said, it occurs to me that upstream Tor seems to have a built-in build script (in the go project) for Go libraries, but
+<a name="l-24"></a><span class="tm">19:39:22</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> they don't seem to have one for Go executables.  Maybe it would be productive to get a Go executable built-in build script merged upstream, so that we don't need a build script at all for ncdns?  (Seems like that would benefit upstream too.)
+<a name="l-25"></a><span class="tm">19:42:02</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Hmm...
+<a name="l-26"></a><span class="tm">19:42:09</span><span class="nk"> &lt;hl&gt;</span> hm
+<a name="l-27"></a><span class="tm">19:42:21</span><span class="nk"> &lt;hl&gt;</span> the ncdns package isn't upstream anyway, so its entire contents is a diff
+<a name="l-28"></a><span class="tm">19:43:29</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> yeah, but the ncdns build script can be diffed against obfs4's or meek's build script to determine what we changed compared to upstream
+<a name="l-29"></a><span class="tm">19:43:57</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Since they're both Go projects, the build scripts are relatively similar
+<a name="l-30"></a><span class="tm">19:45:04</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> (This would shrink to a zero diff if we got a patch merged upstream that moves that build script to the go project)
+<a name="l-31"></a><span class="tm">19:45:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Which I suspect is easily achievable
+<a name="l-32"></a><span class="tm">19:51:01</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> I can possibly look into submitting that upstream, though I'm mostly booked this week so it'll probably have to wait till circa Monday of next week
+<a name="l-33"></a><span class="tm">19:53:58</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> (That's all I had about ncdns-repro, should we move onto the next topic?)
+<a name="l-34"></a><span class="tm">19:54:04</span><span class="nk"> &lt;hl&gt;</span> ok
+<a name="l-35"></a><span class="tm">19:54:06</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Okay!
+<a name="l-36"></a><span class="tm">19:54:56</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">SPV Name Lookups</span>
+<a name="l-37"></a><span class="tm">19:55:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">So, a large fraction of the Electrum-NMC network is currently down due to being hosted on machines that also host Bitcoin ElectrumX servers, which are currently under a large DDoS attack</span>
+<a name="l-38"></a><span class="tm">19:57:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">This leads to questions about exactly why we need ElectrumX servers to do name lookups, and whether there are preferable ways to handle it</span>
+<a name="l-39"></a><span class="tm">19:57:55</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Usually, the role of ElectrumX servers is to maintain indexes (e.g. mapping addresses to transactions)</span>
+<a name="l-40"></a><span class="tm">19:58:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">This is, theoretically, superfluous for Namecoin, because Namecoin Core already maintains such an index.</span>
+<a name="l-41"></a><span class="tm">19:58:44</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">(Specifically, Namecoin Core has an index mapping names to transactions)</span>
+<a name="l-42"></a><span class="tm">20:00:05</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">The main reason we're not using Namecoin Core's name index in ElectrumX is that we don't want nonexistent names to be directly revealed to the network (because that produces a squatting vulnerability)</span>
+<a name="l-43"></a><span class="tm">20:01:00</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Instead, ElectrumX indexes by a hash of the name, so you can request a nonexistent name from an ElectrumX server without revealing the name</span>
+<a name="l-44"></a><span class="tm">20:01:47</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">This should be fixable in Namecoin Core.  It would be nice if Namecoin Core indexed names by their hash, so that we could do lookups by name hash.</span>
+<a name="l-45"></a><span class="tm">20:02:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">We could then do useful things like removing the name index from ElectrumX and instead just pass through name lookups from ElectrumX directly to Namecoin Core, which would decrease resource usage considerably.</span>
+<a name="l-46"></a><span class="tm">20:03:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">This would also probably enable things like Electrum Personal Server, which by its nature doesn't keep indexes.  (I haven't checked that in detail though.)</span>
+<a name="l-47"></a><span class="tm">20:04:12</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Allowing Namecoin Core's name index to be directly used for this purpose would also allow interesting things like adding a Namecoin wire protocol command for name lookups.</span>
+<a name="l-48"></a><span class="tm">20:06:05</span><span class="nk"> &lt;hl&gt;</span> ;q
+<a name="l-49"></a><span class="tm">20:06:05</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Upon chatting with luke-jr about this, I think it's reasonable to add a Namecoin wire protocol command that does a name lookup by name hash, and returns the relevant transaction along with a Merkle proof.</span>
+<a name="l-50"></a><span class="tm">20:07:39</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">We could also rig Namecoin Core to automatically issue that wire protocol command if the headers are synced but the full chain isn't yet.  Which would basically mean that Namecoin Core is usable for name lookups quite quickly after launch (though at SPV security) before the chain is synced.</span>
+<a name="l-51"></a><span class="tm">20:08:45</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">This approach would probably be a lot more resistant to DDoS attacks, simply because there are a lot more Namecoin Core nodes than Namecoin ElectrumX servers (due to ElectrumX needing a lot more resources to run), and therefore a DDoS attack would need to take out a lot more nodes</span>
+<a name="l-52"></a><span class="tm">20:11:26</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">There are also probably some cool enhancements we could do do that wire protocol command, e.g. utilizing Ryan's "unconfirmed transaction chains" idea so that if the chain is verified within 36 kiloblocks of the tip, the command could return a chain of transactions (starting with the last verified one), and we would just verify signatures of the tx chain so that we could be relatively confident that the</span>
+<a name="l-53"></a><span class="tm">20:11:27</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> miners didn't invent a name tx out of thin air
+<a name="l-54"></a><span class="tm">20:14:06</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">hl:</span> any opinions on the above?
+<a name="l-55"></a><span class="tm">20:15:07</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Wow.
+<a name="l-56"></a><span class="tm">20:16:10</span><span class="nk"> &lt;hl&gt;</span> hmm, sounds good
+<a name="l-57"></a><span class="tm">20:21:16</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> alright then.  Any C++ coders want to volunteer for the relevant Core changes, or should I just dump this on Daniel's desk?  🙂
+<a name="l-58"></a><span class="tm">20:23:26</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> (Hypothetically, we might be able to apply for funding for this kind of work if we wait a bit, and I think all of us have other things we're currently busy with, so it's not really a problem if no one wants to code this up immediately)
+<a name="l-59"></a><span class="tm">20:24:42</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Er, sorry, I'm not a coder... :(.
+<a name="l-60"></a><span class="tm">20:32:31</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> alright
+<a name="l-61"></a><span class="tm">20:34:24</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#action </span><span class="cmdline">Jeremy will add "Make Core index names by hash" and "Add getname to wire protocol" to Roadmap and bring to Daniel's attention</span>
+<a name="l-62"></a><span class="tm">20:35:19</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> I *think* those are the only things I was going to bring up today.  hl , anything you'd like to bring up?
+<a name="l-63"></a><span class="tm">20:35:29</span><span class="nk"> &lt;hl&gt;</span> hmm, no
+<a name="l-64"></a><span class="tm">20:35:45</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok.  TheJollyRoger , anything you'd like to bring up?
+<a name="l-65"></a><span class="tm">20:36:31</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I don't think so, sorry.
+<a name="l-66"></a><span class="tm">20:36:39</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I haven't been able to try out that reproducible build harness yet &gt;_&lt;.
+<a name="l-67"></a><span class="tm">20:36:50</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Been pretty swamped :(. It's peak season for me.
+<a name="l-68"></a><span class="tm">20:38:41</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">TheJollyRoger:</span> ok, no worries
+<a name="l-69"></a><span class="tm">20:39:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> And, with that, that's the end of the meeting.  Thanks for attending, see you next time.
+<a name="l-70"></a><span class="tm">20:39:33</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

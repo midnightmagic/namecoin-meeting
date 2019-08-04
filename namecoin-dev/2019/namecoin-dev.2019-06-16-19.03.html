@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand_Talo at 19:03:17 UTC
+(<a href="namecoin-dev.2019-06-16-19.03.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">Namecoin Core</b> <span class="details">(<a href='namecoin-dev.2019-06-16-19.03.log.html#l-15'>Jeremy_Rand_Talo</a>, 19:12:26)</span>
+<ol type="a">
+  <li><span class="INFO">Namecoin Core 0.18.0 has binaries built.  We're
+    just waiting for Gitian sigs to flow in.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-06-16-19.03.log.html#l-16'>Jeremy_Rand_Talo</a>,
+    19:13:32)</span></li>
+  <li><i class="itemtype">IDEA</i>: <span class="IDEA">Should I ask on
+    /r/Namecoin for volunters to build Gitian sigs?</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-06-16-19.03.log.html#l-17'>Jeremy_Rand_Talo</a>,
+    19:14:11)</span></li>
+  <li><i class="itemtype">ACTION</i>: <span class="ACTION">TheJollyRoger
+    will (maybe) do a Gitian build of Namecoin Core</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-06-16-19.03.log.html#l-32'>Jeremy_Rand_Talo</a>,
+    19:27:43)</span></li>
+  <li><i class="itemtype">ACTION</i>: <span
+    class="ACTION">Jeremy_Rand_Talos will ask on Reddit for volunteers
+    to do Gitian builds of Namecoin Core</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-06-16-19.03.log.html#l-62'>Jeremy_Rand_Talo</a>,
+    20:00:01)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">ncdns etc</b> <span class="details">(<a href='namecoin-dev.2019-06-16-19.03.log.html#l-66'>Jeremy_Rand_Talo</a>, 20:04:45)</span>
+<ol type="a">
+  <li><span class="INFO">A lot of progress has happened with building
+    ncdns (and the rest of the Namecoin Go ecosystem) with rbm</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-06-16-19.03.log.html#l-67'>Jeremy_Rand_Talo</a>,
+    20:05:50)</span></li>
+  <li><span class="INFO">ncdns now builds for GNU/Linux and Windows in
+    master branch of ncdns-repro, and there are PR's adding macOS
+    target, as well as DNSSEC-HSTS, ncp11, and
+    certdehydrate-dane-rest-api projects.  ncp11's rbm binaries are
+    tested and working on Tor Browser for GNU/Linux and Windows, as well
+    as Firefox for Debian Buster.</span> <span class="details">(<a
+    href='namecoin-dev.2019-06-16-19.03.log.html#l-68'>Jeremy_Rand_Talo</a>,
+    20:09:45)</span></li>
+  <li><span class="INFO">That means we should shortly be able to claim
+    the "TLS Tor Browser" NLnet milestone</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-06-16-19.03.log.html#l-69'>Jeremy_Rand_Talo</a>,
+    20:10:56)</span></li>
+  <li><span class="INFO">Hopefully soon we'll get ncdns-nsis (ncdns
+    Windows installer) building in rbm as well</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-06-16-19.03.log.html#l-71'>Jeremy_Rand_Talo</a>,
+    20:18:56)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Electrum-NMC</b> <span class="details">(<a href='namecoin-dev.2019-06-16-19.03.log.html#l-77'>Jeremy_Rand_Talo</a>, 20:29:02)</span>
+<ol type="a">
+  <li><span class="INFO">I've resubmitted my Merkle checkpoint PR to
+    upstream Electrum, including a bunch of abstractions that will be
+    highly useful for adapting it to AuxPoW with minimal patch size.
+    Hopefully they'll be able to merge it soon.  This will allow
+    Electrum-NMC to do name lookups much more efficiently.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-06-16-19.03.log.html#l-78'>Jeremy_Rand_Talo</a>,
+    20:31:11)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Public Relations</b> <span class="details">(<a href='namecoin-dev.2019-06-16-19.03.log.html#l-81'>Jeremy_Rand_Talo</a>, 20:39:43)</span>
+<ol type="a">
+  <li><span class="INFO">I need to follow up with Cypher Market about
+    adding Namecoin merchandise.  Will hopefully get to it in the next
+    week.</span> <span class="details">(<a
+    href='namecoin-dev.2019-06-16-19.03.log.html#l-82'>Jeremy_Rand_Talo</a>,
+    20:40:39)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 21:14:14 UTC
+(<a href="namecoin-dev.2019-06-16-19.03.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>TheJollyRoger  will (maybe) do a Gitian build of Namecoin Core</li>
+  <li>Jeremy_Rand_Talos will ask on Reddit for volunteers to do Gitian builds of Namecoin Core</li>
+</ol>
+<br><br>
+
+
+
+<h3>Action items, by person</h3>
+<ol>
+  <li> Jeremy_Rand_Talo <ol>
+    <li>Jeremy_Rand_Talos will ask on Reddit for volunteers to do Gitian builds of Namecoin Core</li>
+  </ol></li>
+  <li> TheJollyRoger <ol>
+    <li>TheJollyRoger  will (maybe) do a Gitian build of Namecoin Core</li>
+  </ol></li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand_Talo (50)</li>
+  <li>TheJollyRoger (34)</li>
+  <li>cannon-c[m] (14)</li>
+  <li>qpm (2)</li>
+  <li>somewhat[m] (2)</li>
+  <li>TheJollyRoger-M (1)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

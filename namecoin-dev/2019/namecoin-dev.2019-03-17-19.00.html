@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand_Talo at 19:00:36 UTC
+(<a href="namecoin-dev.2019-03-17-19.00.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">Electrum-NMC optimizations</b> <span class="details">(<a href='namecoin-dev.2019-03-17-19.00.log.html#l-11'>Jeremy_Rand_Talo</a>, 19:08:19)</span>
+<ol type="a">
+  <li><span class="INFO">The cp_height PR is still working its way
+    through upstream review.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-17-19.00.log.html#l-12'>Jeremy_Rand_Talo</a>,
+    19:08:47)</span></li>
+  <li><span class="INFO">There was some minor disagreement about a
+    couple of the optimizations I made in that PR, which is still in the
+    process of being discussed</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-17-19.00.log.html#l-13'>Jeremy_Rand_Talo</a>,
+    19:09:18)</span></li>
+  <li><span class="INFO">Neil has requested that I submit a protocol and
+    code PR for the CBOR+DEFLATE transport; I intend to do that when I
+    have some time</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-17-19.00.log.html#l-15'>Jeremy_Rand_Talo</a>,
+    19:10:05)</span></li>
+  <li><span class="INFO">I noticed an optimization that can be made to
+    Namecoin Core's AuxPoW serialization that will save 36 bytes per
+    AuxPoW header, which is around 4% of Electrum-NMC's bandwidth usage.
+    Daniel is looking into implementing it.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-17-19.00.log.html#l-17'>Jeremy_Rand_Talo</a>,
+    19:11:28)</span></li>
+  <li><span class="INFO">(The optimization is that Namecoin Core
+    currently serializes the parent block hash and the parent coinbase
+    transaction's Merkle index.  The former is redundant because its
+    preimage also is present in AuxPoW headers, and the latter is
+    redundant because the coinbase transaction is always the first
+    transaction, so its Merkle index is always 0.)</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-17-19.00.log.html#l-18'>Jeremy_Rand_Talo</a>,
+    19:12:45)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Electrum-NMC rebranding static analyzer</b> <span class="details">(<a href='namecoin-dev.2019-03-17-19.00.log.html#l-22'>Jeremy_Rand_Talo</a>, 19:19:09)</span>
+<ol type="a">
+  <li><span class="INFO">I got tired of randomly stumbling across bugs
+    in Electrum-NMC that were caused by me failing to change
+    Bitcoin-related strings to Namecoin equivalents when merging stuff
+    from upstream</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-17-19.00.log.html#l-23'>Jeremy_Rand_Talo</a>,
+    19:19:48)</span></li>
+  <li><span class="INFO">So I made a static analyzer to check for that
+    stuff for me</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-17-19.00.log.html#l-24'>Jeremy_Rand_Talo</a>,
+    19:20:10)</span></li>
+  <li><span class="INFO">It found quite a lot of bugs.  Most of them
+    were fairly harmless (e.g. GUI display bugs), but it did find a few
+    important ones</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-17-19.00.log.html#l-25'>Jeremy_Rand_Talo</a>,
+    19:20:59)</span></li>
+  <li><span class="INFO">Among other things, it found that the message
+    signing code was broken, and that the KeepKey hardware wallet code
+    was broken.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-17-19.00.log.html#l-26'>Jeremy_Rand_Talo</a>,
+    19:21:59)</span></li>
+  <li><i class="itemtype">HELP</i>: <span class="HELP">I think I've
+    fixed those bugs, but I don't have a KeepKey wallet to test with.
+    Do we know anyone with a KeepKey device who can test the fix?</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-03-17-19.00.log.html#l-28'>Jeremy_Rand_Talo</a>,
+    19:22:59)</span></li>
+  <li><span class="INFO">If all else fails, I'll just ask on Reddit and
+    Twitter if someone can test it for us.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-17-19.00.log.html#l-30'>Jeremy_Rand_Talo</a>,
+    19:24:05)</span></li>
+  <li><span class="INFO">Also the static analyzer indicates that the
+    localization code in Electrum-NMC is likely to be horribly broken.
+    Not surprising since I've never tested it with non-English
+    locales.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-17-19.00.log.html#l-31'>Jeremy_Rand_Talo</a>,
+    19:26:01)</span></li>
+  <li><span class="INFO">At some point we'll probably need to just set
+    up a Transifex account for Electrum-NMC as well as Namecoin Core.  I
+    haven't had the time to do it yet, but at some point it'll be
+    necessary for UX reasons.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-17-19.00.log.html#l-32'>Jeremy_Rand_Talo</a>,
+    19:27:22)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Merchandise</b> <span class="details">(<a href='namecoin-dev.2019-03-17-19.00.log.html#l-44'>Jeremy_Rand_Talo</a>, 19:43:34)</span>
+<ol type="a">
+  <li><span class="INFO">I've reached out to Diego from Cypher Market.
+    It looks like it's feasible to list Namecoin merchandise there.
+    However, there's a small issue on their website right now that
+    breaks some stuff when accessing it over Tor with JavaScript
+    disabled.  Diego and I think it's feasible to fix; we'll continue
+    discussing listing Namecoin merchandise there once that issue is
+    fixed.</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-17-19.00.log.html#l-45'>Jeremy_Rand_Talo</a>,
+    19:45:08)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">YaCy search engine for Namecoin</b> <span class="details">(<a href='namecoin-dev.2019-03-17-19.00.log.html#l-48'>Jeremy_Rand_Talo</a>, 19:50:58)</span>
+<ol type="a">
+  <li><span class="INFO">I've written a tool (in Go) that automatically
+    prepares a YaCy installation for use as a Namecoin search engine
+    (i.e. setting the Use Case settings appropriately).</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-17-19.00.log.html#l-49'>Jeremy_Rand_Talo</a>,
+    19:51:55)</span></li>
+  <li><span class="INFO">Next I plan to write another Go tool that
+    automatically triggers a YaCy crawl based on the Namecoin
+    blockchain</span> <span class="details">(<a
+    href='namecoin-dev.2019-03-17-19.00.log.html#l-51'>Jeremy_Rand_Talo</a>,
+    19:52:23)</span></li>
+  <li><span class="INFO">Also, happily, chromium-driver Debian/ppc64le
+    packages are now available from Raptor, so I should be able to make
+    some progress on a ZeroNet search engine too</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-03-17-19.00.log.html#l-53'>Jeremy_Rand_Talo</a>,
+    19:53:20)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 20:30:51 UTC
+(<a href="namecoin-dev.2019-03-17-19.00.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>(none)</li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand_Talo (52)</li>
+  <li>JollyRoger` (11)</li>
+  <li>somewhat[m] (7)</li>
+  <li>qpm (2)</li>
+  <li>hl (2)</li>
+  <li>jonasbits (1)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

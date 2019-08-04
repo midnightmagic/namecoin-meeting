@@ -1,0 +1,115 @@
+19:00:17 <Jeremy_Rand_Talo> #startmeeting
+19:00:17 <qpm> Meeting started Sun May 19 19:00:17 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:00:17 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:00:52 <Jeremy_Rand_Talo> Hello everyone!  Welcome to the Namecoin development meeting.  Can we get a roll call of who's here today?
+19:03:27 * Jeremy_Rand_Talo hopes he's not the only one who's here today...
+19:03:40 <grringo[m]> :)
+19:03:48 <Jeremy_Rand_Talo> Hi grringo !
+19:04:13 <Jeremy_Rand_Talo> grringo: since you're new here, would you like to briefly introduce yourself?
+19:05:35 <grringo[m]> I'm JS developer and I have some time to help if there is such demand.
+19:05:53 <Jeremy_Rand_Talo> cool
+19:07:04 <grringo[m]> I'm curious how far is the project form act as regular DNS server + .bit resolver?
+19:07:35 <TheJollyRoger> Ahoy Cap'n!
+19:07:37 <Jeremy_Rand_Talo> Well, looks like only 2 people are here at the moment.  Not super surprising, as we're around the start of summer and probably a lot of people are out and about.  Not a problem, we can still cover things and everyone else will be able to read the minutes
+19:07:46 <Jeremy_Rand_Talo> ah, make that 3 people
+19:07:50 <TheJollyRoger> o7
+19:08:18 <Jeremy_Rand_Talo> grringo: can you define your question a bit more precisely?  What functionality are you wondering about?
+19:08:34 <TheJollyRoger> Ahoy grringo[m] !
+19:09:19 * Jeremy_Rand_Talo keeps picturing a Mexican version of Tony the Tiger when he sees grringo 's username 🙂
+19:10:11 <TheJollyRoger> XD
+19:11:29 <grringo[m]> I wan't to get DNS server on my localhost to speed up normal DNS resolving and also want to be able to use .bit domains work as well - without hassle.
+19:11:29 * TheJollyRoger1 uploaded an image: nice-to-meet-you.gif (1727KB) < https://matrix.org/_matrix/media/v1/download/matrix.org/dAzGJptSdZGosJjEVWQoZBKU >
+19:13:36 <Jeremy_Rand_Talo> grringo: that's already a thing for Windows (ncdns-nsis).  I think there's some ongoing work relating to deb/rpm packages for similar functionality on GNU/Linux (ncdns-repro should help a lot there).
+19:13:59 <jonasbits> one more
+19:14:06 <Jeremy_Rand_Talo> hi jonasbits !
+19:14:19 <TheJollyRoger> Ahoy! o7
+19:16:17 <Jeremy_Rand_Talo> grringo: is there anything that ncdns-nsis doesn't do that you think it should?
+19:17:32 <grringo[m]> I'm mac user :(
+19:18:21 <jonasbits> me to
+19:18:29 <grringo[m]> Maybe I will try to make docker package or something
+19:19:41 <Jeremy_Rand_Talo> grringo: ah, ok.  So, right now we don't have funding for creating a macOS installer (funds available were limited, and GNU/Linux and Windows were higher priority when we applied for NLnet funding).  But that might change next time we apply for funding.  We'd certainly welcome any volunteer who wants to develop one
+19:19:46 <grringo[m]> ncdns-nsis resolves standard domains as well? or users have to switch between DNS servers?
+19:20:26 * TheJollyRoger1 starts looking up how to create a hackintosh...
+19:20:59 <Jeremy_Rand_Talo> grringo: I'm not particularly familiar with how macOS installers usually are created, but Bitcoin Core is able to create them from a GNU/Linux build machine, so maybe Bitcoin's code would be useful there.  I think using a macOS build machine would be a dealbreaker here due to security/freedom concerns.
+19:21:34 <Jeremy_Rand_Talo> grringo: ncdns-nsis installs DNSSEC-Trigger, which handles DNS domain names
+19:21:56 <TheJollyRoger1> Makes sense 😓
+19:22:16 <grringo[m]> ok, I will try with Docker
+19:22:37 <grringo[m]> also, I noticed that work on UI is progressing quite slow - how about use WebView as UI + namecoind RPC API?
+19:22:38 <grringo[m]> Usually is the easiest way to get a nice, cross-platform interface.
+19:23:16 <Jeremy_Rand_Talo> grringo: generally speaking I don't trust Docker's security very much.  Some Namecoin software (particularly Electrum-NMC) uses Docker for its build procedure, but we're trying to get that fixed, not add more Docker dependencies
+19:24:25 * Jeremy_Rand_Talo has a bad enough time as-is trying to explain to the Tor guys that we're trying to get rid of the Docker dependency 😞
+19:24:55 <Jeremy_Rand_Talo> grringo: UI for what in particular?  The wallet?
+19:25:48 <TheJollyRoger1> 😢
+19:27:13 <grringo[m]> ok, but most users are not as much paranoic or rather the just want to check/experiment/test how namecoin works. Simple Docker container that works as DNS + .bit resolver can by nice entry point.
+19:27:46 <grringo[m]> yes. UI for wallet + doman register + id register + notary(?)
+19:28:22 <Jeremy_Rand_Talo> grringo: the fact that some users don't understand how bad Docker is doesn't mean we should encourage them.  Why not just do what Bitcoin Core does?  UX is fine there, and doesn't adversely impact security
+19:30:15 <Jeremy_Rand_Talo> grringo: to the extent that wallet UI dev has been slow, it's mainly because of things that have nothing to do with the framework choice.  In Namecoin Core's case, it's because the RPC interface needs additional methods added, and no one has had time to finish adding them.  In Electrum-NMC's case, it's just a matter of me being the only current Electrum-NMC developer and me being busy with things besides UI.
+19:30:16 <Jeremy_Rand_Talo> That said, check out the UI in 3.3.5, it's noticeably improved.
+19:31:48 <Jeremy_Rand_Talo> grringo: if you're suggesting using either Firefox's or Chromium's rendering engine as a dependency of a wallet UI, I don't think that's going to be doable due to the attack surface it introduces (and it's not clear to me what the benefits would be anyway)
+19:32:14 <Jeremy_Rand_Talo> (Qt and PyQt are already cross-platform)
+19:34:21 <Jeremy_Rand_Talo> (as an aside, I think it's questionable whether Docker is actually good UX for typical macOS users anyway)
+19:36:19 <grringo[m]> could be easier to use than trying to build everything manually
+19:36:52 <Jeremy_Rand_Talo> grringo: no one is proposing that macOS users build everything from source though
+19:40:58 <grringo[m]> Is there something like roadmap for Namecoin project?
+19:42:49 <Jeremy_Rand_Talo> grringo: yes, but unfortunately it's not public, because at some point I need to go through it and cleanly segregate the work items (can be made public) from the discussion points (which include a lot of off-the-cuff comments that the authors didn't authorize to be made public).  If there's a particular topic you're interested in, I can expedite the public release of stuff from the roadmap that's related to that
+19:42:50 <Jeremy_Rand_Talo> topic
+19:43:27 <Jeremy_Rand_Talo> e.g. I already did so for the consensus fork wishlist
+19:44:21 <Jeremy_Rand_Talo> I suppose the GSoC project ideas page has some resemblance to a roadmap too, though it hasn't been updated for about a year since we didn't apply to GSoC this year
+19:44:47 <Jeremy_Rand_Talo> we'll probably apply to GSoC in 2020 though.  I wasn't very happy about us not applying this year.
+19:47:44 <TheJollyRoger1> Hopefully by then I will be able to get better hours and more time to start on documentation.
+19:48:51 <Jeremy_Rand_Talo> JollyRoger: indeed, we'll also consider applying to GSoD (assuming that they run the program in 2020; this is the first year they're doing it, so if it goes badly they might decide to abandon it)
+19:50:21 <Jeremy_Rand_Talo> JollyRoger: FYI I have a contact at an org that participates in GSoC regularly; I might look into whether their org could include Namecoin if we don't get accepted to GSoC in 2020
+19:50:51 <Jeremy_Rand_Talo> This is, of course, heavily dependent on a lot of uncertainties between now and 2020
+19:50:52 <TheJollyRoger1> Woah, okay!
+19:51:01 <TheJollyRoger1> Yeah...
+19:51:47 <Jeremy_Rand_Talo> anyways...
+19:52:45 <Jeremy_Rand_Talo> grringo: I understand browser extensions are something you're comfortable with?  Have you had a chance to glance at the DNSSEC-HSTS codebase?  (I know it's messy, most of it was written as a PoC for 35C3 and was done on a very tight schedule)
+19:53:46 <grringo[m]> Tomorrow I will try to setup components again
+19:53:52 <Jeremy_Rand_Talo> ok
+19:54:41 <grringo[m]> Is there a way to persist on Namecoin blockchain key-value that never expires?
+19:55:39 <Jeremy_Rand_Talo> grringo: kind of (specifically the "name epochs" approach works fine for that), but there's not much tooling for it
+19:56:10 <Jeremy_Rand_Talo> Also note that once SegVal is a thing, name epochs would require some 3rd party to store the relevant value preimage for you
+20:01:36 <Jeremy_Rand_Talo> meanwhile, before I forget
+20:01:40 <Jeremy_Rand_Talo> #topic Electrum-NMC
+20:01:51 <grringo[m]> Is someone developing idea of using Namecoin for identities?
+20:02:13 <Jeremy_Rand_Talo> #info Electrum-NMC 3.3.5 binaries are built: https://github.com/namecoin/namecoin.org/pull/429
+20:02:51 <Jeremy_Rand_Talo> #help It would be useful if someone could test the Android and AppImage binaries of Electrum-NMC.  This is the first time we've published them, I have no idea if they work.
+20:04:10 <Jeremy_Rand_Talo> grringo: to my knowledge there aren't any identity use cases being actively developed, but there has been some discussion about trying to revive that, for use cases like Ricochet/Cwtch.
+20:04:49 <Jeremy_Rand_Talo> grringo: I think there was some discussion about maybe using Namecoin for OpenAlias-style stuff as well
+20:05:38 <Jeremy_Rand_Talo> Technically I'd expect that Namecoin already should work with OpenAlias, as long as the OpenAlias client is properly handling Namecoin's DNSSEC keys
+20:05:49 <Jeremy_Rand_Talo> Never tested it though
+20:06:57 <somewhat[m]> *somewhat smiles thinking about what could be on roadmap
+20:09:30 <TheJollyRoger1> Human readable and secure and distributed Onion URLs!
+20:09:40 * TheJollyRoger1 goes starry-eyed thinking about it!
+20:10:20 * Jeremy_Rand_Talo declines to comment about that subject
+20:11:35 <Jeremy_Rand_Talo> #info Electrum-NMC adds a name inventory count to the status bar (next to the NMC balance)
+20:12:10 <Jeremy_Rand_Talo> #info Electrum-NMC 3.3.5 also adds a date estimate for name expiration to the Manage Names tab
+20:12:32 <Jeremy_Rand_Talo> #info Electrum-NMC 3.3.5 also fixes Manage Names display of names that are pending registration
+20:13:09 <Jeremy_Rand_Talo> any other Electrum-NMC things anyone wants to bring up?
+20:13:15 <Jeremy_Rand_Talo> (or should we move to the next topic?)
+20:17:54 <Jeremy_Rand_Talo> ok, moving on
+20:18:04 <Jeremy_Rand_Talo> #topic Namecoin Core
+20:18:22 <Jeremy_Rand_Talo> #info Namecoin Core 0.18.0 is tagged.
+20:18:53 <Jeremy_Rand_Talo> #info Namecoin Core 0.18.0 schedules a softfork (P2SH+CSV+SegWit), which will activate in around 5.5 months.
+20:19:44 <Jeremy_Rand_Talo> #action Jeremy_Rand_Talos will look into building Gitian binaries of Core 0.18.0 and notifying service providers that they need to upgrade
+20:23:22 <Jeremy_Rand_Talo> and moving along...
+20:23:27 <Jeremy_Rand_Talo> #topic Packaging
+20:23:41 <Jeremy_Rand_Talo> This is actually somewhat related to grringo 's inquiry...
+20:24:03 <Jeremy_Rand_Talo> #info Upstream Electrum has a PR pending from Lola regarding adding deb packages.
+20:24:35 <Jeremy_Rand_Talo> #info If anyone here is an expert on creating deb packages, particularly from Python software, you may wish to comment in Lola's PR
+20:28:07 <TheJollyRoger1> Prebuilt deb packages sound awesome!
+20:28:18 * Jeremy_Rand_Talo concurs
+20:29:35 <Jeremy_Rand_Talo> #topic Exchanges
+20:30:34 <Jeremy_Rand_Talo> #info As many of you heard, Poloniex and Bitsane are delisting NMC.  Reasons are unclear; Poloniex seems to be giving very weird justifications for this (including allegedly claiming it was due to regulatory pressure)
+20:30:59 <Jeremy_Rand_Talo> #info Obviously Bisq is still working fine, and is what we're recommending
+20:31:44 <Jeremy_Rand_Talo> #help It would be useful if people could ACK/NACK some issues/PR's relating to cleaning up the Exchanges list on Namecoin.org.  List of relevant issues/PR's is at https://github.com/namecoin/namecoin.org/labels/exchanges
+20:35:07 <TheJollyRoger1> Crap. I don't trade cryptocurrency, but shoot, that's awful to hear the exchanges aren't wanting to play ball anymore.
+20:35:59 <Jeremy_Rand_Talo> JollyRoger: I've never used Poloniex, but I've heard a lot of stories about their sketchiness.  I'm not exactly sad to see them exiting our ecosystem.
+20:36:34 <Jeremy_Rand_Talo> Besides, decentralized exchanges are a lot more secure/private, so if a couple of centralized exchanges exiting incentivizes people to move to Bisq, then I think that's a net benefit
+20:38:05 <TheJollyRoger1> Whew. Okay great!
+20:38:14 <Jeremy_Rand_Talo> Anyways.  Those are all the topics I wanted to bring up.  Anyone else have other questions/comments about anything?  Maybe anything from grringo ?
+20:42:25 * Jeremy_Rand_Talo has some AFK stuff he needs to deal with today, so will probably head out soon if no one has any additional things to bring up
+20:42:54 <TheJollyRoger1> Hmm...
+20:43:03 <TheJollyRoger1> I don't think so, not yet.
+20:43:37 <Jeremy_Rand_Talo> ok then.
+20:43:42 <Jeremy_Rand_Talo> #endmeeting

@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:03:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:03:17</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Jun 16 19:03:17 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:03:17</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:03:39</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Yo-ho!
+<a name="l-5"></a><span class="tm">19:03:53</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi everyone, welcome to the meeting!
+<a name="l-6"></a><span class="tm">19:04:02</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Can we get a roll call of who's here today?
+<a name="l-7"></a><span class="tm">19:04:11</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Present and accounted for, cap'n!
+<a name="l-8"></a><span class="tm">19:04:24</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi TheJollyRoger
+<a name="l-9"></a><span class="tm">19:07:00</span><span class="nk"> &lt;cannon-c[m]&gt;</span> aye
+<a name="l-10"></a><span class="tm">19:08:00</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> yay, the return of cannon-c 🙂
+<a name="l-11"></a><span class="tm">19:08:09</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Yarr-harr!
+<a name="l-12"></a><span class="tm">19:09:53 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">notes that we now have 2 people in this channel whose usernames are pirate references 🙂</span>
+<a name="l-13"></a><span class="tm">19:10:21</span><span class="nk"> &lt;TheJollyRoger&gt;</span> \o/
+<a name="l-14"></a><span class="tm">19:12:04</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Okay, so.  First topic:
+<a name="l-15"></a><span class="tm">19:12:26</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Namecoin Core</span>
+<a name="l-16"></a><span class="tm">19:13:32</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Namecoin Core 0.18.0 has binaries built.  We're just waiting for Gitian sigs to flow in.</span>
+<a name="l-17"></a><span class="tm">19:14:11</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#idea </span><span class="cmdline">Should I ask on /r/Namecoin for volunters to build Gitian sigs?</span>
+<a name="l-18"></a><span class="tm">19:15:48 </span><span class="nka">* TheJollyRoger</span> <span class="ac">unfortunately doesn't know about this sort of stuff :(.</span>
+<a name="l-19"></a><span class="tm">19:16:05</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> (side note: there's a tornado warning that just got issued 2 counties north of here, so I might need to vanish from the meeting on short notice)
+<a name="l-20"></a><span class="tm">19:17:35</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> oh cool, and the tornado is headed in this direction too
+<a name="l-21"></a><span class="tm">19:19:22</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">TheJollyRoger:</span> if I gave you instructions for doing Gitian builds, would you be up for trying it out?  It's not particularly difficult for someone who's competent enough to install Gentoo and who uses GPG
+<a name="l-22"></a><span class="tm">19:20:08</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I would be!
+<a name="l-23"></a><span class="tm">19:20:25</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Oh. Oh crap.
+<a name="l-24"></a><span class="tm">19:21:01</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I can't do it on my desktop build, but I can spin you up a Fedora or Debian ppc64 virtual machine.
+<a name="l-25"></a><span class="tm">19:21:27</span><span class="nk"> &lt;TheJollyRoger&gt;</span> (I just haven't gotten the operating system to work in a virtual machine before &gt;_&lt;)
+<a name="l-26"></a><span class="tm">19:21:53</span><span class="nk"> &lt;TheJollyRoger&gt;</span> (Oh crap about the Tornado) -- keep us posted, eh? I hope everything will be alright.
+<a name="l-27"></a><span class="tm">19:22:27</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">Specifically:</span> https://github.com/bitcoin-core/docs/blob/master/gitian-building.md and https://github.com/namecoin/namecoin-core/blob/nc0.18.0/doc/release-process.md  .  Unfortunately it doesn't work in ppc64le yet, you'd have to use an x86_64 machine
+<a name="l-28"></a><span class="tm">19:24:00</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Okay! Ah SHOOT and I gotta get that reproducible build harness and Tor Browser built &gt;_&lt;. Sorry... I'm really behind on that X(
+<a name="l-29"></a><span class="tm">19:25:06</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">TheJollyRoger:</span> if you only have time for 1, building Namecoin Core is somewhat higher priority from our end than building Tor Browser
+<a name="l-30"></a><span class="tm">19:26:17</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Okay!
+<a name="l-31"></a><span class="tm">19:27:01</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I remember I got as far as trying to build one of the dependencies and got stuck. I'll go back at it in a bit. I'm hoping to try to get better work hours at my day job, so I'm optimistic I may get more free time in the future.
+<a name="l-32"></a><span class="tm">19:27:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#action </span><span class="cmdline">TheJollyRoger  will (maybe) do a Gitian build of Namecoin Core</span>
+<a name="l-33"></a><span class="tm">19:28:05</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Okay!
+<a name="l-34"></a><span class="tm">19:28:11</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Any opinions on whether I should ask on Reddit for volunteers to do Gitian builds for us?
+<a name="l-35"></a><span class="tm">19:29:46</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Hmm. More hands and eyes might help, but I don't know what the downsides might be.
+<a name="l-36"></a><span class="tm">19:38:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">TheJollyRoger:</span> no particular downsides, besides (1) risk of wasting time helping users who aren't technically skilled enough to make it work easily; (2) if all of the volunteers are compromised by the same adversary, then they could produce reproducibly malicious binaries (though those binaries wouldn't match mine, so it would trigger an investigation rather than posting bad binaries)
+<a name="l-37"></a><span class="tm">19:39:22</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Got it. Hmm. I'm not sure, this is not something I've ever thought about.
+<a name="l-38"></a><span class="tm">19:40:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> My inclination is to ask on Reddit; it might have the beneficial side effect of getting more people involved in Namecoin dev generally
+<a name="l-39"></a><span class="tm">19:41:36</span><span class="nk"> &lt;cannon-c[m]&gt;</span> Would also introduce gitian and the process to many. Would be good educational/learning experience for many.
+<a name="l-40"></a><span class="tm">19:43:14</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">cannon-c:</span> yes, definitely.  Tinkering with Gitian is how I got the skill set that I'm now using to port Tor Browser to ARM/POWER.
+<a name="l-41"></a><span class="tm">19:43:19</span><span class="nk"> &lt;cannon-c[m]&gt;</span> for those who have not done such a thing before. And getting more people to be involved with it would create more contingency.
+<a name="l-42"></a><span class="tm">19:44:52</span><span class="nk"> &lt;cannon-c[m]&gt;</span> For disadvantage #2, I think that the more people there are, the more likelyhood that a mismatching sig would be noticed?
+<a name="l-43"></a><span class="tm">19:45:02</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Woah.
+<a name="l-44"></a><span class="tm">19:45:23</span><span class="nk"> &lt;cannon-c[m]&gt;</span> I think that such an attack would be made harder with the more people involved? Since such would be more likely noticed?
+<a name="l-45"></a><span class="tm">19:46:06</span><span class="nk"> &lt;cannon-c[m]&gt;</span> sorry for repeat. Lag on my side.
+<a name="l-46"></a><span class="tm">19:46:58</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">cannon-c:</span> if the samples are representative of the same population, then yes.  However, people responding to a Reddit thread are likely to be somewhat less technically sophisticated than people responding to a comment in this channel, so there's a higher risk of those people being compromised.
+<a name="l-47"></a><span class="tm">19:47:22</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Generally I do think it's a beneficial tradeoff, all things considered
+<a name="l-48"></a><span class="tm">19:48:37</span><span class="nk"> &lt;cannon-c[m]&gt;</span> Good points. but I am sure that most people whom would volunteer would be a mix of people from different regions, and hardware and software. Diversity is good for security in some cases. So maybe posting on reddit would enhance the diversity of such possibly.
+<a name="l-49"></a><span class="tm">19:49:12</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">cannon-c:</span> yes, I agree
+<a name="l-50"></a><span class="tm">19:49:33</span><span class="nk"> &lt;cannon-c[m]&gt;</span> If more people on reddit are less technical. It would be also good opportunity to get them to become more active in technical things. Yes pros/cons for sure.
+<a name="l-51"></a><span class="tm">19:49:35</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Whew. Okay!
+<a name="l-52"></a><span class="tm">19:49:42</span><span class="nk"> &lt;cannon-c[m]&gt;</span> just my opinions/thoughts
+<a name="l-53"></a><span class="tm">19:50:35</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Sounds like we have a general consensus here in favor of asking on Reddit?
+<a name="l-54"></a><span class="tm">19:50:56</span><span class="nk"> &lt;cannon-c[m]&gt;</span> and even if people doing it are more likely to be compromised, then at least attacks would be easier to notice. Think of it like a canary of the existence of an adversary
+<a name="l-55"></a><span class="tm">19:51:48</span><span class="nk"> &lt;cannon-c[m]&gt;</span> even if majority has sigs for bad builds, even the minority of something different would still raise questions, right?
+<a name="l-56"></a><span class="tm">19:53:04</span><span class="nk"> &lt;cannon-c[m]&gt;</span> *even if majority generates sigs for bad builds
+<a name="l-57"></a><span class="tm">19:53:28</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Huh. It'd give a good way to test the reproducibility, that's for sure.
+<a name="l-58"></a><span class="tm">19:53:33</span><span class="nk"> &lt;TheJollyRoger&gt;</span> And our supply lines.
+<a name="l-59"></a><span class="tm">19:53:40</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">cannon-c:</span> I would probably veto publishing binaries that didn't match my hashes prior to an investigation into what happened.
+<a name="l-60"></a><span class="tm">19:54:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> I don't know what upstream Bitcoin Core's policies are on this question
+<a name="l-61"></a><span class="tm">19:55:41</span><span class="nk"> &lt;cannon-c[m]&gt;</span> &lt;Jeremy_Rand_Talo "cannon-c: I would probably veto "&gt; good idea
+<a name="l-62"></a><span class="tm">20:00:01</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#action </span><span class="cmdline">Jeremy_Rand_Talos will ask on Reddit for volunteers to do Gitian builds of Namecoin Core</span>
+<a name="l-63"></a><span class="tm">20:00:55</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Any other Namecoin Core related things to bring up before we move on to the next topic?
+<a name="l-64"></a><span class="tm">20:02:15</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Hmm. I don't think so!
+<a name="l-65"></a><span class="tm">20:02:19</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Er, at least not me.
+<a name="l-66"></a><span class="tm">20:04:45</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">ncdns etc</span>
+<a name="l-67"></a><span class="tm">20:05:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">A lot of progress has happened with building ncdns (and the rest of the Namecoin Go ecosystem) with rbm</span>
+<a name="l-68"></a><span class="tm">20:09:45</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">ncdns now builds for GNU/Linux and Windows in master branch of ncdns-repro, and there are PR's adding macOS target, as well as DNSSEC-HSTS, ncp11, and certdehydrate-dane-rest-api projects.  ncp11's rbm binaries are tested and working on Tor Browser for GNU/Linux and Windows, as well as Firefox for Debian Buster.</span>
+<a name="l-69"></a><span class="tm">20:10:56</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">That means we should shortly be able to claim the "TLS Tor Browser" NLnet milestone</span>
+<a name="l-70"></a><span class="tm">20:12:32</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Wow!
+<a name="l-71"></a><span class="tm">20:18:56</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Hopefully soon we'll get ncdns-nsis (ncdns Windows installer) building in rbm as well</span>
+<a name="l-72"></a><span class="tm">20:20:10 </span><span class="nka">* cannon-c[m]</span> <span class="ac">has to leave. Plans to read backlog of messages later. Good bye.</span>
+<a name="l-73"></a><span class="tm">20:21:13</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok
+<a name="l-74"></a><span class="tm">20:22:43</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Okay!
+<a name="l-75"></a><span class="tm">20:23:44</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyone have anything  else ncdns-related to cover before we move onto the next topic?
+<a name="l-76"></a><span class="tm">20:26:49</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I don't.
+<a name="l-77"></a><span class="tm">20:29:02</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Electrum-NMC</span>
+<a name="l-78"></a><span class="tm">20:31:11</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've resubmitted my Merkle checkpoint PR to upstream Electrum, including a bunch of abstractions that will be highly useful for adapting it to AuxPoW with minimal patch size.  Hopefully they'll be able to merge it soon.  This will allow Electrum-NMC to do name lookups much more efficiently.</span>
+<a name="l-79"></a><span class="tm">20:35:56</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Any other Electrum-NMC things to cover before we move onto the next topic?
+<a name="l-80"></a><span class="tm">20:36:09</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I don't have any!
+<a name="l-81"></a><span class="tm">20:39:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Public Relations</span>
+<a name="l-82"></a><span class="tm">20:40:39</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I need to follow up with Cypher Market about adding Namecoin merchandise.  Will hopefully get to it in the next week.</span>
+<a name="l-83"></a><span class="tm">20:41:38</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Arr \o/
+<a name="l-84"></a><span class="tm">20:45:14</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Random other fun thing: I'll be in the live studio audience for Redacted Tonight sometime next month.  Anything I should say to Lee?  🙂
+<a name="l-85"></a><span class="tm">20:46:14</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Woah.
+<a name="l-86"></a><span class="tm">20:46:24</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Woah woah you'll be at a show?
+<a name="l-87"></a><span class="tm">20:46:44</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Woah, Lee Camp?
+<a name="l-88"></a><span class="tm">20:46:51</span><span class="nk"> &lt;TheJollyRoger&gt;</span> From Washington Post?
+<a name="l-89"></a><span class="tm">20:48:45</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">TheJollyRoger:</span> *Redacted Tonight* is the comedy news show on RT America; yes, it's hosted by Lee Camp
+<a name="l-90"></a><span class="tm">20:48:58</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Wowwwww!
+<a name="l-91"></a><span class="tm">20:50:32</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> I was able to rig some travel plans so that I'd be passing through Washington DC anyway, so I decided to go to a Redacted Tonight live taping (it's gratis to get in)
+<a name="l-92"></a><span class="tm">20:51:41</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Oh man. Wow!
+<a name="l-93"></a><span class="tm">20:55:31</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I have to switch devices, so I'll be a bit high latency.
+<a name="l-94"></a><span class="tm">20:56:58</span><span class="nk"> &lt;somewhat[m]&gt;</span> *somewhat likes that quite a few "(not in namecoin)"s will be removed from the release-process.md shortly
+<a name="l-95"></a><span class="tm">20:57:47</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Any other public relations things to cover?
+<a name="l-96"></a><span class="tm">20:57:56</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> hi somewhat
+<a name="l-97"></a><span class="tm">21:02:44</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">TheJollyRoger:</span> any other topics you'd like to cover today?
+<a name="l-98"></a><span class="tm">21:08:13</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> I don't think so!
+<a name="l-99"></a><span class="tm">21:08:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">somewhat:</span> anything you'd like to cover?
+<a name="l-100"></a><span class="tm">21:08:45</span><span class="nk"> &lt;somewhat[m]&gt;</span> no :)
+<a name="l-101"></a><span class="tm">21:10:14</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Ok.  Anyone else have something to bring up today?
+<a name="l-102"></a><span class="tm">21:13:57</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> okay then.  Thanks for attending everyone!
+<a name="l-103"></a><span class="tm">21:14:14</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

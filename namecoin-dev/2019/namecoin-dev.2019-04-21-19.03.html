@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand_Talo at 19:03:00 UTC
+(<a href="namecoin-dev.2019-04-21-19.03.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">ncdns-repro</b> <span class="details">(<a href='namecoin-dev.2019-04-21-19.03.log.html#l-16'>Jeremy_Rand_Talo</a>, 19:26:07)</span>
+<ol type="a">
+  <li><span class="INFO">I've slowly been reviewing hl 's ncdns-repro
+    repo</span> <span class="details">(<a
+    href='namecoin-dev.2019-04-21-19.03.log.html#l-17'>Jeremy_Rand_Talo</a>,
+    19:26:54)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">SPV Name Lookups</b> <span class="details">(<a href='namecoin-dev.2019-04-21-19.03.log.html#l-36'>Jeremy_Rand_Talo</a>, 19:54:56)</span>
+<ol type="a">
+  <li><span class="INFO">So, a large fraction of the Electrum-NMC
+    network is currently down due to being hosted on machines that also
+    host Bitcoin ElectrumX servers, which are currently under a large
+    DDoS attack</span> <span class="details">(<a
+    href='namecoin-dev.2019-04-21-19.03.log.html#l-37'>Jeremy_Rand_Talo</a>,
+    19:55:54)</span></li>
+  <li><span class="INFO">This leads to questions about exactly why we
+    need ElectrumX servers to do name lookups, and whether there are
+    preferable ways to handle it</span> <span class="details">(<a
+    href='namecoin-dev.2019-04-21-19.03.log.html#l-38'>Jeremy_Rand_Talo</a>,
+    19:57:23)</span></li>
+  <li><span class="INFO">Usually, the role of ElectrumX servers is to
+    maintain indexes (e.g. mapping addresses to transactions)</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-04-21-19.03.log.html#l-39'>Jeremy_Rand_Talo</a>,
+    19:57:55)</span></li>
+  <li><span class="INFO">This is, theoretically, superfluous for
+    Namecoin, because Namecoin Core already maintains such an
+    index.</span> <span class="details">(<a
+    href='namecoin-dev.2019-04-21-19.03.log.html#l-40'>Jeremy_Rand_Talo</a>,
+    19:58:17)</span></li>
+  <li><span class="INFO">(Specifically, Namecoin Core has an index
+    mapping names to transactions)</span> <span class="details">(<a
+    href='namecoin-dev.2019-04-21-19.03.log.html#l-41'>Jeremy_Rand_Talo</a>,
+    19:58:44)</span></li>
+  <li><span class="INFO">The main reason we're not using Namecoin Core's
+    name index in ElectrumX is that we don't want nonexistent names to
+    be directly revealed to the network (because that produces a
+    squatting vulnerability)</span> <span class="details">(<a
+    href='namecoin-dev.2019-04-21-19.03.log.html#l-42'>Jeremy_Rand_Talo</a>,
+    20:00:05)</span></li>
+  <li><span class="INFO">Instead, ElectrumX indexes by a hash of the
+    name, so you can request a nonexistent name from an ElectrumX server
+    without revealing the name</span> <span class="details">(<a
+    href='namecoin-dev.2019-04-21-19.03.log.html#l-43'>Jeremy_Rand_Talo</a>,
+    20:01:00)</span></li>
+  <li><span class="INFO">This should be fixable in Namecoin Core.  It
+    would be nice if Namecoin Core indexed names by their hash, so that
+    we could do lookups by name hash.</span> <span class="details">(<a
+    href='namecoin-dev.2019-04-21-19.03.log.html#l-44'>Jeremy_Rand_Talo</a>,
+    20:01:47)</span></li>
+  <li><span class="INFO">We could then do useful things like removing
+    the name index from ElectrumX and instead just pass through name
+    lookups from ElectrumX directly to Namecoin Core, which would
+    decrease resource usage considerably.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-04-21-19.03.log.html#l-45'>Jeremy_Rand_Talo</a>,
+    20:02:28)</span></li>
+  <li><span class="INFO">This would also probably enable things like
+    Electrum Personal Server, which by its nature doesn't keep indexes.
+    (I haven't checked that in detail though.)</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-04-21-19.03.log.html#l-46'>Jeremy_Rand_Talo</a>,
+    20:03:23)</span></li>
+  <li><span class="INFO">Allowing Namecoin Core's name index to be
+    directly used for this purpose would also allow interesting things
+    like adding a Namecoin wire protocol command for name
+    lookups.</span> <span class="details">(<a
+    href='namecoin-dev.2019-04-21-19.03.log.html#l-47'>Jeremy_Rand_Talo</a>,
+    20:04:12)</span></li>
+  <li><span class="INFO">Upon chatting with luke-jr about this, I think
+    it's reasonable to add a Namecoin wire protocol command that does a
+    name lookup by name hash, and returns the relevant transaction along
+    with a Merkle proof.</span> <span class="details">(<a
+    href='namecoin-dev.2019-04-21-19.03.log.html#l-49'>Jeremy_Rand_Talo</a>,
+    20:06:05)</span></li>
+  <li><span class="INFO">We could also rig Namecoin Core to
+    automatically issue that wire protocol command if the headers are
+    synced but the full chain isn't yet.  Which would basically mean
+    that Namecoin Core is usable for name lookups quite quickly after
+    launch (though at SPV security) before the chain is synced.</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-04-21-19.03.log.html#l-50'>Jeremy_Rand_Talo</a>,
+    20:07:39)</span></li>
+  <li><span class="INFO">This approach would probably be a lot more
+    resistant to DDoS attacks, simply because there are a lot more
+    Namecoin Core nodes than Namecoin ElectrumX servers (due to
+    ElectrumX needing a lot more resources to run), and therefore a DDoS
+    attack would need to take out a lot more nodes</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-04-21-19.03.log.html#l-51'>Jeremy_Rand_Talo</a>,
+    20:08:45)</span></li>
+  <li><span class="INFO">There are also probably some cool enhancements
+    we could do do that wire protocol command, e.g. utilizing Ryan's
+    "unconfirmed transaction chains" idea so that if the chain is
+    verified within 36 kiloblocks of the tip, the command could return a
+    chain of transactions (starting with the last verified one), and we
+    would just verify signatures of the tx chain so that we could be
+    relatively confident that the</span> <span class="details">(<a
+    href='namecoin-dev.2019-04-21-19.03.log.html#l-52'>Jeremy_Rand_Talo</a>,
+    20:11:26)</span></li>
+  <li><i class="itemtype">ACTION</i>: <span class="ACTION">Jeremy will
+    add "Make Core index names by hash" and "Add getname to wire
+    protocol" to Roadmap and bring to Daniel's attention</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-04-21-19.03.log.html#l-61'>Jeremy_Rand_Talo</a>,
+    20:34:24)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 20:39:33 UTC
+(<a href="namecoin-dev.2019-04-21-19.03.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>Jeremy will add "Make Core index names by hash" and "Add getname to wire protocol" to Roadmap and bring to Daniel's attention</li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand_Talo (47)</li>
+  <li>TheJollyRoger (12)</li>
+  <li>hl (9)</li>
+  <li>qpm (2)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

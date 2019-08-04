@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand_Talo at 19:02:08 UTC
+(<a href="namecoin-dev.2019-08-04-19.02.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">Softfork Schedule</b> <span class="details">(<a href='namecoin-dev.2019-08-04-19.02.log.html#l-12'>Jeremy_Rand_Talo</a>, 19:08:28)</span>
+<ol type="a">
+  <li><span class="INFO">We've notified 86.2% of hashrate about the
+    upcoming softfork.  14.5% has already confirmed that they've
+    upgraded; I expect that number to climb quickly.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-13'>Jeremy_Rand_Talo</a>,
+    19:10:25)</span></li>
+  <li><span class="INFO">The mining pools that we haven't talked to yet
+    are Poolin, Bixin, Prohashing, and BitMinter.  None of those pools
+    have a public email address, so contacting them is less fun.  There
+    are also a small number of mining pools that we can't identify from
+    coinbase parsing, but IIRC they're less than 1% hashrate combined,
+    so I'm not going to bother trying to track that 1% down.</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-15'>Jeremy_Rand_Talo</a>,
+    19:11:44)</span></li>
+  <li><span class="INFO">For reference, the softfork activates P2SH,
+    CSV, and SegWit.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-16'>Jeremy_Rand_Talo</a>,
+    19:13:06)</span></li>
+  <li><span class="INFO">The softfork is expected to activate in a
+    little bit over 2 months from now.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-17'>Jeremy_Rand_Talo</a>,
+    19:13:06)</span></li>
+  <li><span class="INFO">Note that because P2SH and SegWit repurpose the
+    semantics of scriptPubKeys that were previously considered "anyone
+    can spend", there is an incentive for miners to try to get away with
+    mischief if a lot of users haven't upgraded their full nodes</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-23'>Jeremy_Rand_Talo</a>,
+    19:20:03)</span></li>
+  <li><span class="INFO">So, I strongly recommend that anyone running
+    Namecoin Core who doesn't need the name management GUI should
+    upgrade to 0.18.0 as soon as possible.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-24'>Jeremy_Rand_Talo</a>,
+    19:20:42)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Miscellaneous Golang Project Updates</b> <span class="details">(<a href='namecoin-dev.2019-08-04-19.02.log.html#l-27'>Jeremy_Rand_Talo</a>, 19:23:55)</span>
+<ol type="a">
+  <li><span class="INFO">I've successfully split out Namecoin's fork of
+    `crypto/x509` into its own repo.  This allows ncdns's repo to be
+    revised independently of the Golang compiler version.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-29'>Jeremy_Rand_Talo</a>,
+    19:25:37)</span></li>
+  <li><span class="INFO">This is a critical step towards integrating
+    with Tor's build system.  I haven't yet configured ncdns-repro or
+    tor-browser-build to use this, but it should be pretty easy.</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-30'>Jeremy_Rand_Talo</a>,
+    19:26:40)</span></li>
+  <li><span class="INFO">I've also successfully gotten ncdns to work
+    with a current release of Conformal's btcd RPC client library,
+    instead of the stupid 4-year-old heavily-patched fork that we
+    weren't maintaining.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-31'>Jeremy_Rand_Talo</a>,
+    19:27:46)</span></li>
+  <li><span class="INFO">One of the patches we were carrying wasn't
+    relevant anymore (only mattered for ancient Core versions); another
+    was fixed upstream long ago (ConsensusJ and Electrum support); the
+    last one I've submitted upstream for review (cookie authentication
+    support)</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-32'>Jeremy_Rand_Talo</a>,
+    19:29:08)</span></li>
+  <li><span class="INFO">I did need to submit a patch upstream to
+    Conformal that changes 3 API symbols from private to exported, so
+    that we can add Namecoin-specific RPC calls.  It's submitted,
+    hopefully they'll look at it soon.  If they don't get to it soon, we
+    can probably maintain our own fork for a while (it's a trivial
+    patch).</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-34'>Jeremy_Rand_Talo</a>,
+    19:30:59)</span></li>
+  <li><span class="INFO">Currently the new Namecoin RPC client package
+    exposes `NameShow`, `NameScan`, and `NameQuery`, the last one of
+    which is like `NameShow` but only returns the value without the
+    metadata.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-35'>Jeremy_Rand_Talo</a>,
+    19:32:06)</span></li>
+  <li><span class="INFO">As a side effect of this refactor, `ncdt` and
+    `ncdumpzone` now support cookie authentication.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-36'>Jeremy_Rand_Talo</a>,
+    19:32:56)</span></li>
+  <li><span class="INFO">Meanwhile, I started doing reproducibility
+    testing on ncdns.  It turns out that we're not reproducible right
+    now.  I traced the bug via Diffoscope, and found that there's a bug
+    in upstream rbm.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-37'>Jeremy_Rand_Talo</a>,
+    19:34:31)</span></li>
+  <li><span class="INFO">Specifically, upstream rbm contaminates tar.gz
+    files with timestamps as part of the gzip header</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-38'>Jeremy_Rand_Talo</a>,
+    19:34:58)</span></li>
+  <li><span class="INFO">I tried switching to tar.xz and that was
+    reproducible, so that's a short-term fix.  I chatted with Nicolas
+    from Tor about the issue, and he helped me code up a patch that
+    fixes tar.gz; I've submitted that and it's awaiting review.</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-39'>Jeremy_Rand_Talo</a>,
+    19:36:04)</span></li>
+  <li><span class="INFO">I also addressed Nicolas's feedback on the
+    Golang build script refactor patch; it's now awaiting review as
+    well.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-40'>Jeremy_Rand_Talo</a>,
+    19:37:08)</span></li>
+  <li><span class="INFO">One more thing: documentation is now written
+    for using ncp11 with Tor Browser.  So we're very very close to a
+    release of ncp11.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-41'>Jeremy_Rand_Talo</a>,
+    19:40:56)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Electrum-NMC</b> <span class="details">(<a href='namecoin-dev.2019-08-04-19.02.log.html#l-60'>Jeremy_Rand_Talo</a>, 20:07:18)</span>
+<ol type="a">
+  <li><span class="INFO">The primary blocker from Tor's perspective at
+    this point is stream isolation for name lookups in Electrum-NMC,
+    along with the plumbing to get Tor to pass its stream isolation data
+    through to Electrum-NMC.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-62'>Jeremy_Rand_Talo</a>,
+    20:10:07)</span></li>
+  <li><span class="INFO">I've started discussing with the upstream
+    Electrum devs about how they want this to be done.  I'm hoping to
+    have a patch submitted upstream within a couple weeks, along with a
+    Namecoin-specific patch for the parts that aren't applicable to
+    Bitcoin.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-63'>Jeremy_Rand_Talo</a>,
+    20:10:14)</span></li>
+  <li><span class="INFO">The initial patch will probably have
+    performance issues, because it will do a TCP handshake + TLS
+    handshake + Electrum handshake on-demand each time a new stream ID
+    is opened.  The "right way" to handle this is to preemptively open
+    connections for use by stream-isolated RPC commands, but doing this
+    safely without side channel leaks is complicated, and I'm probably
+    not going to bother with that until after</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-64'>Jeremy_Rand_Talo</a>,
+    20:12:07)</span></li>
+  <li><span class="INFO">Meanwhile, I'm happy to report that I'm no
+    longer the only active Electrum-NMC developer.  Xaya is funding
+    Daniel to do Electrum-NMC development now; he's already sent in some
+    PR's.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-66'>Jeremy_Rand_Talo</a>,
+    20:14:52)</span></li>
+  <li><span class="INFO">It also looks like there's a chance we can get
+    Xaya to sponsor the SegVal scalability work for Namecoin.  Daniel
+    informs me that SegVal is similar enough to some stuff that Xaya
+    wants, that it's likely that SegVal can share a lot of
+    implementation code with Xaya.  No confirmation on this yet
+    though.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-67'>Jeremy_Rand_Talo</a>,
+    20:16:22)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Public Relations</b> <span class="details">(<a href='namecoin-dev.2019-08-04-19.02.log.html#l-71'>Jeremy_Rand_Talo</a>, 20:26:14)</span>
+<ol type="a">
+  <li><span class="INFO">You've probably by now seen the media circus
+    about OpenNIC following the recommendation from me and PRISM Break
+    lead maintainer Yegor Timoshenko to remove .bit from their root
+    zone.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-72'>Jeremy_Rand_Talo</a>,
+    20:27:05)</span></li>
+  <li><span class="INFO">A journalist from ZDNet.fr (who's interviewed
+    me before) asked me for a comment on the subject; I replied with a
+    quite extensive/detailed statement including a timeline of relevant
+    events and various other analysis.  I'm very glad I did, because his
+    article on the subject turned out great IMO.
+    https://www.zdnet.fr/actualites/namecoin-l-integrite-mais-a-quel-prix-39888667.htm</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-73'>Jeremy_Rand_Talo</a>,
+    20:29:19)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Testnet</b> <span class="details">(<a href='namecoin-dev.2019-08-04-19.02.log.html#l-80'>Jeremy_Rand_Talo</a>, 20:41:41)</span>
+<ol type="a">
+  <li><span class="INFO">Testnet is missing a dnsseed to bootstrap new
+    clients joining... its possible to re-join by using an IP adress of
+    a Testnet node.. but i currently dont know of any</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-08-04-19.02.log.html#l-82'>jonasbits</a>,
+    20:43:16)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 21:11:57 UTC
+(<a href="namecoin-dev.2019-08-04-19.02.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>(none)</li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand_Talo (65)</li>
+  <li>jonasbits (18)</li>
+  <li>somewhat[m] (15)</li>
+  <li>sdgathman (13)</li>
+  <li>jonasbits_ (2)</li>
+  <li>qpm (2)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

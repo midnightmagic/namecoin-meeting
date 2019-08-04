@@ -1,0 +1,75 @@
+19:00:36 <Jeremy_Rand_Talo> #startmeeting
+19:00:36 <qpm> Meeting started Sun Mar 17 19:00:36 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:00:36 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:01:39 <Jeremy_Rand_Talo> Hi everyone, welcome to the meeting
+19:01:41 <Jeremy_Rand_Talo> Can we get a roll call of who's here today?
+19:05:47 <hl> hi
+19:06:09 <Jeremy_Rand_Talo> Hi hl
+19:06:33 <JollyRoger`> Ahoy, cap'n!
+19:06:50 <Jeremy_Rand_Talo> Hi JollyRoger`
+19:07:58 <Jeremy_Rand_Talo> Okay, so, first topic:
+19:08:19 <Jeremy_Rand_Talo> #topic Electrum-NMC optimizations
+19:08:47 <Jeremy_Rand_Talo> #info The cp_height PR is still working its way through upstream review.
+19:09:18 <Jeremy_Rand_Talo> #info There was some minor disagreement about a couple of the optimizations I made in that PR, which is still in the process of being discussed
+19:09:31 <jonasbits> hi
+19:10:05 <Jeremy_Rand_Talo> #info Neil has requested that I submit a protocol and code PR for the CBOR+DEFLATE transport; I intend to do that when I have some time
+19:10:11 <Jeremy_Rand_Talo> Hi jonasbits
+19:11:28 <Jeremy_Rand_Talo> #info I noticed an optimization that can be made to Namecoin Core's AuxPoW serialization that will save 36 bytes per AuxPoW header, which is around 4% of Electrum-NMC's bandwidth usage.  Daniel is looking into implementing it.
+19:12:45 <Jeremy_Rand_Talo> #info (The optimization is that Namecoin Core currently serializes the parent block hash and the parent coinbase transaction's Merkle index.  The former is redundant because its preimage also is present in AuxPoW headers, and the latter is redundant because the coinbase transaction is always the first transaction, so its Merkle index is always 0.)
+19:13:54 <Jeremy_Rand_Talo> That's what I've been doing with Electrum-NMC optimizations; anyone have questions/comments about that subject?
+19:14:18 <JollyRoger`> Er, not me.
+19:18:43 <Jeremy_Rand_Talo> Okay, moving along...
+19:19:09 <Jeremy_Rand_Talo> #topic Electrum-NMC rebranding static analyzer
+19:19:48 <Jeremy_Rand_Talo> #info I got tired of randomly stumbling across bugs in Electrum-NMC that were caused by me failing to change Bitcoin-related strings to Namecoin equivalents when merging stuff from upstream
+19:20:10 <Jeremy_Rand_Talo> #info So I made a static analyzer to check for that stuff for me
+19:20:59 <Jeremy_Rand_Talo> #info It found quite a lot of bugs.  Most of them were fairly harmless (e.g. GUI display bugs), but it did find a few important ones
+19:21:59 <Jeremy_Rand_Talo> #info Among other things, it found that the message signing code was broken, and that the KeepKey hardware wallet code was broken.
+19:22:26 <JollyRoger`> Yikes, I'm really glad I didn't buy a KeepKey then.
+19:22:59 <Jeremy_Rand_Talo> #help I think I've fixed those bugs, but I don't have a KeepKey wallet to test with.  Do we know anyone with a KeepKey device who can test the fix?
+19:23:25 <JollyRoger`> Sorry, I don't :(
+19:24:05 <Jeremy_Rand_Talo> #info If all else fails, I'll just ask on Reddit and Twitter if someone can test it for us.
+19:26:01 <Jeremy_Rand_Talo> #info Also the static analyzer indicates that the localization code in Electrum-NMC is likely to be horribly broken.  Not surprising since I've never tested it with non-English locales.
+19:27:22 <Jeremy_Rand_Talo> #info At some point we'll probably need to just set up a Transifex account for Electrum-NMC as well as Namecoin Core.  I haven't had the time to do it yet, but at some point it'll be necessary for UX reasons.
+19:28:50 <Jeremy_Rand_Talo> Anyone have comments/questions about that stuff?  (I don't suppose anyone here has experience with Transifex?)
+19:31:33 <JollyRoger`> I don't, sorry.
+19:34:49 <somewhat[m]> Hi and no questions!
+19:35:33 <Jeremy_Rand_Talo> Hi somewhat
+19:35:47 <Jeremy_Rand_Talo> Okay, moving along...
+19:37:48 <Jeremy_Rand_Talo> JollyRoger`: / hl : is there anything new regarding reproducible builds for ncdns?  (If so, set the topic prior to giving details so that the minutes bot doesn't get confused)
+19:38:30 <JollyRoger`> No news, sorry. I'm still struggling on with it. Last weekend I had both computers break down, and I've been rushing to fix them. That put me behind a lot.
+19:40:03 <Jeremy_Rand_Talo> ok, no worries
+19:40:18 <JollyRoger`> (A botched kernel upgrade crippled the Morgan's Revenge, forcing me to use an incomplete dual boot as a lifeboat, and an unrelated misconfiguration on Spirit of Adventure had left it dead in the water until I could resolve what was going on)
+19:40:34 <JollyRoger`> Sorry about that :(.
+19:43:01 <Jeremy_Rand_Talo> I'll move along to the next topic then...
+19:43:34 <Jeremy_Rand_Talo> #topic Merchandise
+19:45:08 <Jeremy_Rand_Talo> #info I've reached out to Diego from Cypher Market.  It looks like it's feasible to list Namecoin merchandise there.  However, there's a small issue on their website right now that breaks some stuff when accessing it over Tor with JavaScript disabled.  Diego and I think it's feasible to fix; we'll continue discussing listing Namecoin merchandise there once that issue is fixed.
+19:48:55 <JollyRoger`> Fantastic!
+19:50:37 <Jeremy_Rand_Talo> okay, moving along again...
+19:50:58 <Jeremy_Rand_Talo> #topic YaCy search engine for Namecoin
+19:51:55 <Jeremy_Rand_Talo> #info I've written a tool (in Go) that automatically prepares a YaCy installation for use as a Namecoin search engine (i.e. setting the Use Case settings appropriately).
+19:52:23 <somewhat[m]> congratulations!
+19:52:23 <Jeremy_Rand_Talo> #info Next I plan to write another Go tool that automatically triggers a YaCy crawl based on the Namecoin blockchain
+19:53:15 <JollyRoger`> Wow!
+19:53:20 <Jeremy_Rand_Talo> #info Also, happily, chromium-driver Debian/ppc64le packages are now available from Raptor, so I should be able to make some progress on a ZeroNet search engine too
+20:03:23 <Jeremy_Rand_Talo> hl: are there any other topics you'd like to bring up today?
+20:03:30 <somewhat[m]> While there is a gap, the nmc search engine will handle "zeronet" in nmc JSON and the zeronet search engine will handle all zeronet sites?
+20:03:39 <hl> no
+20:03:56 <somewhat[m]> Is that what you are describing?
+20:09:34 <Jeremy_Rand_Talo> somewhat: so there are actually 5 modes for a search engine.  (1) Use ncdns to dump a site list, crawl them in YaCy; this is useful for a P2P search engine.  (2) Same as 1 except use ncdns with a modification to add trailing periods to "ns" field; this is useful for research purposes in figuring out what users are using broken software.  (3) Same as 1 except use ncdns with a modification to output domains that
+20:09:34 <Jeremy_Rand_Talo> have a Tor onion service or an I2P eepsite; this is useful for indexing darknet sites.  (4) Same as 1 except use ncdns to output domains that use ZeroNet; because ZeroNet requires JS, doing this requires some witchcraft involving mitmproxy and selenium.  (5) Same as 4, but also follow links to non-.bit domains that look like ZeroNet sites.  This might be useful for research purposes involving investigating
+20:09:35 <Jeremy_Rand_Talo> whether ZeroNet sites on Namecoin versus non-Namecoin ZeroNet sites have different usage.
+20:10:01 <Jeremy_Rand_Talo> Maybe there are some other modes I haven't considered.
+20:10:48 <Jeremy_Rand_Talo> At the moment, (1) is my top priority, followed by (4).  The other three modes seem interesting but aren't likely to happen anytime soon from me (though the code I wrote for (1) and (4) should make the other there modes easy to implement if someone wants to try)
+20:13:40 <somewhat[m]> Thanks for the detail :)
+20:14:26 <Jeremy_Rand_Talo> By the way, there are a crapton of ZeroNet sites that have misconfigured hyperlinks, so that all their links are broken when you access them via a transproxy.  I suppose mode (6) might be to try to automatically correct that issue via mitmproxy, which would be useful for research purposes similar to (2)
+20:16:42 <Jeremy_Rand_Talo> (It's not super surprising that so many sites are broken in that way, since transproxy support in ZeroNet isn't very widely used, so I doubt most site owners are testing against it.  Hopefully that'll correct itself after some things I discussed with Tamas last summer end up happening....)
+20:20:04 <Jeremy_Rand_Talo> JollyRoger`: anything else you'd like to bring up today?
+20:20:13 <JollyRoger`> Er, not at this moment, sorry.
+20:20:54 <Jeremy_Rand_Talo> jonasbits: anything you'd like to bring up today?
+20:24:40 <Jeremy_Rand_Talo> somewhat: how about you?
+20:25:05 <somewhat[m]> nope
+20:26:01 <Jeremy_Rand_Talo> cool.  Okay, one last quick informal question: how do people like the Namecoin Meeting Reminder bot?  I get the impression that it's helping a lot, is that an accurate impression?
+20:27:09 <somewhat[m]> it's great!
+20:27:54 <Jeremy_Rand_Talo> excellent
+20:30:44 <Jeremy_Rand_Talo> okay then.  Thanks for attending everyone!
+20:30:51 <Jeremy_Rand_Talo> #endmeeting
