@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:00:57</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:00:57</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Aug 18 19:00:57 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:00:58</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:01:29</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi everyone, welcome to the meeting!
+<a name="l-5"></a><span class="tm">19:01:39</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Can we get a roll call of who's here today?
+<a name="l-6"></a><span class="tm">19:02:21</span><span class="nk"> &lt;grringo[m]&gt;</span> hello
+<a name="l-7"></a><span class="tm">19:04:24</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi grringo
+<a name="l-8"></a><span class="tm">19:08:57</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Alright, so, this meeting might be shorter than typical, depending on how much material everyone else has.  (Things have been relatively quiet on my end.)  But, let's get started with the first topic:
+<a name="l-9"></a><span class="tm">19:09:09</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Softfork Upgrade Status</span>
+<a name="l-10"></a><span class="tm">19:09:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">99.6% of hashrate has been contacted about the upcoming softfork.  24.4% have already confirmed that they upgraded successfully.</span>
+<a name="l-11"></a><span class="tm">19:10:39</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Both figures are noticeably higher than at the previous meeting.  I expect the latter figure to continue to rise quickly.</span>
+<a name="l-12"></a><span class="tm">19:14:00</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> any questions/comments about this topic before we move on?
+<a name="l-13"></a><span class="tm">19:17:55</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Electrum-NMC</span>
+<a name="l-14"></a><span class="tm">19:19:48</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Someone posted on the tech support forum recently saying that they weren't able to get Electrum-NMC v3.3.6.1 on Windows to connect to a server.  I haven't run across that behavior, but v3.3.5 through v3.3.6.1 were subject to some misbehavior due to a broken refactor, and that misbehavior did seem to affect Windows more strongly.</span>
+<a name="l-15"></a><span class="tm">19:20:12</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Ahoy Jeremy_Rand_Talo!
+<a name="l-16"></a><span class="tm">19:20:14</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Sorry I'm late
+<a name="l-17"></a><span class="tm">19:20:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Electrum-NMC binaries for v3.3.7 were uploaded earlier today; I've asked the user to check whether it's fixed there.</span>
+<a name="l-18"></a><span class="tm">19:20:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi TheJollyRoger !
+<a name="l-19"></a><span class="tm">19:23:10</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Meanwhile, Daniel has been contributing some highly useful PR's to Electrum-NMC, mostly involving cleanup/refactoring of unit tests and AuxPoW.  The code is actually becoming somewhat clean as a result.  \o/</span>
+<a name="l-20"></a><span class="tm">19:27:00</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Any other questions/comments about Electrum-NMC before we move onto the next topic?
+<a name="l-21"></a><span class="tm">19:29:10</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">ncdns</span>
+<a name="l-22"></a><span class="tm">19:29:41</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">We had a big release of ncdns v0.0.9.</span>
+<a name="l-23"></a><span class="tm">19:30:14</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">ncdns v0.0.9 switched to the rbm-based build system from Tor Browser.</span>
+<a name="l-24"></a><span class="tm">19:30:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Builds aren't yet reproducible due to an upstream rbm bug that I've submitted a patch for.</span>
+<a name="l-25"></a><span class="tm">19:31:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">ncdns v0.0.9 also includes the first public releases of DNSSEC-HSTS, ncp11, and ncprop279.</span>
+<a name="l-26"></a><span class="tm">19:31:46</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Preliminary documentation on using ncp11 is also pushed to the website.</span>
+<a name="l-27"></a><span class="tm">19:34:00</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Any other things ncdns-related anyone would like to bring up?
+<a name="l-28"></a><span class="tm">19:37:40</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Alright, so those are the only topics I had for today.  grringo , is there anything you wanted to bring up today?
+<a name="l-29"></a><span class="tm">19:37:49</span><span class="nk"> &lt;grringo[m]&gt;</span> nope
+<a name="l-30"></a><span class="tm">19:38:11</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok.  TheJollyRoger , anything you'd like to bring up today?
+<a name="l-31"></a><span class="tm">19:39:55</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> Er, not much.
+<a name="l-32"></a><span class="tm">19:40:04</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> Actually, I don't think I have anything for today, sorry :(
+<a name="l-33"></a><span class="tm">19:41:10</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok.  Any lurkers here who would like to bring something up before we close the meeting?
+<a name="l-34"></a><span class="tm">19:44:20</span><span class="nk"> &lt;jonasbits&gt;</span> I have a question how to debug my ncdns + unbound setup
+<a name="l-35"></a><span class="tm">19:44:33</span><span class="nk"> &lt;jonasbits&gt;</span> i get a DNS respons with SERVFAIL
+<a name="l-36"></a><span class="tm">19:45:23</span><span class="nk"> &lt;jonasbits&gt;</span> resolving non .bit domains is working
+<a name="l-37"></a><span class="tm">19:45:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">jonasbits:</span> is the SERVFAIL happening when you query ncdns directly, or when you query Unbound?  Also, do you have DNSSEC enabled?  I'm pretty sure there's a DNSSEC bug in madns, which IIRC causes NXDOMAIN responses for .bit domains from Unbound to turn into SERVFAIL
+<a name="l-38"></a><span class="tm">19:46:25</span><span class="nk"> &lt;jonasbits&gt;</span> directly "dig nf.bit @localhost -p 1153" goes fine
+<a name="l-39"></a><span class="tm">19:46:43</span><span class="nk"> &lt;jonasbits&gt;</span> i have DNSSEC disabled
+<a name="l-40"></a><span class="tm">19:47:14</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">jonasbits:</span> Hmm, interesting.  I think Unbound has a log verbosity setting in the config file.  Maybe increase it and check the logs to see why it's returning SERVFAIL?
+<a name="l-41"></a><span class="tm">19:48:04</span><span class="nk"> &lt;jonasbits&gt;</span> sure, will try
+<a name="l-42"></a><span class="tm">19:50:03</span><span class="nk"> &lt;jonasbits&gt;</span> about the softfork, there is a list of all nodes here https://dnsseed.nmctest.net/summary - and we have 200 active nodes that this dnsseeder can find, i would like it to be able to sort and count different versions of the software
+<a name="l-43"></a><span class="tm">19:50:42</span><span class="nk"> &lt;jonasbits&gt;</span> 17 is running the legacy client
+<a name="l-44"></a><span class="tm">19:51:29</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">jonasbits:</span> yeah, would be useful.
+<a name="l-45"></a><span class="tm">19:51:52</span><span class="nk"> &lt;jonasbits&gt;</span> 36 is running 110014
+<a name="l-46"></a><span class="tm">19:52:20</span><span class="nk"> &lt;jonasbits&gt;</span> 146 is running 110015
+<a name="l-47"></a><span class="tm">19:54:45</span><span class="nk"> &lt;jonasbits&gt;</span> but thats the protocol version, not the SubVersion that shows what version of the release its running
+<a name="l-48"></a><span class="tm">19:57:32</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">jonasbits:</span> interesting, so there's a method of querying the software version (as opposed to the protocol version) over the Bitcoin wire protocol?
+<a name="l-49"></a><span class="tm">19:58:51</span><span class="nk"> &lt;jonasbits&gt;</span> i think its in the greeting, its missing from the legacy client, but all the rest have it
+<a name="l-50"></a><span class="tm">20:01:03</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">jonasbits:</span> cool.
+<a name="l-51"></a><span class="tm">20:01:24</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anything else to add for the meeting?
+<a name="l-52"></a><span class="tm">20:03:46</span><span class="nk"> &lt;jonasbits&gt;</span> thats all
+<a name="l-53"></a><span class="tm">20:10:29</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> alright cool.  Thanks for attending the meeting everyone!
+<a name="l-54"></a><span class="tm">20:10:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

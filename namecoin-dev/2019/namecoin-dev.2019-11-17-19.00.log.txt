@@ -1,0 +1,10 @@
+19:00:56 <Jeremy_Rand_Talo> #startmeeting
+19:00:57 <qpm> Meeting started Sun Nov 17 19:00:56 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:00:57 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:02:43 * Jeremy_Rand_Talo observes that MeetBot is delayed by around 2 minutes over here on Matrix.  How nice.
+19:02:54 <Jeremy_Rand_Talo> anyway
+19:02:58 <Jeremy_Rand_Talo> Hi everyone!  Welcome to the meeting.
+19:03:08 <Jeremy_Rand_Talo> Can we get a roll call of who's here today?
+19:11:09 <Jeremy_Rand_Talo> Hmm, anyone here today?
+19:21:12 <Jeremy_Rand_Talo> How sad, no one here today.
+19:21:53 <Jeremy_Rand_Talo> #endmeeting

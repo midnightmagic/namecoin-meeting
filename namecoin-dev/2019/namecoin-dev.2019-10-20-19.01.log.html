@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:01:25</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:01:25</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Oct 20 19:01:25 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:01:25</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:02:07</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi everyone!  Welcome to the meeting.
+<a name="l-5"></a><span class="tm">19:02:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Can we get a roll call of who's here today?
+<a name="l-6"></a><span class="tm">19:03:32</span><span class="nk"> &lt;grringo[m]&gt;</span> hi
+<a name="l-7"></a><span class="tm">19:04:53</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> hi grringo
+<a name="l-8"></a><span class="tm">19:06:31</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> okay, so first topic
+<a name="l-9"></a><span class="tm">19:06:40</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Softfork</span>
+<a name="l-10"></a><span class="tm">19:07:39</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I'm excited to report that the P2SH+CSV+SegWit softfork is now active on Namecoin mainnet.</span>
+<a name="l-11"></a><span class="tm">19:08:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Activation was a little bit bumpy in terms of network disruption, but things stabilized pretty fast.  All of the major mining pools are now mining compliant blocks.</span>
+<a name="l-12"></a><span class="tm">19:11:33</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I spent several days following activation babysitting the network and coordinating with mining pools and other service providers.  This unfortunately meant that not as much Tor stuff got done this week as I would have liked.  That said, the Tor people were warned in advance that my productivity would be shot this week, so I don't think they'll be unhappy.</span>
+<a name="l-13"></a><span class="tm">19:14:06</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">The softfork activation means we are now free to move forward with various smart-contract projects, including integration with various decentralized exchanges, which is part of our anonymity blueprint.</span>
+<a name="l-14"></a><span class="tm">19:15:51</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Any questions/comments about the softfork?
+<a name="l-15"></a><span class="tm">19:17:08</span><span class="nk"> &lt;grringo[m]&gt;</span> Congratulations https://media2.giphy.com/media/XtUPfbJIltIaY/giphy.gif?cid=790b7611408231d84523aa9a3229e674799cee587b79b524&amp;rid=giphy.gif !
+<a name="l-16"></a><span class="tm">19:18:31</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> thanks grringo
+<a name="l-17"></a><span class="tm">19:19:56</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Okay, moving along...
+<a name="l-18"></a><span class="tm">19:20:22</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Tor</span>
+<a name="l-19"></a><span class="tm">19:22:34</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Stream isolation patches have been merged into a significant number of Namecoin projects in the last 2 weeks, including ncprop279, madns, and ncdns.  We also got an ACK on a revised version of the btcd cookie isolation patch.</span>
+<a name="l-20"></a><span class="tm">19:23:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">At this point most of the bottleneck is waiting for Nick to finish reviewing the torspec stream isolation patch.  I'm not expecting this to be a huge delay.</span>
+<a name="l-21"></a><span class="tm">19:24:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">The previous projection of having a final tor-browser-build patch sent to the Tor devs by end of October is looking like it was a tad too optimistic (due to the softfork eating up time), but it doesn't look like we'll be very behind that.</span>
+<a name="l-22"></a><span class="tm">19:25:44</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Questions/comments about this?
+<a name="l-23"></a><span class="tm">19:26:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">err, s/cookie isolation/cookie authentication/</span>
+<a name="l-24"></a><span class="tm">19:29:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Moving along
+<a name="l-25"></a><span class="tm">19:29:29</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">36C3</span>
+<a name="l-26"></a><span class="tm">19:30:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">36C3 private presale begins tomorrow.  Anyone here who wants to go to 36C3, please make sure I have your email address so that you can be sent a voucher.</span>
+<a name="l-27"></a><span class="tm">19:32:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">For the 3rd year straight, Namecoin will be hosted by the Monero Assembly at 36C3.  We're hoping to have at least 1 kickass talk for the Congress; it looks like we'll be coming down to the wire on getting the talks ready.</span>
+<a name="l-28"></a><span class="tm">19:33:12</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> Woah!
+<a name="l-29"></a><span class="tm">19:33:40</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> That's awesome! (er, sorry I'm late... ☹️)
+<a name="l-30"></a><span class="tm">19:34:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> no worries
+<a name="l-31"></a><span class="tm">19:35:49</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Any questions/comments on 36C3?
+<a name="l-32"></a><span class="tm">19:36:34</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Lodging there's going to be expensive, er, should we figure out who's gonna go and then split on stuff?
+<a name="l-33"></a><span class="tm">19:38:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">TheJollyRoger:</span> let's talk about that outside of the meeting; the subject may be a time sink that a lot of people here aren't going to want to sit through
+<a name="l-34"></a><span class="tm">19:39:24</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> Sure.
+<a name="l-35"></a><span class="tm">19:40:07</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Any other 36C3-related things to cover?
+<a name="l-36"></a><span class="tm">19:43:41</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Alright, moving along...
+<a name="l-37"></a><span class="tm">19:43:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Search Engine</span>
+<a name="l-38"></a><span class="tm">19:43:57</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> whoops
+<a name="l-39"></a><span class="tm">19:44:06</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Search Engine</span>
+<a name="l-40"></a><span class="tm">19:45:18</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I er, don't think I have more for 36C3 at this moment ^_^.
+<a name="l-41"></a><span class="tm">19:45:31</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">My Talos recently got a RAM upgrade, which means I have bucketloads of RAM to run a search engine in the background for a few weeks.  So hopefully we'll have an updated and more complete census of the Namecoin ecosystem soon.</span>
+<a name="l-42"></a><span class="tm">19:52:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> alright cool.  Those are the only topics I wanted to cover.
+<a name="l-43"></a><span class="tm">19:53:08</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anything else we should cover today?
+<a name="l-44"></a><span class="tm">19:53:57 </span><span class="nka">* grringo[m]</span> <span class="ac">sent a long message:  &lt; https://matrix.org/_matrix/media/r0/download/matrix.org/bGpKwbUrmIdHUXlCklcvnVqG &gt;</span>
+<a name="l-45"></a><span class="tm">19:55:22</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I er... i don't think I have anything for that at the moment?
+<a name="l-46"></a><span class="tm">19:55:40</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> As an aside, I just checked virus_net's census data, and his metrics are showing over 6000 .bit 2nd-level domains that are responding on TCP port 80.  I don't have his previous numbers in front of me, but I'm pretty sure that's massively higher than it was last year.  I don't suppose anyone knows whether those numbers are inflated for some reason?
+<a name="l-47"></a><span class="tm">19:56:02</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Like, last year I think it was only a few hundred.
+<a name="l-48"></a><span class="tm">19:56:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> And I'd be really surprised if we got that many new users without hearing about it.
+<a name="l-49"></a><span class="tm">19:57:10</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> just checking, is Electrum (for Bitcoin) already packaged in Brew?
+<a name="l-50"></a><span class="tm">19:57:49</span><span class="nk"> &lt;grringo[m]&gt;</span> I didn't found any `electrum` packages
+<a name="l-51"></a><span class="tm">19:58:53</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> ok.  So, it may be a good idea to package the Bitcoin version first, and that way Electrum-NMC can be a trivial fork of the Bitcoin version.  It also may be a good idea to focus on Namecoin Core first, since Bitcoin Core is already in Brew.
+<a name="l-52"></a><span class="tm">19:59:38</span><span class="nk"> &lt;grringo[m]&gt;</span> ok
+<a name="l-53"></a><span class="tm">19:59:56</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> okay, I'm looking at virus_net's census data and this does not look organic.
+<a name="l-54"></a><span class="tm">20:00:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> The domain count increased 10-fold in a 2-day period in September
+<a name="l-55"></a><span class="tm">20:00:44</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Is that maybe some kind of botnet?
+<a name="l-56"></a><span class="tm">20:02:00 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">makes note to look into what those new domains are</span>
+<a name="l-57"></a><span class="tm">20:02:05</span><span class="nk"> &lt;M7918070_[m]&gt;</span> I'd reckon Namecoin is perfect if you want to run a Botnet
+<a name="l-58"></a><span class="tm">20:02:59</span><span class="nk"> &lt;M7918070_[m]&gt;</span> The issue of c2 servers is an unsolved problem that's worth a lot of money. What they usually do is to have some kind of domain rotation scheme, but that costs money and is far from airtight
+<a name="l-59"></a><span class="tm">20:03:10</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">7918070_:</span> why does a botnet need 5000+ C&amp;C domains?
+<a name="l-60"></a><span class="tm">20:03:10</span><span class="nk"> &lt;M7918070_[m]&gt;</span> Or use a bulletproof provider -- again, not airtight
+<a name="l-61"></a><span class="tm">20:03:24</span><span class="nk"> &lt;M7918070_[m]&gt;</span> What the real sophisticated attackers do is to use Tor, but that bloats the binary
+<a name="l-62"></a><span class="tm">20:03:30</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> This doesn't look right
+<a name="l-63"></a><span class="tm">20:03:33</span><span class="nk"> &lt;M7918070_[m]&gt;</span> Maybe for IOC evasion?
+<a name="l-64"></a><span class="tm">20:03:37</span><span class="nk"> &lt;M7918070_[m]&gt;</span> but yeah that's a good question
+<a name="l-65"></a><span class="tm">20:03:42</span><span class="nk"> &lt;M7918070_[m]&gt;</span> any clue what they're hosting?
+<a name="l-66"></a><span class="tm">20:03:58</span><span class="nk"> &lt;M7918070_[m]&gt;</span> are they just gibberish strings, or do they look like legit names?
+<a name="l-67"></a><span class="tm">20:04:12</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">7918070_:</span> no idea, I literally just looked at virus_net's census count 5 minutes ago for the first time in a year and was blown away
+<a name="l-68"></a><span class="tm">20:04:19</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> I haven't checked which domains are new
+<a name="l-69"></a><span class="tm">20:04:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> It's also totally possible that something is broken/changed on virus_net's server that caused a giant artifact in the numbers
+<a name="l-70"></a><span class="tm">20:05:47</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> If my YaCy-based census doesn't quickly figure out what the heck this is, then I might try asking virus_net if he has any idea why the working domain count jumped from ~800 to ~6000 in a 48-hour period
+<a name="l-71"></a><span class="tm">20:05:47</span><span class="nk"> &lt;M7918070_[m]&gt;</span> link?
+<a name="l-72"></a><span class="tm">20:06:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> let's close the meeting and come back to the census after the meeting.  grringo , anything else from your end?
+<a name="l-73"></a><span class="tm">20:07:49</span><span class="nk"> &lt;grringo[m]&gt;</span> no
+<a name="l-74"></a><span class="tm">20:07:57</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> alright
+<a name="l-75"></a><span class="tm">20:08:03</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> thanks for attending everyone
+<a name="l-76"></a><span class="tm">20:08:08</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

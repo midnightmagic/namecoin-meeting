@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand_Talo at 19:01:25 UTC
+(<a href="namecoin-dev.2019-10-20-19.01.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">Softfork</b> <span class="details">(<a href='namecoin-dev.2019-10-20-19.01.log.html#l-9'>Jeremy_Rand_Talo</a>, 19:06:40)</span>
+<ol type="a">
+  <li><span class="INFO">I'm excited to report that the P2SH+CSV+SegWit
+    softfork is now active on Namecoin mainnet.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-10-20-19.01.log.html#l-10'>Jeremy_Rand_Talo</a>,
+    19:07:39)</span></li>
+  <li><span class="INFO">Activation was a little bit bumpy in terms of
+    network disruption, but things stabilized pretty fast.  All of the
+    major mining pools are now mining compliant blocks.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-10-20-19.01.log.html#l-11'>Jeremy_Rand_Talo</a>,
+    19:08:54)</span></li>
+  <li><span class="INFO">I spent several days following activation
+    babysitting the network and coordinating with mining pools and other
+    service providers.  This unfortunately meant that not as much Tor
+    stuff got done this week as I would have liked.  That said, the Tor
+    people were warned in advance that my productivity would be shot
+    this week, so I don't think they'll be unhappy.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-10-20-19.01.log.html#l-12'>Jeremy_Rand_Talo</a>,
+    19:11:33)</span></li>
+  <li><span class="INFO">The softfork activation means we are now free
+    to move forward with various smart-contract projects, including
+    integration with various decentralized exchanges, which is part of
+    our anonymity blueprint.</span> <span class="details">(<a
+    href='namecoin-dev.2019-10-20-19.01.log.html#l-13'>Jeremy_Rand_Talo</a>,
+    19:14:06)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Tor</b> <span class="details">(<a href='namecoin-dev.2019-10-20-19.01.log.html#l-18'>Jeremy_Rand_Talo</a>, 19:20:22)</span>
+<ol type="a">
+  <li><span class="INFO">Stream isolation patches have been merged into
+    a significant number of Namecoin projects in the last 2 weeks,
+    including ncprop279, madns, and ncdns.  We also got an ACK on a
+    revised version of the btcd cookie isolation patch.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-10-20-19.01.log.html#l-19'>Jeremy_Rand_Talo</a>,
+    19:22:34)</span></li>
+  <li><span class="INFO">At this point most of the bottleneck is waiting
+    for Nick to finish reviewing the torspec stream isolation patch.
+    I'm not expecting this to be a huge delay.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-10-20-19.01.log.html#l-20'>Jeremy_Rand_Talo</a>,
+    19:23:50)</span></li>
+  <li><span class="INFO">The previous projection of having a final
+    tor-browser-build patch sent to the Tor devs by end of October is
+    looking like it was a tad too optimistic (due to the softfork eating
+    up time), but it doesn't look like we'll be very behind that.</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-10-20-19.01.log.html#l-21'>Jeremy_Rand_Talo</a>,
+    19:24:59)</span></li>
+  <li><span class="INFO">err, s/cookie isolation/cookie
+    authentication/</span> <span class="details">(<a
+    href='namecoin-dev.2019-10-20-19.01.log.html#l-23'>Jeremy_Rand_Talo</a>,
+    19:26:18)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">36C3</b> <span class="details">(<a href='namecoin-dev.2019-10-20-19.01.log.html#l-25'>Jeremy_Rand_Talo</a>, 19:29:29)</span>
+<ol type="a">
+  <li><span class="INFO">36C3 private presale begins tomorrow.  Anyone
+    here who wants to go to 36C3, please make sure I have your email
+    address so that you can be sent a voucher.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-10-20-19.01.log.html#l-26'>Jeremy_Rand_Talo</a>,
+    19:30:50)</span></li>
+  <li><span class="INFO">For the 3rd year straight, Namecoin will be
+    hosted by the Monero Assembly at 36C3.  We're hoping to have at
+    least 1 kickass talk for the Congress; it looks like we'll be coming
+    down to the wire on getting the talks ready.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-10-20-19.01.log.html#l-27'>Jeremy_Rand_Talo</a>,
+    19:32:18)</span></li>
+  <li><span class="INFO">Search Engine</span> <span class="details">(<a
+    href='namecoin-dev.2019-10-20-19.01.log.html#l-37'>Jeremy_Rand_Talo</a>,
+    19:43:54)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Search Engine</b> <span class="details">(<a href='namecoin-dev.2019-10-20-19.01.log.html#l-39'>Jeremy_Rand_Talo</a>, 19:44:06)</span>
+<ol type="a">
+  <li><span class="INFO">My Talos recently got a RAM upgrade, which
+    means I have bucketloads of RAM to run a search engine in the
+    background for a few weeks.  So hopefully we'll have an updated and
+    more complete census of the Namecoin ecosystem soon.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-10-20-19.01.log.html#l-41'>Jeremy_Rand_Talo</a>,
+    19:45:31)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 20:08:08 UTC
+(<a href="namecoin-dev.2019-10-20-19.01.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>(none)</li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand_Talo (53)</li>
+  <li>M7918070_[m] (9)</li>
+  <li>grringo[m] (6)</li>
+  <li>TheJollyRoger (3)</li>
+  <li>TheJollyRoger-M (3)</li>
+  <li>qpm (2)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

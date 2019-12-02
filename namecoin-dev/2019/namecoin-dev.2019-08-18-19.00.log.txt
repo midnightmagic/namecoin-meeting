@@ -1,0 +1,54 @@
+19:00:57 <Jeremy_Rand_Talo> #startmeeting
+19:00:57 <qpm> Meeting started Sun Aug 18 19:00:57 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:00:58 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:01:29 <Jeremy_Rand_Talo> Hi everyone, welcome to the meeting!
+19:01:39 <Jeremy_Rand_Talo> Can we get a roll call of who's here today?
+19:02:21 <grringo[m]> hello
+19:04:24 <Jeremy_Rand_Talo> Hi grringo
+19:08:57 <Jeremy_Rand_Talo> Alright, so, this meeting might be shorter than typical, depending on how much material everyone else has.  (Things have been relatively quiet on my end.)  But, let's get started with the first topic:
+19:09:09 <Jeremy_Rand_Talo> #topic Softfork Upgrade Status
+19:09:54 <Jeremy_Rand_Talo> #info 99.6% of hashrate has been contacted about the upcoming softfork.  24.4% have already confirmed that they upgraded successfully.
+19:10:39 <Jeremy_Rand_Talo> #info Both figures are noticeably higher than at the previous meeting.  I expect the latter figure to continue to rise quickly.
+19:14:00 <Jeremy_Rand_Talo> any questions/comments about this topic before we move on?
+19:17:55 <Jeremy_Rand_Talo> #topic Electrum-NMC
+19:19:48 <Jeremy_Rand_Talo> #info Someone posted on the tech support forum recently saying that they weren't able to get Electrum-NMC v3.3.6.1 on Windows to connect to a server.  I haven't run across that behavior, but v3.3.5 through v3.3.6.1 were subject to some misbehavior due to a broken refactor, and that misbehavior did seem to affect Windows more strongly.
+19:20:12 <TheJollyRoger> Ahoy Jeremy_Rand_Talo!
+19:20:14 <TheJollyRoger> Sorry I'm late
+19:20:23 <Jeremy_Rand_Talo> #info Electrum-NMC binaries for v3.3.7 were uploaded earlier today; I've asked the user to check whether it's fixed there.
+19:20:28 <Jeremy_Rand_Talo> Hi TheJollyRoger !
+19:23:10 <Jeremy_Rand_Talo> #info Meanwhile, Daniel has been contributing some highly useful PR's to Electrum-NMC, mostly involving cleanup/refactoring of unit tests and AuxPoW.  The code is actually becoming somewhat clean as a result.  \o/
+19:27:00 <Jeremy_Rand_Talo> Any other questions/comments about Electrum-NMC before we move onto the next topic?
+19:29:10 <Jeremy_Rand_Talo> #topic ncdns
+19:29:41 <Jeremy_Rand_Talo> #info We had a big release of ncdns v0.0.9.
+19:30:14 <Jeremy_Rand_Talo> #info ncdns v0.0.9 switched to the rbm-based build system from Tor Browser.
+19:30:54 <Jeremy_Rand_Talo> #info Builds aren't yet reproducible due to an upstream rbm bug that I've submitted a patch for.
+19:31:23 <Jeremy_Rand_Talo> #info ncdns v0.0.9 also includes the first public releases of DNSSEC-HSTS, ncp11, and ncprop279.
+19:31:46 <Jeremy_Rand_Talo> #info Preliminary documentation on using ncp11 is also pushed to the website.
+19:34:00 <Jeremy_Rand_Talo> Any other things ncdns-related anyone would like to bring up?
+19:37:40 <Jeremy_Rand_Talo> Alright, so those are the only topics I had for today.  grringo , is there anything you wanted to bring up today?
+19:37:49 <grringo[m]> nope
+19:38:11 <Jeremy_Rand_Talo> ok.  TheJollyRoger , anything you'd like to bring up today?
+19:39:55 <TheJollyRoger-M> Er, not much.
+19:40:04 <TheJollyRoger-M> Actually, I don't think I have anything for today, sorry :(
+19:41:10 <Jeremy_Rand_Talo> ok.  Any lurkers here who would like to bring something up before we close the meeting?
+19:44:20 <jonasbits> I have a question how to debug my ncdns + unbound setup
+19:44:33 <jonasbits> i get a DNS respons with SERVFAIL
+19:45:23 <jonasbits> resolving non .bit domains is working
+19:45:59 <Jeremy_Rand_Talo> jonasbits: is the SERVFAIL happening when you query ncdns directly, or when you query Unbound?  Also, do you have DNSSEC enabled?  I'm pretty sure there's a DNSSEC bug in madns, which IIRC causes NXDOMAIN responses for .bit domains from Unbound to turn into SERVFAIL
+19:46:25 <jonasbits> directly "dig nf.bit @localhost -p 1153" goes fine
+19:46:43 <jonasbits> i have DNSSEC disabled
+19:47:14 <Jeremy_Rand_Talo> jonasbits: Hmm, interesting.  I think Unbound has a log verbosity setting in the config file.  Maybe increase it and check the logs to see why it's returning SERVFAIL?
+19:48:04 <jonasbits> sure, will try
+19:50:03 <jonasbits> about the softfork, there is a list of all nodes here https://dnsseed.nmctest.net/summary - and we have 200 active nodes that this dnsseeder can find, i would like it to be able to sort and count different versions of the software
+19:50:42 <jonasbits> 17 is running the legacy client
+19:51:29 <Jeremy_Rand_Talo> jonasbits: yeah, would be useful.
+19:51:52 <jonasbits> 36 is running 110014
+19:52:20 <jonasbits> 146 is running 110015
+19:54:45 <jonasbits> but thats the protocol version, not the SubVersion that shows what version of the release its running
+19:57:32 <Jeremy_Rand_Talo> jonasbits: interesting, so there's a method of querying the software version (as opposed to the protocol version) over the Bitcoin wire protocol?
+19:58:51 <jonasbits> i think its in the greeting, its missing from the legacy client, but all the rest have it
+20:01:03 <Jeremy_Rand_Talo> jonasbits: cool.
+20:01:24 <Jeremy_Rand_Talo> Anything else to add for the meeting?
+20:03:46 <jonasbits> thats all
+20:10:29 <Jeremy_Rand_Talo> alright cool.  Thanks for attending the meeting everyone!
+20:10:54 <Jeremy_Rand_Talo> #endmeeting

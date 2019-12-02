@@ -1,0 +1,10 @@
+19:00:19 <Jeremy_Rand_Talo> #startmeeting
+19:00:20 <qpm> Meeting started Sun Nov  3 19:00:19 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:00:20 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:01:17 <Jeremy_Rand_Talo> Hi everyone!  Welcome to the meeting.
+19:02:46 <Jeremy_Rand_Talo> Those of you who observe DST will notice that this meeting is an hour earlier than previously due to the DST change, since this meeting is denominated in UTC.  Hope that hasn't messed with you too much.
+19:02:47 <Jeremy_Rand_Talo> Can we get a roll call of who's here?
+19:08:32 <Jeremy_Rand_Talo> Hmm, I hope DST didn't wreck our attendance today...
+19:18:16 <Jeremy_Rand_Talo> hmm, so I guess if no one's here, no meeting.
+19:18:27 <Jeremy_Rand_Talo> oh well
+19:18:58 <Jeremy_Rand_Talo> #endmeeting

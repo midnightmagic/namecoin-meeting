@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">18:59:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">18:59:50</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Sep  1 18:59:50 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">18:59:51</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:00:41</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi everyone!  Welcome to the Namecoin development meeting.
+<a name="l-5"></a><span class="tm">19:00:48</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Can we get a roll call of who's here today?
+<a name="l-6"></a><span class="tm">19:05:25</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyone here today?
+<a name="l-7"></a><span class="tm">19:08:13</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Ahoy!
+<a name="l-8"></a><span class="tm">19:08:40</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> hello TheJollyRoger
+<a name="l-9"></a><span class="tm">19:08:46</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Ahoy Cap'n!
+<a name="l-10"></a><span class="tm">19:11:16</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Okay, so, this has been a mildly quiet 2 weeks.  So, this may be a shorter meeting than usual.  But, let's jump in.
+<a name="l-11"></a><span class="tm">19:11:25</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Electrum-NMC</span>
+<a name="l-12"></a><span class="tm">19:12:49</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Upstream Electrum merged the Lightning branch recently.  This is a big merge, and it broke quite a lot of stuff upstream.  Even more breakage occurred downstream in Electrum-NMC as a result.</span>
+<a name="l-13"></a><span class="tm">19:14:42</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've been patching things up, but it's likely that the Electrum-NMC master branch will remain heavily broken for at least another week.  Users who want working software should use a stable branch for now.  (Though that's generally considered good advice anyway.)</span>
+<a name="l-14"></a><span class="tm">19:15:04</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Yikes.
+<a name="l-15"></a><span class="tm">19:15:58</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyone else have things to say about Electrum-NMC?
+<a name="l-16"></a><span class="tm">19:17:28</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I... I don't have anything.
+<a name="l-17"></a><span class="tm">19:17:49</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok
+<a name="l-18"></a><span class="tm">19:17:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> moving on then...
+<a name="l-19"></a><span class="tm">19:17:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Softfork</span>
+<a name="l-20"></a><span class="tm">19:20:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> 38.7% of hashrate (Antpool, F2Pool, and Slush) has upgraded so far.  BTC.com, Poolin, and BitMinter (35.6% total) say that they're working on upgrading as well, and should be upgraded shortly.
+<a name="l-21"></a><span class="tm">19:20:45</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> whoops
+<a name="l-22"></a><span class="tm">19:20:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">38.7% of hashrate (Antpool, F2Pool, and Slush) has upgraded so far.  BTC.com, Poolin, and BitMinter (35.6% total) say that they're working on upgrading as well, and should be upgraded shortly.</span>
+<a name="l-23"></a><span class="tm">19:21:24</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Where does that leave the remaining quarter?
+<a name="l-24"></a><span class="tm">19:22:42</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Currently the softfork is expected to activate in around 42 days.</span>
+<a name="l-25"></a><span class="tm">19:22:44</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I er... I haven't found anyone that I trust that writes both Mandarin or Cantonese and understands computers yet, unfortunately.
+<a name="l-26"></a><span class="tm">19:23:27</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Sure, lots of people here speak one of the two, some speak both, but the part about "that I trust" and "understands computers" is proving to be much more difficult than I thought it would be.
+<a name="l-27"></a><span class="tm">19:24:36</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">ViaBTC (9.5%), BTC.TOP (8.9%), Huobi (4.5%), Bixin (1.4%), OK Pool (0.9%), and Prohashing (0.1%) were each notified at least once but did not get back to me.</span>
+<a name="l-28"></a><span class="tm">19:27:08</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I will continue badgering the remaining miners to upgrade.</span>
+<a name="l-29"></a><span class="tm">19:28:40</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Okay!
+<a name="l-30"></a><span class="tm">19:29:00</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Any other things related to the softfork?
+<a name="l-31"></a><span class="tm">19:29:15</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I don't have anything here, no.
+<a name="l-32"></a><span class="tm">19:29:22</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok
+<a name="l-33"></a><span class="tm">19:29:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Go ecosystem docs</span>
+<a name="l-34"></a><span class="tm">19:30:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I pushed new documentation to namecoin.org for ncp11 as well as ncprop279+StemNS.  It now should be fairly straightforward for people to test them out with Tor Browser.</span>
+<a name="l-35"></a><span class="tm">19:31:15</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Docs for DNSSEC-HSTS should be added in the near future as well.</span>
+<a name="l-36"></a><span class="tm">19:32:04</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">These will, AFAICT, satisfy some more NLnet criteria, meaning we get paid soon.  \o/</span>
+<a name="l-37"></a><span class="tm">19:32:30</span><span class="nk"> &lt;TheJollyRoger&gt;</span> woohoo! \o/
+<a name="l-38"></a><span class="tm">19:34:13</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Any other things related to the Go ecosystem.
+<a name="l-39"></a><span class="tm">19:35:12</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> s/./?/
+<a name="l-40"></a><span class="tm">19:35:46</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Er, I don't have anything here. I haven't gotten Golang to work properly yet except with precompiled stuff.
+<a name="l-41"></a><span class="tm">19:35:58</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Still struggling, sorry T_T
+<a name="l-42"></a><span class="tm">19:36:13</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok
+<a name="l-43"></a><span class="tm">19:36:30</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Those are the only topics I had for today.  Any other topics we should cover?
+<a name="l-44"></a><span class="tm">19:38:04</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I don't have anything here, unfortunately.
+<a name="l-45"></a><span class="tm">19:38:38</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Alright then. Thanks for attending!
+<a name="l-46"></a><span class="tm">19:38:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

@@ -1,0 +1,76 @@
+19:01:25 <Jeremy_Rand_Talo> #startmeeting
+19:01:25 <qpm> Meeting started Sun Oct 20 19:01:25 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:01:25 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:02:07 <Jeremy_Rand_Talo> Hi everyone!  Welcome to the meeting.
+19:02:18 <Jeremy_Rand_Talo> Can we get a roll call of who's here today?
+19:03:32 <grringo[m]> hi
+19:04:53 <Jeremy_Rand_Talo> hi grringo
+19:06:31 <Jeremy_Rand_Talo> okay, so first topic
+19:06:40 <Jeremy_Rand_Talo> #topic Softfork
+19:07:39 <Jeremy_Rand_Talo> #info I'm excited to report that the P2SH+CSV+SegWit softfork is now active on Namecoin mainnet.
+19:08:54 <Jeremy_Rand_Talo> #info Activation was a little bit bumpy in terms of network disruption, but things stabilized pretty fast.  All of the major mining pools are now mining compliant blocks.
+19:11:33 <Jeremy_Rand_Talo> #info I spent several days following activation babysitting the network and coordinating with mining pools and other service providers.  This unfortunately meant that not as much Tor stuff got done this week as I would have liked.  That said, the Tor people were warned in advance that my productivity would be shot this week, so I don't think they'll be unhappy.
+19:14:06 <Jeremy_Rand_Talo> #info The softfork activation means we are now free to move forward with various smart-contract projects, including integration with various decentralized exchanges, which is part of our anonymity blueprint.
+19:15:51 <Jeremy_Rand_Talo> Any questions/comments about the softfork?
+19:17:08 <grringo[m]> Congratulations https://media2.giphy.com/media/XtUPfbJIltIaY/giphy.gif?cid=790b7611408231d84523aa9a3229e674799cee587b79b524&rid=giphy.gif !
+19:18:31 <Jeremy_Rand_Talo> thanks grringo
+19:19:56 <Jeremy_Rand_Talo> Okay, moving along...
+19:20:22 <Jeremy_Rand_Talo> #topic Tor
+19:22:34 <Jeremy_Rand_Talo> #info Stream isolation patches have been merged into a significant number of Namecoin projects in the last 2 weeks, including ncprop279, madns, and ncdns.  We also got an ACK on a revised version of the btcd cookie isolation patch.
+19:23:50 <Jeremy_Rand_Talo> #info At this point most of the bottleneck is waiting for Nick to finish reviewing the torspec stream isolation patch.  I'm not expecting this to be a huge delay.
+19:24:59 <Jeremy_Rand_Talo> #info The previous projection of having a final tor-browser-build patch sent to the Tor devs by end of October is looking like it was a tad too optimistic (due to the softfork eating up time), but it doesn't look like we'll be very behind that.
+19:25:44 <Jeremy_Rand_Talo> Questions/comments about this?
+19:26:18 <Jeremy_Rand_Talo> #info err, s/cookie isolation/cookie authentication/
+19:29:18 <Jeremy_Rand_Talo> Moving along
+19:29:29 <Jeremy_Rand_Talo> #topic 36C3
+19:30:50 <Jeremy_Rand_Talo> #info 36C3 private presale begins tomorrow.  Anyone here who wants to go to 36C3, please make sure I have your email address so that you can be sent a voucher.
+19:32:18 <Jeremy_Rand_Talo> #info For the 3rd year straight, Namecoin will be hosted by the Monero Assembly at 36C3.  We're hoping to have at least 1 kickass talk for the Congress; it looks like we'll be coming down to the wire on getting the talks ready.
+19:33:12 <TheJollyRoger-M> Woah!
+19:33:40 <TheJollyRoger-M> That's awesome! (er, sorry I'm late... ☹️)
+19:34:23 <Jeremy_Rand_Talo> no worries
+19:35:49 <Jeremy_Rand_Talo> Any questions/comments on 36C3?
+19:36:34 <TheJollyRoger> Lodging there's going to be expensive, er, should we figure out who's gonna go and then split on stuff?
+19:38:18 <Jeremy_Rand_Talo> TheJollyRoger: let's talk about that outside of the meeting; the subject may be a time sink that a lot of people here aren't going to want to sit through
+19:39:24 <TheJollyRoger-M> Sure.
+19:40:07 <Jeremy_Rand_Talo> Any other 36C3-related things to cover?
+19:43:41 <Jeremy_Rand_Talo> Alright, moving along...
+19:43:54 <Jeremy_Rand_Talo> #info Search Engine
+19:43:57 <Jeremy_Rand_Talo> whoops
+19:44:06 <Jeremy_Rand_Talo> #topic Search Engine
+19:45:18 <TheJollyRoger> I er, don't think I have more for 36C3 at this moment ^_^.
+19:45:31 <Jeremy_Rand_Talo> #info My Talos recently got a RAM upgrade, which means I have bucketloads of RAM to run a search engine in the background for a few weeks.  So hopefully we'll have an updated and more complete census of the Namecoin ecosystem soon.
+19:52:52 <Jeremy_Rand_Talo> alright cool.  Those are the only topics I wanted to cover.
+19:53:08 <Jeremy_Rand_Talo> Anything else we should cover today?
+19:53:57 * grringo[m] sent a long message:  < https://matrix.org/_matrix/media/r0/download/matrix.org/bGpKwbUrmIdHUXlCklcvnVqG >
+19:55:22 <TheJollyRoger> I er... i don't think I have anything for that at the moment?
+19:55:40 <Jeremy_Rand_Talo> As an aside, I just checked virus_net's census data, and his metrics are showing over 6000 .bit 2nd-level domains that are responding on TCP port 80.  I don't have his previous numbers in front of me, but I'm pretty sure that's massively higher than it was last year.  I don't suppose anyone knows whether those numbers are inflated for some reason?
+19:56:02 <Jeremy_Rand_Talo> Like, last year I think it was only a few hundred.
+19:56:18 <Jeremy_Rand_Talo> And I'd be really surprised if we got that many new users without hearing about it.
+19:57:10 <Jeremy_Rand_Talo> grringo: just checking, is Electrum (for Bitcoin) already packaged in Brew?
+19:57:49 <grringo[m]> I didn't found any `electrum` packages
+19:58:53 <Jeremy_Rand_Talo> grringo: ok.  So, it may be a good idea to package the Bitcoin version first, and that way Electrum-NMC can be a trivial fork of the Bitcoin version.  It also may be a good idea to focus on Namecoin Core first, since Bitcoin Core is already in Brew.
+19:59:38 <grringo[m]> ok
+19:59:56 <Jeremy_Rand_Talo> okay, I'm looking at virus_net's census data and this does not look organic.
+20:00:43 <Jeremy_Rand_Talo> The domain count increased 10-fold in a 2-day period in September
+20:00:44 <Jeremy_Rand_Talo> Is that maybe some kind of botnet?
+20:02:00 * Jeremy_Rand_Talo makes note to look into what those new domains are
+20:02:05 <M7918070_[m]> I'd reckon Namecoin is perfect if you want to run a Botnet
+20:02:59 <M7918070_[m]> The issue of c2 servers is an unsolved problem that's worth a lot of money. What they usually do is to have some kind of domain rotation scheme, but that costs money and is far from airtight
+20:03:10 <Jeremy_Rand_Talo> 7918070_: why does a botnet need 5000+ C&C domains?
+20:03:10 <M7918070_[m]> Or use a bulletproof provider -- again, not airtight
+20:03:24 <M7918070_[m]> What the real sophisticated attackers do is to use Tor, but that bloats the binary
+20:03:30 <Jeremy_Rand_Talo> This doesn't look right
+20:03:33 <M7918070_[m]> Maybe for IOC evasion?
+20:03:37 <M7918070_[m]> but yeah that's a good question
+20:03:42 <M7918070_[m]> any clue what they're hosting?
+20:03:58 <M7918070_[m]> are they just gibberish strings, or do they look like legit names?
+20:04:12 <Jeremy_Rand_Talo> 7918070_: no idea, I literally just looked at virus_net's census count 5 minutes ago for the first time in a year and was blown away
+20:04:19 <Jeremy_Rand_Talo> I haven't checked which domains are new
+20:04:50 <Jeremy_Rand_Talo> It's also totally possible that something is broken/changed on virus_net's server that caused a giant artifact in the numbers
+20:05:47 <Jeremy_Rand_Talo> If my YaCy-based census doesn't quickly figure out what the heck this is, then I might try asking virus_net if he has any idea why the working domain count jumped from ~800 to ~6000 in a 48-hour period
+20:05:47 <M7918070_[m]> link?
+20:06:54 <Jeremy_Rand_Talo> let's close the meeting and come back to the census after the meeting.  grringo , anything else from your end?
+20:07:49 <grringo[m]> no
+20:07:57 <Jeremy_Rand_Talo> alright
+20:08:03 <Jeremy_Rand_Talo> thanks for attending everyone
+20:08:08 <Jeremy_Rand_Talo> #endmeeting

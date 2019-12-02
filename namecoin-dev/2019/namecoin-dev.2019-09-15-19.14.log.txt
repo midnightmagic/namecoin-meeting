@@ -1,0 +1,54 @@
+19:14:05 <Jeremy_Rand_Talo> #startmeeting
+19:14:06 <qpm> Meeting started Sun Sep 15 19:14:05 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:14:06 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:14:49 <Jeremy_Rand_Talo> Hey everyone, welcome to the meeting!  Sorry for the late start today.
+19:14:54 <TheJollyRoger> Ahoy!
+19:15:03 <Jeremy_Rand_Talo> Can we get a roll call of who's here today?
+19:15:26 <Jeremy_Rand_Talo> Hi TheJollyRoger
+19:15:28 <TheJollyRoger> Yarr, Cap'n! o7
+19:16:45 <Jeremy_Rand_Talo> Okay, so, first topic...
+19:17:07 <Jeremy_Rand_Talo> #topic Electrum-NMC packaging
+19:17:43 <Jeremy_Rand_Talo> #info Debian Sid and Debian Bullseye now have an updated Electrum (Bitcoin) package.
+19:18:15 <Jeremy_Rand_Talo> #info Lola is looking into porting that package for Electrum-NMC
+19:19:00 <Jeremy_Rand_Talo> #info If she succeeds at that, I'll ask mhatta if he can get it uploaded as an official Debian package
+19:20:02 <Jeremy_Rand_Talo> Anyone have questions/comments about this topic?
+19:21:25 <TheJollyRoger> I don't think I have any.
+19:22:05 <Jeremy_Rand_Talo> next topic then
+19:22:22 <Jeremy_Rand_Talo> #topic ncdns-repro
+19:25:18 <Jeremy_Rand_Talo> #info ncdns-repro now supports arbitrary Go compiler versions.  This means that we can independently upgrade the tor-browser-build dependency and the x509-signature-splice dependency, rather than forcing them to be kept in lockstep
+19:26:49 <Jeremy_Rand_Talo> #info ncdns-repro now also produces DNSSEC-HSTS binaries that can be transformed into a .crx Chromium/Chrome extension.  This should allow us to release DNSSEC-HSTS for Chrome.
+19:27:50 <Jeremy_Rand_Talo> #info I updated qlib to properly handle current versions of Miek's DNS library.  This allowed me to remove a bunch of stupid hackery in ncdns-repro that dealt with handling 2 different miekg/dns revisions at once.
+19:28:32 <Jeremy_Rand_Talo> #info And, the big two things...
+19:29:37 <somewhat[m]> *somewhat waves
+19:29:46 * TheJollyRoger does the drumroll!
+19:30:26 <Jeremy_Rand_Talo> #info ncprop279 now builds inside the tor-browser-build tree (this is merged to ncdns-repro and my tor-browser-build fork), and Electrum-NMC now builds from source (including building all of its Python dependencies from source) inside the tor-browser-build tree as well (this will be merged to ncdns-repro and my tor-browser-build fork as soon as I verify that it builds okay in a standalone ncdns-repro tree)
+19:31:15 <Jeremy_Rand_Talo> #info Building ncprop279 and Electrum-NMC from source were two of the major blockers for getting into the Tor Browser nightly builds.  With those out of the way, the path is substantially cleared.
+19:31:53 <Jeremy_Rand_Talo> hello somewhat !
+19:33:29 <Jeremy_Rand_Talo> any questions/comments about this stuff?
+19:34:49 <somewhat[m]> nope :)
+19:34:57 <TheJollyRoger> Woah. We might get ncdns with Tor Browser?
+19:38:54 <Jeremy_Rand_Talo> TheJollyRoger: That's the intent.  Initially it would most likely be solely ncprop279, configured to only handle resolution to .onion domains.  Resolution to IP addresses and TLS-related stuff would be saved for a follow-up patch.
+19:40:21 <Jeremy_Rand_Talo> TheJollyRoger: and as stated above, this would be for nightly builds only at first.  Migrating to alpha and stable builds would not happen immediately.
+19:41:12 <TheJollyRoger> Woah!
+19:41:21 <TheJollyRoger> Well that's... that's... that's really huge still though.
+19:41:38 <TheJollyRoger> Tor with Namecoin! To do onionsites!
+19:44:21 * Jeremy_Rand_Talo concurs, though suggests that any celebration should be reserved for after things are shipped
+19:44:30 <TheJollyRoger> Got it XP
+19:45:42 <Jeremy_Rand_Talo> any other questions/comments on this?
+19:50:02 <somewhat[m]> no
+19:51:38 <TheJollyRoger> I'm holding the champagne :P.
+19:53:26 <Jeremy_Rand_Talo> #topic Funding
+19:55:23 <Jeremy_Rand_Talo> #info We're approaching the end of our funding from the NLnet Internet Hardening Fund.  (The amount of funding remaining is IIRC somewhere in the realm of 4000 EUR, though I don't have the numbers in front of me.)
+19:56:19 <TheJollyRoger> Crud. :(
+19:56:56 <Jeremy_Rand_Talo> #info Once that funding ends, we will put together a new funding proposal and try to get new funding.  So, I suggest that people start brainstorming ideas on what projects we should ask for funding for.
+19:58:15 <Jeremy_Rand_Talo> #info Our current NLnet funding is fairly limited in scope (everything funded by that pool of money has to be TLS related).  Our next funding proposal is unlikely to be as constrained.  So there are things that we weren't able to get funded last time, that we could potentially fund soon.
+20:00:40 <Jeremy_Rand_Talo> #info Given that we'll still have funding from Cyphrs, Xaya, and NMDF after the current NLnet funding ends, it's unlikely that we'll see significant disruption to our operations while we're looking for new funding.  However, since funding proposals tend to get handled by me, it does mean that I'll be spending less time on code and more time on getting new funding.
+20:01:49 <Jeremy_Rand_Talo> Any questions/comments on this topic?
+20:03:32 <somewhat[m]> no
+20:05:41 <TheJollyRoger> I don't think so. I don't have any ideas X(
+20:06:01 <Jeremy_Rand_Talo> ok
+20:06:42 <Jeremy_Rand_Talo> Those are the only topics I had today.  Anyone else have other topics to cover?
+20:08:12 <somewhat[m]> nope 🙂
+20:11:53 <TheJollyRoger-M> I don't think I've got anything else!
+20:12:23 <Jeremy_Rand_Talo> alright cool.  Thanks for attending everyone!
+20:12:27 <Jeremy_Rand_Talo> #endmeeting

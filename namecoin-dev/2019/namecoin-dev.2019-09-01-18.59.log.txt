@@ -1,0 +1,46 @@
+18:59:50 <Jeremy_Rand_Talo> #startmeeting
+18:59:50 <qpm> Meeting started Sun Sep  1 18:59:50 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+18:59:51 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:00:41 <Jeremy_Rand_Talo> Hi everyone!  Welcome to the Namecoin development meeting.
+19:00:48 <Jeremy_Rand_Talo> Can we get a roll call of who's here today?
+19:05:25 <Jeremy_Rand_Talo> Anyone here today?
+19:08:13 <TheJollyRoger> Ahoy!
+19:08:40 <Jeremy_Rand_Talo> hello TheJollyRoger
+19:08:46 <TheJollyRoger> Ahoy Cap'n!
+19:11:16 <Jeremy_Rand_Talo> Okay, so, this has been a mildly quiet 2 weeks.  So, this may be a shorter meeting than usual.  But, let's jump in.
+19:11:25 <Jeremy_Rand_Talo> #topic Electrum-NMC
+19:12:49 <Jeremy_Rand_Talo> #info Upstream Electrum merged the Lightning branch recently.  This is a big merge, and it broke quite a lot of stuff upstream.  Even more breakage occurred downstream in Electrum-NMC as a result.
+19:14:42 <Jeremy_Rand_Talo> #info I've been patching things up, but it's likely that the Electrum-NMC master branch will remain heavily broken for at least another week.  Users who want working software should use a stable branch for now.  (Though that's generally considered good advice anyway.)
+19:15:04 <TheJollyRoger> Yikes.
+19:15:58 <Jeremy_Rand_Talo> Anyone else have things to say about Electrum-NMC?
+19:17:28 <TheJollyRoger> I... I don't have anything.
+19:17:49 <Jeremy_Rand_Talo> ok
+19:17:52 <Jeremy_Rand_Talo> moving on then...
+19:17:54 <Jeremy_Rand_Talo> #topic Softfork
+19:20:17 <Jeremy_Rand_Talo> 38.7% of hashrate (Antpool, F2Pool, and Slush) has upgraded so far.  BTC.com, Poolin, and BitMinter (35.6% total) say that they're working on upgrading as well, and should be upgraded shortly.
+19:20:45 <Jeremy_Rand_Talo> whoops
+19:20:52 <Jeremy_Rand_Talo> #info 38.7% of hashrate (Antpool, F2Pool, and Slush) has upgraded so far.  BTC.com, Poolin, and BitMinter (35.6% total) say that they're working on upgrading as well, and should be upgraded shortly.
+19:21:24 <TheJollyRoger> Where does that leave the remaining quarter?
+19:22:42 <Jeremy_Rand_Talo> #info Currently the softfork is expected to activate in around 42 days.
+19:22:44 <TheJollyRoger> I er... I haven't found anyone that I trust that writes both Mandarin or Cantonese and understands computers yet, unfortunately.
+19:23:27 <TheJollyRoger> Sure, lots of people here speak one of the two, some speak both, but the part about "that I trust" and "understands computers" is proving to be much more difficult than I thought it would be.
+19:24:36 <Jeremy_Rand_Talo> #info ViaBTC (9.5%), BTC.TOP (8.9%), Huobi (4.5%), Bixin (1.4%), OK Pool (0.9%), and Prohashing (0.1%) were each notified at least once but did not get back to me.
+19:27:08 <Jeremy_Rand_Talo> #info I will continue badgering the remaining miners to upgrade.
+19:28:40 <TheJollyRoger> Okay!
+19:29:00 <Jeremy_Rand_Talo> Any other things related to the softfork?
+19:29:15 <TheJollyRoger> I don't have anything here, no.
+19:29:22 <Jeremy_Rand_Talo> ok
+19:29:43 <Jeremy_Rand_Talo> #topic Go ecosystem docs
+19:30:50 <Jeremy_Rand_Talo> #info I pushed new documentation to namecoin.org for ncp11 as well as ncprop279+StemNS.  It now should be fairly straightforward for people to test them out with Tor Browser.
+19:31:15 <Jeremy_Rand_Talo> #info Docs for DNSSEC-HSTS should be added in the near future as well.
+19:32:04 <Jeremy_Rand_Talo> #info These will, AFAICT, satisfy some more NLnet criteria, meaning we get paid soon.  \o/
+19:32:30 <TheJollyRoger> woohoo! \o/
+19:34:13 <Jeremy_Rand_Talo> Any other things related to the Go ecosystem.
+19:35:12 <Jeremy_Rand_Talo> s/./?/
+19:35:46 <TheJollyRoger> Er, I don't have anything here. I haven't gotten Golang to work properly yet except with precompiled stuff.
+19:35:58 <TheJollyRoger> Still struggling, sorry T_T
+19:36:13 <Jeremy_Rand_Talo> ok
+19:36:30 <Jeremy_Rand_Talo> Those are the only topics I had for today.  Any other topics we should cover?
+19:38:04 <TheJollyRoger> I don't have anything here, unfortunately.
+19:38:38 <Jeremy_Rand_Talo> Alright then. Thanks for attending!
+19:38:54 <Jeremy_Rand_Talo> #endmeeting

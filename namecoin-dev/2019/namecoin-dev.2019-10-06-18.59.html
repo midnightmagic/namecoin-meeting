@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand_Talo at 18:59:51 UTC
+(<a href="namecoin-dev.2019-10-06-18.59.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">Softfork</b> <span class="details">(<a href='namecoin-dev.2019-10-06-18.59.log.html#l-10'>Jeremy_Rand_Talo</a>, 19:13:10)</span>
+<ol type="a">
+  <li><span class="INFO">As I mentioned over in #namecoin yesterday, the
+    softfork activation is projected for less than a week from
+    now.</span> <span class="details">(<a
+    href='namecoin-dev.2019-10-06-18.59.log.html#l-11'>Jeremy_Rand_Talo</a>,
+    19:13:50)</span></li>
+  <li><span class="INFO">The upshot is that a supermajority of hashrate
+    has confirmed to me that they're upgraded, but a few smaller mining
+    pools didn't get back to me when I contacted them.  So, there's a
+    risk that a few miners might wind up mining invalid blocks, which
+    will get quickly orphaned.</span> <span class="details">(<a
+    href='namecoin-dev.2019-10-06-18.59.log.html#l-13'>Jeremy_Rand_Talo</a>,
+    19:15:21)</span></li>
+  <li><span class="INFO">The largest exchange (Livecoin) as well as 100%
+    of the Electrum server operators have confirmed that they've
+    upgraded.  So a few orphan blocks are not likely to cause much
+    disruption to the ecosystem.</span> <span class="details">(<a
+    href='namecoin-dev.2019-10-06-18.59.log.html#l-15'>Jeremy_Rand_Talo</a>,
+    19:16:51)</span></li>
+  <li><span class="INFO">That said, we should closely keep an eye on the
+    situation in the few days surrounding the softfork
+    activation.</span> <span class="details">(<a
+    href='namecoin-dev.2019-10-06-18.59.log.html#l-16'>Jeremy_Rand_Talo</a>,
+    19:17:33)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Namecoin Go ecosystem</b> <span class="details">(<a href='namecoin-dev.2019-10-06-18.59.log.html#l-20'>Jeremy_Rand_Talo</a>, 19:23:24)</span>
+<ol type="a">
+  <li><span class="INFO">As those of you who pay attention in
+    #namecoin-dev noticed, we've now got Travis notifying us daily in
+    the event that ncdns-repro dependencies are outdated.  This should
+    mitigate the stupid time sink of having to manually check dependency
+    versions.</span> <span class="details">(<a
+    href='namecoin-dev.2019-10-06-18.59.log.html#l-21'>Jeremy_Rand_Talo</a>,
+    19:24:51)</span></li>
+  <li><span class="INFO">Also, I've added a build tag to ncdns that
+    disables TLSA-related code, which should make the Tor folks happier
+    wrt binary size concerns.</span> <span class="details">(<a
+    href='namecoin-dev.2019-10-06-18.59.log.html#l-22'>Jeremy_Rand_Talo</a>,
+    19:26:11)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Electrum-NMC</b> <span class="details">(<a href='namecoin-dev.2019-10-06-18.59.log.html#l-25'>Jeremy_Rand_Talo</a>, 19:30:21)</span>
+<ol type="a">
+  <li><span class="INFO">master branch is still unusable due to the
+    fallout of the lightning merge upstream, but things are improving
+    noticeably in that department.  Probably going to need to ping
+    Daniel about a remaining issue which needs some Namecoin Core
+    expertise that I don't have.</span> <span class="details">(<a
+    href='namecoin-dev.2019-10-06-18.59.log.html#l-26'>Jeremy_Rand_Talo</a>,
+    19:31:37)</span></li>
+  <li><span class="INFO">The binary size optimizations from the Tor demo
+    branch have been cherry-picked to the 3.3.8 branch.  In addition, I
+    made the protobuf dependency optional, and allowed certifi to use a
+    heavily-trimmed Mozilla root CA list (thanks ryan-c for the
+    suggestion).  As with the TLSA stuff above, this should make the Tor
+    folks happier wrt binary size concerns.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-10-06-18.59.log.html#l-27'>Jeremy_Rand_Talo</a>,
+    19:33:41)</span></li>
+  <li><span class="INFO">Also the binary size optimizations are
+    selectable via rbm targets.</span> <span class="details">(<a
+    href='namecoin-dev.2019-10-06-18.59.log.html#l-28'>Jeremy_Rand_Talo</a>,
+    19:34:28)</span></li>
+  <li><span class="INFO">We're still aiming to have a patch sent to Tor
+    for review by end of the month, though there are a bunch of
+    remaining tasks with fairly uncertain ETA's, so hard to be confident
+    about this.  Nothing that looks like a major roadblock
+    though.</span> <span class="details">(<a
+    href='namecoin-dev.2019-10-06-18.59.log.html#l-29'>Jeremy_Rand_Talo</a>,
+    19:37:15)</span></li>
+  <li><span class="INFO">s/aiming to have a patch/aiming to have a
+    tor-browser-build patch/</span> <span class="details">(<a
+    href='namecoin-dev.2019-10-06-18.59.log.html#l-32'>Jeremy_Rand_Talo</a>,
+    19:38:20)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Public Relations</b> <span class="details">(<a href='namecoin-dev.2019-10-06-18.59.log.html#l-33'>Jeremy_Rand_Talo</a>, 19:39:09)</span>
+<ol type="a">
+  <li><span class="INFO">As alluded to earlier, we're moving forward
+    with having Cypher Market sell Namecoin merchandise.  No ETA on when
+    exactly the first merchandise will be available for sale, but no
+    blockers are known.</span> <span class="details">(<a
+    href='namecoin-dev.2019-10-06-18.59.log.html#l-34'>Jeremy_Rand_Talo</a>,
+    19:40:27)</span></li>
+  <li><span class="INFO">The Oklahoma City Peace Festival has
+    tentatively invited me to have a Namecoin table there.  (I had a
+    table there in 2017; I was invited back in 2018 but had to decline
+    because the date collided with IGF in Paris.) Paperwork is
+    submitted, I'm just waiting for the final word on whether they have
+    space for me.</span> <span class="details">(<a
+    href='namecoin-dev.2019-10-06-18.59.log.html#l-36'>Jeremy_Rand_Talo</a>,
+    19:42:50)</span></li>
+  <li><span class="INFO">Hoping to have 36C3 info soon as well.  We plan
+    to be hosted by the Monero Assembly once again, although it's
+    possible that Namecoin will officially be its own Assembly so that
+    the word "Namecoin" shows up on the venue map.  Either way, in
+    practice we'll be part of the Monero Assembly.  As usual, if anyone
+    has access to 36C3 presale vouchers, please ping me.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-10-06-18.59.log.html#l-37'>Jeremy_Rand_Talo</a>,
+    19:45:50)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 20:04:20 UTC
+(<a href="namecoin-dev.2019-10-06-18.59.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>(none)</li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand_Talo (40)</li>
+  <li>somewhat[m] (7)</li>
+  <li>grringo[m] (5)</li>
+  <li>qpm (2)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

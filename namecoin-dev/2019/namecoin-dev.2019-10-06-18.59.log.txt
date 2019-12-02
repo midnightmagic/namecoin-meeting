@@ -1,0 +1,54 @@
+18:59:51 <Jeremy_Rand_Talo> #startmeeting
+18:59:52 <qpm> Meeting started Sun Oct  6 18:59:51 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+18:59:52 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:00:53 <Jeremy_Rand_Talo> Hi everyone!  Welcome to the meeting.
+19:01:07 <Jeremy_Rand_Talo> Can we get a roll call of who's here today?
+19:06:42 <Jeremy_Rand_Talo> Hmm, am I the only one here today...?
+19:08:36 <grringo[m]> hi
+19:09:38 <Jeremy_Rand_Talo> hi grringo !
+19:12:48 <Jeremy_Rand_Talo> Okay, so looks like it's only 2 of us here today.  More people might filter in, but in the meantime, let's get started
+19:13:10 <Jeremy_Rand_Talo> #topic Softfork
+19:13:50 <Jeremy_Rand_Talo> #info As I mentioned over in #namecoin yesterday, the softfork activation is projected for less than a week from now.
+19:14:22 <somewhat[m]> *somewhat waves
+19:15:21 <Jeremy_Rand_Talo> #info The upshot is that a supermajority of hashrate has confirmed to me that they're upgraded, but a few smaller mining pools didn't get back to me when I contacted them.  So, there's a risk that a few miners might wind up mining invalid blocks, which will get quickly orphaned.
+19:15:26 <Jeremy_Rand_Talo> Hello somewhat !
+19:16:51 <Jeremy_Rand_Talo> #info The largest exchange (Livecoin) as well as 100% of the Electrum server operators have confirmed that they've upgraded.  So a few orphan blocks are not likely to cause much disruption to the ecosystem.
+19:17:33 <Jeremy_Rand_Talo> #info That said, we should closely keep an eye on the situation in the few days surrounding the softfork activation.
+19:17:51 <Jeremy_Rand_Talo> Anyone have questions/comments about this topic?
+19:19:05 <somewhat[m]> no
+19:23:07 <Jeremy_Rand_Talo> Alright, next up...
+19:23:24 <Jeremy_Rand_Talo> #topic Namecoin Go ecosystem
+19:24:51 <Jeremy_Rand_Talo> #info As those of you who pay attention in #namecoin-dev noticed, we've now got Travis notifying us daily in the event that ncdns-repro dependencies are outdated.  This should mitigate the stupid time sink of having to manually check dependency versions.
+19:26:11 <Jeremy_Rand_Talo> #info Also, I've added a build tag to ncdns that disables TLSA-related code, which should make the Tor folks happier wrt binary size concerns.
+19:27:47 <Jeremy_Rand_Talo> Any questions/comments about this topic?
+19:28:59 <somewhat[m]> no
+19:30:21 <Jeremy_Rand_Talo> #topic Electrum-NMC
+19:31:37 <Jeremy_Rand_Talo> #info master branch is still unusable due to the fallout of the lightning merge upstream, but things are improving noticeably in that department.  Probably going to need to ping Daniel about a remaining issue which needs some Namecoin Core expertise that I don't have.
+19:33:41 <Jeremy_Rand_Talo> #info The binary size optimizations from the Tor demo branch have been cherry-picked to the 3.3.8 branch.  In addition, I made the protobuf dependency optional, and allowed certifi to use a heavily-trimmed Mozilla root CA list (thanks ryan-c for the suggestion).  As with the TLSA stuff above, this should make the Tor folks happier wrt binary size concerns.
+19:34:28 <Jeremy_Rand_Talo> #info Also the binary size optimizations are selectable via rbm targets.
+19:37:15 <Jeremy_Rand_Talo> #info We're still aiming to have a patch sent to Tor for review by end of the month, though there are a bunch of remaining tasks with fairly uncertain ETA's, so hard to be confident about this.  Nothing that looks like a major roadblock though.
+19:37:19 <Jeremy_Rand_Talo> Any questions/comments on this topic?
+19:38:05 <somewhat[m]> no
+19:38:20 <Jeremy_Rand_Talo> #info s/aiming to have a patch/aiming to have a tor-browser-build patch/
+19:39:09 <Jeremy_Rand_Talo> #topic Public Relations
+19:40:27 <Jeremy_Rand_Talo> #info As alluded to earlier, we're moving forward with having Cypher Market sell Namecoin merchandise.  No ETA on when exactly the first merchandise will be available for sale, but no blockers are known.
+19:41:06 <somewhat[m]> nice!
+19:42:50 <Jeremy_Rand_Talo> #info The Oklahoma City Peace Festival has tentatively invited me to have a Namecoin table there.  (I had a table there in 2017; I was invited back in 2018 but had to decline because the date collided with IGF in Paris.) Paperwork is submitted, I'm just waiting for the final word on whether they have space for me.
+19:45:50 <Jeremy_Rand_Talo> #info Hoping to have 36C3 info soon as well.  We plan to be hosted by the Monero Assembly once again, although it's possible that Namecoin will officially be its own Assembly so that the word "Namecoin" shows up on the venue map.  Either way, in practice we'll be part of the Monero Assembly.  As usual, if anyone has access to 36C3 presale vouchers, please ping me.
+19:48:22 <Jeremy_Rand_Talo> Anyone have questions/comments on that stuff?
+19:48:41 <somewhat[m]> no
+19:49:16 <Jeremy_Rand_Talo> Alright.  Does anyone have other topics they'd like to bring up today?
+19:50:46 <somewhat[m]> no
+19:51:07 <Jeremy_Rand_Talo> grringo: anything from you?
+19:51:42 <Jeremy_Rand_Talo> grringo: I seem to recall you were maybe playing around with Brew packages?  Do I recall that correctly?  Any news on that?
+19:57:31 <grringo[m]> oj, I will try to investigate that topic.
+19:57:38 <grringo[m]> *ok
+19:58:44 <grringo[m]> I didn't move it forward yet.
+19:58:54 <Jeremy_Rand_Talo> ok, no worries
+19:59:07 <Jeremy_Rand_Talo> grringo: anything else you'd like to cover?
+19:59:24 <grringo[m]> no
+19:59:46 <Jeremy_Rand_Talo> ok
+19:59:58 <Jeremy_Rand_Talo> anyone covertly lurking in this meeting who would like to un-covertify themselves to bring up a topic?
+20:03:53 <Jeremy_Rand_Talo> Looking like no one wants to un-covertify themselves this time.  Oh well, maybe next time.  🙂
+20:04:03 <Jeremy_Rand_Talo> Thanks for attending everyone!
+20:04:20 <Jeremy_Rand_Talo> #endmeeting

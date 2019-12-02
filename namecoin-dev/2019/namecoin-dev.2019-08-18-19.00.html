@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand_Talo at 19:00:57 UTC
+(<a href="namecoin-dev.2019-08-18-19.00.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">Softfork Upgrade Status</b> <span class="details">(<a href='namecoin-dev.2019-08-18-19.00.log.html#l-9'>Jeremy_Rand_Talo</a>, 19:09:09)</span>
+<ol type="a">
+  <li><span class="INFO">99.6% of hashrate has been contacted about the
+    upcoming softfork.  24.4% have already confirmed that they upgraded
+    successfully.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-18-19.00.log.html#l-10'>Jeremy_Rand_Talo</a>,
+    19:09:54)</span></li>
+  <li><span class="INFO">Both figures are noticeably higher than at the
+    previous meeting.  I expect the latter figure to continue to rise
+    quickly.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-18-19.00.log.html#l-11'>Jeremy_Rand_Talo</a>,
+    19:10:39)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Electrum-NMC</b> <span class="details">(<a href='namecoin-dev.2019-08-18-19.00.log.html#l-13'>Jeremy_Rand_Talo</a>, 19:17:55)</span>
+<ol type="a">
+  <li><span class="INFO">Someone posted on the tech support forum
+    recently saying that they weren't able to get Electrum-NMC v3.3.6.1
+    on Windows to connect to a server.  I haven't run across that
+    behavior, but v3.3.5 through v3.3.6.1 were subject to some
+    misbehavior due to a broken refactor, and that misbehavior did seem
+    to affect Windows more strongly.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-18-19.00.log.html#l-14'>Jeremy_Rand_Talo</a>,
+    19:19:48)</span></li>
+  <li><span class="INFO">Electrum-NMC binaries for v3.3.7 were uploaded
+    earlier today; I've asked the user to check whether it's fixed
+    there.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-18-19.00.log.html#l-17'>Jeremy_Rand_Talo</a>,
+    19:20:23)</span></li>
+  <li><span class="INFO">Meanwhile, Daniel has been contributing some
+    highly useful PR's to Electrum-NMC, mostly involving
+    cleanup/refactoring of unit tests and AuxPoW.  The code is actually
+    becoming somewhat clean as a result.  \o/</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-08-18-19.00.log.html#l-19'>Jeremy_Rand_Talo</a>,
+    19:23:10)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">ncdns</b> <span class="details">(<a href='namecoin-dev.2019-08-18-19.00.log.html#l-21'>Jeremy_Rand_Talo</a>, 19:29:10)</span>
+<ol type="a">
+  <li><span class="INFO">We had a big release of ncdns v0.0.9.</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-08-18-19.00.log.html#l-22'>Jeremy_Rand_Talo</a>,
+    19:29:41)</span></li>
+  <li><span class="INFO">ncdns v0.0.9 switched to the rbm-based build
+    system from Tor Browser.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-18-19.00.log.html#l-23'>Jeremy_Rand_Talo</a>,
+    19:30:14)</span></li>
+  <li><span class="INFO">Builds aren't yet reproducible due to an
+    upstream rbm bug that I've submitted a patch for.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-08-18-19.00.log.html#l-24'>Jeremy_Rand_Talo</a>,
+    19:30:54)</span></li>
+  <li><span class="INFO">ncdns v0.0.9 also includes the first public
+    releases of DNSSEC-HSTS, ncp11, and ncprop279.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-08-18-19.00.log.html#l-25'>Jeremy_Rand_Talo</a>,
+    19:31:23)</span></li>
+  <li><span class="INFO">Preliminary documentation on using ncp11 is
+    also pushed to the website.</span> <span class="details">(<a
+    href='namecoin-dev.2019-08-18-19.00.log.html#l-26'>Jeremy_Rand_Talo</a>,
+    19:31:46)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 20:10:54 UTC
+(<a href="namecoin-dev.2019-08-18-19.00.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>(none)</li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand_Talo (33)</li>
+  <li>jonasbits (13)</li>
+  <li>TheJollyRoger (2)</li>
+  <li>qpm (2)</li>
+  <li>TheJollyRoger-M (2)</li>
+  <li>grringo[m] (2)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

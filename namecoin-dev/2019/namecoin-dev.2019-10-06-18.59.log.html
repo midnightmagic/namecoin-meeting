@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">18:59:51</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">18:59:52</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Oct  6 18:59:51 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">18:59:52</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:00:53</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi everyone!  Welcome to the meeting.
+<a name="l-5"></a><span class="tm">19:01:07</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Can we get a roll call of who's here today?
+<a name="l-6"></a><span class="tm">19:06:42</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hmm, am I the only one here today...?
+<a name="l-7"></a><span class="tm">19:08:36</span><span class="nk"> &lt;grringo[m]&gt;</span> hi
+<a name="l-8"></a><span class="tm">19:09:38</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> hi grringo !
+<a name="l-9"></a><span class="tm">19:12:48</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Okay, so looks like it's only 2 of us here today.  More people might filter in, but in the meantime, let's get started
+<a name="l-10"></a><span class="tm">19:13:10</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Softfork</span>
+<a name="l-11"></a><span class="tm">19:13:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">As I mentioned over in #namecoin yesterday, the softfork activation is projected for less than a week from now.</span>
+<a name="l-12"></a><span class="tm">19:14:22</span><span class="nk"> &lt;somewhat[m]&gt;</span> *somewhat waves
+<a name="l-13"></a><span class="tm">19:15:21</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">The upshot is that a supermajority of hashrate has confirmed to me that they're upgraded, but a few smaller mining pools didn't get back to me when I contacted them.  So, there's a risk that a few miners might wind up mining invalid blocks, which will get quickly orphaned.</span>
+<a name="l-14"></a><span class="tm">19:15:26</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hello somewhat !
+<a name="l-15"></a><span class="tm">19:16:51</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">The largest exchange (Livecoin) as well as 100% of the Electrum server operators have confirmed that they've upgraded.  So a few orphan blocks are not likely to cause much disruption to the ecosystem.</span>
+<a name="l-16"></a><span class="tm">19:17:33</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">That said, we should closely keep an eye on the situation in the few days surrounding the softfork activation.</span>
+<a name="l-17"></a><span class="tm">19:17:51</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyone have questions/comments about this topic?
+<a name="l-18"></a><span class="tm">19:19:05</span><span class="nk"> &lt;somewhat[m]&gt;</span> no
+<a name="l-19"></a><span class="tm">19:23:07</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Alright, next up...
+<a name="l-20"></a><span class="tm">19:23:24</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Namecoin Go ecosystem</span>
+<a name="l-21"></a><span class="tm">19:24:51</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">As those of you who pay attention in #namecoin-dev noticed, we've now got Travis notifying us daily in the event that ncdns-repro dependencies are outdated.  This should mitigate the stupid time sink of having to manually check dependency versions.</span>
+<a name="l-22"></a><span class="tm">19:26:11</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Also, I've added a build tag to ncdns that disables TLSA-related code, which should make the Tor folks happier wrt binary size concerns.</span>
+<a name="l-23"></a><span class="tm">19:27:47</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Any questions/comments about this topic?
+<a name="l-24"></a><span class="tm">19:28:59</span><span class="nk"> &lt;somewhat[m]&gt;</span> no
+<a name="l-25"></a><span class="tm">19:30:21</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Electrum-NMC</span>
+<a name="l-26"></a><span class="tm">19:31:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">master branch is still unusable due to the fallout of the lightning merge upstream, but things are improving noticeably in that department.  Probably going to need to ping Daniel about a remaining issue which needs some Namecoin Core expertise that I don't have.</span>
+<a name="l-27"></a><span class="tm">19:33:41</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">The binary size optimizations from the Tor demo branch have been cherry-picked to the 3.3.8 branch.  In addition, I made the protobuf dependency optional, and allowed certifi to use a heavily-trimmed Mozilla root CA list (thanks ryan-c for the suggestion).  As with the TLSA stuff above, this should make the Tor folks happier wrt binary size concerns.</span>
+<a name="l-28"></a><span class="tm">19:34:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Also the binary size optimizations are selectable via rbm targets.</span>
+<a name="l-29"></a><span class="tm">19:37:15</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">We're still aiming to have a patch sent to Tor for review by end of the month, though there are a bunch of remaining tasks with fairly uncertain ETA's, so hard to be confident about this.  Nothing that looks like a major roadblock though.</span>
+<a name="l-30"></a><span class="tm">19:37:19</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Any questions/comments on this topic?
+<a name="l-31"></a><span class="tm">19:38:05</span><span class="nk"> &lt;somewhat[m]&gt;</span> no
+<a name="l-32"></a><span class="tm">19:38:20</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">s/aiming to have a patch/aiming to have a tor-browser-build patch/</span>
+<a name="l-33"></a><span class="tm">19:39:09</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Public Relations</span>
+<a name="l-34"></a><span class="tm">19:40:27</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">As alluded to earlier, we're moving forward with having Cypher Market sell Namecoin merchandise.  No ETA on when exactly the first merchandise will be available for sale, but no blockers are known.</span>
+<a name="l-35"></a><span class="tm">19:41:06</span><span class="nk"> &lt;somewhat[m]&gt;</span> nice!
+<a name="l-36"></a><span class="tm">19:42:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">The Oklahoma City Peace Festival has tentatively invited me to have a Namecoin table there.  (I had a table there in 2017; I was invited back in 2018 but had to decline because the date collided with IGF in Paris.) Paperwork is submitted, I'm just waiting for the final word on whether they have space for me.</span>
+<a name="l-37"></a><span class="tm">19:45:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Hoping to have 36C3 info soon as well.  We plan to be hosted by the Monero Assembly once again, although it's possible that Namecoin will officially be its own Assembly so that the word "Namecoin" shows up on the venue map.  Either way, in practice we'll be part of the Monero Assembly.  As usual, if anyone has access to 36C3 presale vouchers, please ping me.</span>
+<a name="l-38"></a><span class="tm">19:48:22</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyone have questions/comments on that stuff?
+<a name="l-39"></a><span class="tm">19:48:41</span><span class="nk"> &lt;somewhat[m]&gt;</span> no
+<a name="l-40"></a><span class="tm">19:49:16</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Alright.  Does anyone have other topics they'd like to bring up today?
+<a name="l-41"></a><span class="tm">19:50:46</span><span class="nk"> &lt;somewhat[m]&gt;</span> no
+<a name="l-42"></a><span class="tm">19:51:07</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> anything from you?
+<a name="l-43"></a><span class="tm">19:51:42</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> I seem to recall you were maybe playing around with Brew packages?  Do I recall that correctly?  Any news on that?
+<a name="l-44"></a><span class="tm">19:57:31</span><span class="nk"> &lt;grringo[m]&gt;</span> oj, I will try to investigate that topic.
+<a name="l-45"></a><span class="tm">19:57:38</span><span class="nk"> &lt;grringo[m]&gt;</span> *ok
+<a name="l-46"></a><span class="tm">19:58:44</span><span class="nk"> &lt;grringo[m]&gt;</span> I didn't move it forward yet.
+<a name="l-47"></a><span class="tm">19:58:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok, no worries
+<a name="l-48"></a><span class="tm">19:59:07</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">grringo:</span> anything else you'd like to cover?
+<a name="l-49"></a><span class="tm">19:59:24</span><span class="nk"> &lt;grringo[m]&gt;</span> no
+<a name="l-50"></a><span class="tm">19:59:46</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok
+<a name="l-51"></a><span class="tm">19:59:58</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> anyone covertly lurking in this meeting who would like to un-covertify themselves to bring up a topic?
+<a name="l-52"></a><span class="tm">20:03:53</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Looking like no one wants to un-covertify themselves this time.  Oh well, maybe next time.  🙂
+<a name="l-53"></a><span class="tm">20:04:03</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Thanks for attending everyone!
+<a name="l-54"></a><span class="tm">20:04:20</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:14:05</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:14:06</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Sep 15 19:14:05 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:14:06</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:14:49</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hey everyone, welcome to the meeting!  Sorry for the late start today.
+<a name="l-5"></a><span class="tm">19:14:54</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Ahoy!
+<a name="l-6"></a><span class="tm">19:15:03</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Can we get a roll call of who's here today?
+<a name="l-7"></a><span class="tm">19:15:26</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi TheJollyRoger
+<a name="l-8"></a><span class="tm">19:15:28</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Yarr, Cap'n! o7
+<a name="l-9"></a><span class="tm">19:16:45</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Okay, so, first topic...
+<a name="l-10"></a><span class="tm">19:17:07</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Electrum-NMC packaging</span>
+<a name="l-11"></a><span class="tm">19:17:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Debian Sid and Debian Bullseye now have an updated Electrum (Bitcoin) package.</span>
+<a name="l-12"></a><span class="tm">19:18:15</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Lola is looking into porting that package for Electrum-NMC</span>
+<a name="l-13"></a><span class="tm">19:19:00</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">If she succeeds at that, I'll ask mhatta if he can get it uploaded as an official Debian package</span>
+<a name="l-14"></a><span class="tm">19:20:02</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyone have questions/comments about this topic?
+<a name="l-15"></a><span class="tm">19:21:25</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I don't think I have any.
+<a name="l-16"></a><span class="tm">19:22:05</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> next topic then
+<a name="l-17"></a><span class="tm">19:22:22</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">ncdns-repro</span>
+<a name="l-18"></a><span class="tm">19:25:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">ncdns-repro now supports arbitrary Go compiler versions.  This means that we can independently upgrade the tor-browser-build dependency and the x509-signature-splice dependency, rather than forcing them to be kept in lockstep</span>
+<a name="l-19"></a><span class="tm">19:26:49</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">ncdns-repro now also produces DNSSEC-HSTS binaries that can be transformed into a .crx Chromium/Chrome extension.  This should allow us to release DNSSEC-HSTS for Chrome.</span>
+<a name="l-20"></a><span class="tm">19:27:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I updated qlib to properly handle current versions of Miek's DNS library.  This allowed me to remove a bunch of stupid hackery in ncdns-repro that dealt with handling 2 different miekg/dns revisions at once.</span>
+<a name="l-21"></a><span class="tm">19:28:32</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">And, the big two things...</span>
+<a name="l-22"></a><span class="tm">19:29:37</span><span class="nk"> &lt;somewhat[m]&gt;</span> *somewhat waves
+<a name="l-23"></a><span class="tm">19:29:46 </span><span class="nka">* TheJollyRoger</span> <span class="ac">does the drumroll!</span>
+<a name="l-24"></a><span class="tm">19:30:26</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">ncprop279 now builds inside the tor-browser-build tree (this is merged to ncdns-repro and my tor-browser-build fork), and Electrum-NMC now builds from source (including building all of its Python dependencies from source) inside the tor-browser-build tree as well (this will be merged to ncdns-repro and my tor-browser-build fork as soon as I verify that it builds okay in a standalone ncdns-repro tree)</span>
+<a name="l-25"></a><span class="tm">19:31:15</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Building ncprop279 and Electrum-NMC from source were two of the major blockers for getting into the Tor Browser nightly builds.  With those out of the way, the path is substantially cleared.</span>
+<a name="l-26"></a><span class="tm">19:31:53</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> hello somewhat !
+<a name="l-27"></a><span class="tm">19:33:29</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> any questions/comments about this stuff?
+<a name="l-28"></a><span class="tm">19:34:49</span><span class="nk"> &lt;somewhat[m]&gt;</span> nope :)
+<a name="l-29"></a><span class="tm">19:34:57</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Woah. We might get ncdns with Tor Browser?
+<a name="l-30"></a><span class="tm">19:38:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">TheJollyRoger:</span> That's the intent.  Initially it would most likely be solely ncprop279, configured to only handle resolution to .onion domains.  Resolution to IP addresses and TLS-related stuff would be saved for a follow-up patch.
+<a name="l-31"></a><span class="tm">19:40:21</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">TheJollyRoger:</span> and as stated above, this would be for nightly builds only at first.  Migrating to alpha and stable builds would not happen immediately.
+<a name="l-32"></a><span class="tm">19:41:12</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Woah!
+<a name="l-33"></a><span class="tm">19:41:21</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Well that's... that's... that's really huge still though.
+<a name="l-34"></a><span class="tm">19:41:38</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Tor with Namecoin! To do onionsites!
+<a name="l-35"></a><span class="tm">19:44:21 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">concurs, though suggests that any celebration should be reserved for after things are shipped</span>
+<a name="l-36"></a><span class="tm">19:44:30</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Got it XP
+<a name="l-37"></a><span class="tm">19:45:42</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> any other questions/comments on this?
+<a name="l-38"></a><span class="tm">19:50:02</span><span class="nk"> &lt;somewhat[m]&gt;</span> no
+<a name="l-39"></a><span class="tm">19:51:38</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I'm holding the champagne :P.
+<a name="l-40"></a><span class="tm">19:53:26</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Funding</span>
+<a name="l-41"></a><span class="tm">19:55:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">We're approaching the end of our funding from the NLnet Internet Hardening Fund.  (The amount of funding remaining is IIRC somewhere in the realm of 4000 EUR, though I don't have the numbers in front of me.)</span>
+<a name="l-42"></a><span class="tm">19:56:19</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Crud. :(
+<a name="l-43"></a><span class="tm">19:56:56</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Once that funding ends, we will put together a new funding proposal and try to get new funding.  So, I suggest that people start brainstorming ideas on what projects we should ask for funding for.</span>
+<a name="l-44"></a><span class="tm">19:58:15</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Our current NLnet funding is fairly limited in scope (everything funded by that pool of money has to be TLS related).  Our next funding proposal is unlikely to be as constrained.  So there are things that we weren't able to get funded last time, that we could potentially fund soon.</span>
+<a name="l-45"></a><span class="tm">20:00:40</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Given that we'll still have funding from Cyphrs, Xaya, and NMDF after the current NLnet funding ends, it's unlikely that we'll see significant disruption to our operations while we're looking for new funding.  However, since funding proposals tend to get handled by me, it does mean that I'll be spending less time on code and more time on getting new funding.</span>
+<a name="l-46"></a><span class="tm">20:01:49</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Any questions/comments on this topic?
+<a name="l-47"></a><span class="tm">20:03:32</span><span class="nk"> &lt;somewhat[m]&gt;</span> no
+<a name="l-48"></a><span class="tm">20:05:41</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I don't think so. I don't have any ideas X(
+<a name="l-49"></a><span class="tm">20:06:01</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok
+<a name="l-50"></a><span class="tm">20:06:42</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Those are the only topics I had today.  Anyone else have other topics to cover?
+<a name="l-51"></a><span class="tm">20:08:12</span><span class="nk"> &lt;somewhat[m]&gt;</span> nope 🙂
+<a name="l-52"></a><span class="tm">20:11:53</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> I don't think I've got anything else!
+<a name="l-53"></a><span class="tm">20:12:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> alright cool.  Thanks for attending everyone!
+<a name="l-54"></a><span class="tm">20:12:27</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>
