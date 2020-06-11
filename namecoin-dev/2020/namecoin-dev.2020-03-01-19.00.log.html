@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:00:00</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:00:01</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Mar  1 19:00:00 2020 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:00:01</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:00:54</span><span class="nk"> &lt;yanmaani&gt;</span> ah
+<a name="l-5"></a><span class="tm">19:00:59</span><span class="nk"> &lt;yanmaani&gt;</span> bot works for once
+<a name="l-6"></a><span class="tm">19:01:15</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hello!  Welcome to the meeting.
+<a name="l-7"></a><span class="tm">19:01:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Can we get a roll call of who's here today?
+<a name="l-8"></a><span class="tm">19:01:27</span><span class="nk"> &lt;yanmaani&gt;</span> I'm here
+<a name="l-9"></a><span class="tm">19:01:41</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi yanmaani
+<a name="l-10"></a><span class="tm">19:01:58</span><span class="nk"> &lt;yanmaani&gt;</span> Hi
+<a name="l-11"></a><span class="tm">19:02:51</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyone else here today?
+<a name="l-12"></a><span class="tm">19:05:02</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> ok, so
+<a name="l-13"></a><span class="tm">19:05:57</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> the main news this week is that Matt from Tor ACKed the mailing list post for getting more tester feedback, and the mailing list post went out.
+<a name="l-14"></a><span class="tm">19:07:01</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> A journalist noticed the post, and as a result we ended up on the front page of LinuxReviews.org
+<a name="l-15"></a><span class="tm">19:08:11</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Not clear yet how much tester feedback we'll get out of the mailing list thread; hopefully we get a decent amount.
+<a name="l-16"></a><span class="tm">19:10:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> In other news, things are going well on the NLnet funding proposal; submission deadline is April 1.
+<a name="l-17"></a><span class="tm">19:11:26</span><span class="nk"> &lt;yanmaani&gt;</span> Have you gotten any feedback out of it yet?
+<a name="l-18"></a><span class="tm">19:11:29</span><span class="nk"> &lt;yanmaani&gt;</span> Or is that confidential?
+<a name="l-19"></a><span class="tm">19:12:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> no tester feedback from the mailing list thread yet, except for the journalist who clearly tested it because he posted screenshots in his article
+<a name="l-20"></a><span class="tm">19:13:17</span><span class="nk"> &lt;yanmaani&gt;</span> How does it work, exactly
+<a name="l-21"></a><span class="tm">19:13:27</span><span class="nk"> &lt;yanmaani&gt;</span> ? Does Tor require it to be tested by N people?
+<a name="l-22"></a><span class="tm">19:13:46</span><span class="nk"> &lt;yanmaani&gt;</span> Or is it a case of "nobody complained so we'll ship it"?
+<a name="l-23"></a><span class="tm">19:14:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> there's not a specific number of test reports they want (such a standard would be pretty easy to game by Sybils); if we don't get sufficient feedback on that mailing list, then we'll probably ask for feedback in other venues
+<a name="l-24"></a><span class="tm">19:15:35</span><span class="nk"> &lt;yanmaani&gt;</span> ah so it could go on forever, theoretically?
+<a name="l-25"></a><span class="tm">19:17:54</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> well, in the sense that there's no strictly defined timeline, yes.  It wouldn't last forever though; if there's literally no interest shown then at some point the experiment would likely be deemed to be not worth continuing.  That seems unlikely though; it's mainly a matter of figuring out how to contact the testers who will be interested.
+<a name="l-26"></a><span class="tm">19:19:03</span><span class="nk"> &lt;yanmaani&gt;</span> So would-be testers would first have to download TBB alpha and then manually enable it?
+<a name="l-27"></a><span class="tm">19:19:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> Nightly, not Alpha, but yes.
+<a name="l-28"></a><span class="tm">19:23:16</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Meanwhile, on the public relations front, I'm told that Namecoin merchandise is projected to be available on Cypher Market sometime this week.
+<a name="l-29"></a><span class="tm">19:25:05</span><span class="nk"> &lt;yanmaani&gt;</span> It's just high-priced graphic tees??
+<a name="l-30"></a><span class="tm">19:26:46</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> prices aren't that high; they're comparable to most other online merchandise shops.  Anyway, we get half of the profits, and they accept Bitcoin (for real, not the BitPay bullshit) and Monero in addition to credit cards.
+<a name="l-31"></a><span class="tm">19:27:14</span><span class="nk"> &lt;yanmaani&gt;</span> $35 for a t-shirt
+<a name="l-32"></a><span class="tm">19:27:20</span><span class="nk"> &lt;yanmaani&gt;</span> wtf??
+<a name="l-33"></a><span class="tm">19:27:33</span><span class="nk"> &lt;yanmaani&gt;</span> and $5 of that goes to Namecoin, yes?
+<a name="l-34"></a><span class="tm">19:29:51</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> not 100% sure what the Namecoin merch will be priced at.  The prices I see aren't far off from what I paid for my custom Namecoin t-shirt at SpreadShirt.
+<a name="l-35"></a><span class="tm">19:30:15</span><span class="nk"> &lt;yanmaani&gt;</span> AND $15 SHIPPING, IN "7-21 business days" UNTRACKED?!
+<a name="l-36"></a><span class="tm">19:30:21</span><span class="nk"> &lt;yanmaani&gt;</span> that's $50 for a t-shirt
+<a name="l-37"></a><span class="tm">19:30:52</span><span class="nk"> &lt;yanmaani&gt;</span> I could buy 20 t-shirts for that price and have them shipped to me for that price
+<a name="l-38"></a><span class="tm">19:31:31</span><span class="nk"> &lt;yanmaani&gt;</span> I refuse to believe it can cost $48 to print a t-shirt
+<a name="l-39"></a><span class="tm">19:33:36</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Whatever.  If you'd like to propose some other merchandise shop that meets our standards, feel free.
+<a name="l-40"></a><span class="tm">19:33:37</span><span class="nk"> &lt;yanmaani&gt;</span> (in fact, it does not - $2 is a more reasonable figure if you're buying in bulk, 10 seconds of web searches show)
+<a name="l-41"></a><span class="tm">19:34:03</span><span class="nk"> &lt;yanmaani&gt;</span> yeah I mean this does not affect me in any way whatsoever and I suppose it is nice that it is available
+<a name="l-42"></a><span class="tm">19:34:12</span><span class="nk"> &lt;yanmaani&gt;</span> still I am shocked, that is an outrageous fee
+<a name="l-43"></a><span class="tm">19:35:54</span><span class="nk"> &lt;yanmaani&gt;</span> A quick search query turns up https://ondemand.printsome.com/pricing.php
+<a name="l-44"></a><span class="tm">19:36:41</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Meanwhile, Botball regional tournament is in Oklahoma on Saturday.  As usual, I'll be hanging out there, looking for students who might be interested in Namecoin dev.
+<a name="l-45"></a><span class="tm">19:37:44</span><span class="nk"> &lt;yanmaani&gt;</span> It's bizarre that you have to actively solicit for developers considering the low standards you have otherwise
+<a name="l-46"></a><span class="tm">19:37:47</span><span class="nk"> &lt;yanmaani&gt;</span> like don't get me wrong here
+<a name="l-47"></a><span class="tm">19:38:01</span><span class="nk"> &lt;yanmaani&gt;</span> but there is absolutely no due dilligence being done here, no CV check, no nothing
+<a name="l-48"></a><span class="tm">19:39:04</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> Whoops, sorry I'm late X(
+<a name="l-49"></a><span class="tm">19:39:21</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> which open source projects do you know of who do a formal CV check...?
+<a name="l-50"></a><span class="tm">19:39:40</span><span class="nk"> &lt;yanmaani&gt;</span> none, but neither do I know of any which pay you actual money for contributing
+<a name="l-51"></a><span class="tm">19:40:27</span><span class="nk"> &lt;yanmaani&gt;</span> the deal is either that you do it for free or you get hired by some utterly shady software company
+<a name="l-52"></a><span class="tm">19:40:45</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> Oh yeah. Jeremy_Rand_Talos speaking of the shirts, I sent in my lineart. I couldn't overlay the exact one since NX doesn't support it, so I had to try to approximate it as best I could using sketcher.
+<a name="l-53"></a><span class="tm">19:43:15</span><span class="nk"> &lt;yanmaani&gt;</span> Speaking of "art", I found this alternate Namecoin logo the other day
+<a name="l-54"></a><span class="tm">19:43:17</span><span class="nk"> &lt;yanmaani&gt;</span> https://upload.wikimedia.org/wikipedia/commons/9/9a/Namecoin_Coin.png
+<a name="l-55"></a><span class="tm">19:43:22</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> also I have no idea why you're under the impression that we spend a substantial amount of resources soliciting for developers.  Virtually none of our time is spent on that these days.  (There was a mild amount of such activity when I was a student, before I decided to tell Trump University of Oklahoma to go fuck themselves.)
+<a name="l-56"></a><span class="tm">19:43:29</span><span class="nk"> &lt;yanmaani&gt;</span> very 2011-esque
+<a name="l-57"></a><span class="tm">19:43:49</span><span class="nk"> &lt;yanmaani&gt;</span> no not substantial. But it's heavily a buyers market.
+<a name="l-58"></a><span class="tm">19:44:02</span><span class="nk"> &lt;yanmaani&gt;</span> companies soliciting workers usually get hundreds of applicants
+<a name="l-59"></a><span class="tm">19:44:44</span><span class="nk"> &lt;yanmaani&gt;</span> so I was under the impression that if you had funding it was trivial to score people to work for you
+<a name="l-60"></a><span class="tm">19:46:30</span><span class="nk"> &lt;yanmaani&gt;</span> Like just put in the footer "we are looking for people to do paid development work; join #namecoin at freenode for more details"
+<a name="l-61"></a><span class="tm">19:46:33</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> not many people find decentralized naming/PKI to be something they're interested in or good at.  I mean, unless you count the kind of people who found scams like Blockstack.  *shrugs*
+<a name="l-62"></a><span class="tm">19:47:19</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> anyway, when more funding comes in, yes, I wouldn't really be opposed to putting something more prominent on the website
+<a name="l-63"></a><span class="tm">19:47:31</span><span class="nk"> &lt;yanmaani&gt;</span> still, it's a buyers' market. Tons of unemployed people out there who would take literally whatever
+<a name="l-64"></a><span class="tm">19:47:43</span><span class="nk"> &lt;somewhat[m]&gt;</span> *somewhat waves, takes a seat at the back and scrolls up
+<a name="l-65"></a><span class="tm">19:47:52</span><span class="nk"> &lt;yanmaani&gt;</span> granted most of them are going to be node.js shitters or similar, but still
+<a name="l-66"></a><span class="tm">19:47:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Ah hey somewhat
+<a name="l-67"></a><span class="tm">19:49:00</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> FWIW our general approach of letting interested devs come to us rather than the other way around does have a mild selection effect in favor of people who are likely to do competent work and who are here for the right reasons
+<a name="l-68"></a><span class="tm">19:49:13</span><span class="nk"> &lt;yanmaani&gt;</span> I suspected that was the case
+<a name="l-69"></a><span class="tm">19:49:24</span><span class="nk"> &lt;yanmaani&gt;</span> you'll get huge adverse selection if you do it any other way
+<a name="l-70"></a><span class="tm">19:49:36</span><span class="nk"> &lt;yanmaani&gt;</span> let alone mentioning that you don't check CVs or identities or anything
+<a name="l-71"></a><span class="tm">19:49:42</span><span class="nk"> &lt;yanmaani&gt;</span> wew
+<a name="l-72"></a><span class="tm">19:49:57</span><span class="nk"> &lt;yanmaani&gt;</span> channel would be flooded by all sorts of riff-raff
+<a name="l-73"></a><span class="tm">19:50:18 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">really does not want to attract devs who, as Hitler would say, "You're all a bunch of Node.js hipsters who just have to install everything you see on HackerNews!"</span>
+<a name="l-74"></a><span class="tm">19:50:30</span><span class="nk"> &lt;yanmaani&gt;</span> but doesn't talking to students have this effect too? or are they sharp people?
+<a name="l-75"></a><span class="tm">19:51:17</span><span class="nk"> &lt;yanmaani&gt;</span> most of the polytechnics where I live have as goals to churn out "full stack" shitters or alternatively so-called "web developers"
+<a name="l-76"></a><span class="tm">19:51:33</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> Botball tends to select for competent students who like open-source dev.
+<a name="l-77"></a><span class="tm">19:51:34</span><span class="nk"> &lt;yanmaani&gt;</span> but perhaps things are better in Oklahoma
+<a name="l-78"></a><span class="tm">19:52:20</span><span class="nk"> &lt;yanmaani&gt;</span> oh botball
+<a name="l-79"></a><span class="tm">19:52:27</span><span class="nk"> &lt;yanmaani&gt;</span> I thought you said baseball
+<a name="l-80"></a><span class="tm">19:52:43</span><span class="nk"> &lt;yanmaani&gt;</span> that makes a lot more sense
+<a name="l-81"></a><span class="tm">19:52:57</span><span class="nk"> &lt;yanmaani&gt;</span> no offense here but I have never set foot in Oklahoma
+<a name="l-82"></a><span class="tm">19:55:38</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyway, this meeting is drifting toward random banter, which I suspect means we've run out of things to cover.  Anything else before I close the meeting?
+<a name="l-83"></a><span class="tm">19:55:48</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">somewhat:</span> anything you'd like to cover?
+<a name="l-84"></a><span class="tm">20:01:40</span><span class="nk"> &lt;somewhat[m]&gt;</span> no but the cypher market news is cool
+<a name="l-85"></a><span class="tm">20:02:23</span><span class="nk"> &lt;somewhat[m]&gt;</span> once sales are steady somewhat wants to buy some overpriced merch and leave them around their city
+<a name="l-86"></a><span class="tm">20:02:51</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> hehe
+<a name="l-87"></a><span class="tm">20:02:53</span><span class="nk"> &lt;somewhat[m]&gt;</span> 😇
+<a name="l-88"></a><span class="tm">20:04:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">somewhat:</span> note that the WikiLeaks tweet design is probably not going to be in the first batch of designs to be posted.  (It's in the queue though, along with a design that quotes the genesis block.)
+<a name="l-89"></a><span class="tm">20:05:14</span><span class="nk"> &lt;somewhat[m]&gt;</span> *somewhat at least knows where you had yours done now
+<a name="l-90"></a><span class="tm">20:07:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">somewhat:</span> the shirt I bought custom was printed at SpreadShirt.  I don't recommend SpreadShirt though; they just happened to be the least bad option for one-off custom shirts as of a few years ago.  Anyway, the delay on getting that design on Cypher Market is because their designers will probably want to tweak my design a bit.
+<a name="l-91"></a><span class="tm">20:08:17</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> Understandable.
+<a name="l-92"></a><span class="tm">20:08:48 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">grumbles about SpreadShirt's website only working in Chromium, among other egregious things</span>
+<a name="l-93"></a><span class="tm">20:09:19</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> Phoneshomium. &gt;_&lt;
+<a name="l-94"></a><span class="tm">20:09:19</span><span class="nk"> &lt;somewhat[m]&gt;</span> *just a thought, faces of nmc devs past or present would be great or something less CRYPTO trash but a conversation starter for those already familiar with nmc. Maybe the .bit tor circuit display or similar
+<a name="l-95"></a><span class="tm">20:09:23</span><span class="nk"> &lt;yanmaani&gt;</span> I really do not understand the appeal of graphic tees
+<a name="l-96"></a><span class="tm">20:09:41</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> Well they're nice and they're a morale item!
+<a name="l-97"></a><span class="tm">20:09:42</span><span class="nk"> &lt;yanmaani&gt;</span> or I mean I understand it in the abstract sense, but I don't see why you would want one
+<a name="l-98"></a><span class="tm">20:10:16</span><span class="nk"> &lt;yanmaani&gt;</span> are you supposed to wear them on the few days a year you visit conferences repping namecoin?
+<a name="l-99"></a><span class="tm">20:12:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">somewhat:</span> hmm, so a t-shirt design showing the Tor circuit display?  Might be doable, not sure how it would look exactly.  I'd probably want to wait until we actually advance a bit on the Tor Browser integration.  Not sure if it would annoy the Tor devs....
+<a name="l-100"></a><span class="tm">20:12:47</span><span class="nk"> &lt;yanmaani&gt;</span> Wait, will .bit have a separate circuit display?
+<a name="l-101"></a><span class="tm">20:12:53</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Also I don't know if that would actually be readable on a t-shirt without messing with the graphic heavily
+<a name="l-102"></a><span class="tm">20:13:07</span><span class="nk"> &lt;yanmaani&gt;</span> I'd just go with white polo shirts with the Namecoin logo in the upper left/right hand corner if it were me
+<a name="l-103"></a><span class="tm">20:13:27</span><span class="nk"> &lt;yanmaani&gt;</span> or the slightly cleaner option of polo shirts in the exact Namecoin shade of blue
+<a name="l-104"></a><span class="tm">20:13:31</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> the Tor Browser integration shows the .onion domain next to the .bit domain in the circuit display
+<a name="l-105"></a><span class="tm">20:13:53</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> (which was a fun feature that Arthur coded up in his spare time)
+<a name="l-106"></a><span class="tm">20:14:17</span><span class="nk"> &lt;yanmaani&gt;</span> so it's gonna say "Relay \n Relay \n Relay \n asdasd.onion | asd.bit"?
+<a name="l-107"></a><span class="tm">20:15:24 </span><span class="nka">* Jeremy_Rand_Talo</span> <span class="ac">is not sure why yanmaani is offering opinions on what prices are reasonable for graphical t-shirts if they don't even like graphical t-shirts.</span>
+<a name="l-108"></a><span class="tm">20:16:02</span><span class="nk"> &lt;yanmaani&gt;</span> I am not royalty Jeremy
+<a name="l-109"></a><span class="tm">20:16:45</span><span class="nk"> &lt;yanmaani&gt;</span> but the answer is that it's hugely overpriced; I buy my t-shirts online for a bit north of $2 per piece and the same supplier offers printing for about twice that
+<a name="l-110"></a><span class="tm">20:17:16</span><span class="nk"> &lt;yanmaani&gt;</span> the same reason I would be shocked if someone told me they bought gold for $200/g; even if I don't own any gold that is clearly too much money for it
+<a name="l-111"></a><span class="tm">20:17:26</span><span class="nk"> &lt;yanmaani&gt;</span> with that said it is an excellent example of bikeshedding
+<a name="l-112"></a><span class="tm">20:17:37</span><span class="nk"> &lt;somewhat[m]&gt;</span> anyways in the words of a great comedian, "is anyone here in marketing?"
+<a name="l-113"></a><span class="tm">20:17:40</span><span class="nk"> &lt;yanmaani&gt;</span> truly excellent
+<a name="l-114"></a><span class="tm">20:17:43</span><span class="nk"> &lt;yanmaani&gt;</span> archetypal even
+<a name="l-115"></a><span class="tm">20:17:49</span><span class="nk"> &lt;somewhat[m]&gt;</span> "KILL YOURSELF!"
+<a name="l-116"></a><span class="tm">20:17:52</span><span class="nk"> &lt;yanmaani&gt;</span> the ur-bikeshedding, if you will
+<a name="l-117"></a><span class="tm">20:18:18</span><span class="nk"> &lt;yanmaani&gt;</span> think I prefer Hitler tbh, he's more polite
+<a name="l-118"></a><span class="tm">20:18:19 </span><span class="nka">* TheJollyRoger-M</span> <span class="ac">cracks up.</span>
+<a name="l-119"></a><span class="tm">20:19:00</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> I found a site that sells customized hockey and baseball jerseys. Maybe I'll have to make myself a oneoff :P.
+<a name="l-120"></a><span class="tm">20:19:25</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> whatever price you're paying is not typical in the U.S., nor is this the same market since a significant fraction of proceeds go to funding Namecoin dev.
+<a name="l-121"></a><span class="tm">20:21:01</span><span class="nk"> &lt;yanmaani&gt;</span> $2.7 per piece plus shipping, less if you buy in bulk
+<a name="l-122"></a><span class="tm">20:21:21</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyway, we put our money where our mouth is.  Hence why we're using Cypher Market, who accept Bitcoin (not BitPay) and Monero, and whose website works reasonably well in Tor Browser.
+<a name="l-123"></a><span class="tm">20:22:09</span><span class="nk"> &lt;yanmaani&gt;</span> That's an advantage - with run of the mill dropshipping suppliers, you'd either have to make a homemade solution or to only accept cards
+<a name="l-124"></a><span class="tm">20:23:23</span><span class="nk"> &lt;somewhat[m]&gt;</span> &lt;yanmaani "are you supposed to wear them on"&gt; *somewhat would wear it round the house, a friend swings by and says "cool shirt"(it is a XXXXL with Jeremy's face front and center). Conversation started, "have you heard about the internet?"
+<a name="l-125"></a><span class="tm">20:24:04</span><span class="nk"> &lt;yanmaani&gt;</span> my sides
+<a name="l-126"></a><span class="tm">20:24:22</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> XD
+<a name="l-127"></a><span class="tm">20:24:46</span><span class="nk"> &lt;somewhat[m]&gt;</span> on that note somewhat heads out
+<a name="l-128"></a><span class="tm">20:25:27</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">somewhat:</span> heh, the number of Namecoin devs who actually show their faces in public is pretty low though.  (I think it's just me, Daniel, Brandon, and Lola?)
+<a name="l-129"></a><span class="tm">20:26:34</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> Hmm. If we had twelve we could get a small discount on customized hockey or baseball jerseys for the team 😁
+<a name="l-130"></a><span class="tm">20:26:34</span><span class="nk"> &lt;yanmaani&gt;</span> but of course. It is absurd and repulsive this idea that you have to do everything under your real name. You are an exception since you actually hold talks and such, which is a bit hard to do non-anonymously
+<a name="l-131"></a><span class="tm">20:26:44 </span><span class="nka">* TheJollyRoger-M</span> <span class="ac">is just joking!</span>
+<a name="l-132"></a><span class="tm">20:26:47</span><span class="nk"> &lt;somewhat[m]&gt;</span> obviously the faces thing is a bad idea in general as people might think you wanted it. Just keep these logs  as somewhat says
+<a name="l-133"></a><span class="tm">20:26:49</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> I guess Ryan does, if you count a DEF CON talk
+<a name="l-134"></a><span class="tm">20:26:51</span><span class="nk"> &lt;yanmaani&gt;</span> but it is absurd when you are trying to comment on a news website and they ask for KYC
+<a name="l-135"></a><span class="tm">20:27:11</span><span class="nk"> &lt;somewhat[m]&gt;</span> JEREMY I NEED YOU ON A T-SHIRT, there's no getting round it
+<a name="l-136"></a><span class="tm">20:27:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> there are some people who do conference talks and show their faces under a pseudonym.  It's not exactly easy though.
+<a name="l-137"></a><span class="tm">20:28:01</span><span class="nk"> &lt;somewhat[m]&gt;</span> anyways somewhat departs
+<a name="l-138"></a><span class="tm">20:28:13</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> see ya somewhat
+<a name="l-139"></a><span class="tm">20:28:19</span><span class="nk"> &lt;yanmaani&gt;</span> see you
+<a name="l-140"></a><span class="tm">20:28:29</span><span class="nk"> &lt;yanmaani&gt;</span> wait what, how does that work?
+<a name="l-141"></a><span class="tm">20:28:45</span><span class="nk"> &lt;yanmaani&gt;</span> I suppose we still have the freedom to do it for a few more years
+<a name="l-142"></a><span class="tm">20:29:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> I've met some of the Tails devs; they participate in conferences (talks, panels, etc) under pseudonyms.
+<a name="l-143"></a><span class="tm">20:29:48</span><span class="nk"> &lt;somewhat[m]&gt;</span> &lt;yanmaani "I'd just go with white polo shir"&gt; *somewhat hates polo shirts, they're for you know POLO
+<a name="l-144"></a><span class="tm">20:30:58</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> I have no idea how they manage to do so and maintain mental health; all the evidence I've seen (from Patrick Schleizer and Alyssa Rosenzweig) indicates that the impact on mental health from such activity is rather crippling
+<a name="l-145"></a><span class="tm">20:31:36</span><span class="nk"> &lt;yanmaani&gt;</span> these people don't sound very, y'know, anonymous
+<a name="l-146"></a><span class="tm">20:32:10</span><span class="nk"> &lt;yanmaani&gt;</span> I mean, I would rather do it than give my full name
+<a name="l-147"></a><span class="tm">20:32:25</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> ...I don't think you followed my references.
+<a name="l-148"></a><span class="tm">20:32:25</span><span class="nk"> &lt;yanmaani&gt;</span> but your approach still ought to be to let the chips fall as they may
+<a name="l-149"></a><span class="tm">20:32:37</span><span class="nk"> &lt;yanmaani&gt;</span> no I've never heard of them before
+<a name="l-150"></a><span class="tm">20:32:48</span><span class="nk"> &lt;yanmaani&gt;</span> did they go crazy?
+<a name="l-151"></a><span class="tm">20:33:40</span><span class="nk"> &lt;yanmaani&gt;</span> <span class="hi">somewhat[m]:</span> I feel the same for t-shirts tbh
+<a name="l-152"></a><span class="tm">20:34:03</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Patrick and Alyssa ran free software projects (Whonix and Panfrost) pseudonymously for a few years, they both decided to doxx themselves because their mental health was severely damaged by trying to keep their pseudonyms separated from their other activities.
+<a name="l-153"></a><span class="tm">20:35:36</span><span class="nk"> &lt;yanmaani&gt;</span> it seems like it only makes sense to either do it sloppily or all-in, like Nakamoto
+<a name="l-154"></a><span class="tm">20:36:00</span><span class="nk"> &lt;yanmaani&gt;</span> to give talks and show your face but making a concerted effort to stay anonymous is just strange
+<a name="l-155"></a><span class="tm">20:39:22</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> see https://lists.torproject.org/pipermail/tor-talk/2014-January/031742.html and https://rosenzweig.io/blog/my-name-is-cafe-beverage.html for the writeups from Patrick and Alyssa on why they decided to quit using pseudonyms
+<a name="l-156"></a><span class="tm">20:39:39</span><span class="nk"> &lt;yanmaani&gt;</span> mmm very interesting thanks
+<a name="l-157"></a><span class="tm">20:43:12</span><span class="nk"> &lt;yanmaani&gt;</span> what about Moxie Marlinspike tho?
+<a name="l-158"></a><span class="tm">20:43:47</span><span class="nk"> &lt;yanmaani&gt;</span> he manages decently - his name is an open secret, but so are like three other candidates
+<a name="l-159"></a><span class="tm">20:43:55</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> AFAIK Moxie (and Zooko) make no effort to hide their legal name; their pseudonyms are more akin to trademarks
+<a name="l-160"></a><span class="tm">20:44:25</span><span class="nk"> &lt;yanmaani&gt;</span> wait Zooko isn't named that way? I thought he was a researcher at an university?
+<a name="l-161"></a><span class="tm">20:44:33</span><span class="nk"> &lt;yanmaani&gt;</span> Although that explains why they use his given name
+<a name="l-162"></a><span class="tm">20:44:51</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">yanmaani:</span> Zooko's legal name is easy to find
+<a name="l-163"></a><span class="tm">20:45:30</span><span class="nk"> &lt;yanmaani&gt;</span> yeah it's right there on his wiki page
+<a name="l-164"></a><span class="tm">20:45:45</span><span class="nk"> &lt;TheJollyRoger-M&gt;</span> Huh.
+<a name="l-165"></a><span class="tm">20:46:15</span><span class="nk"> &lt;yanmaani&gt;</span> I always thought it was his real name tho. But it's the same thing as with Nakamoto
+<a name="l-166"></a><span class="tm">20:46:23</span><span class="nk"> &lt;yanmaani&gt;</span> were he a real person, you would indeed write Nakamoto
+<a name="l-167"></a><span class="tm">20:46:28</span><span class="nk"> &lt;yanmaani&gt;</span> but as it's a psuedonym you write Satoshi
+<a name="l-168"></a><span class="tm">20:47:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> (going to close the meeting as we've drifted away from anything remotely meeting-topic-related, feel free to keep talking though)
+<a name="l-169"></a><span class="tm">20:47:19</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

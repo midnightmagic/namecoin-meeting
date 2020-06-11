@@ -1,0 +1,169 @@
+19:00:00 <Jeremy_Rand_Talo> #startmeeting
+19:00:01 <qpm> Meeting started Sun Mar  1 19:00:00 2020 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:00:01 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:00:54 <yanmaani> ah
+19:00:59 <yanmaani> bot works for once
+19:01:15 <Jeremy_Rand_Talo> Hello!  Welcome to the meeting.
+19:01:23 <Jeremy_Rand_Talo> Can we get a roll call of who's here today?
+19:01:27 <yanmaani> I'm here
+19:01:41 <Jeremy_Rand_Talo> Hi yanmaani
+19:01:58 <yanmaani> Hi
+19:02:51 <Jeremy_Rand_Talo> Anyone else here today?
+19:05:02 <Jeremy_Rand_Talo> ok, so
+19:05:57 <Jeremy_Rand_Talo> the main news this week is that Matt from Tor ACKed the mailing list post for getting more tester feedback, and the mailing list post went out.
+19:07:01 <Jeremy_Rand_Talo> A journalist noticed the post, and as a result we ended up on the front page of LinuxReviews.org
+19:08:11 <Jeremy_Rand_Talo> Not clear yet how much tester feedback we'll get out of the mailing list thread; hopefully we get a decent amount.
+19:10:37 <Jeremy_Rand_Talo> In other news, things are going well on the NLnet funding proposal; submission deadline is April 1.
+19:11:26 <yanmaani> Have you gotten any feedback out of it yet?
+19:11:29 <yanmaani> Or is that confidential?
+19:12:23 <Jeremy_Rand_Talo> yanmaani: no tester feedback from the mailing list thread yet, except for the journalist who clearly tested it because he posted screenshots in his article
+19:13:17 <yanmaani> How does it work, exactly
+19:13:27 <yanmaani> ? Does Tor require it to be tested by N people?
+19:13:46 <yanmaani> Or is it a case of "nobody complained so we'll ship it"?
+19:14:37 <Jeremy_Rand_Talo> yanmaani: there's not a specific number of test reports they want (such a standard would be pretty easy to game by Sybils); if we don't get sufficient feedback on that mailing list, then we'll probably ask for feedback in other venues
+19:15:35 <yanmaani> ah so it could go on forever, theoretically?
+19:17:54 <Jeremy_Rand_Talo> yanmaani: well, in the sense that there's no strictly defined timeline, yes.  It wouldn't last forever though; if there's literally no interest shown then at some point the experiment would likely be deemed to be not worth continuing.  That seems unlikely though; it's mainly a matter of figuring out how to contact the testers who will be interested.
+19:19:03 <yanmaani> So would-be testers would first have to download TBB alpha and then manually enable it?
+19:19:37 <Jeremy_Rand_Talo> yanmaani: Nightly, not Alpha, but yes.
+19:23:16 <Jeremy_Rand_Talo> Meanwhile, on the public relations front, I'm told that Namecoin merchandise is projected to be available on Cypher Market sometime this week.
+19:25:05 <yanmaani> It's just high-priced graphic tees??
+19:26:46 <Jeremy_Rand_Talo> yanmaani: prices aren't that high; they're comparable to most other online merchandise shops.  Anyway, we get half of the profits, and they accept Bitcoin (for real, not the BitPay bullshit) and Monero in addition to credit cards.
+19:27:14 <yanmaani> $35 for a t-shirt
+19:27:20 <yanmaani> wtf??
+19:27:33 <yanmaani> and $5 of that goes to Namecoin, yes?
+19:29:51 <Jeremy_Rand_Talo> yanmaani: not 100% sure what the Namecoin merch will be priced at.  The prices I see aren't far off from what I paid for my custom Namecoin t-shirt at SpreadShirt.
+19:30:15 <yanmaani> AND $15 SHIPPING, IN "7-21 business days" UNTRACKED?!
+19:30:21 <yanmaani> that's $50 for a t-shirt
+19:30:52 <yanmaani> I could buy 20 t-shirts for that price and have them shipped to me for that price
+19:31:31 <yanmaani> I refuse to believe it can cost $48 to print a t-shirt
+19:33:36 <Jeremy_Rand_Talo> Whatever.  If you'd like to propose some other merchandise shop that meets our standards, feel free.
+19:33:37 <yanmaani> (in fact, it does not - $2 is a more reasonable figure if you're buying in bulk, 10 seconds of web searches show)
+19:34:03 <yanmaani> yeah I mean this does not affect me in any way whatsoever and I suppose it is nice that it is available
+19:34:12 <yanmaani> still I am shocked, that is an outrageous fee
+19:35:54 <yanmaani> A quick search query turns up https://ondemand.printsome.com/pricing.php
+19:36:41 <Jeremy_Rand_Talo> Meanwhile, Botball regional tournament is in Oklahoma on Saturday.  As usual, I'll be hanging out there, looking for students who might be interested in Namecoin dev.
+19:37:44 <yanmaani> It's bizarre that you have to actively solicit for developers considering the low standards you have otherwise
+19:37:47 <yanmaani> like don't get me wrong here
+19:38:01 <yanmaani> but there is absolutely no due dilligence being done here, no CV check, no nothing
+19:39:04 <TheJollyRoger-M> Whoops, sorry I'm late X(
+19:39:21 <Jeremy_Rand_Talo> yanmaani: which open source projects do you know of who do a formal CV check...?
+19:39:40 <yanmaani> none, but neither do I know of any which pay you actual money for contributing
+19:40:27 <yanmaani> the deal is either that you do it for free or you get hired by some utterly shady software company
+19:40:45 <TheJollyRoger-M> Oh yeah. Jeremy_Rand_Talos speaking of the shirts, I sent in my lineart. I couldn't overlay the exact one since NX doesn't support it, so I had to try to approximate it as best I could using sketcher.
+19:43:15 <yanmaani> Speaking of "art", I found this alternate Namecoin logo the other day
+19:43:17 <yanmaani> https://upload.wikimedia.org/wikipedia/commons/9/9a/Namecoin_Coin.png
+19:43:22 <Jeremy_Rand_Talo> yanmaani: also I have no idea why you're under the impression that we spend a substantial amount of resources soliciting for developers.  Virtually none of our time is spent on that these days.  (There was a mild amount of such activity when I was a student, before I decided to tell Trump University of Oklahoma to go fuck themselves.)
+19:43:29 <yanmaani> very 2011-esque
+19:43:49 <yanmaani> no not substantial. But it's heavily a buyers market.
+19:44:02 <yanmaani> companies soliciting workers usually get hundreds of applicants
+19:44:44 <yanmaani> so I was under the impression that if you had funding it was trivial to score people to work for you
+19:46:30 <yanmaani> Like just put in the footer "we are looking for people to do paid development work; join #namecoin at freenode for more details"
+19:46:33 <Jeremy_Rand_Talo> yanmaani: not many people find decentralized naming/PKI to be something they're interested in or good at.  I mean, unless you count the kind of people who found scams like Blockstack.  *shrugs*
+19:47:19 <Jeremy_Rand_Talo> yanmaani: anyway, when more funding comes in, yes, I wouldn't really be opposed to putting something more prominent on the website
+19:47:31 <yanmaani> still, it's a buyers' market. Tons of unemployed people out there who would take literally whatever
+19:47:43 <somewhat[m]> *somewhat waves, takes a seat at the back and scrolls up
+19:47:52 <yanmaani> granted most of them are going to be node.js shitters or similar, but still
+19:47:59 <Jeremy_Rand_Talo> Ah hey somewhat
+19:49:00 <Jeremy_Rand_Talo> yanmaani: FWIW our general approach of letting interested devs come to us rather than the other way around does have a mild selection effect in favor of people who are likely to do competent work and who are here for the right reasons
+19:49:13 <yanmaani> I suspected that was the case
+19:49:24 <yanmaani> you'll get huge adverse selection if you do it any other way
+19:49:36 <yanmaani> let alone mentioning that you don't check CVs or identities or anything
+19:49:42 <yanmaani> wew
+19:49:57 <yanmaani> channel would be flooded by all sorts of riff-raff
+19:50:18 * Jeremy_Rand_Talo really does not want to attract devs who, as Hitler would say, "You're all a bunch of Node.js hipsters who just have to install everything you see on HackerNews!"
+19:50:30 <yanmaani> but doesn't talking to students have this effect too? or are they sharp people?
+19:51:17 <yanmaani> most of the polytechnics where I live have as goals to churn out "full stack" shitters or alternatively so-called "web developers"
+19:51:33 <Jeremy_Rand_Talo> yanmaani: Botball tends to select for competent students who like open-source dev.
+19:51:34 <yanmaani> but perhaps things are better in Oklahoma
+19:52:20 <yanmaani> oh botball
+19:52:27 <yanmaani> I thought you said baseball
+19:52:43 <yanmaani> that makes a lot more sense
+19:52:57 <yanmaani> no offense here but I have never set foot in Oklahoma
+19:55:38 <Jeremy_Rand_Talo> Anyway, this meeting is drifting toward random banter, which I suspect means we've run out of things to cover.  Anything else before I close the meeting?
+19:55:48 <Jeremy_Rand_Talo> somewhat: anything you'd like to cover?
+20:01:40 <somewhat[m]> no but the cypher market news is cool
+20:02:23 <somewhat[m]> once sales are steady somewhat wants to buy some overpriced merch and leave them around their city
+20:02:51 <Jeremy_Rand_Talo> hehe
+20:02:53 <somewhat[m]> 😇
+20:04:37 <Jeremy_Rand_Talo> somewhat: note that the WikiLeaks tweet design is probably not going to be in the first batch of designs to be posted.  (It's in the queue though, along with a design that quotes the genesis block.)
+20:05:14 <somewhat[m]> *somewhat at least knows where you had yours done now
+20:07:43 <Jeremy_Rand_Talo> somewhat: the shirt I bought custom was printed at SpreadShirt.  I don't recommend SpreadShirt though; they just happened to be the least bad option for one-off custom shirts as of a few years ago.  Anyway, the delay on getting that design on Cypher Market is because their designers will probably want to tweak my design a bit.
+20:08:17 <TheJollyRoger-M> Understandable.
+20:08:48 * Jeremy_Rand_Talo grumbles about SpreadShirt's website only working in Chromium, among other egregious things
+20:09:19 <TheJollyRoger-M> Phoneshomium. >_<
+20:09:19 <somewhat[m]> *just a thought, faces of nmc devs past or present would be great or something less CRYPTO trash but a conversation starter for those already familiar with nmc. Maybe the .bit tor circuit display or similar
+20:09:23 <yanmaani> I really do not understand the appeal of graphic tees
+20:09:41 <TheJollyRoger-M> Well they're nice and they're a morale item!
+20:09:42 <yanmaani> or I mean I understand it in the abstract sense, but I don't see why you would want one
+20:10:16 <yanmaani> are you supposed to wear them on the few days a year you visit conferences repping namecoin?
+20:12:17 <Jeremy_Rand_Talo> somewhat: hmm, so a t-shirt design showing the Tor circuit display?  Might be doable, not sure how it would look exactly.  I'd probably want to wait until we actually advance a bit on the Tor Browser integration.  Not sure if it would annoy the Tor devs....
+20:12:47 <yanmaani> Wait, will .bit have a separate circuit display?
+20:12:53 <Jeremy_Rand_Talo> Also I don't know if that would actually be readable on a t-shirt without messing with the graphic heavily
+20:13:07 <yanmaani> I'd just go with white polo shirts with the Namecoin logo in the upper left/right hand corner if it were me
+20:13:27 <yanmaani> or the slightly cleaner option of polo shirts in the exact Namecoin shade of blue
+20:13:31 <Jeremy_Rand_Talo> yanmaani: the Tor Browser integration shows the .onion domain next to the .bit domain in the circuit display
+20:13:53 <Jeremy_Rand_Talo> (which was a fun feature that Arthur coded up in his spare time)
+20:14:17 <yanmaani> so it's gonna say "Relay \n Relay \n Relay \n asdasd.onion | asd.bit"?
+20:15:24 * Jeremy_Rand_Talo is not sure why yanmaani is offering opinions on what prices are reasonable for graphical t-shirts if they don't even like graphical t-shirts.
+20:16:02 <yanmaani> I am not royalty Jeremy
+20:16:45 <yanmaani> but the answer is that it's hugely overpriced; I buy my t-shirts online for a bit north of $2 per piece and the same supplier offers printing for about twice that
+20:17:16 <yanmaani> the same reason I would be shocked if someone told me they bought gold for $200/g; even if I don't own any gold that is clearly too much money for it
+20:17:26 <yanmaani> with that said it is an excellent example of bikeshedding
+20:17:37 <somewhat[m]> anyways in the words of a great comedian, "is anyone here in marketing?"
+20:17:40 <yanmaani> truly excellent
+20:17:43 <yanmaani> archetypal even
+20:17:49 <somewhat[m]> "KILL YOURSELF!"
+20:17:52 <yanmaani> the ur-bikeshedding, if you will
+20:18:18 <yanmaani> think I prefer Hitler tbh, he's more polite
+20:18:19 * TheJollyRoger-M cracks up.
+20:19:00 <TheJollyRoger-M> I found a site that sells customized hockey and baseball jerseys. Maybe I'll have to make myself a oneoff :P.
+20:19:25 <Jeremy_Rand_Talo> yanmaani: whatever price you're paying is not typical in the U.S., nor is this the same market since a significant fraction of proceeds go to funding Namecoin dev.
+20:21:01 <yanmaani> $2.7 per piece plus shipping, less if you buy in bulk
+20:21:21 <Jeremy_Rand_Talo> Anyway, we put our money where our mouth is.  Hence why we're using Cypher Market, who accept Bitcoin (not BitPay) and Monero, and whose website works reasonably well in Tor Browser.
+20:22:09 <yanmaani> That's an advantage - with run of the mill dropshipping suppliers, you'd either have to make a homemade solution or to only accept cards
+20:23:23 <somewhat[m]> <yanmaani "are you supposed to wear them on"> *somewhat would wear it round the house, a friend swings by and says "cool shirt"(it is a XXXXL with Jeremy's face front and center). Conversation started, "have you heard about the internet?"
+20:24:04 <yanmaani> my sides
+20:24:22 <TheJollyRoger-M> XD
+20:24:46 <somewhat[m]> on that note somewhat heads out
+20:25:27 <Jeremy_Rand_Talo> somewhat: heh, the number of Namecoin devs who actually show their faces in public is pretty low though.  (I think it's just me, Daniel, Brandon, and Lola?)
+20:26:34 <TheJollyRoger-M> Hmm. If we had twelve we could get a small discount on customized hockey or baseball jerseys for the team 😁
+20:26:34 <yanmaani> but of course. It is absurd and repulsive this idea that you have to do everything under your real name. You are an exception since you actually hold talks and such, which is a bit hard to do non-anonymously
+20:26:44 * TheJollyRoger-M is just joking!
+20:26:47 <somewhat[m]> obviously the faces thing is a bad idea in general as people might think you wanted it. Just keep these logs  as somewhat says
+20:26:49 <Jeremy_Rand_Talo> I guess Ryan does, if you count a DEF CON talk
+20:26:51 <yanmaani> but it is absurd when you are trying to comment on a news website and they ask for KYC
+20:27:11 <somewhat[m]> JEREMY I NEED YOU ON A T-SHIRT, there's no getting round it
+20:27:52 <Jeremy_Rand_Talo> yanmaani: there are some people who do conference talks and show their faces under a pseudonym.  It's not exactly easy though.
+20:28:01 <somewhat[m]> anyways somewhat departs
+20:28:13 <Jeremy_Rand_Talo> see ya somewhat
+20:28:19 <yanmaani> see you
+20:28:29 <yanmaani> wait what, how does that work?
+20:28:45 <yanmaani> I suppose we still have the freedom to do it for a few more years
+20:29:37 <Jeremy_Rand_Talo> yanmaani: I've met some of the Tails devs; they participate in conferences (talks, panels, etc) under pseudonyms.
+20:29:48 <somewhat[m]> <yanmaani "I'd just go with white polo shir"> *somewhat hates polo shirts, they're for you know POLO
+20:30:58 <Jeremy_Rand_Talo> I have no idea how they manage to do so and maintain mental health; all the evidence I've seen (from Patrick Schleizer and Alyssa Rosenzweig) indicates that the impact on mental health from such activity is rather crippling
+20:31:36 <yanmaani> these people don't sound very, y'know, anonymous
+20:32:10 <yanmaani> I mean, I would rather do it than give my full name
+20:32:25 <Jeremy_Rand_Talo> yanmaani: ...I don't think you followed my references.
+20:32:25 <yanmaani> but your approach still ought to be to let the chips fall as they may
+20:32:37 <yanmaani> no I've never heard of them before
+20:32:48 <yanmaani> did they go crazy?
+20:33:40 <yanmaani> somewhat[m]: I feel the same for t-shirts tbh
+20:34:03 <Jeremy_Rand_Talo> Patrick and Alyssa ran free software projects (Whonix and Panfrost) pseudonymously for a few years, they both decided to doxx themselves because their mental health was severely damaged by trying to keep their pseudonyms separated from their other activities.
+20:35:36 <yanmaani> it seems like it only makes sense to either do it sloppily or all-in, like Nakamoto
+20:36:00 <yanmaani> to give talks and show your face but making a concerted effort to stay anonymous is just strange
+20:39:22 <Jeremy_Rand_Talo> yanmaani: see https://lists.torproject.org/pipermail/tor-talk/2014-January/031742.html and https://rosenzweig.io/blog/my-name-is-cafe-beverage.html for the writeups from Patrick and Alyssa on why they decided to quit using pseudonyms
+20:39:39 <yanmaani> mmm very interesting thanks
+20:43:12 <yanmaani> what about Moxie Marlinspike tho?
+20:43:47 <yanmaani> he manages decently - his name is an open secret, but so are like three other candidates
+20:43:55 <Jeremy_Rand_Talo> yanmaani: AFAIK Moxie (and Zooko) make no effort to hide their legal name; their pseudonyms are more akin to trademarks
+20:44:25 <yanmaani> wait Zooko isn't named that way? I thought he was a researcher at an university?
+20:44:33 <yanmaani> Although that explains why they use his given name
+20:44:51 <Jeremy_Rand_Talo> yanmaani: Zooko's legal name is easy to find
+20:45:30 <yanmaani> yeah it's right there on his wiki page
+20:45:45 <TheJollyRoger-M> Huh.
+20:46:15 <yanmaani> I always thought it was his real name tho. But it's the same thing as with Nakamoto
+20:46:23 <yanmaani> were he a real person, you would indeed write Nakamoto
+20:46:28 <yanmaani> but as it's a psuedonym you write Satoshi
+20:47:17 <Jeremy_Rand_Talo> (going to close the meeting as we've drifted away from anything remotely meeting-topic-related, feel free to keep talking though)
+20:47:19 <Jeremy_Rand_Talo> #endmeeting

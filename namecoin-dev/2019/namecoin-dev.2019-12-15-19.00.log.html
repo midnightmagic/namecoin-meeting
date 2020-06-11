@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:00:33</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:00:33</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Dec 15 19:00:33 2019 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:00:34</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:01:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi everyone!  Welcome to the meeting.
+<a name="l-5"></a><span class="tm">19:01:32</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Can we get a roll call of who's here today?
+<a name="l-6"></a><span class="tm">19:02:10</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Ahoy captain!
+<a name="l-7"></a><span class="tm">19:02:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hi TheJollyRoger !
+<a name="l-8"></a><span class="tm">19:02:56</span><span class="nk"> &lt;TheJollyRoger&gt;</span> o7
+<a name="l-9"></a><span class="tm">19:04:05</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> This is probably going to be a shorter-than-usual meeting, because we're busy getting ready for 36C3.
+<a name="l-10"></a><span class="tm">19:04:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyway, first topic:
+<a name="l-11"></a><span class="tm">19:04:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Namecoin Core</span>
+<a name="l-12"></a><span class="tm">19:05:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Namecoin Core 0.19.0.1 is tagged, binaries are built and uploaded, and Gitian sigs are up.  All I have to do there is update the Downloads page to point to the new binaries, and write a brief news post about the release.</span>
+<a name="l-13"></a><span class="tm">19:06:04</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Ah crap. Sorry about that. I haven't been able to figure out building yet &gt;_&lt;. (I'm still trying to figure out how to put together a decent build environment for it, it's no fault of NMC's yet)
+<a name="l-14"></a><span class="tm">19:06:07</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Kudos to bonfire for reproducing my Gitian hashes for GNU/Linux and Windows targets</span>
+<a name="l-15"></a><span class="tm">19:08:10</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="hi">TheJollyRoger:</span> no worries.  You can always reproduce them after we do the release.  And then you'll have practice under your belt for next time we do a release.
+<a name="l-16"></a><span class="tm">19:08:54</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Whew, thanks!
+<a name="l-17"></a><span class="tm">19:09:01</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Meanwhile, next topic...
+<a name="l-18"></a><span class="tm">19:09:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Tor Browser</span>
+<a name="l-19"></a><span class="tm">19:11:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">The Namecoin patch has (AFAICT) gotten all the way through code review, and is now in the "Georg tries to run it" phase.  Georg found 3 possible blockers in the first round of testing.  I've already fixed the 1st one (the fix is awaiting review).</span>
+<a name="l-20"></a><span class="tm">19:11:42</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Georg and I decided to figure out the 2nd one after he reviews the fix for the 1st one.  I can't actually reproduce the 3rd one, but Georg and I think it might have been a side effect of the 1st one.</span>
+<a name="l-21"></a><span class="tm">19:14:37</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I haven't spoken to Georg about this since Friday, which I assume is because the Tor people aren't working on weekends.  So we'll hopefully know more tomorrow morning (European time).</span>
+<a name="l-22"></a><span class="tm">19:15:56</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Woah, fingers crossed!
+<a name="l-23"></a><span class="tm">19:16:07</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">The 2nd possible blocker is probably (I think; haven't confirmed with Georg) going to be easy to do a quick-and-dirty fix to let a release go out.  A clean fix is going to be more annoying, but I think we can defer the clean fix until after a Nightly merge.</span>
+<a name="l-24"></a><span class="tm">19:17:49</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> And now, next topic...
+<a name="l-25"></a><span class="tm">19:17:57</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">36C3</span>
+<a name="l-26"></a><span class="tm">19:18:32</span><span class="nk"> &lt;TheJollyRoger&gt;</span> Who's going ^_^? I can't make it this year but maybe next one!
+<a name="l-27"></a><span class="tm">19:19:02</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">ryan-c and I will both be at 36C3.  Officially, I'm the only one representing Namecoin this year.  ( jonasbits and Cassini will not be attending this year.)</span>
+<a name="l-28"></a><span class="tm">19:19:32</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">As usual, Namecoin is being hosted by the Monero Assembly at the Critical Decentralization Cluster.</span>
+<a name="l-29"></a><span class="tm">19:20:25</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Also as usual, Namecoin's participation is being facilitated by our friends at Replicant, who this year will also have an Assembly at the CDC.</span>
+<a name="l-30"></a><span class="tm">19:22:04</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Interestingly, the CDC is in discussions with the About:Freedom Cluster about merging next year.  The About:Freedom Cluster hosts Assemblies such as EFF, FSFE, and... Tor!  All of the About:Freedom Cluster's Assemblies will be using the CDC stage.</span>
+<a name="l-31"></a><span class="tm">19:22:31</span><span class="nk"> &lt;somewhat[m]&gt;</span> *somewhat waves and  scrolls up
+<a name="l-32"></a><span class="tm">19:23:16</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I've reserved a talk slot and a workshop slot at the CDC for Namecoin.  The abstracts/descriptions are not yet filled in, but obviously I'm hoping to do a talk and workshop on the Tor Browser stuff.</span>
+<a name="l-33"></a><span class="tm">19:25:11</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Initially I did not want to give a talk/workshop on the Tor Browser stuff unless the patches were already merged by the time of the talk/workshop.</span>
+<a name="l-34"></a><span class="tm">19:25:40</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">However, one of the Tor people is telling me I should reconsider this, and ask Georg if it's okay to do a talk regardless of the review/merge status, with an obvious "no guarantee that this will actually be merged" disclaimer attached to the talk/workshop in the case that it's not yet merged.</span>
+<a name="l-35"></a><span class="tm">19:27:31</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">I think he's successfully persuaded me to ask Georg about that.  That conversation will likely happen later this week, unless I chicken out.  🙂</span>
+<a name="l-36"></a><span class="tm">19:27:37</span><span class="nk"> &lt;TheJollyRoger&gt;</span> \o/
+<a name="l-37"></a><span class="tm">19:29:25</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">The fact that the talk would be held on the stage that the Tor Assembly is using will hopefully make it more likely that we'll get approval.  That said, there is no guarantee that Georg will ACK doing the talk/workshop prior to a merge, and I'm not going to argue with him if he declines.</span>
+<a name="l-38"></a><span class="tm">19:31:06</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Meanwhile, there are hopefully going to be a lot of other informal Namecoin activities happening at 36C3, mostly related to coordinating with allied projects.</span>
+<a name="l-39"></a><span class="tm">19:31:19</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> And on that note,
+<a name="l-40"></a><span class="tm">19:31:26</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="topic">#topic </span><span class="topicline">Fundraising</span>
+<a name="l-41"></a><span class="tm">19:32:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">As of a few days ago, we completed what will probably be the final milestone in our current NLnet funding pool.  I'm waiting to hear back from NLnet about whether the Tor licensing issue is going to be a blocker for the payout.  Will hopefully have more news this week on that.</span>
+<a name="l-42"></a><span class="tm">19:33:17</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">So this means that we will imminently start planning our next funding proposal.</span>
+<a name="l-43"></a><span class="tm">19:34:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Conveniently, this coincides with 36C3.  So, given that the potential Tor Browser merge, the NLnet funding completion, and 36C3 are all converging at once time, it seems like 36C3 may be a good place to talk to allied projects about coordinating on work that we could put on a funding proposal.</span>
+<a name="l-44"></a><span class="tm">19:36:46</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#info </span><span class="cmdline">Unfortunately it looks like Tamas and Lola from ZeroNet will both not be at the Congress this year.  I was hoping to chat with at least one of them about this stuff.</span>
+<a name="l-45"></a><span class="tm">19:38:05</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Okay, so, that's all the stuff I had to cover today.  Sorry for the quickness of going through all that.  Are there any things that anyone else would like to cover today?
+<a name="l-46"></a><span class="tm">19:38:12</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I hope you're able to reach them!
+<a name="l-47"></a><span class="tm">19:38:19</span><span class="nk"> &lt;TheJollyRoger&gt;</span> I don't think I have anything at this point!
+<a name="l-48"></a><span class="tm">19:38:25</span><span class="nk"> &lt;somewhat[m]&gt;</span> nope
+<a name="l-49"></a><span class="tm">19:39:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Alright cool.  Thanks for attending everyone.
+<a name="l-50"></a><span class="tm">19:39:33</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

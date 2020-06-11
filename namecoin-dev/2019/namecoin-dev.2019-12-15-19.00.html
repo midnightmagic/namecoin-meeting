@@ -1,0 +1,231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev Meeting</title>
+<style type="text/css">
+/* This is for the .html in the HTML2 writer */
+body {
+    font-family: Helvetica, sans-serif;
+    font-size:14px;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:navy;
+    text-decoration: none;
+    border-bottom:1px dotted navy;
+}
+a:hover {
+    text-decoration:none;
+    border-bottom: 0;
+    color:#0000B9;
+}
+hr {
+    border: 1px solid #ccc;
+}
+/* The (nick, time) item pairs, and other body text things. */
+.details {
+    font-size: 12px;
+    font-weight:bold;
+}
+/* The 'AGREED:', 'IDEA', etc, prefix to lines. */
+.itemtype {
+    font-style: normal;    /* un-italics it */
+    font-weight: bold;
+}
+/* Example: change single item types.  Capitalized command name.
+/* .TOPIC  {  color:navy;  } */
+/* .AGREED {  color:lime;  } */
+
+</style>
+</head>
+
+<body>
+<h1>#namecoin-dev Meeting</h1>
+<span class="details">
+Meeting started by Jeremy_Rand_Talo at 19:00:33 UTC
+(<a href="namecoin-dev.2019-12-15-19.00.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Meeting summary</h3>
+<ol>
+<li><b class="TOPIC">Namecoin Core</b> <span class="details">(<a href='namecoin-dev.2019-12-15-19.00.log.html#l-11'>Jeremy_Rand_Talo</a>, 19:04:23)</span>
+<ol type="a">
+  <li><span class="INFO">Namecoin Core 0.19.0.1 is tagged, binaries are
+    built and uploaded, and Gitian sigs are up.  All I have to do there
+    is update the Downloads page to point to the new binaries, and write
+    a brief news post about the release.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-12'>Jeremy_Rand_Talo</a>,
+    19:05:23)</span></li>
+  <li><span class="INFO">Kudos to bonfire for reproducing my Gitian
+    hashes for GNU/Linux and Windows targets</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-14'>Jeremy_Rand_Talo</a>,
+    19:06:07)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Tor Browser</b> <span class="details">(<a href='namecoin-dev.2019-12-15-19.00.log.html#l-18'>Jeremy_Rand_Talo</a>, 19:09:18)</span>
+<ol type="a">
+  <li><span class="INFO">The Namecoin patch has (AFAICT) gotten all the
+    way through code review, and is now in the "Georg tries to run it"
+    phase.  Georg found 3 possible blockers in the first round of
+    testing.  I've already fixed the 1st one (the fix is awaiting
+    review).</span> <span class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-19'>Jeremy_Rand_Talo</a>,
+    19:11:28)</span></li>
+  <li><span class="INFO">Georg and I decided to figure out the 2nd one
+    after he reviews the fix for the 1st one.  I can't actually
+    reproduce the 3rd one, but Georg and I think it might have been a
+    side effect of the 1st one.</span> <span class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-20'>Jeremy_Rand_Talo</a>,
+    19:11:42)</span></li>
+  <li><span class="INFO">I haven't spoken to Georg about this since
+    Friday, which I assume is because the Tor people aren't working on
+    weekends.  So we'll hopefully know more tomorrow morning (European
+    time).</span> <span class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-21'>Jeremy_Rand_Talo</a>,
+    19:14:37)</span></li>
+  <li><span class="INFO">The 2nd possible blocker is probably (I think;
+    haven't confirmed with Georg) going to be easy to do a
+    quick-and-dirty fix to let a release go out.  A clean fix is going
+    to be more annoying, but I think we can defer the clean fix until
+    after a Nightly merge.</span> <span class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-23'>Jeremy_Rand_Talo</a>,
+    19:16:07)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">36C3</b> <span class="details">(<a href='namecoin-dev.2019-12-15-19.00.log.html#l-25'>Jeremy_Rand_Talo</a>, 19:17:57)</span>
+<ol type="a">
+  <li><span class="INFO">ryan-c and I will both be at 36C3.  Officially,
+    I'm the only one representing Namecoin this year.  ( jonasbits and
+    Cassini will not be attending this year.)</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-27'>Jeremy_Rand_Talo</a>,
+    19:19:02)</span></li>
+  <li><span class="INFO">As usual, Namecoin is being hosted by the
+    Monero Assembly at the Critical Decentralization Cluster.</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-28'>Jeremy_Rand_Talo</a>,
+    19:19:32)</span></li>
+  <li><span class="INFO">Also as usual, Namecoin's participation is
+    being facilitated by our friends at Replicant, who this year will
+    also have an Assembly at the CDC.</span> <span class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-29'>Jeremy_Rand_Talo</a>,
+    19:20:25)</span></li>
+  <li><span class="INFO">Interestingly, the CDC is in discussions with
+    the About:Freedom Cluster about merging next year.  The
+    About:Freedom Cluster hosts Assemblies such as EFF, FSFE, and...
+    Tor!  All of the About:Freedom Cluster's Assemblies will be using
+    the CDC stage.</span> <span class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-30'>Jeremy_Rand_Talo</a>,
+    19:22:04)</span></li>
+  <li><span class="INFO">I've reserved a talk slot and a workshop slot
+    at the CDC for Namecoin.  The abstracts/descriptions are not yet
+    filled in, but obviously I'm hoping to do a talk and workshop on the
+    Tor Browser stuff.</span> <span class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-32'>Jeremy_Rand_Talo</a>,
+    19:23:16)</span></li>
+  <li><span class="INFO">Initially I did not want to give a
+    talk/workshop on the Tor Browser stuff unless the patches were
+    already merged by the time of the talk/workshop.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-33'>Jeremy_Rand_Talo</a>,
+    19:25:11)</span></li>
+  <li><span class="INFO">However, one of the Tor people is telling me I
+    should reconsider this, and ask Georg if it's okay to do a talk
+    regardless of the review/merge status, with an obvious "no guarantee
+    that this will actually be merged" disclaimer attached to the
+    talk/workshop in the case that it's not yet merged.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-34'>Jeremy_Rand_Talo</a>,
+    19:25:40)</span></li>
+  <li><span class="INFO">I think he's successfully persuaded me to ask
+    Georg about that.  That conversation will likely happen later this
+    week, unless I chicken out.  🙂</span> <span class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-35'>Jeremy_Rand_Talo</a>,
+    19:27:31)</span></li>
+  <li><span class="INFO">The fact that the talk would be held on the
+    stage that the Tor Assembly is using will hopefully make it more
+    likely that we'll get approval.  That said, there is no guarantee
+    that Georg will ACK doing the talk/workshop prior to a merge, and
+    I'm not going to argue with him if he declines.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-37'>Jeremy_Rand_Talo</a>,
+    19:29:25)</span></li>
+  <li><span class="INFO">Meanwhile, there are hopefully going to be a
+    lot of other informal Namecoin activities happening at 36C3, mostly
+    related to coordinating with allied projects.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-38'>Jeremy_Rand_Talo</a>,
+    19:31:06)</span></li>
+</ol>
+<br></li>
+<li><b class="TOPIC">Fundraising</b> <span class="details">(<a href='namecoin-dev.2019-12-15-19.00.log.html#l-40'>Jeremy_Rand_Talo</a>, 19:31:26)</span>
+<ol type="a">
+  <li><span class="INFO">As of a few days ago, we completed what will
+    probably be the final milestone in our current NLnet funding pool.
+    I'm waiting to hear back from NLnet about whether the Tor licensing
+    issue is going to be a blocker for the payout.  Will hopefully have
+    more news this week on that.</span> <span class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-41'>Jeremy_Rand_Talo</a>,
+    19:32:52)</span></li>
+  <li><span class="INFO">So this means that we will imminently start
+    planning our next funding proposal.</span> <span class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-42'>Jeremy_Rand_Talo</a>,
+    19:33:17)</span></li>
+  <li><span class="INFO">Conveniently, this coincides with 36C3.  So,
+    given that the potential Tor Browser merge, the NLnet funding
+    completion, and 36C3 are all converging at once time, it seems like
+    36C3 may be a good place to talk to allied projects about
+    coordinating on work that we could put on a funding proposal.</span>
+    <span class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-43'>Jeremy_Rand_Talo</a>,
+    19:34:59)</span></li>
+  <li><span class="INFO">Unfortunately it looks like Tamas and Lola from
+    ZeroNet will both not be at the Congress this year.  I was hoping to
+    chat with at least one of them about this stuff.</span> <span
+    class="details">(<a
+    href='namecoin-dev.2019-12-15-19.00.log.html#l-44'>Jeremy_Rand_Talo</a>,
+    19:36:46)</span></li>
+</ol>
+</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">
+Meeting ended at 19:39:33 UTC
+(<a href="namecoin-dev.2019-12-15-19.00.log.html">full logs</a>).</span>
+
+<br><br>
+
+
+
+<h3>Action items</h3>
+<ol>
+  <li>(none)</li>
+</ol>
+<br><br>
+
+
+
+<h3>People present (lines said)</h3>
+<ol>
+  <li>Jeremy_Rand_Talo (37)</li>
+  <li>TheJollyRoger (9)</li>
+  <li>somewhat[m] (2)</li>
+  <li>qpm (2)</li>
+</ol>
+<br><br>
+
+
+
+<span class="details">Generated by <a href="https://wiki.debian.org/MeetBot">MeetBot</a> 0.1.4.</span>
+</body></html>

@@ -1,0 +1,28 @@
+19:03:15 <Jeremy_Rand_Talo> #startmeeting
+19:03:15 <qpm> Meeting started Sun Jan 19 19:03:15 2020 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:03:15 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:04:29 <Jeremy_Rand_Talo> Happy Sunday everyone!  Welcome to the meeting.
+19:04:38 <Jeremy_Rand_Talo> Can we get a roll call of who's here today?
+19:07:57 <Jeremy_Rand_Talo> Hmm, would be unfortunate if everyone else isn't here today...
+19:08:42 <Jeremy_Rand_Talo> Anyway I'll give a brief status update from my end, and maybe some more people will spontaneously apparate while I'm doing so
+19:10:18 <Jeremy_Rand_Talo> So, first off, I was quite a bit less productive the past week than I usually am, due to some (non-serious) medical issues on my end.  Looks like things are returning to normal here, and I should be back to typical productivity by circa middle of this week.
+19:11:20 <Jeremy_Rand_Talo> (And thank you to everyone on Matrix/IRC who sent me get-well wishes.  🙂   It is appreciated.)
+19:12:46 <Jeremy_Rand_Talo> Anyway, we have an NLnet funding proposal submission deadline on February 1.  I am attempting to have a proposal ready and reviewed by then.  It is not clear if we'll meet that deadline; if we don't, it'll rollover to April 1 (which isn't exactly a disaster)
+19:14:20 <Jeremy_Rand_Talo> Please note that I am not in the business of submitting half-assed funding proposals.  Because fuck Zach.  If the funding proposal is not ready for submission, I will let it rollover by 2 months without a second thought.
+19:15:18 <Jeremy_Rand_Talo> This funding proposal is interesting because we're going to try to collaborate with a few other allied projects on some of the milestones.  This, of course, adds to the complexity of preparing the proposal.
+19:16:08 <Jeremy_Rand_Talo> Meanwhile, our current NLnet funding is almost depleted; there's one milestone remaining, and I think that the ncdns release from a few days ago is the final thing on our end that's needed to claim that milestone.
+19:16:43 <Jeremy_Rand_Talo> I'm doing some final QA testing to make certain that we're meeting the requirements of that milestone; that should be finished within the next couple days.
+19:19:50 <Jeremy_Rand_Talo> In other news.  Those of you who were watching this channel earlier today will have noticed an interesting TLS interoperability idea that occurred to me.
+19:21:23 <Jeremy_Rand_Talo> I think we can abuse the AIA (Authority Information Access) feature of X.509 certs to fetch all the intermediate CA certs between a Namecoin end-entity CA-signed cert and a Namecoin root CA.
+19:22:03 <Jeremy_Rand_Talo> This means that ncdns would no longer need to run with write access to the cert store (not even the intermediate cert store)
+19:22:18 <Jeremy_Rand_Talo> Which improves both sandboxing and reliability considerably
+19:22:50 <Jeremy_Rand_Talo> It looks like basically all major browsers support AIA, except for Firefox.
+19:23:58 <Jeremy_Rand_Talo> For Firefox we can, of course, continue using ncp11, which works fine (and shouldn't be broken in any way by the presence of AIA)
+19:27:48 <Jeremy_Rand_Talo> Also, you may have noticed in this channel that I found what looks like an undocumented TLS feature in Windows that could hypothetically be useful for Namecoin integration.
+19:29:28 <Jeremy_Rand_Talo> I say "hypothetically" because I am skeptical that this feature, even if it works, is really the best approach for doing what we need.  There are probably some edge cases where it helps, but I'm not convinced that those are edge cases that we actually want people to be doing.
+19:31:35 <Jeremy_Rand_Talo> Anyway, the funding stuff kept me pretty busy this week, so that's all I have to report today.
+19:31:52 <Jeremy_Rand_Talo> Has anyone else quietly joined the meeting who would like to talk now?  🙂
+19:34:43 <Jeremy_Rand_Talo> Oh, one other thing.  The Namecoin website now credits our funders at the footer of every page.  Kudos to (in literally random order) NLnet, Cyphrs, Autonomous Worlds, F2Pool, and the Netherlands government for their support.
+19:36:08 <Jeremy_Rand_Talo> Hopefully this helps direct some positive community vibes toward those 5 funders, and also improves our transparency about where our funding is coming from.
+19:40:59 <Jeremy_Rand_Talo> Okay, so it looks like this is a 1-person meeting today.  Happens sometimes, that's okay.  So I guess I'll close this meeting now.  Enjoy the remainder of your weekend.
+19:41:05 <Jeremy_Rand_Talo> #endmeeting

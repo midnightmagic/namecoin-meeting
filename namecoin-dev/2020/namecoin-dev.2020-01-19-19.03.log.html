@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>#namecoin-dev log</title>
+<style type="text/css">
+/* For the .log.html */
+pre { /*line-height: 125%;*/
+      white-space: pre-wrap; }
+body { background: #f0f0f0; }
+
+body .tm  { color: #007020 }                      /* time */
+body .nk  { color: #062873; font-weight: bold }   /* nick, regular */
+body .nka { color: #007020; font-weight: bold }  /* action nick */
+body .ac  { color: #00A000 }                      /* action line */
+body .hi  { color: #4070a0 }                 /* hilights */
+/* Things to make particular MeetBot commands stick out */
+body .topic     { color: #007020; font-weight: bold }
+body .topicline { color: #000080; font-weight: bold }
+body .cmd       { color: #007020; font-weight: bold }
+body .cmdline  { font-weight: bold }
+
+</style>
+</head>
+
+<body>
+<pre><a name="l-1"></a><span class="tm">19:03:15</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#startmeeting</span><span class="cmdline"></span>
+<a name="l-2"></a><span class="tm">19:03:15</span><span class="nk"> &lt;qpm&gt;</span> Meeting started Sun Jan 19 19:03:15 2020 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">19:03:15</span><span class="nk"> &lt;qpm&gt;</span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">19:04:29</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Happy Sunday everyone!  Welcome to the meeting.
+<a name="l-5"></a><span class="tm">19:04:38</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Can we get a roll call of who's here today?
+<a name="l-6"></a><span class="tm">19:07:57</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hmm, would be unfortunate if everyone else isn't here today...
+<a name="l-7"></a><span class="tm">19:08:42</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyway I'll give a brief status update from my end, and maybe some more people will spontaneously apparate while I'm doing so
+<a name="l-8"></a><span class="tm">19:10:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> So, first off, I was quite a bit less productive the past week than I usually am, due to some (non-serious) medical issues on my end.  Looks like things are returning to normal here, and I should be back to typical productivity by circa middle of this week.
+<a name="l-9"></a><span class="tm">19:11:20</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> (And thank you to everyone on Matrix/IRC who sent me get-well wishes.  🙂   It is appreciated.)
+<a name="l-10"></a><span class="tm">19:12:46</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyway, we have an NLnet funding proposal submission deadline on February 1.  I am attempting to have a proposal ready and reviewed by then.  It is not clear if we'll meet that deadline; if we don't, it'll rollover to April 1 (which isn't exactly a disaster)
+<a name="l-11"></a><span class="tm">19:14:20</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Please note that I am not in the business of submitting half-assed funding proposals.  Because fuck Zach.  If the funding proposal is not ready for submission, I will let it rollover by 2 months without a second thought.
+<a name="l-12"></a><span class="tm">19:15:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> This funding proposal is interesting because we're going to try to collaborate with a few other allied projects on some of the milestones.  This, of course, adds to the complexity of preparing the proposal.
+<a name="l-13"></a><span class="tm">19:16:08</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Meanwhile, our current NLnet funding is almost depleted; there's one milestone remaining, and I think that the ncdns release from a few days ago is the final thing on our end that's needed to claim that milestone.
+<a name="l-14"></a><span class="tm">19:16:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> I'm doing some final QA testing to make certain that we're meeting the requirements of that milestone; that should be finished within the next couple days.
+<a name="l-15"></a><span class="tm">19:19:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> In other news.  Those of you who were watching this channel earlier today will have noticed an interesting TLS interoperability idea that occurred to me.
+<a name="l-16"></a><span class="tm">19:21:23</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> I think we can abuse the AIA (Authority Information Access) feature of X.509 certs to fetch all the intermediate CA certs between a Namecoin end-entity CA-signed cert and a Namecoin root CA.
+<a name="l-17"></a><span class="tm">19:22:03</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> This means that ncdns would no longer need to run with write access to the cert store (not even the intermediate cert store)
+<a name="l-18"></a><span class="tm">19:22:18</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Which improves both sandboxing and reliability considerably
+<a name="l-19"></a><span class="tm">19:22:50</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> It looks like basically all major browsers support AIA, except for Firefox.
+<a name="l-20"></a><span class="tm">19:23:58</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> For Firefox we can, of course, continue using ncp11, which works fine (and shouldn't be broken in any way by the presence of AIA)
+<a name="l-21"></a><span class="tm">19:27:48</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Also, you may have noticed in this channel that I found what looks like an undocumented TLS feature in Windows that could hypothetically be useful for Namecoin integration.
+<a name="l-22"></a><span class="tm">19:29:28</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> I say "hypothetically" because I am skeptical that this feature, even if it works, is really the best approach for doing what we need.  There are probably some edge cases where it helps, but I'm not convinced that those are edge cases that we actually want people to be doing.
+<a name="l-23"></a><span class="tm">19:31:35</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Anyway, the funding stuff kept me pretty busy this week, so that's all I have to report today.
+<a name="l-24"></a><span class="tm">19:31:52</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Has anyone else quietly joined the meeting who would like to talk now?  🙂
+<a name="l-25"></a><span class="tm">19:34:43</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Oh, one other thing.  The Namecoin website now credits our funders at the footer of every page.  Kudos to (in literally random order) NLnet, Cyphrs, Autonomous Worlds, F2Pool, and the Netherlands government for their support.
+<a name="l-26"></a><span class="tm">19:36:08</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Hopefully this helps direct some positive community vibes toward those 5 funders, and also improves our transparency about where our funding is coming from.
+<a name="l-27"></a><span class="tm">19:40:59</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> Okay, so it looks like this is a 1-person meeting today.  Happens sometimes, that's okay.  So I guess I'll close this meeting now.  Enjoy the remainder of your weekend.
+<a name="l-28"></a><span class="tm">19:41:05</span><span class="nk"> &lt;Jeremy_Rand_Talo&gt;</span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre>
+</body></html>

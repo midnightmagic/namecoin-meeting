@@ -1,0 +1,8 @@
+19:04:46 <Jeremy_Rand_Talo> #startmeeting
+19:04:46 <qpm> Meeting started Sun Mar 15 19:04:46 2020 UTC.  The chair is Jeremy_Rand_Talo. Information about MeetBot at https://wiki.debian.org/MeetBot.
+19:04:46 <qpm> Useful Commands: #action #agreed #help #info #idea #link #topic.
+19:06:01 <Jeremy_Rand_Talo> Hello!  Welcome to the meeting!
+19:06:16 <Jeremy_Rand_Talo> Can we get a roll call of who's here today?
+19:17:56 <Jeremy_Rand_Talo> Hmm, no one around today?
+19:34:42 <Jeremy_Rand_Talo> Okay then.  I guess no meeting today, since I'm the only one here.  See you next time.  🙂
+19:34:51 <Jeremy_Rand_Talo> #endmeeting
